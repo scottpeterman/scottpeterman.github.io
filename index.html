@@ -1,0 +1,1841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scott Peterman - Network Automation Engineer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Theme Variables */
+        :root {
+            /* Dark/Tech Theme */
+            --dark-primary: #00CCCC;
+            --dark-primary-dark: #00AAAA;
+            --dark-secondary: #00FFFF;
+            --dark-accent: #00FF00;
+            --dark-text: #E0E0E0;
+            --dark-text-light: #888888;
+            --dark-text-bright: #FFFFFF;
+            --dark-bg: #0A0A0F;
+            --dark-bg-alt: #111122;
+            --dark-bg-card: #1A1A2E;
+            --dark-border: #00CCCC;
+            --dark-shadow: 0 0 20px rgba(0, 204, 204, 0.3);
+            --dark-shadow-lg: 0 0 40px rgba(0, 204, 204, 0.5);
+            --dark-grid-color: rgba(0, 204, 204, 0.2);
+
+            /* Light/Business Theme */
+            --light-primary: #2563EB;
+            --light-primary-dark: #1D4ED8;
+            --light-secondary: #0EA5E9;
+            --light-accent: #059669;
+            --light-text: #374151;
+            --light-text-light: #6B7280;
+            --light-text-bright: #111827;
+            --light-bg: #FFFFFF;
+            --light-bg-alt: #F9FAFB;
+            --light-bg-card: #FFFFFF;
+            --light-border: #E5E7EB;
+            --light-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --light-shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --light-grid-color: rgba(37, 99, 235, 0.05);
+
+            /* Active theme (default to dark) */
+            --primary: var(--dark-primary);
+            --primary-dark: var(--dark-primary-dark);
+            --secondary: var(--dark-secondary);
+            --accent: var(--dark-accent);
+            --text: var(--dark-text);
+            --text-light: var(--dark-text-light);
+            --text-bright: var(--dark-text-bright);
+            --bg: var(--dark-bg);
+            --bg-alt: var(--dark-bg-alt);
+            --bg-card: var(--dark-bg-card);
+            --border: var(--dark-border);
+            --shadow: var(--dark-shadow);
+            --shadow-lg: var(--dark-shadow-lg);
+            --grid-color: var(--dark-grid-color);
+        }
+
+        /* Light theme override */
+        [data-theme="light"] {
+            --primary: var(--light-primary);
+            --primary-dark: var(--light-primary-dark);
+            --secondary: var(--light-secondary);
+            --accent: var(--light-accent);
+            --text: var(--light-text);
+            --text-light: var(--light-text-light);
+            --text-bright: var(--light-text-bright);
+            --bg: var(--light-bg);
+            --bg-alt: var(--light-bg-alt);
+            --bg-card: var(--light-bg-card);
+            --border: var(--light-border);
+            --shadow: var(--light-shadow);
+            --shadow-lg: var(--light-shadow-lg);
+            --grid-color: var(--light-grid-color);
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+            position: relative;
+            overflow-x: hidden;
+            transition: all 0.3s ease;
+        }
+
+        /* Business theme uses Inter font */
+        [data-theme="light"] body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Theme-specific grid background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                linear-gradient(90deg, transparent 24px, var(--grid-color) 25px, var(--grid-color) 26px, transparent 27px, transparent 74px, var(--grid-color) 75px, var(--grid-color) 76px, transparent 77px),
+                linear-gradient(transparent 24px, var(--grid-color) 25px, var(--grid-color) 26px, transparent 27px, transparent 74px, var(--grid-color) 75px, var(--grid-color) 76px, transparent 77px);
+            background-size: 50px 50px;
+            opacity: 0.1;
+            z-index: -1;
+            animation: gridMove 20s linear infinite;
+        }
+
+        /* Different grid animation for light theme */
+        [data-theme="light"] body::before {
+            animation: none;
+            opacity: 0.3;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1001;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--bg-card);
+            padding: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 50px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .try-me-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.25rem;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 40px;
+            height: 20px;
+            background: var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-switch::before {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 16px;
+            height: 16px;
+            background: var(--primary);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        [data-theme="light"] .toggle-switch::before {
+            transform: translateX(20px);
+        }
+
+        /* Terminal-style animations for dark theme */
+        @keyframes terminal-cursor {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% { filter: drop-shadow(0 0 5px var(--primary)); }
+            50% { filter: drop-shadow(0 0 20px var(--primary)); }
+        }
+
+        @keyframes scan-line {
+            0% { transform: translateY(-100vh) scaleY(0.1); opacity: 0.8; }
+            100% { transform: translateY(100vh) scaleY(0.1); opacity: 0; }
+        }
+
+        /* Scanning effect - only for dark theme */
+        .scan-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--secondary), transparent);
+            z-index: 1000;
+            animation: scan-line 3s linear infinite;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        [data-theme="light"] .scan-line {
+            opacity: 0;
+        }
+
+        /* Header & Hero */
+        .header {
+            background: var(--bg-alt);
+            color: var(--text-bright);
+            padding: 2rem 0;
+            position: relative;
+            border-bottom: 2px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+
+        [data-theme="light"] .header {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+            position: relative;
+        }
+
+        .logo-container {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .animated-logo {
+            width: 120px;
+            height: 120px;
+            animation: glow-pulse 2s ease-in-out infinite;
+        }
+
+        [data-theme="light"] .animated-logo {
+            animation: none;
+            filter: none;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-bright);
+            text-shadow: 0 0 10px var(--primary);
+            position: relative;
+        }
+
+        [data-theme="light"] .hero h1 {
+            text-shadow: none;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .hero .tagline {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Different tagline styles for each theme */
+        .terminal-prompt {
+            color: var(--accent);
+            margin-right: 0.5rem;
+        }
+
+        [data-theme="light"] .terminal-prompt {
+            display: none;
+        }
+
+        [data-theme="light"] .hero .tagline {
+            font-style: italic;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--primary);
+            border-radius: 0;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        [data-theme="light"] .btn {
+            border-radius: 8px;
+            text-transform: none;
+            letter-spacing: normal;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 204, 204, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        [data-theme="light"] .btn::before {
+            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.1), transparent);
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: transparent;
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary);
+            color: var(--bg);
+            box-shadow: var(--shadow);
+        }
+
+        [data-theme="light"] .btn-primary:hover {
+            color: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--secondary);
+            border-color: var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--secondary);
+            color: var(--bg);
+            box-shadow: var(--shadow);
+        }
+
+        [data-theme="light"] .btn-secondary:hover {
+            color: white;
+        }
+
+        /* Navigation */
+        .nav {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            padding: 1rem 0;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        [data-theme="light"] .nav-links a {
+            text-transform: none;
+            letter-spacing: normal;
+            border-radius: 6px;
+        }
+
+        .nav-links a::before {
+            content: '> ';
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            color: var(--primary);
+        }
+
+        [data-theme="light"] .nav-links a::before {
+            display: none;
+        }
+
+        .nav-links a:hover::before,
+        .nav-links a.active::before {
+            opacity: 1;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+            border-color: var(--primary);
+            box-shadow: var(--shadow);
+        }
+
+        [data-theme="light"] .nav-links a:hover,
+        [data-theme="light"] .nav-links a.active {
+            background: var(--bg-alt);
+        }
+
+        /* Sections */
+        .section {
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        .section:nth-child(even) {
+            background: var(--bg-alt);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--text-bright);
+            text-shadow: 0 0 10px var(--primary);
+            position: relative;
+        }
+
+        [data-theme="light"] .section-title {
+            text-shadow: none;
+        }
+
+        .section-title::before {
+            content: '[';
+            color: var(--primary);
+            margin-right: 0.5rem;
+        }
+
+        .section-title::after {
+            content: ']';
+            color: var(--primary);
+            margin-left: 0.5rem;
+        }
+
+        [data-theme="light"] .section-title::before,
+        [data-theme="light"] .section-title::after {
+            display: none;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        [data-theme="light"] .project-card {
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        [data-theme="light"] .project-card::before {
+            height: 4px;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--secondary);
+        }
+
+        .project-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-icon {
+            width: 60px;
+            height: 60px;
+            position: relative;
+        }
+
+        .project-logo {
+            width: 100%;
+            height: 100%;
+            animation: glow-pulse 3s ease-in-out infinite;
+        }
+
+        [data-theme="light"] .project-logo {
+            animation: none;
+            filter: none;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-bright);
+        }
+
+        .project-description {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="light"] .tech-tag {
+            border-radius: 20px;
+            background: var(--bg-alt);
+        }
+
+        .tech-tag:hover {
+            background: var(--primary);
+            color: var(--bg);
+            box-shadow: var(--shadow);
+        }
+
+        [data-theme="light"] .tech-tag:hover {
+            color: white;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-link {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            color: var(--text-bright);
+            text-shadow: 0 0 5px var(--secondary);
+        }
+
+        [data-theme="light"] .project-link:hover {
+            text-shadow: none;
+        }
+
+        .project-link::before {
+            content: '→ ';
+            transition: transform 0.3s ease;
+        }
+
+        .project-link:hover::before {
+            transform: translateX(3px);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        [data-theme="light"] .modal {
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            margin: 2rem auto;
+            padding: 2rem;
+            border: 2px solid var(--border);
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: var(--shadow-lg);
+        }
+
+        [data-theme="light"] .modal-content {
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .modal-close:hover {
+            color: var(--secondary);
+            text-shadow: 0 0 5px var(--secondary);
+        }
+
+        [data-theme="light"] .modal-close:hover {
+            text-shadow: none;
+            color: var(--primary);
+        }
+
+        /* About & Skills */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        [data-theme="light"] .skill-category {
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .skill-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        [data-theme="light"] .skill-category::before {
+            height: 3px;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .skill-category h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            padding: 0.25rem 0;
+            color: var(--text-light);
+            position: relative;
+            padding-left: 1rem;
+        }
+
+        .skill-list li::before {
+            content: '▸ ';
+            color: var(--primary);
+            position: absolute;
+            left: 0;
+        }
+
+        [data-theme="light"] .skill-list li::before {
+            content: '• ';
+        }
+
+        /* Experience */
+        .experience-timeline {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .experience-item {
+            background: var(--bg-card);
+            padding: 2rem;
+            border: 1px solid var(--border);
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--primary);
+            position: relative;
+        }
+
+        [data-theme="light"] .experience-item {
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+        }
+
+        [data-theme="light"] .experience-item::before {
+            display: none;
+        }
+
+        .experience-header {
+            margin-bottom: 1rem;
+        }
+
+        .experience-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-bright);
+        }
+
+        .experience-company {
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .experience-period {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Contact */
+        .contact-info {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--primary);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        [data-theme="light"] .contact-link {
+            border-radius: 8px;
+            text-transform: none;
+            letter-spacing: normal;
+        }
+
+        .contact-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 204, 204, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        [data-theme="light"] .contact-link::before {
+            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.1), transparent);
+        }
+
+        .contact-link:hover::before {
+            left: 100%;
+        }
+
+        .contact-link:hover {
+            background: var(--primary);
+            color: var(--bg);
+            box-shadow: var(--shadow);
+        }
+
+        [data-theme="light"] .contact-link:hover {
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .theme-toggle {
+                top: 1rem;
+                right: 1rem;
+                padding: 0.75rem;
+            }
+
+            .try-me-label {
+                font-size: 0.7rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+    <div class="scan-line"></div>
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle">
+        <div class="try-me-label">Try Me!</div>
+        <div class="toggle-switch" onclick="toggleTheme()"></div>
+    </div>
+
+    <header class="header">
+        <div class="container">
+            <div class="hero">
+                <div class="logo-container">
+                    <svg class="animated-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+                        <defs>
+                            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                                <feGaussianBlur stdDeviation="5" result="blur"/>
+                                <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+                            </filter>
+                            <radialGradient id="scan-gradient" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" style="stop-color:#00FFFF;stop-opacity:0.8"/>
+                                <stop offset="50%" style="stop-color:#00CCCC;stop-opacity:0.4"/>
+                                <stop offset="100%" style="stop-color:#00CCCC;stop-opacity:0"/>
+                            </radialGradient>
+                            <radialGradient id="business-gradient" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" style="stop-color:#2563EB;stop-opacity:0.6"/>
+                                <stop offset="50%" style="stop-color:#1D4ED8;stop-opacity:0.3"/>
+                                <stop offset="100%" style="stop-color:#1D4ED8;stop-opacity:0"/>
+                            </radialGradient>
+                        </defs>
+                        <rect width="500" height="500" fill="var(--bg-card)"/>
+                        <circle cx="250" cy="250" r="0" fill="url(#scan-gradient)" opacity="0.6" class="dark-only">
+                            <animate attributeName="r" values="0;200;0" dur="4s" repeatCount="indefinite"/>
+                            <animate attributeName="opacity" values="0.8;0.2;0.8" dur="4s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="250" cy="250" r="0" fill="url(#business-gradient)" opacity="0.4" class="light-only" style="display: none;">
+                            <animate attributeName="r" values="0;150;0" dur="6s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="250" cy="250" r="180" fill="none" stroke="var(--primary)" stroke-width="3" opacity="0.8">
+                            <animate attributeName="stroke-width" values="3;6;3" dur="4s" repeatCount="indefinite" class="dark-only"/>
+                            <animate attributeName="opacity" values="0.8;1;0.8" dur="4s" repeatCount="indefinite" class="dark-only"/>
+                        </circle>
+                        <path d="M250 100 L400 350 L100 350 Z" fill="none" stroke="var(--secondary)" stroke-width="5" opacity="0.9">
+                            <animate attributeName="stroke-dasharray" values="0,800;400,400;800,0;0,800" dur="6s" repeatCount="indefinite" class="dark-only"/>
+                            <animate attributeName="stroke-width" values="5;8;5" dur="3s" repeatCount="indefinite" class="dark-only"/>
+                        </path>
+                    </svg>
+                </div>
+                <h1>Scott Peterman</h1>
+                <div class="subtitle">Principal Infrastructure Engineer</div>
+                <div class="tagline">
+                    <span class="terminal-prompt">core-rtr-01#</span>
+                    <span class="tech-tagline">Network Automation • DevOps • Full Stack Development</span>
+                    <span class="business-tagline" style="display: none;">Transforming network operations through innovative automation solutions and strategic infrastructure engineering</span>
+                </div>
+                <div class="cta-buttons">
+                    <a href="#projects" class="btn btn-primary">View Projects</a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <span class="tech-text">Initialize Contact</span>
+                        <span class="business-text" style="display: none;">Get In Touch</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-container">
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">About</h2>
+            <div class="about-content">
+                <div>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-light); margin-bottom: 1.5rem;">
+                        <span class="terminal-prompt">$</span>
+                        <span class="tech-text">Passionate network automation engineer with extensive experience building scalable infrastructure solutions. Specializing in network programmability, monitoring, and automation across multiple vendor platforms.</span>
+                        <span class="business-text" style="display: none;">Results-driven infrastructure leader with a proven track record of transforming network operations through strategic automation and innovative engineering solutions. Expert in designing scalable, enterprise-grade systems that drive operational efficiency and business growth.</span>
+                    </p>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-light); margin-bottom: 1.5rem;">
+                        <span style="color: var(--primary); font-weight: 600;" class="tech-label">[PHILOSOPHY]</span>
+                        <span style="color: var(--primary); font-weight: 600;" class="business-label" style="display: none;">Core Philosophy:</span>
+                        "If you can't see it, you can't fix it." Focus on comprehensive visibility and operational consistency through intelligent automation.
+                    </p>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-light);">
+                        <span style="color: var(--primary); font-weight: 600;" class="tech-label">[Network Tools Developer]</span>
+                        <span style="color: var(--primary); font-weight: 600;" class="business-label" style="display: none;">Technical Foundation:</span>
+                        <span class="tech-text">Based on years as a hands on network engineer. Experienced hardware experience across Cisco, Arista, Juniper, Aruba, F5 and A10</span>
+                        <span class="business-text" style="display: none;">Leveraging decades of hands-on network engineering experience across enterprise-grade platforms including Cisco, Arista, Juniper, Aruba, F5, and A10 to deliver practical, production-ready solutions.</span>
+                    </p>
+                </div>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>🔧 Automation & DevOps</h3>
+                        <ul class="skill-list">
+                            <li>Python, Go, JavaScript</li>
+                            <li>Ansible, Tower/AWX, Rundeck</li>
+                            <li>Docker, GitLab CI/CD</li>
+                            <li>Napalm, Nornir, pyATS</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h3>🌐 Networking</h3>
+                        <ul class="skill-list">
+                            <li>Datacenter</li>
+                            <li>MPLS Edge/Core</li>
+                            <li>Metro Ethernet</li>
+                            <li>Classic VOIP</li>
+                            <li>SD-WAN (Prisma/CloudGenix)</li>
+                            <li>BGP, IPSEC, VPN</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h3>💻 Development</h3>
+                        <ul class="skill-list">
+                            <li>Flask, FastAPI, Node.js/Express</li>
+                            <li>MySQL, MongoDB, PostgreSQL</li>
+                            <li>Bootstrap, Modern UI/UX</li>
+                            <li>REST APIs, WebSockets/SSE</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h3>☁️ Infrastructure</h3>
+                        <ul class="skill-list">
+                            <li>VMware vSphere</li>
+                            <li>Linux (CentOS/Ubuntu)</li>
+                            <li>IaC Solutions</li>
+                            <li>Monitoring & Observability</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+
+            <h3 style="color: var(--primary); font-size: 1.8rem; margin-bottom: 2rem; text-align: center;">
+                <span class="tech-label">[FULL_STACK_APPLICATIONS]</span>
+                <span class="business-label" style="display: none;">Enterprise Applications</span>
+            </h3>
+            <div class="projects-grid">
+                <div class="project-card" onclick="openModal('secure-cartography')">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <svg class="project-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                                <rect width="200" height="200" fill="var(--bg-card)"/>
+                                <rect x="20" y="30" width="160" height="120" fill="none" stroke="var(--primary)" stroke-width="2"/>
+                                <rect x="25" y="35" width="150" height="20" fill="var(--primary)" opacity="0.3"/>
+                                <g fill="none" stroke="var(--secondary)" stroke-width="2">
+                                    <circle cx="80" cy="80" r="8"/>
+                                    <circle cx="120" cy="80" r="8"/>
+                                    <circle cx="100" cy="110" r="8"/>
+                                    <line x1="80" y1="80" x2="120" y2="80"/>
+                                    <line x1="80" y1="80" x2="100" y2="110"/>
+                                    <line x1="120" y1="80" x2="100" y2="110"/>
+                                </g>
+                                <text x="100" y="180" fill="var(--text-light)" text-anchor="middle" font-family="monospace" font-size="10">NETWORK MAPPING</text>
+                            </svg>
+                        </div>
+                        <div class="project-title">Secure Cartography</div>
+                    </div>
+                    <div class="project-description">
+                        Network discovery and mapping tool with SSH-based device interrogation. Generates comprehensive topology maps with security-focused design and automated discovery capabilities.
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">SSH</span>
+                        <span class="tech-tag">Network Discovery</span>
+                        <span class="tech-tag">PyQt</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/scottpeterman/secure_cartography" class="project-link" target="_blank">
+                            GitHub Repository
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card" onclick="openModal('terminal-telemetry')">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <svg class="project-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                                <defs>
+                                    <filter id="glow-sm" x="-50%" y="-50%" width="200%" height="200%">
+                                        <feGaussianBlur stdDeviation="3" result="blur"/>
+                                        <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+                                    </filter>
+                                </defs>
+                                <rect width="200" height="200" fill="var(--bg-card)"/>
+                                <path d="M100 40 L160 140 L40 140 Z" fill="none" stroke="var(--primary)" stroke-width="3" filter="url(#glow-sm)">
+                                    <animate attributeName="stroke-dasharray" values="0,320;160,160;320,0;0,320" dur="4s" repeatCount="indefinite" class="dark-only"/>
+                                </path>
+                                <path d="M100 60 L140 120 L60 120 Z" fill="none" stroke="var(--secondary)" stroke-width="2" filter="url(#glow-sm)">
+                                    <animate attributeName="stroke-dasharray" values="0,240;120,120;240,0;0,240" dur="4s" repeatCount="indefinite" begin="1s" class="dark-only"/>
+                                </path>
+                                <circle cx="100" cy="100" r="50" fill="none" stroke="var(--primary)" stroke-width="2" opacity="0.6">
+                                    <animate attributeName="r" values="50;60;50" dur="3s" repeatCount="indefinite" class="dark-only"/>
+                                </circle>
+                            </svg>
+                        </div>
+                        <div class="project-title">Terminal Telemetry</div>
+                    </div>
+                    <div class="project-description">
+                        Advanced terminal-based network monitoring system. Real-time telemetry collection with intuitive interface for network performance and device health insights.
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Terminal UI</span>
+                        <span class="tech-tag">Monitoring</span>
+                        <span class="tech-tag">Real-time</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/scottpeterman/terminaltelemetry" class="project-link" target="_blank">
+                            GitHub Repository
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card" onclick="openModal('velociterm')">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <svg class="project-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                                <rect width="200" height="200" fill="var(--bg-card)"/>
+                                <rect x="40" y="40" width="120" height="80" fill="none" stroke="var(--primary)" stroke-width="3" rx="5"/>
+                                <rect x="45" y="45" width="110" height="15" fill="var(--primary)" opacity="0.3"/>
+                                <g fill="none" stroke="var(--secondary)" stroke-width="2">
+                                    <rect x="50" y="70" width="30" height="40"/>
+                                    <rect x="85" y="70" width="30" height="40"/>
+                                    <rect x="120" y="70" width="30" height="40"/>
+                                </g>
+                                <circle cx="140" cy="52" r="3" fill="var(--accent)">
+                                    <animate attributeName="opacity" values="1;0.3;1" dur="1s" repeatCount="indefinite"/>
+                                </circle>
+                                <text x="100" y="180" fill="var(--text-light)" text-anchor="middle" font-family="monospace" font-size="8">ENTERPRISE WEB</text>
+                            </svg>
+                        </div>
+                        <div class="project-title">VelociTerm</div>
+                    </div>
+                    <div class="project-description">
+                        Enterprise web application with LDAP authentication. Multi-user jump host platform providing user-based session management and tabbed terminal support for secure network operations.
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Web Application</span>
+                        <span class="tech-tag">LDAP Auth</span>
+                        <span class="tech-tag">Multi-User</span>
+                        <span class="tech-tag">Jump Host</span>
+                        <span class="tech-tag">Session Management</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/scottpeterman/velociterm" class="project-link" target="_blank">
+                            GitHub Repository
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card" onclick="openModal('gosnmptk')">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <svg class="project-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                                <rect width="200" height="200" fill="var(--bg-card)"/>
+                                <g fill="none" stroke="var(--primary)" stroke-width="2">
+                                    <circle cx="100" cy="100" r="60"/>
+                                    <circle cx="100" cy="100" r="40"/>
+                                    <circle cx="100" cy="100" r="20"/>
+                                    <line x1="100" y1="40" x2="100" y2="160"/>
+                                    <line x1="40" y1="100" x2="160" y2="100"/>
+                                </g>
+                                <text x="100" y="110" fill="var(--secondary)" text-anchor="middle" font-family="monospace" font-size="20">Go</text>
+                            </svg>
+                        </div>
+                        <div class="project-title">GoSNMPTK</div>
+                    </div>
+                    <div class="project-description">
+                        Go-based SNMP toolkit for high-performance network monitoring. Efficient SNMP operations with modern concurrency patterns for large-scale data collection.
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Go</span>
+                        <span class="tech-tag">SNMP</span>
+                        <span class="tech-tag">Concurrency</span>
+                        <span class="tech-tag">Performance</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/scottpeterman/gosnmptk" class="project-link" target="_blank">
+                            GitHub Repository
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card" onclick="openModal('textfsm-ports')">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <svg class="project-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                                <rect width="200" height="200" fill="var(--bg-card)"/>
+                                <g fill="none" stroke="var(--primary)" stroke-width="3">
+                                    <rect x="30" y="50" width="50" height="100" rx="5"/>
+                                    <rect x="90" y="50" width="50" height="100" rx="5"/>
+                                    <rect x="150" y="50" width="20" height="100" rx="5"/>
+                                </g>
+                                <text x="100" y="110" fill="var(--secondary)" text-anchor="middle" font-family="monospace" font-size="16">FSM</text>
+                                <circle cx="55" cy="170" r="3" fill="#FFD700"/>
+                                <circle cx="115" cy="170" r="3" fill="var(--accent)"/>
+                                <circle cx="160" cy="170" r="3" fill="#FF6B6B"/>
+                                <text x="100" y="190" fill="var(--text-light)" text-anchor="middle" font-family="monospace" font-size="8">PY•JS•C#</text>
+                            </svg>
+                        </div>
+                        <div class="project-title">TextFSM Cross-Platform Ports</div>
+                    </div>
+                    <div class="project-description">
+                        Multi-language ports of Google's TextFSM template engine. JavaScript implementation for browser/Node.js environments and C# port for .NET 8, enabling network data parsing across diverse technology stacks.
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">C#/.NET 8</span>
+                        <span class="tech-tag">Cross-Platform</span>
+                        <span class="tech-tag">Template Engine</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/scottpeterman/textfsm.net" class="project-link" target="_blank">
+                            C#/.NET Port
+                        </a>
+                        <a href="https://github.com/scottpeterman/tfsmjstester" class="project-link" target="_blank">
+                            JavaScript Port
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="color: var(--primary); font-size: 1.8rem; margin: 4rem 0 2rem; text-align: center;">
+                <span class="tech-label">[VSCODE_EXTENSIONS]</span>
+                <span class="business-label" style="display: none;">Development Tools</span>
+            </h3>
+            <div class="projects-grid">
+                <div class="project-card" onclick="openModal('terminal-telemetry-vsc')">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <svg class="project-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                                <rect width="200" height="200" fill="var(--bg-card)"/>
+                                <rect x="20" y="30" width="160" height="120" fill="none" stroke="var(--primary)" stroke-width="2"/>
+                                <rect x="25" y="35" width="150" height="20" fill="var(--primary)" opacity="0.3"/>
+                                <g stroke="var(--secondary)" stroke-width="1" fill="none">
+                                    <rect x="30" y="65" width="70" height="40"/>
+                                    <rect x="110" y="65" width="60" height="40"/>
+                                    <rect x="30" y="115" width="140" height="25"/>
+                                </g>
+                                <circle cx="160" cy="75" r="3" fill="var(--accent)">
+                                    <animate attributeName="opacity" values="1;0.3;1" dur="1s" repeatCount="indefinite"/>
+                                </circle>
+                                <text x="100" y="180" fill="var(--text-light)" text-anchor="middle" font-family="monospace" font-size="10">TERMINAL APP</text>
+                            </svg>
+                        </div>
+                        <div class="project-title">Terminal Telemetry VSC</div>
+                    </div>
+                    <div class="project-description">
+                        Complete terminal application with session manager built in JavaScript for VS Code. Full-featured terminal emulation with telemetry capabilities integrated directly into the development environment.
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">VS Code API</span>
+                        <span class="tech-tag">Terminal Emulation</span>
+                        <span class="tech-tag">Session Management</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/scottpeterman/terminaltelemetryvsc" class="project-link" target="_blank">
+                            GitHub Repository
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card" onclick="openModal('secure-cartography-vsc')">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <svg class="project-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                                <rect width="200" height="200" fill="var(--bg-card)"/>
+                                <rect x="20" y="30" width="160" height="120" fill="none" stroke="var(--primary)" stroke-width="2"/>
+                                <rect x="25" y="35" width="150" height="20" fill="var(--primary)" opacity="0.3"/>
+                                <g fill="none" stroke="var(--secondary)" stroke-width="2">
+                                    <circle cx="80" cy="80" r="8"/>
+                                    <circle cx="120" cy="80" r="8"/>
+                                    <circle cx="100" cy="110" r="8"/>
+                                    <line x1="80" y1="80" x2="120" y2="80"/>
+                                    <line x1="80" y1="80" x2="100" y2="110"/>
+                                    <line x1="120" y1="80" x2="100" y2="110"/>
+                                </g>
+                                <text x="100" y="180" fill="var(--text-light)" text-anchor="middle" font-family="monospace" font-size="10">JS MAPPING</text>
+                            </svg>
+                        </div>
+                        <div class="project-title">Secure Cartography VSC</div>
+                    </div>
+                    <div class="project-description">
+                        Pure JavaScript VS Code extension for network topology mapping. Browser-based network discovery and visualization with interactive mapping capabilities built entirely in JavaScript.
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">VS Code API</span>
+                        <span class="tech-tag">Network Mapping</span>
+                        <span class="tech-tag">Browser-Based</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/scottpeterman/securecartographyvsc" class="project-link" target="_blank">
+                            GitHub Repository
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="section">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <div class="experience-timeline">
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div class="experience-title">Principal Infrastructure Engineer</div>
+                        <div class="experience-company">Columbia Sportswear Company</div>
+                        <div class="experience-period">
+                            <span class="tech-text">[2022-03] → [Present]</span>
+                            <span class="business-text" style="display: none;">March 2022 - Present</span>
+                        </div>
+                    </div>
+                    <p>Spearheaded comprehensive Full Stack network automation solutions using Python Flask/FastAPI with MySQL. Built real-time automation jobs with Server-Sent Events streams. Developed custom integrations with Prisma SDWAN, PaloAlto Panorama, and LogicMonitor APIs.</p>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div class="experience-title">Principal Engineer - QA Network Automation Architect</div>
+                        <div class="experience-company">Charter Communications</div>
+                        <div class="experience-period">
+                            <span class="tech-text">[2017-05] → [2021-03]</span>
+                            <span class="business-text" style="display: none;">May 2017 - March 2021</span>
+                        </div>
+                    </div>
+                    <p>Led network automation architecture for QA environments. Implemented comprehensive testing frameworks and automation solutions for large-scale network infrastructure validation and deployment.</p>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div class="experience-title">Architect IP Edge Engineering</div>
+                        <div class="experience-company">Level 3 Communications</div>
+                        <div class="experience-period">
+                            <span class="tech-text">[2013-04] → [2016-04]</span>
+                            <span class="business-text" style="display: none;">April 2013 - April 2016</span>
+                        </div>
+                    </div>
+                    <p>Architected IP edge solutions for global internet backbone provider. Focused on scalable network designs and automation frameworks for high-performance networking infrastructure.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <div class="contact-info">
+                <p style="font-size: 1.2rem; color: var(--text-light); margin-bottom: 1rem;">
+                    <span class="terminal-prompt">$</span>
+                    <span class="tech-text">Interested in network automation, infrastructure engineering, or collaboration?</span>
+                    <span class="business-text" style="display: none;">Ready to discuss how we can transform your network infrastructure together?</span>
+                </p>
+                <p style="font-size: 1.1rem; color: var(--text-light);">
+                    <span style="color: var(--primary);" class="tech-label">[Looking For New Opportunity]</span>
+                    <span style="color: var(--primary);" class="business-label" style="display: none;">Open to New Opportunities:</span>
+                    <div>
+                        <span class="tech-text">Available for innovative solutions and challenging projects.</span>
+                        <span class="business-text" style="display: none;">Seeking roles where I can drive significant impact through strategic automation and infrastructure innovation.</span>
+                    </div>
+                </p>
+                <div class="contact-links">
+                    <a href="mailto:scottpeterman@gmail.com" class="contact-link">
+                        📧 Email
+                    </a>
+                    <a href="https://linkedin.com/in/scott-peterman-networkeng" class="contact-link" target="_blank">
+                        💼 LinkedIn
+                    </a>
+                    <a href="https://github.com/scottpeterman" class="contact-link" target="_blank">
+                        🐙 GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Modals with Technical Details -->
+    <div id="secure-cartography" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('secure-cartography')">&times;</button>
+            <h2 style="margin-bottom: 1rem; color: var(--primary);">
+                <span class="tech-label">[SECURE_CARTOGRAPHY.EXE]</span>
+                <span class="business-label" style="display: none;">Secure Cartography Platform</span>
+            </h2>
+            <h3 style="margin-bottom: 1.5rem; color: var(--text-light);">Network Discovery & Topology Mapping</h3>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
+                    <span class="tech-label">[OVERVIEW]</span>
+                    <span class="business-label" style="display: none;">Solution Overview</span>
+                </h4>
+                <p style="line-height: 1.6; color: var(--text-light);">
+                    Secure network discovery and mapping solution providing automated topology generation through SSH-based device interrogation.
+                    Security-first design with powerful visualization capabilities for network infrastructure documentation and analysis.
+                </p>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
+                    <span class="tech-label">[FEATURES]</span>
+                    <span class="business-label" style="display: none;">Key Features</span>
+                </h4>
+                <ul style="line-height: 1.8; color: var(--text-light); padding-left: 1.5rem;">
+                    <li>▸ Automated SSH-based device discovery</li>
+                    <li>▸ Interactive topology map generation</li>
+                    <li>▸ Multi-vendor support (Cisco, Juniper, etc.)</li>
+                    <li>▸ Encrypted credential management</li>
+                    <li>▸ Real-time network state visualization</li>
+                    <li>▸ Export capabilities for documentation</li>
+                </ul>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
+                    <span class="tech-label">[IMPLEMENTATION]</span>
+                    <span class="business-label" style="display: none;">Technical Implementation</span>
+                </h4>
+                <p style="line-height: 1.6; color: var(--text-light);">
+                    Built with Python and PyQt framework, utilizing paramiko for secure SSH connections and networkx for graph-based topology representation.
+                    Implements threading for non-blocking operations and credential encryption for security compliance.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="terminal-telemetry" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('terminal-telemetry')">&times;</button>
+            <h2 style="margin-bottom: 1rem; color: var(--primary);">
+                <span class="tech-label">[TERMINAL_TELEMETRY.EXE]</span>
+                <span class="business-label" style="display: none;">Terminal Telemetry Platform</span>
+            </h2>
+            <h3 style="margin-bottom: 1.5rem; color: var(--text-light);">Advanced Network Monitoring & Analytics</h3>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
+                    <span class="tech-label">[OVERVIEW]</span>
+                    <span class="business-label" style="display: none;">Solution Overview</span>
+                </h4>
+                <p style="line-height: 1.6; color: var(--text-light);">
+                    Comprehensive network monitoring and telemetry collection through intuitive terminal interface.
+                    Real-time insights into network performance, device health, and operational metrics with minimal overhead.
+                </p>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
+                    <span class="tech-label">[CAPABILITIES]</span>
+                    <span class="business-label" style="display: none;">Core Capabilities</span>
+                </h4>
+                <ul style="line-height: 1.8; color: var(--text-light); padding-left: 1.5rem;">
+                    <li>▸ Real-time performance monitoring</li>
+                    <li>▸ Multi-protocol telemetry (SNMP, SSH, APIs)</li>
+                    <li>▸ Interactive terminal dashboards</li>
+                    <li>▸ Alert and threshold management</li>
+                    <li>▸ Historical analysis and trending</li>
+                    <li>▸ Custom metric definition</li>
+                </ul>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
+                    <span class="tech-label">[ARCHITECTURE]</span>
+                    <span class="business-label" style="display: none;">System Architecture</span>
+                </h4>
+                <p style="line-height: 1.6; color: var(--text-light);">
+                    Modular design supporting multiple data collection backends with real-time processing and efficient terminal rendering.
+                    Asynchronous processing for high-performance data collection with extensible plugin architecture.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="velociterm" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('velociterm')">&times;</button>
+            <h2 style="margin-bottom: 1rem; color: var(--primary);">
+                <span class="tech-label">[VELOCITERM.WEB]</span>
+                <span class="business-label" style="display: none;">VelociTerm Enterprise Platform</span>
+            </h2>
+            <h3 style="margin-bottom: 1.5rem; color: var(--text-light);">Enterprise Multi-User Jump Host Platform</h3>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
+                    <span class="tech-label">[ENTERPRISE_FEATURES]</span>
+                    <span class="business-label" style="display: none;">Enterprise Features</span>
+                </h4>
+                <p style="line-height: 1.6; color: var(--text-light);">
+                    Web-based enterprise terminal platform with LDAP authentication and multi-user capabilities.
+                    Provides secure jump host functionality with comprehensive session management for network operations teams.
+                </p>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
+                    <span class="tech-label">[CAPABILITIES]</span>
+                    <span class="business-label" style="display: none;">Platform Capabilities</span>
+                </h4>
+                <ul style="line-height: 1.8; color: var(--text-light); padding-left: 1.5rem;">
+                    <li>▸ LDAP/Active Directory integration</li>
+                    <li>▸ Multi-user concurrent sessions</li>
+                    <li>▸ User-based session isolation</li>
+                    <li>▸ Tabbed terminal interface</li>
+                    <li>▸ Secure jump host operations</li>
+                    <li>▸ Web-based accessibility</li>
+                    <li>▸ Enterprise authentication</li>
+                    <li>▸ Session recording and audit</li>
+                </ul>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
+                    <span class="tech-label">[DEPLOYMENT]</span>
+                    <span class="business-label" style="display: none;">Deployment Strategy</span>
+                </h4>
+                <p style="line-height: 1.6; color: var(--text-light);">
+                    Designed for enterprise environments requiring centralized terminal access with role-based permissions.
+                    Supports high-availability deployments and integrates with existing corporate authentication infrastructure.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="gosnmptk" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('gosnmptk')">&times;</button>
+            <h2 style="margin-bottom: 1rem; color: var(--primary);">
+                <span class="tech-label">[GOSNMPTK.EXE]</span>
+                <span class="business-label" style="display: none;">GoSNMPTK Performance Toolkit</span>
+            </h2>
+            <h3 style="margin-bottom: 1.5rem; color: var(--text-light);">High-Performance SNMP Toolkit</h3>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
+                    <span class="tech-label">[CONCURRENCY_ENGINE]</span>
+                    <span class="business-label" style="display: none;">Performance Engine</span>
+                </h4>
+                <p style="line-height: 1.6; color: var(--text-light);">
+                    Utilizes goroutines and channels for efficient concurrent processing, enabling simultaneous queries across hundreds of devices.
+                    Excellent scalability with low memory footprint and CPU usage.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="textfsm-ports" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('textfsm-ports')">&times;</button>
+            <h2 style="margin-bottom: 1rem; color: var(--primary);">
+                <span class="tech-label">[TEXTFSM_CROSS_PLATFORM.PKG]</span>
+                <span class="business-label" style="display: none;">TextFSM Cross-Platform Solutions</span>
+            </h2>
+            <h3 style="margin-bottom: 1.5rem; color: var(--text-light);">Multi-Language Template Engine Ports</h3>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
+                    <span class="tech-label">[OVERVIEW]</span>
+                    <span class="business-label" style="display: none;">Platform Overview</span>
+                </h4>
+                <p style="line-height: 1.6; color: var(--text-light);">
+                    Advanced cross-platform implementations of Google's TextFSM template engine. JavaScript port supports both browser and Node.js environments,
+                    while C# implementation targets .NET 8 for enterprise integration scenarios.
+                </p>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
+                    <span class="tech-label">[IMPLEMENTATIONS]</span>
+                    <span class="business-label" style="display: none;">Available Implementations</span>
+                </h4>
+                <ul style="line-height: 1.8; color: var(--text-light); padding-left: 1.5rem;">
+                    <li>▸ JavaScript: Browser + Node.js compatibility</li>
+                    <li>▸ C#/.NET 8: Enterprise integration ready</li>
+                    <li>▸ VS Code test UI for JavaScript version</li>
+                    <li>▸ Full template syntax compatibility</li>
+                    <li>▸ Network data parsing optimization</li>
+                    <li>▸ Cross-platform deployment capabilities</li>
+                </ul>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
+                    <span class="tech-label">[USE_CASES]</span>
+                    <span class="business-label" style="display: none;">Business Applications</span>
+                </h4>
+                <p style="line-height: 1.6; color: var(--text-light);">
+                    Enables network automation across diverse technology stacks. JavaScript version supports web-based tools and Node.js automation,
+                    while C# implementation integrates with enterprise .NET applications and microservices.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="terminal-telemetry-vsc" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('terminal-telemetry-vsc')">&times;</button>
+            <h2 style="margin-bottom: 1rem; color: var(--primary);">
+                <span class="tech-label">[TERMINAL_TELEMETRY_VSC.EXT]</span>
+                <span class="business-label" style="display: none;">Terminal Telemetry VS Code Extension</span>
+            </h2>
+            <h3 style="margin-bottom: 1.5rem; color: var(--text-light);">Full Terminal Application for VS Code</h3>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
+                    <span class="tech-label">[SYSTEM_SPECS]</span>
+                    <span class="business-label" style="display: none;">System Specifications</span>
+                </h4>
+                <p style="line-height: 1.6; color: var(--text-light);">
+                    Complete terminal application with session manager built entirely in JavaScript for VS Code.
+                    Provides full terminal emulation capabilities with telemetry integration directly within the development environment.
+                </p>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
+                    <span class="tech-label">[FEATURES]</span>
+                    <span class="business-label" style="display: none;">Key Features</span>
+                </h4>
+                <ul style="line-height: 1.8; color: var(--text-light); padding-left: 1.5rem;">
+                    <li>▸ Full terminal emulation in VS Code</li>
+                    <li>▸ Advanced session management</li>
+                    <li>▸ Telemetry data collection</li>
+                    <li>▸ JavaScript-based architecture</li>
+                    <li>▸ Seamless IDE integration</li>
+                    <li>▸ Multi-session support</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="secure-cartography-vsc" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('secure-cartography-vsc')">&times;</button>
+            <h2 style="margin-bottom: 1rem; color: var(--primary);">
+                <span class="tech-label">[SECURE_CARTOGRAPHY_VSC.EXT]</span>
+                <span class="business-label" style="display: none;">Secure Cartography VS Code Extension</span>
+            </h2>
+            <h3 style="margin-bottom: 1.5rem; color: var(--text-light);">Pure JavaScript Network Mapping</h3>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
+                    <span class="tech-label">[ARCHITECTURE]</span>
+                    <span class="business-label" style="display: none;">Technical Architecture</span>
+                </h4>
+                <p style="line-height: 1.6; color: var(--text-light);">
+                    Browser-based network discovery and topology mapping built entirely in JavaScript.
+                    Provides interactive network visualization capabilities without external dependencies.
+                </p>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
+                    <span class="tech-label">[CAPABILITIES]</span>
+                    <span class="business-label" style="display: none;">Platform Capabilities</span>
+                </h4>
+                <ul style="line-height: 1.8; color: var(--text-light); padding-left: 1.5rem;">
+                    <li>▸ Pure JavaScript implementation</li>
+                    <li>▸ Browser-based network mapping</li>
+                    <li>▸ Interactive topology visualization</li>
+                    <li>▸ VS Code integrated interface</li>
+                    <li>▸ Real-time network discovery</li>
+                    <li>▸ Cross-platform compatibility</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme toggle functionality
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            body.setAttribute('data-theme', newTheme);
+
+            // Toggle visibility of theme-specific elements
+            const techElements = document.querySelectorAll('.tech-text, .tech-label, .tech-tagline');
+            const businessElements = document.querySelectorAll('.business-text, .business-label, .business-tagline');
+            const darkOnlyElements = document.querySelectorAll('.dark-only');
+            const lightOnlyElements = document.querySelectorAll('.light-only');
+
+            if (newTheme === 'light') {
+                techElements.forEach(el => el.style.display = 'none');
+                businessElements.forEach(el => el.style.display = 'inline');
+                darkOnlyElements.forEach(el => el.style.display = 'none');
+                lightOnlyElements.forEach(el => el.style.display = 'block');
+            } else {
+                techElements.forEach(el => el.style.display = 'inline');
+                businessElements.forEach(el => el.style.display = 'none');
+                darkOnlyElements.forEach(el => el.style.display = 'block');
+                lightOnlyElements.forEach(el => el.style.display = 'none');
+            }
+
+            // Save theme preference
+            localStorage.setItem('portfolio-theme', newTheme);
+        }
+
+        // Load saved theme preference
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('portfolio-theme') || 'dark';
+            if (savedTheme === 'light') {
+                toggleTheme();
+            }
+        }
+
+        // Enhanced script with terminal-style interactions
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Active navigation highlighting
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-links a');
+
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                e.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal').forEach(modal => {
+                    modal.style.display = 'none';
+                });
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Enhanced scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements with fade-in effect
+        document.querySelectorAll('.project-card, .experience-item, .skill-category').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Initialize theme on page load
+        document.addEventListener('DOMContentLoaded', loadTheme);
+    </script>
+</body>
+</html>
