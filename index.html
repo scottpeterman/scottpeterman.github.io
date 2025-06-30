@@ -1446,6 +1446,114 @@
                     </div>
                 </div>
 
+                
+<div class="project-card" onclick="openModal('retroterm-net')">
+    <div class="project-header">
+        <div class="project-icon">
+            <svg class="project-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                <defs>
+                    <filter id="retro-glow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="3" result="blur"/>
+                        <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+                    </filter>
+                    <linearGradient id="screen-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#0A0A0F;stop-opacity:1"/>
+                        <stop offset="100%" style="stop-color:#111122;stop-opacity:1"/>
+                    </linearGradient>
+                </defs>
+                <rect width="200" height="200" fill="var(--bg-card)"/>
+                
+                <!-- Retro terminal screen with cyberpunk colors -->
+                <rect x="30" y="40" width="140" height="100" fill="url(#screen-gradient)" stroke="#00CCCC" stroke-width="2" filter="url(#retro-glow)"/>
+                <rect x="32" y="42" width="136" height="96" fill="#0A0A0F"/>
+                
+                <!-- Classic cyberpunk border with double lines -->
+                <rect x="28" y="38" width="144" height="104" fill="none" stroke="#00CCCC" stroke-width="1"/>
+                <rect x="30" y="40" width="140" height="100" fill="none" stroke="#00FFFF" stroke-width="1"/>
+                
+                <!-- Function key bar -->
+                <rect x="32" y="42" width="136" height="12" fill="#00CCCC" opacity="0.8"/>
+                <text x="100" y="50" fill="#0A0A0F" text-anchor="middle" font-family="monospace" font-size="8" font-weight="bold">F1 F2 F3 F4 F5 F6 F7 F8 F9 F10</text>
+                
+                <!-- Terminal content -->
+                <g fill="#00FFFF" font-family="monospace" font-size="6">
+                    <text x="35" y="65">C:\> ssh user@router.company.com</text>
+                    <text x="35" y="75">Connecting to 192.168.1.1...</text>
+                    <text x="35" y="85">router# show version</text>
+                    <text x="35" y="95">Cisco IOS Software, Version 15.1</text>
+                    <text x="35" y="105">router# show ip interface brief</text>
+                    <text x="35" y="115">Interface    IP-Address   Status</text>
+                    <text x="35" y="125" fill="#00FF00">GigE0/0/1    10.1.1.1     up</text>
+                </g>
+                
+                <!-- Blinking cursor -->
+                <rect x="90" y="120" width="6" height="8" fill="#00FF00">
+                    <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/>
+                </rect>
+                
+                <!-- Status bar -->
+                <rect x="32" y="130" width="136" height="8" fill="#00CCCC" opacity="0.8"/>
+                <text x="100" y="136" fill="#0A0A0F" text-anchor="middle" font-family="monospace" font-size="5" font-weight="bold">RetroTerm.NET - Session: router.company.com</text>
+                
+                <!-- Cyberpunk glow effects -->
+                <rect x="34" y="144" width="140" height="2" fill="#00CCCC" opacity="0.3">
+                    <animate attributeName="opacity" values="0.3;0.6;0.3" dur="2s" repeatCount="indefinite"/>
+                </rect>
+                <rect x="174" y="44" width="2" height="100" fill="#00CCCC" opacity="0.3">
+                    <animate attributeName="opacity" values="0.3;0.6;0.3" dur="2s" repeatCount="indefinite" begin="1s"/>
+                </rect>
+                
+                <!-- Connection indicator -->
+                <circle cx="160" cy="48" r="2" fill="#00FF00" filter="url(#retro-glow)">
+                    <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+                </circle>
+                
+                <!-- Scanning line effect -->
+                <line x1="32" y1="60" x2="168" y2="60" stroke="#00FFFF" stroke-width="0.5" opacity="0.6">
+                    <animateTransform attributeName="transform" type="translate" values="0,0;0,80;0,0" dur="3s" repeatCount="indefinite"/>
+                    <animate attributeName="opacity" values="0.6;1;0.6" dur="3s" repeatCount="indefinite"/>
+                </line>
+                
+                <!-- Retro label -->
+                <text x="100" y="170" fill="#00CCCC" text-anchor="middle" font-family="monospace" font-size="8">RETRO DOS TERMINAL</text>
+                
+                <!-- Cyberpunk aesthetic lines -->
+                <g stroke="#00CCCC" stroke-width="0.5" opacity="0.4">
+                    <line x1="20" y1="160" x2="180" y2="160"/>
+                    <line x1="20" y1="165" x2="180" y2="165"/>
+                    <line x1="20" y1="30" x2="180" y2="30"/>
+                    <line x1="20" y1="180" x2="180" y2="180"/>
+                </g>
+                
+                <!-- Additional cyberpunk corner details -->
+                <g stroke="#00FFFF" stroke-width="1" fill="none" opacity="0.6">
+                    <path d="M25,35 L35,35 L35,45"/>
+                    <path d="M165,35 L175,35 L175,45"/>
+                    <path d="M25,155 L35,155 L35,165"/>
+                    <path d="M165,155 L175,155 L175,165"/>
+                </g>
+            </svg>
+        </div>
+        <div class="project-title">RetroTerm.NET</div>
+    </div>
+    <div class="project-description">
+        Nostalgic terminal emulator with authentic DOS-inspired interface providing modern SSH connectivity. Features classic blue theme, function key hotkeys, tabbed sessions, and 20+ retro themes including Borland, Norton Commander, and cyberpunk styles.
+    </div>
+                <div class="tech-stack">
+                    <span class="tech-tag">C# / .NET 6</span>
+                    <span class="tech-tag">Windows Forms</span>
+                    <span class="tech-tag">WebView2</span>
+                    <span class="tech-tag">xterm.js</span>
+                    <span class="tech-tag">SSH.NET</span>
+                    <span class="tech-tag">Theming System</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/scottpeterman/retroterm.net" class="project-link" target="_blank">
+                        GitHub Repository
+                    </a>
+                
+                </div>
+            </div>
                 <div class="project-card" onclick="openModal('velociterm')">
                     <div class="project-header">
                         <div class="project-icon">
@@ -1963,7 +2071,79 @@
             </div>
         </div>
     </div>
+<div id="retroterm-net" class="modal">
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeModal('retroterm-net')">&times;</button>
+        <h2 style="margin-bottom: 1rem; color: var(--primary);">
+            <span class="tech-label">[RETROTERM.NET]</span>
+            <span class="business-label" style="display: none;">RetroTerm.NET Terminal Platform</span>
+        </h2>
+        <h3 style="margin-bottom: 1.5rem; color: var(--text-light);">Nostalgic DOS Terminal with Modern SSH Capabilities</h3>
 
+        <div style="margin-bottom: 2rem;">
+            <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
+                <span class="tech-label">[RETRO_AESTHETIC]</span>
+                <span class="business-label" style="display: none;">Design Philosophy</span>
+            </h4>
+            <p style="line-height: 1.6; color: var(--text-light);">
+                Combines authentic DOS-era aesthetics with modern terminal functionality. Features classic blue interface reminiscent of Borland IDE, 
+                Norton Commander, and other legendary DOS applications, complete with function key bars and double-line borders.
+            </p>
+        </div>
+
+        <div style="margin-bottom: 2rem;">
+            <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
+                <span class="tech-label">[CORE_FEATURES]</span>
+                <span class="business-label" style="display: none;">Key Features</span>
+            </h4>
+            <ul style="line-height: 1.8; color: var(--text-light); padding-left: 1.5rem;">
+                <li>▸ Authentic retro DOS interface with modern SSH connectivity</li>
+                <li>▸ Function key bar (F1-F10) with hotkey support</li>
+                <li>▸ 4 built-in themes + 20+ importable themes</li>
+                <li>▸ Tabbed interface for multiple simultaneous connections</li>
+                <li>▸ Session management with folder organization</li>
+                <li>▸ AES-256 encrypted password storage</li>
+                <li>▸ Full terminal emulation via xterm.js</li>
+                <li>▸ Theme import/export with JSON format</li>
+            </ul>
+        </div>
+
+        <div style="margin-bottom: 2rem;">
+            <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
+                <span class="tech-label">[THEME_ECOSYSTEM]</span>
+                <span class="business-label" style="display: none;">Rich Theming System</span>
+            </h4>
+            <p style="line-height: 1.6; color: var(--text-light);">
+                Extensive theme collection spanning classic computing (Borland, IBM DOS, Amiga), modern development (Solarized, Nord, Gruvbox), 
+                retro CRT simulations (Amber, Matrix), and cyberpunk styles (Neon City, Doom). Complete color control for all UI elements 
+                with synchronized terminal colors.
+            </p>
+        </div>
+
+        <div style="margin-bottom: 2rem;">
+            <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
+                <span class="tech-label">[ARCHITECTURE]</span>
+                <span class="business-label" style="display: none;">Technical Architecture</span>
+            </h4>
+            <p style="line-height: 1.6; color: var(--text-light);">
+                Layered architecture combining Windows Forms for classic DOS styling with WebView2 hosting xterm.js for modern terminal emulation. 
+                SSH.NET provides robust connectivity while custom-drawn components deliver authentic retro aesthetics. 
+                Security-first design with PBKDF2 key derivation and AES-256 encryption.
+            </p>
+        </div>
+
+        <div style="margin-bottom: 2rem;">
+            <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
+                <span class="tech-label">[PHILOSOPHY]</span>
+                <span class="business-label" style="display: none;">Design Philosophy</span>
+            </h4>
+            <p style="line-height: 1.6; color: var(--text-light); font-style: italic;">
+                "CLI's Never Die, They Just Change Their Prompt" - Bridging the gap between nostalgic computing aesthetics 
+                and modern network operations. For those who appreciate the elegance of classic interfaces but need contemporary functionality.
+            </p>
+        </div>
+    </div>
+</div>
     <div id="secure-cartography-vsc" class="modal">
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal('secure-cartography-vsc')">&times;</button>
