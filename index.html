@@ -1445,7 +1445,91 @@
                         </a>
                     </div>
                 </div>
-
+<div class="project-card" onclick="openModal('rapidcmdb-details')">
+    <div class="project-header">
+        <div class="project-icon">
+            <svg class="project-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                <rect width="200" height="200" fill="var(--bg-card)"/>
+                
+                <!-- Main reconciliation interface -->
+                <rect x="20" y="30" width="160" height="120" fill="none" stroke="var(--primary)" stroke-width="2"/>
+                <rect x="25" y="35" width="150" height="20" fill="var(--primary)" opacity="0.3"/>
+                
+                <!-- CMDB data sources -->
+                <g stroke="var(--secondary)" stroke-width="1" fill="none">
+                    <rect x="30" y="65" width="65" height="35"/>
+                    <rect x="105" y="65" width="65" height="35"/>
+                    <rect x="30" y="110" width="140" height="30"/>
+                </g>
+                
+                <!-- Data correlation indicators -->
+                <g fill="var(--primary)" opacity="0.6">
+                    <rect x="35" y="70" width="55" height="3"/>
+                    <rect x="35" y="75" width="45" height="3"/>
+                    <rect x="35" y="80" width="35" height="3"/>
+                </g>
+                
+                <g fill="var(--secondary)" opacity="0.6">
+                    <rect x="110" y="70" width="55" height="3"/>
+                    <rect x="110" y="75" width="40" height="3"/>
+                    <rect x="110" y="80" width="50" height="3"/>
+                </g>
+                
+                <!-- Reconciliation results -->
+                <g fill="var(--accent)" opacity="0.7">
+                    <rect x="35" y="115" width="130" height="4"/>
+                    <rect x="35" y="122" width="100" height="4"/>
+                    <rect x="35" y="129" width="120" height="4"/>
+                </g>
+                
+                <!-- Active processing indicator -->
+                <circle cx="160" cy="75" r="3" fill="var(--accent)">
+                    <animate attributeName="opacity" values="1;0.3;1" dur="1s" repeatCount="indefinite"/>
+                </circle>
+                
+                <!-- Confidence scoring bars -->
+                <g transform="translate(25,60)">
+                    <rect x="0" y="0" width="15" height="3" fill="var(--accent)">
+                        <animate attributeName="width" values="5;15;5" dur="2s" repeatCount="indefinite"/>
+                    </rect>
+                    <rect x="0" y="5" width="10" height="3" fill="#FFD700">
+                        <animate attributeName="width" values="3;10;3" dur="2s" repeatCount="indefinite" begin="0.7s"/>
+                    </rect>
+                </g>
+                
+                <!-- Data flow animation -->
+                <g stroke="var(--secondary)" stroke-width="1" fill="none" opacity="0.6">
+                    <line x1="95" y1="85" x2="105" y2="85">
+                        <animate attributeName="stroke-dasharray" values="0,10;5,5;10,0;0,10" dur="2s" repeatCount="indefinite"/>
+                    </line>
+                    <line x1="100" y1="100" x2="100" y2="110">
+                        <animate attributeName="stroke-dasharray" values="0,10;5,5;10,0;0,10" dur="2s" repeatCount="indefinite" begin="0.5s"/>
+                    </line>
+                </g>
+                
+                <text x="100" y="180" fill="var(--text-light)" text-anchor="middle" font-family="monospace" font-size="10">CMDB RECONCILIATION</text>
+            </svg>
+        </div>
+        <div class="project-title">RapidCMDB</div>
+    </div>
+    <div class="project-description">
+        Network discovery and CMDB reconciliation platform designed for asset auditing and compliance workflows. 
+        Automated device correlation with confidence-based matching to streamline manual reconciliation processes.
+    </div>
+    <div class="tech-stack">
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">Flask Blueprints</span>
+        <span class="tech-tag">SNMP Discovery</span>
+        <span class="tech-tag">On-Demand, Streamed Pipeline</span>
+        <span class="tech-tag">Vendor Correlation</span>
+        <span class="tech-tag">Compliance Data</span>
+    </div>
+    <div class="project-links">
+        <a href="https://github.com/scottpeterman/rapidcmdb" class="project-link" target="_blank">
+            GitHub Repository
+        </a>
+    </div>
+</div>
                 
 <div class="project-card" onclick="openModal('retroterm-net')">
     <div class="project-header">
@@ -1819,6 +1903,147 @@
     </section>
 
     <!-- Enhanced Modals with Technical Details -->
+     <div id="rapidcmdb-details" class="modal">
+    <div class="modal-content" style="max-width: 1000px;">
+        <button class="modal-close" onclick="closeModal('rapidcmdb-details')">&times;</button>
+        <h2 style="margin-bottom: 1rem; color: var(--primary);">
+            <span class="tech-label">[RAPIDCMDB.ENTERPRISE]</span>
+            <span class="business-label" style="display: none;">RapidCMDB Enterprise Platform</span>
+        </h2>
+        <h3 style="margin-bottom: 1.5rem; color: var(--text-light);">
+            <span class="tech-text">Enterprise CMDB Reconciliation & Asset Intelligence Engine</span>
+            <span class="business-text" style="display: none;">Strategic Asset Intelligence for Enterprise Decision Making</span>
+        </h3>
+
+        <div style="margin-bottom: 2rem;">
+            <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
+                <span class="tech-label">[PURPOSE]</span>
+                <span class="business-label" style="display: none;">Solution Purpose</span>
+            </h4>
+            <p style="line-height: 1.6; color: var(--text-light);">
+                <span class="tech-text">
+                    Designed to address CMDB reconciliation challenges faced by enterprise IT teams: conflicting asset databases, 
+                    time-intensive manual audits, and incomplete network visibility. Purpose-built for asset reconciliation 
+                    workflows rather than general monitoring or security scanning.
+                </span>
+                <span class="business-text" style="display: none;">
+                    Built to support asset management teams dealing with multiple data sources, compliance requirements, 
+                    and the need for accurate inventory data. Focuses specifically on reconciliation workflows that 
+                    bridge discovered network reality with recorded asset databases.
+                </span>
+            </p>
+        </div>
+
+        <div style="margin-bottom: 2rem;">
+            <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
+                <span class="tech-label">[CORE_CAPABILITIES]</span>
+                <span class="business-label" style="display: none;">Key Capabilities</span>
+            </h4>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                <div>
+                    <h5 style="color: var(--primary); margin-bottom: 0.5rem;">
+                        <span class="tech-text">Discovery Engine</span>
+                        <span class="business-text" style="display: none;">Asset Discovery</span>
+                    </h5>
+                    <ul style="line-height: 1.8; color: var(--text-light); padding-left: 1.5rem;">
+                        <li>▸ Multi-protocol discovery (SNMP v2c/v3, SSH, HTTP)</li>
+                        <li>▸ Concurrent scanning with rate limiting</li>
+                        <li>▸ Serial number and hardware identification</li>
+                        <li>▸ Read-only network operations</li>
+                        <li>▸ Vendor-agnostic device support</li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 style="color: var(--primary); margin-bottom: 0.5rem;">
+                        <span class="tech-text">Reconciliation Engine</span>
+                        <span class="business-text" style="display: none;">Data Reconciliation</span>
+                    </h5>
+                    <ul style="line-height: 1.8; color: var(--text-light); padding-left: 1.5rem;">
+                        <li>▸ Confidence-based device matching</li>
+                        <li>▸ Fuzzy correlation algorithms</li>
+                        <li>▸ Duplicate detection and merge suggestions</li>
+                        <li>▸ Gap analysis reporting</li>
+                        <li>▸ Vendor and model normalization</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div style="margin-bottom: 2rem;">
+            <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
+                <span class="tech-label">[WORKFLOW_EXAMPLES]</span>
+                <span class="business-label" style="display: none;">Use Case Examples</span>
+            </h4>
+            <div style="background: var(--bg-alt); padding: 1.5rem; border-left: 4px solid var(--accent);">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div>
+                        <h6 style="color: var(--accent); margin-bottom: 0.5rem;">Compliance Audits</h6>
+                        <ul style="color: var(--text-light); line-height: 1.6;">
+                            <li>• Network discovery and device enumeration</li>
+                            <li>• CMDB data import and correlation</li>
+                            <li>• Gap analysis and compliance reporting</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h6 style="color: var(--accent); margin-bottom: 0.5rem;">Asset Reconciliation</h6>
+                        <ul style="color: var(--text-light); line-height: 1.6;">
+                            <li>• Multi-source CMDB comparison</li>
+                            <li>• Automated confidence-based matching</li>
+                            <li>• Duplicate identification and cleanup</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 2rem;">
+            <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
+                <span class="tech-label">[DESIGN_APPROACH]</span>
+                <span class="business-label" style="display: none;">Design Philosophy</span>
+            </h4>
+            <div style="background: var(--bg-alt); padding: 1.5rem;">
+                <p style="line-height: 1.6; color: var(--text-light); margin-bottom: 1rem;">
+                    <span class="tech-text">
+                        Purpose-built for CMDB reconciliation rather than general network monitoring. Focuses on lightweight, 
+                        portable deployment with straightforward workflows for asset reconciliation teams and consultants.
+                    </span>
+                    <span class="business-text" style="display: none;">
+                        Designed for rapid deployment in enterprise environments where asset accuracy and reconciliation 
+                        workflows are the primary concern rather than ongoing monitoring or security assessment.
+                    </span>
+                </p>
+                <div style="color: var(--primary); font-weight: 600;">
+                    <span class="tech-text">
+                        ✓ Reconciliation-focused ✓ Portable deployment ✓ Multi-vendor support ✓ Confidence-based workflows
+                    </span>
+                    <span class="business-text" style="display: none;">
+                        ✓ Asset accuracy ✓ Compliance workflows ✓ Data correlation ✓ Audit preparation
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; padding: 2rem; background: linear-gradient(135deg, rgba(0, 204, 204, 0.1), rgba(0, 255, 255, 0.1)); border: 1px solid var(--border);">
+            <h5 style="color: var(--primary); margin-bottom: 1rem;">
+                <span class="tech-text">Ready to Streamline Your Asset Reconciliation?</span>
+                <span class="business-text" style="display: none;">Ready to Improve Your Asset Management Process?</span>
+            </h5>
+            <p style="color: var(--text-light); margin-bottom: 1rem;">
+                <span class="tech-text">
+                    Designed for network discovery, CMDB correlation, and asset reconciliation workflows
+                </span>
+                <span class="business-text" style="display: none;">
+                    Built to support asset management teams with discovery, correlation, and reconciliation capabilities
+                </span>
+            </p>
+            <div style="color: var(--secondary); font-weight: 600;">
+                Streamline manual asset reconciliation processes with automated discovery and correlation
+            </div>
+        </div>
+    </div>
+</div>
     <div id="secure-cartography" class="modal">
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal('secure-cartography')">&times;</button>
