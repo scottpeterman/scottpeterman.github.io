@@ -3,126 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scott Peterman - Network Automation Engineer</title>
+    <title>Scott Peterman - Principal Infrastructure Engineer</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary-blue: #2563EB;
+            --primary-blue-dark: #1D4ED8;
+            --secondary-blue: #0EA5E9;
+            --accent-green: #059669;
+            --text-primary: #1F2937;
+            --text-secondary: #6B7280;
+            --text-light: #9CA3AF;
+            --bg-white: #FFFFFF;
+            --bg-gray-50: #F9FAFB;
+            --bg-gray-100: #F3F4F6;
+            --border-gray: #E5E7EB;
+            --border-gray-light: #F3F4F6;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* Theme Variables */
-        :root {
-            /* Dark/Tech Theme */
-            --dark-primary: #00CCCC;
-            --dark-primary-dark: #00AAAA;
-            --dark-secondary: #00FFFF;
-            --dark-accent: #00FF00;
-            --dark-text: #E0E0E0;
-            --dark-text-light: #888888;
-            --dark-text-bright: #FFFFFF;
-            --dark-bg: #0A0A0F;
-            --dark-bg-alt: #111122;
-            --dark-bg-card: #1A1A2E;
-            --dark-border: #00CCCC;
-            --dark-shadow: 0 0 20px rgba(0, 204, 204, 0.3);
-            --dark-shadow-lg: 0 0 40px rgba(0, 204, 204, 0.5);
-            --dark-grid-color: rgba(0, 204, 204, 0.2);
-
-            /* Light/Business Theme */
-            --light-primary: #2563EB;
-            --light-primary-dark: #1D4ED8;
-            --light-secondary: #0EA5E9;
-            --light-accent: #059669;
-            --light-text: #374151;
-            --light-text-light: #6B7280;
-            --light-text-bright: #111827;
-            --light-bg: #FFFFFF;
-            --light-bg-alt: #F9FAFB;
-            --light-bg-card: #FFFFFF;
-            --light-border: #E5E7EB;
-            --light-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            --light-shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-            --light-grid-color: rgba(37, 99, 235, 0.05);
-
-            /* Active theme (default to dark) */
-            --primary: var(--dark-primary);
-            --primary-dark: var(--dark-primary-dark);
-            --secondary: var(--dark-secondary);
-            --accent: var(--dark-accent);
-            --text: var(--dark-text);
-            --text-light: var(--dark-text-light);
-            --text-bright: var(--dark-text-bright);
-            --bg: var(--dark-bg);
-            --bg-alt: var(--dark-bg-alt);
-            --bg-card: var(--dark-bg-card);
-            --border: var(--dark-border);
-            --shadow: var(--dark-shadow);
-            --shadow-lg: var(--dark-shadow-lg);
-            --grid-color: var(--dark-grid-color);
-        }
-
-        /* Light theme override */
-        [data-theme="light"] {
-            --primary: var(--light-primary);
-            --primary-dark: var(--light-primary-dark);
-            --secondary: var(--light-secondary);
-            --accent: var(--light-accent);
-            --text: var(--light-text);
-            --text-light: var(--light-text-light);
-            --text-bright: var(--light-text-bright);
-            --bg: var(--light-bg);
-            --bg-alt: var(--light-bg-alt);
-            --bg-card: var(--light-bg-card);
-            --border: var(--light-border);
-            --shadow: var(--light-shadow);
-            --shadow-lg: var(--light-shadow-lg);
-            --grid-color: var(--light-grid-color);
-        }
-
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
-
         body {
-            font-family: 'JetBrains Mono', monospace;
-            line-height: 1.6;
-            color: var(--text);
-            background: var(--bg);
-            position: relative;
-            overflow-x: hidden;
-            transition: all 0.3s ease;
-        }
-
-        /* Business theme uses Inter font */
-        [data-theme="light"] body {
             font-family: 'Inter', sans-serif;
-        }
-
-        /* Theme-specific grid background */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background:
-                linear-gradient(90deg, transparent 24px, var(--grid-color) 25px, var(--grid-color) 26px, transparent 27px, transparent 74px, var(--grid-color) 75px, var(--grid-color) 76px, transparent 77px),
-                linear-gradient(transparent 24px, var(--grid-color) 25px, var(--grid-color) 26px, transparent 27px, transparent 74px, var(--grid-color) 75px, var(--grid-color) 76px, transparent 77px);
-            background-size: 50px 50px;
-            opacity: 0.1;
-            z-index: -1;
-            animation: gridMove 20s linear infinite;
-        }
-
-        /* Different grid animation for light theme */
-        [data-theme="light"] body::before {
-            animation: none;
-            opacity: 0.3;
-        }
-
-        @keyframes gridMove {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-white);
         }
 
         .container {
@@ -131,442 +45,389 @@
             padding: 0 2rem;
         }
 
-        /* Theme Toggle */
-        .theme-toggle {
-            position: fixed;
-            top: 2rem;
-            right: 2rem;
-            z-index: 1001;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-            background: var(--bg-card);
-            padding: 1rem;
-            border: 2px solid var(--border);
-            border-radius: 50px;
-            box-shadow: var(--shadow);
-            transition: all 0.3s ease;
-        }
-
-        .try-me-label {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--text-light);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.25rem;
-        }
-
-        .toggle-switch {
-            position: relative;
-            width: 40px;
-            height: 20px;
-            background: var(--border);
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .toggle-switch::before {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 16px;
-            height: 16px;
-            background: var(--primary);
-            border-radius: 50%;
-            transition: all 0.3s ease;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-        }
-
-        [data-theme="light"] .toggle-switch::before {
-            transform: translateX(20px);
-        }
-
-        /* Terminal-style animations for dark theme */
-        @keyframes terminal-cursor {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-
-        @keyframes glow-pulse {
-            0%, 100% { filter: drop-shadow(0 0 5px var(--primary)); }
-            50% { filter: drop-shadow(0 0 20px var(--primary)); }
-        }
-
-        @keyframes scan-line {
-            0% { transform: translateY(-100vh) scaleY(0.1); opacity: 0.8; }
-            100% { transform: translateY(100vh) scaleY(0.1); opacity: 0; }
-        }
-
-        /* Scanning effect - only for dark theme */
-        .scan-line {
+        /* Header & Navigation */
+        .header {
+            background: var(--bg-white);
+            border-bottom: 1px solid var(--border-gray);
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--secondary), transparent);
+            right: 0;
             z-index: 1000;
-            animation: scan-line 3s linear infinite;
-            opacity: 1;
-            transition: opacity 0.3s ease;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
         }
 
-        [data-theme="light"] .scan-line {
-            opacity: 0;
-        }
-
-        /* Header & Hero */
-        .header {
-            background: var(--bg-alt);
-            color: var(--text-bright);
-            padding: 2rem 0;
-            position: relative;
-            border-bottom: 2px solid var(--border);
-            box-shadow: var(--shadow);
-        }
-
-        [data-theme="light"] .header {
-            border-bottom: 1px solid var(--border);
-        }
-
-        .hero {
-            text-align: center;
-            padding: 3rem 0;
-            position: relative;
-        }
-
-        .logo-container {
-            margin-bottom: 2rem;
+        .nav {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary-blue);
+            background: var(--bg-gray-50);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 0 4rem;
+            background: linear-gradient(135deg, var(--bg-gray-50) 0%, var(--bg-white) 100%);
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 4rem;
             align-items: center;
         }
 
-        .animated-logo {
-            width: 120px;
-            height: 120px;
-            animation: glow-pulse 2s ease-in-out infinite;
-        }
-
-        [data-theme="light"] .animated-logo {
-            animation: none;
-            filter: none;
-        }
-
-        .hero h1 {
+        .hero-text h1 {
             font-size: 3.5rem;
             font-weight: 700;
+            color: var(--text-primary);
             margin-bottom: 1rem;
-            color: var(--text-bright);
-            text-shadow: 0 0 10px var(--primary);
-            position: relative;
+            line-height: 1.1;
         }
 
-        [data-theme="light"] .hero h1 {
-            text-shadow: none;
-        }
-
-        .hero .subtitle {
+        .hero-text .subtitle {
             font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
-            font-weight: 500;
+            color: var(--primary-blue);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
         }
 
-        .hero .tagline {
+        .hero-text .description {
             font-size: 1.2rem;
-            color: var(--text-light);
-            max-width: 600px;
-            margin: 0 auto 2rem;
-        }
-
-        /* Different tagline styles for each theme */
-        .terminal-prompt {
-            color: var(--accent);
-            margin-right: 0.5rem;
-        }
-
-        [data-theme="light"] .terminal-prompt {
-            display: none;
-        }
-
-        [data-theme="light"] .hero .tagline {
-            font-style: italic;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.6;
         }
 
         .cta-buttons {
             display: flex;
             gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
         }
 
         .btn {
-            padding: 0.75rem 1.5rem;
-            border: 2px solid var(--primary);
-            border-radius: 0;
-            font-size: 1rem;
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
             font-weight: 600;
             text-decoration: none;
-            cursor: pointer;
             transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        [data-theme="light"] .btn {
-            border-radius: 8px;
-            text-transform: none;
-            letter-spacing: normal;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 204, 204, 0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        [data-theme="light"] .btn::before {
-            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.1), transparent);
-        }
-
-        .btn:hover::before {
-            left: 100%;
         }
 
         .btn-primary {
-            background: transparent;
-            color: var(--primary);
-            border-color: var(--primary);
+            background: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
         }
 
         .btn-primary:hover {
-            background: var(--primary);
-            color: var(--bg);
-            box-shadow: var(--shadow);
-        }
-
-        [data-theme="light"] .btn-primary:hover {
-            color: white;
+            background: var(--primary-blue-dark);
+            border-color: var(--primary-blue-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
         }
 
         .btn-secondary {
             background: transparent;
-            color: var(--secondary);
-            border-color: var(--secondary);
+            color: var(--primary-blue);
+            border-color: var(--primary-blue);
         }
 
         .btn-secondary:hover {
-            background: var(--secondary);
-            color: var(--bg);
-            box-shadow: var(--shadow);
-        }
-
-        [data-theme="light"] .btn-secondary:hover {
+            background: var(--primary-blue);
             color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
         }
 
-        /* Navigation */
-        .nav {
-            background: var(--bg-card);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(10px);
-        }
-
-        .nav-container {
+        .hero-visual {
             display: flex;
             justify-content: center;
-            padding: 1rem 0;
+            align-items: center;
         }
 
-        .nav-links {
+        .profile-card {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-xl);
+            text-align: center;
+            border: 1px solid var(--border-gray-light);
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            margin: 0 auto 1.5rem;
             display: flex;
-            gap: 2rem;
-            list-style: none;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 700;
         }
 
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border: 1px solid transparent;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
+        .profile-card h3 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
         }
 
-        [data-theme="light"] .nav-links a {
-            text-transform: none;
-            letter-spacing: normal;
-            border-radius: 6px;
+        .profile-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
         }
 
-        .nav-links a::before {
-            content: '> ';
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            color: var(--primary);
+        .profile-stats {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            margin-top: 1.5rem;
         }
 
-        [data-theme="light"] .nav-links a::before {
-            display: none;
+        .stat {
+            display: flex;
+            flex-direction: column;
         }
 
-        .nav-links a:hover::before,
-        .nav-links a.active::before {
-            opacity: 1;
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
         }
 
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--primary);
-            border-color: var(--primary);
-            box-shadow: var(--shadow);
-        }
-
-        [data-theme="light"] .nav-links a:hover,
-        [data-theme="light"] .nav-links a.active {
-            background: var(--bg-alt);
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-light);
         }
 
         /* Sections */
         .section {
             padding: 4rem 0;
-            position: relative;
         }
 
         .section:nth-child(even) {
-            background: var(--bg-alt);
+            background: var(--bg-gray-50);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
         }
 
         .section-title {
-            text-align: center;
             font-size: 2.5rem;
             font-weight: 700;
-            margin-bottom: 3rem;
-            color: var(--text-bright);
-            text-shadow: 0 0 10px var(--primary);
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight {
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-gray);
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .skill-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            padding: 0.375rem 0;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-gray-light);
+            font-weight: 500;
+        }
+
+        .skill-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Experience Section */
+        .experience-timeline {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .experience-item {
+            background: var(--bg-white);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--primary-blue);
             position: relative;
         }
 
-        [data-theme="light"] .section-title {
-            text-shadow: none;
+        .experience-header {
+            margin-bottom: 1.5rem;
         }
 
-        .section-title::before {
-            content: '[';
-            color: var(--primary);
-            margin-right: 0.5rem;
+        .experience-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
         }
 
-        .section-title::after {
-            content: ']';
-            color: var(--primary);
-            margin-left: 0.5rem;
+        .experience-company {
+            color: var(--primary-blue);
+            font-weight: 600;
+            font-size: 1.1rem;
         }
 
-        [data-theme="light"] .section-title::before,
-        [data-theme="light"] .section-title::after {
-            display: none;
+        .experience-period {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-top: 0.25rem;
         }
 
-        /* Projects Grid */
+        .experience-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .experience-highlights {
+            margin-top: 1rem;
+            list-style: none;
+        }
+
+        .experience-highlights li {
+            padding: 0.25rem 0 0.25rem 1.5rem;
+            position: relative;
+            color: var(--text-secondary);
+        }
+
+        .experience-highlights li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+
+        /* Projects Section */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
-            margin-bottom: 2rem;
         }
 
         .project-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            padding: 2rem;
+            background: var(--bg-white);
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-gray);
             transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
             overflow: hidden;
         }
 
-        [data-theme="light"] .project-card {
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-        }
-
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-        }
-
-        [data-theme="light"] .project-card::before {
-            height: 4px;
-            border-radius: 12px 12px 0 0;
-        }
-
         .project-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-4px);
             box-shadow: var(--shadow-lg);
-            border-color: var(--secondary);
         }
 
         .project-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .project-icon {
-            width: 60px;
-            height: 60px;
-            position: relative;
-        }
-
-        .project-logo {
-            width: 100%;
-            height: 100%;
-            animation: glow-pulse 3s ease-in-out infinite;
-        }
-
-        [data-theme="light"] .project-logo {
-            animation: none;
-            filter: none;
+            padding: 2rem 2rem 1rem;
         }
 
         .project-title {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: 600;
-            color: var(--text-bright);
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
         }
 
         .project-description {
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
             line-height: 1.6;
+            margin-bottom: 1.5rem;
         }
 
         .tech-stack {
@@ -577,28 +438,16 @@
         }
 
         .tech-tag {
-            background: transparent;
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            padding: 0.25rem 0.75rem;
+            background: var(--bg-gray-100);
+            color: var(--text-secondary);
+            padding: 0.375rem 0.75rem;
+            border-radius: 20px;
             font-size: 0.875rem;
             font-weight: 500;
-            transition: all 0.3s ease;
         }
 
-        [data-theme="light"] .tech-tag {
-            border-radius: 20px;
-            background: var(--bg-alt);
-        }
-
-        .tech-tag:hover {
-            background: var(--primary);
-            color: var(--bg);
-            box-shadow: var(--shadow);
-        }
-
-        [data-theme="light"] .tech-tag:hover {
-            color: white;
+        .project-footer {
+            padding: 0 2rem 2rem;
         }
 
         .project-links {
@@ -607,298 +456,90 @@
         }
 
         .project-link {
-            color: var(--secondary);
+            color: var(--primary-blue);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             display: flex;
             align-items: center;
             gap: 0.25rem;
-            transition: all 0.3s ease;
+            transition: color 0.3s ease;
         }
 
         .project-link:hover {
-            color: var(--text-bright);
-            text-shadow: 0 0 5px var(--secondary);
+            color: var(--primary-blue-dark);
         }
 
-        [data-theme="light"] .project-link:hover {
-            text-shadow: none;
-        }
-
-        .project-link::before {
-            content: '→ ';
-            transition: transform 0.3s ease;
-        }
-
-        .project-link:hover::before {
-            transform: translateX(3px);
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 1000;
-            backdrop-filter: blur(5px);
-        }
-
-        [data-theme="light"] .modal {
-            background: rgba(0, 0, 0, 0.5);
-        }
-
-        .modal-content {
-            background: var(--bg-card);
-            margin: 2rem auto;
-            padding: 2rem;
-            border: 2px solid var(--border);
-            max-width: 800px;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-            box-shadow: var(--shadow-lg);
-        }
-
-        [data-theme="light"] .modal-content {
-            border-radius: 12px;
-            border: 1px solid var(--border);
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: none;
-            border: none;
-            font-size: 2rem;
-            cursor: pointer;
-            color: var(--text-light);
-        }
-
-        .modal-close:hover {
-            color: var(--secondary);
-            text-shadow: 0 0 5px var(--secondary);
-        }
-
-        [data-theme="light"] .modal-close:hover {
-            text-shadow: none;
-            color: var(--primary);
-        }
-
-        /* About & Skills */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: start;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .skill-category {
-            background: var(--bg-card);
-            padding: 1.5rem;
-            border: 1px solid var(--border);
-            position: relative;
-        }
-
-        [data-theme="light"] .skill-category {
-            border-radius: 8px;
-            box-shadow: var(--shadow);
-        }
-
-        .skill-category::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-        }
-
-        [data-theme="light"] .skill-category::before {
-            height: 3px;
-            border-radius: 8px 8px 0 0;
-        }
-
-        .skill-category h3 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-        }
-
-        .skill-list {
-            list-style: none;
-        }
-
-        .skill-list li {
-            padding: 0.25rem 0;
-            color: var(--text-light);
-            position: relative;
-            padding-left: 1rem;
-        }
-
-        .skill-list li::before {
-            content: '▸ ';
-            color: var(--primary);
-            position: absolute;
-            left: 0;
-        }
-
-        [data-theme="light"] .skill-list li::before {
-            content: '• ';
-        }
-
-        /* Experience */
-        .experience-timeline {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .experience-item {
-            background: var(--bg-card);
-            padding: 2rem;
-            border: 1px solid var(--border);
-            margin-bottom: 2rem;
-            border-left: 4px solid var(--primary);
-            position: relative;
-        }
-
-        [data-theme="light"] .experience-item {
-            border-radius: 8px;
-            box-shadow: var(--shadow);
-        }
-
-        .experience-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 2px;
-            height: 100%;
-            background: linear-gradient(180deg, var(--primary), var(--secondary));
-        }
-
-        [data-theme="light"] .experience-item::before {
-            display: none;
-        }
-
-        .experience-header {
-            margin-bottom: 1rem;
-        }
-
-        .experience-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--text-bright);
-        }
-
-        .experience-company {
-            color: var(--primary);
-            font-weight: 500;
-        }
-
-        .experience-period {
-            color: var(--text-light);
-            font-size: 0.9rem;
-        }
-
-        /* Contact */
-        .contact-info {
-            text-align: center;
+        /* Contact Section */
+        .contact-content {
             max-width: 600px;
             margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-info {
+            background: var(--bg-white);
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-gray);
+        }
+
+        .contact-info h3 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .contact-info p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
         }
 
         .contact-links {
             display: flex;
             justify-content: center;
-            gap: 2rem;
-            margin-top: 2rem;
+            gap: 1.5rem;
+            flex-wrap: wrap;
         }
 
         .contact-link {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            color: var(--primary);
+            gap: 0.75rem;
+            color: var(--primary-blue);
             text-decoration: none;
-            font-weight: 500;
-            padding: 0.75rem 1.5rem;
-            border: 2px solid var(--primary);
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        [data-theme="light"] .contact-link {
+            font-weight: 600;
+            padding: 1rem 1.5rem;
+            border: 2px solid var(--primary-blue);
             border-radius: 8px;
-            text-transform: none;
-            letter-spacing: normal;
-        }
-
-        .contact-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 204, 204, 0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        [data-theme="light"] .contact-link::before {
-            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.1), transparent);
-        }
-
-        .contact-link:hover::before {
-            left: 100%;
+            transition: all 0.3s ease;
         }
 
         .contact-link:hover {
-            background: var(--primary);
-            color: var(--bg);
-            box-shadow: var(--shadow);
-        }
-
-        [data-theme="light"] .contact-link:hover {
+            background: var(--primary-blue);
             color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .theme-toggle {
-                top: 1rem;
-                right: 1rem;
-                padding: 0.75rem;
-            }
+        /* Footer */
+        .footer {
+            background: var(--text-primary);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
 
-            .try-me-label {
-                font-size: 0.7rem;
-            }
+        .footer p {
+            color: var(--text-light);
+        }
 
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero .subtitle {
-                font-size: 1.2rem;
-            }
-
-            .projects-grid {
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .hero-content {
                 grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
             }
 
             .about-content {
@@ -906,9 +547,43 @@
                 gap: 2rem;
             }
 
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
             .nav-links {
-                flex-wrap: wrap;
                 gap: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .hero {
+                padding: 6rem 0 3rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .hero-text .subtitle {
+                font-size: 1.25rem;
+            }
+
+            .section {
+                padding: 3rem 0;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 0.5rem;
             }
 
             .cta-buttons {
@@ -920,440 +595,143 @@
                 flex-direction: column;
                 align-items: center;
             }
+
+            .profile-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        /* Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
-<body data-theme="dark">
-    <div class="scan-line"></div>
-
-    <!-- Theme Toggle -->
-    <div class="theme-toggle">
-        <div class="try-me-label">Try Me!</div>
-        <div class="toggle-switch" onclick="toggleTheme()"></div>
-    </div>
-
+<body>
+    <!-- Header & Navigation -->
     <header class="header">
         <div class="container">
-            <div class="hero">
-                <div class="logo-container">
-                    <svg class="animated-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
-  <!-- Filters for glow effects -->
-  <defs>
-    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="5" result="blur"/>
-      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-    </filter>
-    <filter id="pulse-glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="8" result="blur"/>
-      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-    </filter>
-    <radialGradient id="scan-gradient" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" style="stop-color:#00FFFF;stop-opacity:0.8"/>
-      <stop offset="50%" style="stop-color:#00CCCC;stop-opacity:0.4"/>
-      <stop offset="100%" style="stop-color:#00CCCC;stop-opacity:0"/>
-    </radialGradient>
-  </defs>
-
-  <!-- Dark background -->
-  <rect width="500" height="500" fill="#111122"/>
-
-  <!-- Animated scanning circle -->
-  <circle cx="250" cy="250" r="0" fill="url(#scan-gradient)" opacity="0.6">
-    <animate attributeName="r" values="0;200;0" dur="4s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0.8;0.2;0.8" dur="4s" repeatCount="indefinite"/>
-  </circle>
-
-  <!-- Grid pattern with subtle animation -->
-  <g stroke="#00CCCC" stroke-width="0.5" opacity="0.3">
-    <!-- Vertical lines -->
-    <g>
-      <line x1="25" y1="0" x2="25" y2="500">
-        <animate attributeName="opacity" values="0.3;0.6;0.3" dur="6s" repeatCount="indefinite" begin="0s"/>
-      </line>
-      <line x1="50" y1="0" x2="50" y2="500">
-        <animate attributeName="opacity" values="0.3;0.6;0.3" dur="6s" repeatCount="indefinite" begin="0.3s"/>
-      </line>
-      <line x1="75" y1="0" x2="75" y2="500">
-        <animate attributeName="opacity" values="0.3;0.6;0.3" dur="6s" repeatCount="indefinite" begin="0.6s"/>
-      </line>
-      <line x1="100" y1="0" x2="100" y2="500">
-        <animate attributeName="opacity" values="0.3;0.6;0.3" dur="6s" repeatCount="indefinite" begin="0.9s"/>
-      </line>
-      <line x1="125" y1="0" x2="125" y2="500">
-        <animate attributeName="opacity" values="0.3;0.6;0.3" dur="6s" repeatCount="indefinite" begin="1.2s"/>
-      </line>
-      <line x1="150" y1="0" x2="150" y2="500"/>
-      <line x1="175" y1="0" x2="175" y2="500"/>
-      <line x1="200" y1="0" x2="200" y2="500"/>
-      <line x1="225" y1="0" x2="225" y2="500"/>
-      <line x1="250" y1="0" x2="250" y2="500">
-        <animate attributeName="stroke-width" values="0.5;2;0.5" dur="3s" repeatCount="indefinite"/>
-      </line>
-      <line x1="275" y1="0" x2="275" y2="500"/>
-      <line x1="300" y1="0" x2="300" y2="500"/>
-      <line x1="325" y1="0" x2="325" y2="500"/>
-      <line x1="350" y1="0" x2="350" y2="500"/>
-      <line x1="375" y1="0" x2="375" y2="500">
-        <animate attributeName="opacity" values="0.3;0.6;0.3" dur="6s" repeatCount="indefinite" begin="3.6s"/>
-      </line>
-      <line x1="400" y1="0" x2="400" y2="500">
-        <animate attributeName="opacity" values="0.3;0.6;0.3" dur="6s" repeatCount="indefinite" begin="3.9s"/>
-      </line>
-      <line x1="425" y1="0" x2="425" y2="500">
-        <animate attributeName="opacity" values="0.3;0.6;0.3" dur="6s" repeatCount="indefinite" begin="4.2s"/>
-      </line>
-      <line x1="450" y1="0" x2="450" y2="500">
-        <animate attributeName="opacity" values="0.3;0.6;0.3" dur="6s" repeatCount="indefinite" begin="4.5s"/>
-      </line>
-      <line x1="475" y1="0" x2="475" y2="500">
-        <animate attributeName="opacity" values="0.3;0.6;0.3" dur="6s" repeatCount="indefinite" begin="4.8s"/>
-      </line>
-    </g>
-
-    <!-- Horizontal lines -->
-    <g>
-      <line x1="0" y1="25" x2="500" y2="25"/>
-      <line x1="0" y1="50" x2="500" y2="50"/>
-      <line x1="0" y1="75" x2="500" y2="75"/>
-      <line x1="0" y1="100" x2="500" y2="100"/>
-      <line x1="0" y1="125" x2="500" y2="125"/>
-      <line x1="0" y1="150" x2="500" y2="150"/>
-      <line x1="0" y1="175" x2="500" y2="175"/>
-      <line x1="0" y1="200" x2="500" y2="200"/>
-      <line x1="0" y1="225" x2="500" y2="225"/>
-      <line x1="0" y1="250" x2="500" y2="250">
-        <animate attributeName="stroke-width" values="0.5;2;0.5" dur="3s" repeatCount="indefinite"/>
-      </line>
-      <line x1="0" y1="275" x2="500" y2="275"/>
-      <line x1="0" y1="300" x2="500" y2="300"/>
-      <line x1="0" y1="325" x2="500" y2="325"/>
-      <line x1="0" y1="350" x2="500" y2="350"/>
-      <line x1="0" y1="375" x2="500" y2="375"/>
-      <line x1="0" y1="400" x2="500" y2="400"/>
-      <line x1="0" y1="425" x2="500" y2="425"/>
-      <line x1="0" y1="450" x2="500" y2="450"/>
-      <line x1="0" y1="475" x2="500" y2="475"/>
-    </g>
-
-    <!-- Grid dots with twinkling effect -->
-    <g fill="#00CCCC">
-      <g id="dot-row" opacity="0.8">
-        <circle cx="25" cy="25" r="1.5">
-          <animate attributeName="r" values="1.5;3;1.5" dur="2s" repeatCount="indefinite" begin="0s"/>
-        </circle>
-        <circle cx="50" cy="25" r="1.5">
-          <animate attributeName="r" values="1.5;3;1.5" dur="2s" repeatCount="indefinite" begin="0.2s"/>
-        </circle>
-        <circle cx="75" cy="25" r="1.5">
-          <animate attributeName="r" values="1.5;3;1.5" dur="2s" repeatCount="indefinite" begin="0.4s"/>
-        </circle>
-        <circle cx="100" cy="25" r="1.5"/>
-        <circle cx="125" cy="25" r="1.5"/>
-        <circle cx="150" cy="25" r="1.5"/>
-        <circle cx="175" cy="25" r="1.5"/>
-        <circle cx="200" cy="25" r="1.5"/>
-        <circle cx="225" cy="25" r="1.5"/>
-        <circle cx="250" cy="25" r="1.5">
-          <animate attributeName="fill" values="#00CCCC;#FFFFFF;#00CCCC" dur="3s" repeatCount="indefinite"/>
-        </circle>
-        <circle cx="275" cy="25" r="1.5"/>
-        <circle cx="300" cy="25" r="1.5"/>
-        <circle cx="325" cy="25" r="1.5"/>
-        <circle cx="350" cy="25" r="1.5"/>
-        <circle cx="375" cy="25" r="1.5"/>
-        <circle cx="400" cy="25" r="1.5"/>
-        <circle cx="425" cy="25" r="1.5">
-          <animate attributeName="r" values="1.5;3;1.5" dur="2s" repeatCount="indefinite" begin="1.6s"/>
-        </circle>
-        <circle cx="450" cy="25" r="1.5">
-          <animate attributeName="r" values="1.5;3;1.5" dur="2s" repeatCount="indefinite" begin="1.8s"/>
-        </circle>
-        <circle cx="475" cy="25" r="1.5">
-          <animate attributeName="r" values="1.5;3;1.5" dur="2s" repeatCount="indefinite" begin="2s"/>
-        </circle>
-      </g>
-
-      <!-- Use the dot-row pattern for other rows -->
-      <use href="#dot-row" y="25"/>
-      <use href="#dot-row" y="50"/>
-      <use href="#dot-row" y="75"/>
-      <use href="#dot-row" y="100"/>
-      <use href="#dot-row" y="125"/>
-      <use href="#dot-row" y="150"/>
-      <use href="#dot-row" y="175"/>
-      <use href="#dot-row" y="200"/>
-      <use href="#dot-row" y="225"/>
-      <use href="#dot-row" y="250"/>
-      <use href="#dot-row" y="275"/>
-      <use href="#dot-row" y="300"/>
-      <use href="#dot-row" y="325"/>
-      <use href="#dot-row" y="350"/>
-      <use href="#dot-row" y="375"/>
-      <use href="#dot-row" y="400"/>
-      <use href="#dot-row" y="425"/>
-      <use href="#dot-row" y="450"/>
-    </g>
-  </g>
-
-  <!-- Outer Circle with rotation -->
-  <circle cx="250" cy="250" r="180" fill="none" stroke="#00CCCC" stroke-width="3" opacity="0.8">
-    <animate attributeName="stroke-width" values="3;6;3" dur="4s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0.8;1;0.8" dur="4s" repeatCount="indefinite"/>
-  </circle>
-
-  <!-- Circular grid lines with pulsing effect -->
-  <g fill="none" stroke="#00CCCC" stroke-width="1.5" opacity="0.6">
-    <circle cx="250" cy="250" r="160">
-      <animate attributeName="opacity" values="0.6;1;0.6" dur="3s" repeatCount="indefinite" begin="0s"/>
-    </circle>
-    <circle cx="250" cy="250" r="140">
-      <animate attributeName="opacity" values="0.6;1;0.6" dur="3s" repeatCount="indefinite" begin="1s"/>
-    </circle>
-    <circle cx="250" cy="250" r="120">
-      <animate attributeName="opacity" values="0.6;1;0.6" dur="3s" repeatCount="indefinite" begin="2s"/>
-    </circle>
-  </g>
-
-  <!-- Rotating circular dotted pattern -->
-  <circle cx="250" cy="250" r="170" fill="none" stroke="#00FFFF" stroke-width="0.5" stroke-dasharray="2,4" opacity="0.8">
-    <animateTransform attributeName="transform" type="rotate" values="0 250 250;360 250 250" dur="8s" repeatCount="indefinite"/>
-  </circle>
-
-  <!-- Crosshair lines with scanning effect -->
-  <g stroke="#00CCCC" stroke-width="1" opacity="0.7">
-    <line x1="100" y1="250" x2="400" y2="250">
-      <animate attributeName="stroke-dasharray" values="0,300;300,0;0,300" dur="5s" repeatCount="indefinite"/>
-    </line>
-    <line x1="250" y1="100" x2="250" y2="400">
-      <animate attributeName="stroke-dasharray" values="0,300;300,0;0,300" dur="5s" repeatCount="indefinite" begin="2.5s"/>
-    </line>
-    <line x1="150" y1="150" x2="350" y2="350">
-      <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite"/>
-    </line>
-    <line x1="150" y1="350" x2="350" y2="150">
-      <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite" begin="1s"/>
-    </line>
-  </g>
-
-  <!-- Outer triangle with data flow animation -->
-  <path d="M250 100 L400 350 L100 350 Z" fill="none" stroke="#00FFFF" stroke-width="5" opacity="0.9">
-    <animate attributeName="stroke-dasharray" values="0,800;400,400;800,0;0,800" dur="6s" repeatCount="indefinite"/>
-    <animate attributeName="stroke-width" values="5;8;5" dur="3s" repeatCount="indefinite"/>
-  </path>
-
-  <!-- Middle triangle -->
-  <path d="M250 150 L350 325 L150 325 Z" fill="none" stroke="#00FFFF" stroke-width="4" opacity="0.9">
-    <animate attributeName="stroke-dasharray" values="0,600;300,300;600,0;0,600" dur="6s" repeatCount="indefinite" begin="2s"/>
-    <animate attributeName="stroke-width" values="4;7;4" dur="3s" repeatCount="indefinite" begin="1s"/>
-  </path>
-
-  <!-- Inner triangle -->
-  <path d="M250 200 L325 300 L175 300 Z" fill="none" stroke="#00FFFF" stroke-width="3" opacity="0.9">
-    <animate attributeName="stroke-dasharray" values="0,400;200,200;400,0;0,400" dur="6s" repeatCount="indefinite" begin="4s"/>
-    <animate attributeName="stroke-width" values="3;6;3" dur="3s" repeatCount="indefinite" begin="2s"/>
-  </path>
-
-  <!-- Triangle inner grid lines -->
-  <g stroke="#00CCCC" stroke-width="0.75" opacity="0.5">
-    <!-- Outer triangle grid -->
-    <line x1="250" y1="100" x2="175" y2="225">
-      <animate attributeName="opacity" values="0.5;1;0.5" dur="4s" repeatCount="indefinite" begin="0s"/>
-    </line>
-    <line x1="250" y1="100" x2="325" y2="225">
-      <animate attributeName="opacity" values="0.5;1;0.5" dur="4s" repeatCount="indefinite" begin="0.5s"/>
-    </line>
-    <line x1="100" y1="350" x2="225" y2="225">
-      <animate attributeName="opacity" values="0.5;1;0.5" dur="4s" repeatCount="indefinite" begin="1s"/>
-    </line>
-    <line x1="400" y1="350" x2="275" y2="225">
-      <animate attributeName="opacity" values="0.5;1;0.5" dur="4s" repeatCount="indefinite" begin="1.5s"/>
-    </line>
-    <line x1="225" y1="225" x2="275" y2="225">
-      <animate attributeName="opacity" values="0.5;1;0.5" dur="4s" repeatCount="indefinite" begin="2s"/>
-    </line>
-
-    <!-- Inner triangle grids -->
-    <line x1="250" y1="150" x2="200" y2="250">
-      <animate attributeName="opacity" values="0.5;1;0.5" dur="4s" repeatCount="indefinite" begin="2.5s"/>
-    </line>
-    <line x1="250" y1="150" x2="300" y2="250">
-      <animate attributeName="opacity" values="0.5;1;0.5" dur="4s" repeatCount="indefinite" begin="3s"/>
-    </line>
-    <line x1="150" y1="325" x2="200" y2="250">
-      <animate attributeName="opacity" values="0.5;1;0.5" dur="4s" repeatCount="indefinite" begin="3.5s"/>
-    </line>
-    <line x1="350" y1="325" x2="300" y2="250"/>
-    <line x1="200" y1="250" x2="300" y2="250"/>
-  </g>
-
-  <!-- Animated data packets -->
-  <g>
-    <!-- Packet traveling around outer circle -->
-    <circle r="3" fill="#FFFFFF" opacity="0.9">
-      <animateMotion dur="8s" repeatCount="indefinite">
-        <path d="M 430 250 A 180 180 0 1 1 70 250 A 180 180 0 1 1 430 250"/>
-      </animateMotion>
-      <animate attributeName="opacity" values="0;1;1;0" dur="8s" repeatCount="indefinite"/>
-    </circle>
-
-    <!-- Packet traveling around middle circle -->
-    <circle r="2" fill="#00FFFF" opacity="0.8">
-      <animateMotion dur="6s" repeatCount="indefinite">
-        <path d="M 410 250 A 160 160 0 1 0 90 250 A 160 160 0 1 0 410 250"/>
-      </animateMotion>
-      <animate attributeName="opacity" values="0;1;1;0" dur="6s" repeatCount="indefinite"/>
-    </circle>
-
-    <!-- Packets traveling along triangle edges -->
-    <circle r="2" fill="#00FF00" opacity="0.7">
-      <animateMotion dur="4s" repeatCount="indefinite">
-        <path d="M 250 100 L 400 350 L 100 350 Z"/>
-      </animateMotion>
-    </circle>
-  </g>
-
-  <!-- Glow effects with enhanced pulsing -->
-  <g filter="url(#pulse-glow)">
-    <!-- Triangle edge highlights -->
-    <path d="M250 100 L400 350 L100 350 Z" fill="none" stroke="#00FFFF" stroke-width="1.5" opacity="0.7">
-      <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite"/>
-    </path>
-    <path d="M250 150 L350 325 L150 325 Z" fill="none" stroke="#00FFFF" stroke-width="1.5" opacity="0.7">
-      <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite" begin="0.7s"/>
-    </path>
-    <path d="M250 200 L325 300 L175 300 Z" fill="none" stroke="#00FFFF" stroke-width="1.5" opacity="0.7">
-      <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite" begin="1.3s"/>
-    </path>
-
-    <!-- Center triangle point with intense pulsing -->
-    <circle cx="250" cy="85" r="3" fill="#FFFFFF">
-      <animate attributeName="r" values="3;8;3" dur="2s" repeatCount="indefinite"/>
-      <animate attributeName="fill" values="#FFFFFF;#00FFFF;#FFFFFF" dur="2s" repeatCount="indefinite"/>
-    </circle>
-  </g>
-
-  <!-- Text "SSH" label with terminal typing effect -->
-  <text x="40" y="50" fill="#00CCCC" font-family="monospace" font-size="16" font-weight="bold">
-    <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/>
-    SSH
-  </text>
-
-  <!-- Additional telemetry indicators -->
-  <g opacity="0.8">
-    <!-- Status indicators -->
-    <circle cx="450" cy="50" r="4" fill="#00FF00">
-      <animate attributeName="opacity" values="1;0.3;1" dur="0.5s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="450" cy="70" r="4" fill="#FFAA00">
-      <animate attributeName="opacity" values="1;0.3;1" dur="0.7s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="450" cy="90" r="4" fill="#00CCCC">
-      <animate attributeName="opacity" values="1;0.3;1" dur="0.9s" repeatCount="indefinite"/>
-    </circle>
-
-    <!-- Data flow lines -->
-    <line x1="400" y1="50" x2="440" y2="50" stroke="#00FF00" stroke-width="2">
-      <animate attributeName="stroke-dasharray" values="0,40;40,0;0,40" dur="2s" repeatCount="indefinite"/>
-    </line>
-    <line x1="400" y1="70" x2="440" y2="70" stroke="#FFAA00" stroke-width="2">
-      <animate attributeName="stroke-dasharray" values="0,40;40,0;0,40" dur="2.5s" repeatCount="indefinite"/>
-    </line>
-    <line x1="400" y1="90" x2="440" y2="90" stroke="#00CCCC" stroke-width="2">
-      <animate attributeName="stroke-dasharray" values="0,40;40,0;0,40" dur="3s" repeatCount="indefinite"/>
-    </line>
-  </g>
-</svg>
-                </div>
-                <h1>Scott Peterman</h1>
-                <div class="subtitle">Principal Infrastructure Engineer</div>
-                <div class="tagline">
-                    <span class="terminal-prompt">core-rtr-01#</span>
-                    <span class="tech-tagline">Network Automation • DevOps • Full Stack Development</span>
-                    <span class="business-tagline" style="display: none;">Transforming network operations through innovative automation solutions and strategic infrastructure engineering</span>
-                </div>
-                <div class="cta-buttons">
-                    <a href="#projects" class="btn btn-primary">View Projects</a>
-                    <a href="#contact" class="btn btn-secondary">
-                        <span class="tech-text">Initialize Contact</span>
-                        <span class="business-text" style="display: none;">Get In Touch</span>
-                    </a>
-                </div>
-            </div>
+            <nav class="nav">
+                <div class="logo">Scott Peterman</div>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
-    <nav class="nav">
+    <!-- Hero Section -->
+    <section class="hero">
         <div class="container">
-            <div class="nav-container">
-                <ul class="nav-links">
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#experience">Experience</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Principal Infrastructure Engineer</h1>
+                    <div class="subtitle">Network Automation & DevOps Expert</div>
+                    <div class="description">
+                        Transforming network operations through innovative automation solutions and strategic infrastructure engineering. 
+                        20+ years of progressive experience designing, implementing, and optimizing complex global network infrastructures.
+                    </div>
+                    <div class="cta-buttons">
+                        <a href="#projects" class="btn btn-primary">View Projects</a>
+                        <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="profile-card">
+                        <div class="profile-image">SP</div>
+                        <h3>Scott Peterman</h3>
+                        <p>Littleton, Colorado</p>
+                        <div class="profile-stats">
+                            <div class="stat">
+                                <div class="stat-number">20+</div>
+                                <div class="stat-label">Years Experience</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">10+</div>
+                                <div class="stat-label">Open Source Projects</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">5</div>
+                                <div class="stat-label">Enterprise Roles</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </nav>
+    </section>
 
+    <!-- About Section -->
     <section id="about" class="section">
         <div class="container">
-            <h2 class="section-title">About</h2>
+            <div class="section-header">
+                <h2 class="section-title">About</h2>
+                <p class="section-subtitle">
+                    Passionate about operational consistency, visibility, and leveraging advanced network automation to enhance network agility, resilience, and efficiency.
+                </p>
+            </div>
             <div class="about-content">
-                <div>
-                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-light); margin-bottom: 1.5rem;">
-                        <span class="terminal-prompt">$</span>
-                        <span class="tech-text">Passionate network automation engineer with extensive experience building scalable infrastructure solutions. Specializing in network programmability, monitoring, and automation across multiple vendor platforms.</span>
-                        <span class="business-text" style="display: none;">Results-driven infrastructure leader with a proven track record of transforming network operations through strategic automation and innovative engineering solutions. Expert in designing scalable, enterprise-grade systems that drive operational efficiency and business growth.</span>
+                <div class="about-text">
+                    <p>
+                        As a <span class="highlight">Principal Infrastructure Engineer</span> with over two decades of experience, I specialize in designing and implementing comprehensive network automation solutions that drive operational excellence and business growth.
                     </p>
-                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-light); margin-bottom: 1.5rem;">
-                        <span style="color: var(--primary); font-weight: 600;" class="tech-label">[PHILOSOPHY]</span>
-                        <span style="color: var(--primary); font-weight: 600;" class="business-label" style="display: none;">Core Philosophy:</span>
-                        "If you can't see it, you can't fix it." Focus on comprehensive visibility and operational consistency through intelligent automation.
+                    <p>
+                        My core philosophy: <em>"If you can't see it, you can't fix it."</em> I focus on comprehensive visibility and operational consistency through intelligent automation, ensuring networks are not just functional, but optimized for future growth.
                     </p>
-                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-light);">
-                        <span style="color: var(--primary); font-weight: 600;" class="tech-label">[Network Tools Developer]</span>
-                        <span style="color: var(--primary); font-weight: 600;" class="business-label" style="display: none;">Technical Foundation:</span>
-                        <span class="tech-text">Based on years as a hands on network engineer. Experienced hardware experience across Cisco, Arista, Juniper, Aruba, F5 and A10</span>
-                        <span class="business-text" style="display: none;">Leveraging decades of hands-on network engineering experience across enterprise-grade platforms including Cisco, Arista, Juniper, Aruba, F5, and A10 to deliver practical, production-ready solutions.</span>
+                    <p>
+                        Currently at <span class="highlight">Columbia Sportswear Company</span>, I lead the development of full-stack network automation platforms, custom API integrations, and innovative solutions that streamline network operations across global infrastructure.
                     </p>
                 </div>
                 <div class="skills-grid">
-                    <div class="skill-category">
+                    <div class="skill-card">
                         <h3>🔧 Automation & DevOps</h3>
                         <ul class="skill-list">
                             <li>Python, Go, JavaScript</li>
                             <li>Ansible, Tower/AWX, Rundeck</li>
                             <li>Docker, GitLab CI/CD</li>
                             <li>Napalm, Nornir, pyATS</li>
+                            <li>Infrastructure-as-Code (IaC)</li>
                         </ul>
                     </div>
-                    <div class="skill-category">
+                    <div class="skill-card">
                         <h3>🌐 Networking</h3>
                         <ul class="skill-list">
-                            <li>Datacenter</li>
-                            <li>MPLS Edge/Core</li>
-                            <li>Metro Ethernet</li>
-                            <li>Classic VOIP</li>
                             <li>SD-WAN (Prisma/CloudGenix)</li>
-                            <li>BGP, IPSEC, VPN</li>
+                            <li>MPLS Edge/Core</li>
+                            <li>BGP, OSPF, EIGRP, IPv6</li>
+                            <li>Datacenter Architecture</li>
+                            <li>VPN, QoS, VoIP</li>
                         </ul>
                     </div>
-                    <div class="skill-category">
+                    <div class="skill-card">
                         <h3>💻 Development</h3>
                         <ul class="skill-list">
-                            <li>Flask, FastAPI, Node.js/Express</li>
+                            <li>Flask, FastAPI, Node.js</li>
                             <li>MySQL, MongoDB, PostgreSQL</li>
-                            <li>Bootstrap, Modern UI/UX</li>
-                            <li>REST APIs, WebSockets/SSE</li>
+                            <li>REST APIs, WebSockets</li>
+                            <li>Modern UI/UX Design</li>
+                            <li>Full-Stack Development</li>
                         </ul>
                     </div>
-                    <div class="skill-category">
-                        <h3>☁️ Infrastructure</h3>
+                    <div class="skill-card">
+                        <h3>🏢 Vendor Platforms</h3>
                         <ul class="skill-list">
-                            <li>VMware vSphere</li>
-                            <li>Linux (CentOS/Ubuntu)</li>
-                            <li>IaC Solutions</li>
-                            <li>Monitoring & Observability</li>
+                            <li>Cisco (IOS-XE, NX-OS, ASR, ISR)</li>
+                            <li>Juniper (MX, M, EX)</li>
+                            <li>Arista, Palo Alto, F5, A10</li>
+                            <li>Aruba/HPE Solutions</li>
+                            <li>Multi-vendor Integration</li>
                         </ul>
                     </div>
                 </div>
@@ -1361,1110 +739,306 @@
         </div>
     </section>
 
-    <section id="projects" class="section">
-        <div class="container">
-            <h2 class="section-title">Projects</h2>
-
-            <h3 style="color: var(--primary); font-size: 1.8rem; margin-bottom: 2rem; text-align: center;">
-                <span class="tech-label">[FULL_STACK_APPLICATIONS]</span>
-                <span class="business-label" style="display: none;">Enterprise Applications</span>
-            </h3>
-            <div class="projects-grid">
-                <div class="project-card" onclick="openModal('secure-cartography')">
-                    <div class="project-header">
-                        <div class="project-icon">
-                            <svg class="project-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-                                <rect width="200" height="200" fill="var(--bg-card)"/>
-                                <rect x="20" y="30" width="160" height="120" fill="none" stroke="var(--primary)" stroke-width="2"/>
-                                <rect x="25" y="35" width="150" height="20" fill="var(--primary)" opacity="0.3"/>
-                                <g fill="none" stroke="var(--secondary)" stroke-width="2">
-                                    <circle cx="80" cy="80" r="8"/>
-                                    <circle cx="120" cy="80" r="8"/>
-                                    <circle cx="100" cy="110" r="8"/>
-                                    <line x1="80" y1="80" x2="120" y2="80"/>
-                                    <line x1="80" y1="80" x2="100" y2="110"/>
-                                    <line x1="120" y1="80" x2="100" y2="110"/>
-                                </g>
-                                <text x="100" y="180" fill="var(--text-light)" text-anchor="middle" font-family="monospace" font-size="10">NETWORK MAPPING</text>
-                            </svg>
-                        </div>
-                        <div class="project-title">Secure Cartography</div>
-                    </div>
-                    <div class="project-description">
-                        Network discovery and mapping tool with SSH-based device interrogation. Generates comprehensive topology maps with security-focused design and automated discovery capabilities.
-                    </div>
-                    <div class="tech-stack">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">SSH</span>
-                        <span class="tech-tag">Network Discovery</span>
-                        <span class="tech-tag">PyQt</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/scottpeterman/secure_cartography" class="project-link" target="_blank">
-                            GitHub Repository
-                        </a>
-                    </div>
-                </div>
-
-                <div class="project-card" onclick="openModal('terminal-telemetry')">
-                    <div class="project-header">
-                        <div class="project-icon">
-                            <svg class="project-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-                                <defs>
-                                    <filter id="glow-sm" x="-50%" y="-50%" width="200%" height="200%">
-                                        <feGaussianBlur stdDeviation="3" result="blur"/>
-                                        <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-                                    </filter>
-                                </defs>
-                                <rect width="200" height="200" fill="var(--bg-card)"/>
-                                <path d="M100 40 L160 140 L40 140 Z" fill="none" stroke="var(--primary)" stroke-width="3" filter="url(#glow-sm)">
-                                    <animate attributeName="stroke-dasharray" values="0,320;160,160;320,0;0,320" dur="4s" repeatCount="indefinite" class="dark-only"/>
-                                </path>
-                                <path d="M100 60 L140 120 L60 120 Z" fill="none" stroke="var(--secondary)" stroke-width="2" filter="url(#glow-sm)">
-                                    <animate attributeName="stroke-dasharray" values="0,240;120,120;240,0;0,240" dur="4s" repeatCount="indefinite" begin="1s" class="dark-only"/>
-                                </path>
-                                <circle cx="100" cy="100" r="50" fill="none" stroke="var(--primary)" stroke-width="2" opacity="0.6">
-                                    <animate attributeName="r" values="50;60;50" dur="3s" repeatCount="indefinite" class="dark-only"/>
-                                </circle>
-                            </svg>
-                        </div>
-                        <div class="project-title">Terminal Telemetry</div>
-                    </div>
-                    <div class="project-description">
-                        Advanced terminal-based network monitoring system. Real-time SSH side channel telemetry collection with intuitive interface for network performance and device health insights.
-                    </div>
-                    <div class="tech-stack">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Terminal UI</span>
-                        <span class="tech-tag">Monitoring</span>
-                        <span class="tech-tag">Real-time</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/scottpeterman/terminaltelemetry" class="project-link" target="_blank">
-                            GitHub Repository
-                        </a>
-                    </div>
-                </div>
-<div class="project-card" onclick="openModal('rapidcmdb-details')">
-    <div class="project-header">
-        <div class="project-icon">
-            <svg class="project-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-                <rect width="200" height="200" fill="var(--bg-card)"/>
-                
-                <!-- Main reconciliation interface -->
-                <rect x="20" y="30" width="160" height="120" fill="none" stroke="var(--primary)" stroke-width="2"/>
-                <rect x="25" y="35" width="150" height="20" fill="var(--primary)" opacity="0.3"/>
-                
-                <!-- CMDB data sources -->
-                <g stroke="var(--secondary)" stroke-width="1" fill="none">
-                    <rect x="30" y="65" width="65" height="35"/>
-                    <rect x="105" y="65" width="65" height="35"/>
-                    <rect x="30" y="110" width="140" height="30"/>
-                </g>
-                
-                <!-- Data correlation indicators -->
-                <g fill="var(--primary)" opacity="0.6">
-                    <rect x="35" y="70" width="55" height="3"/>
-                    <rect x="35" y="75" width="45" height="3"/>
-                    <rect x="35" y="80" width="35" height="3"/>
-                </g>
-                
-                <g fill="var(--secondary)" opacity="0.6">
-                    <rect x="110" y="70" width="55" height="3"/>
-                    <rect x="110" y="75" width="40" height="3"/>
-                    <rect x="110" y="80" width="50" height="3"/>
-                </g>
-                
-                <!-- Reconciliation results -->
-                <g fill="var(--accent)" opacity="0.7">
-                    <rect x="35" y="115" width="130" height="4"/>
-                    <rect x="35" y="122" width="100" height="4"/>
-                    <rect x="35" y="129" width="120" height="4"/>
-                </g>
-                
-                <!-- Active processing indicator -->
-                <circle cx="160" cy="75" r="3" fill="var(--accent)">
-                    <animate attributeName="opacity" values="1;0.3;1" dur="1s" repeatCount="indefinite"/>
-                </circle>
-                
-                <!-- Confidence scoring bars -->
-                <g transform="translate(25,60)">
-                    <rect x="0" y="0" width="15" height="3" fill="var(--accent)">
-                        <animate attributeName="width" values="5;15;5" dur="2s" repeatCount="indefinite"/>
-                    </rect>
-                    <rect x="0" y="5" width="10" height="3" fill="#FFD700">
-                        <animate attributeName="width" values="3;10;3" dur="2s" repeatCount="indefinite" begin="0.7s"/>
-                    </rect>
-                </g>
-                
-                <!-- Data flow animation -->
-                <g stroke="var(--secondary)" stroke-width="1" fill="none" opacity="0.6">
-                    <line x1="95" y1="85" x2="105" y2="85">
-                        <animate attributeName="stroke-dasharray" values="0,10;5,5;10,0;0,10" dur="2s" repeatCount="indefinite"/>
-                    </line>
-                    <line x1="100" y1="100" x2="100" y2="110">
-                        <animate attributeName="stroke-dasharray" values="0,10;5,5;10,0;0,10" dur="2s" repeatCount="indefinite" begin="0.5s"/>
-                    </line>
-                </g>
-                
-                <text x="100" y="180" fill="var(--text-light)" text-anchor="middle" font-family="monospace" font-size="10">CMDB RECONCILIATION</text>
-            </svg>
-        </div>
-        <div class="project-title">RapidCMDB</div>
-    </div>
-    <div class="project-description">
-        Network discovery and CMDB reconciliation platform designed for asset auditing and compliance workflows. 
-        Automated device correlation with confidence-based matching to streamline manual reconciliation processes.
-    </div>
-    <div class="tech-stack">
-        <span class="tech-tag">Python</span>
-        <span class="tech-tag">Flask Blueprints</span>
-        <span class="tech-tag">SNMP Discovery</span>
-        <span class="tech-tag">On-Demand, Streamed Pipeline</span>
-        <span class="tech-tag">Vendor Correlation</span>
-        <span class="tech-tag">Compliance Data</span>
-    </div>
-    <div class="project-links">
-        <a href="https://github.com/scottpeterman/rapidcmdb" class="project-link" target="_blank">
-            GitHub Repository
-        </a>
-    </div>
-</div>
-                
-<div class="project-card" onclick="openModal('retroterm-net')">
-    <div class="project-header">
-        <div class="project-icon">
-            <svg class="project-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-                <defs>
-                    <filter id="retro-glow" x="-50%" y="-50%" width="200%" height="200%">
-                        <feGaussianBlur stdDeviation="3" result="blur"/>
-                        <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-                    </filter>
-                    <linearGradient id="screen-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#0A0A0F;stop-opacity:1"/>
-                        <stop offset="100%" style="stop-color:#111122;stop-opacity:1"/>
-                    </linearGradient>
-                </defs>
-                <rect width="200" height="200" fill="var(--bg-card)"/>
-                
-                <!-- Retro terminal screen with cyberpunk colors -->
-                <rect x="30" y="40" width="140" height="100" fill="url(#screen-gradient)" stroke="#00CCCC" stroke-width="2" filter="url(#retro-glow)"/>
-                <rect x="32" y="42" width="136" height="96" fill="#0A0A0F"/>
-                
-                <!-- Classic cyberpunk border with double lines -->
-                <rect x="28" y="38" width="144" height="104" fill="none" stroke="#00CCCC" stroke-width="1"/>
-                <rect x="30" y="40" width="140" height="100" fill="none" stroke="#00FFFF" stroke-width="1"/>
-                
-                <!-- Function key bar -->
-                <rect x="32" y="42" width="136" height="12" fill="#00CCCC" opacity="0.8"/>
-                <text x="100" y="50" fill="#0A0A0F" text-anchor="middle" font-family="monospace" font-size="8" font-weight="bold">F1 F2 F3 F4 F5 F6 F7 F8 F9 F10</text>
-                
-                <!-- Terminal content -->
-                <g fill="#00FFFF" font-family="monospace" font-size="6">
-                    <text x="35" y="65">C:\> ssh user@router.company.com</text>
-                    <text x="35" y="75">Connecting to 192.168.1.1...</text>
-                    <text x="35" y="85">router# show version</text>
-                    <text x="35" y="95">Cisco IOS Software, Version 15.1</text>
-                    <text x="35" y="105">router# show ip interface brief</text>
-                    <text x="35" y="115">Interface    IP-Address   Status</text>
-                    <text x="35" y="125" fill="#00FF00">GigE0/0/1    10.1.1.1     up</text>
-                </g>
-                
-                <!-- Blinking cursor -->
-                <rect x="90" y="120" width="6" height="8" fill="#00FF00">
-                    <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/>
-                </rect>
-                
-                <!-- Status bar -->
-                <rect x="32" y="130" width="136" height="8" fill="#00CCCC" opacity="0.8"/>
-                <text x="100" y="136" fill="#0A0A0F" text-anchor="middle" font-family="monospace" font-size="5" font-weight="bold">RetroTerm.NET - Session: router.company.com</text>
-                
-                <!-- Cyberpunk glow effects -->
-                <rect x="34" y="144" width="140" height="2" fill="#00CCCC" opacity="0.3">
-                    <animate attributeName="opacity" values="0.3;0.6;0.3" dur="2s" repeatCount="indefinite"/>
-                </rect>
-                <rect x="174" y="44" width="2" height="100" fill="#00CCCC" opacity="0.3">
-                    <animate attributeName="opacity" values="0.3;0.6;0.3" dur="2s" repeatCount="indefinite" begin="1s"/>
-                </rect>
-                
-                <!-- Connection indicator -->
-                <circle cx="160" cy="48" r="2" fill="#00FF00" filter="url(#retro-glow)">
-                    <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
-                </circle>
-                
-                <!-- Scanning line effect -->
-                <line x1="32" y1="60" x2="168" y2="60" stroke="#00FFFF" stroke-width="0.5" opacity="0.6">
-                    <animateTransform attributeName="transform" type="translate" values="0,0;0,80;0,0" dur="3s" repeatCount="indefinite"/>
-                    <animate attributeName="opacity" values="0.6;1;0.6" dur="3s" repeatCount="indefinite"/>
-                </line>
-                
-                <!-- Retro label -->
-                <text x="100" y="170" fill="#00CCCC" text-anchor="middle" font-family="monospace" font-size="8">RETRO DOS TERMINAL</text>
-                
-                <!-- Cyberpunk aesthetic lines -->
-                <g stroke="#00CCCC" stroke-width="0.5" opacity="0.4">
-                    <line x1="20" y1="160" x2="180" y2="160"/>
-                    <line x1="20" y1="165" x2="180" y2="165"/>
-                    <line x1="20" y1="30" x2="180" y2="30"/>
-                    <line x1="20" y1="180" x2="180" y2="180"/>
-                </g>
-                
-                <!-- Additional cyberpunk corner details -->
-                <g stroke="#00FFFF" stroke-width="1" fill="none" opacity="0.6">
-                    <path d="M25,35 L35,35 L35,45"/>
-                    <path d="M165,35 L175,35 L175,45"/>
-                    <path d="M25,155 L35,155 L35,165"/>
-                    <path d="M165,155 L175,155 L175,165"/>
-                </g>
-            </svg>
-        </div>
-        <div class="project-title">RetroTerm.NET</div>
-    </div>
-    <div class="project-description">
-        Nostalgic terminal emulator with authentic DOS-inspired interface providing modern SSH connectivity. Features classic blue theme, function key hotkeys, tabbed sessions, and 20+ retro themes including Borland, Norton Commander, and cyberpunk styles.
-    </div>
-                <div class="tech-stack">
-                    <span class="tech-tag">C# / .NET 6</span>
-                    <span class="tech-tag">Windows Forms</span>
-                    <span class="tech-tag">WebView2</span>
-                    <span class="tech-tag">xterm.js</span>
-                    <span class="tech-tag">SSH.NET</span>
-                    <span class="tech-tag">Theming System</span>
-                </div>
-                <div class="project-links">
-                    <a href="https://github.com/scottpeterman/retroterm.net" class="project-link" target="_blank">
-                        GitHub Repository
-                    </a>
-                
-                </div>
-            </div>
-                <div class="project-card" onclick="openModal('velociterm')">
-                    <div class="project-header">
-                        <div class="project-icon">
-                            <svg class="project-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-                                <rect width="200" height="200" fill="var(--bg-card)"/>
-                                <rect x="40" y="40" width="120" height="80" fill="none" stroke="var(--primary)" stroke-width="3" rx="5"/>
-                                <rect x="45" y="45" width="110" height="15" fill="var(--primary)" opacity="0.3"/>
-                                <g fill="none" stroke="var(--secondary)" stroke-width="2">
-                                    <rect x="50" y="70" width="30" height="40"/>
-                                    <rect x="85" y="70" width="30" height="40"/>
-                                    <rect x="120" y="70" width="30" height="40"/>
-                                </g>
-                                <circle cx="140" cy="52" r="3" fill="var(--accent)">
-                                    <animate attributeName="opacity" values="1;0.3;1" dur="1s" repeatCount="indefinite"/>
-                                </circle>
-                                <text x="100" y="180" fill="var(--text-light)" text-anchor="middle" font-family="monospace" font-size="8">ENTERPRISE WEB</text>
-                            </svg>
-                        </div>
-                        <div class="project-title">VelociTerm</div>
-                    </div>
-                    <div class="project-description">
-                        Enterprise web SSH application with LDAP authentication. Multi-user jump host platform providing user-based session management and tabbed terminal support for secure network operations.
-                    </div>
-                    <div class="tech-stack">
-                        <span class="tech-tag">Web Application</span>
-                        <span class="tech-tag">LDAP Auth</span>
-                        <span class="tech-tag">Multi-User</span>
-                        <span class="tech-tag">Jump Host</span>
-                        <span class="tech-tag">Session Management</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/scottpeterman/velociterm" class="project-link" target="_blank">
-                            GitHub Repository
-                        </a>
-                    </div>
-                </div>
-
-                <div class="project-card" onclick="openModal('gosnmptk')">
-                    <div class="project-header">
-                        <div class="project-icon">
-                            <svg class="project-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-                                <rect width="200" height="200" fill="var(--bg-card)"/>
-                                <g fill="none" stroke="var(--primary)" stroke-width="2">
-                                    <circle cx="100" cy="100" r="60"/>
-                                    <circle cx="100" cy="100" r="40"/>
-                                    <circle cx="100" cy="100" r="20"/>
-                                    <line x1="100" y1="40" x2="100" y2="160"/>
-                                    <line x1="40" y1="100" x2="160" y2="100"/>
-                                </g>
-                                <text x="100" y="110" fill="var(--secondary)" text-anchor="middle" font-family="monospace" font-size="20">Go</text>
-                            </svg>
-                        </div>
-                        <div class="project-title">GoSNMPTK</div>
-                    </div>
-                    <div class="project-description">
-                        Go-based SNMP toolkit for high-performance network discovery. Blazing fast SNMP operations with modern concurrency patterns for large-scale data collection.
-                    </div>
-                    <div class="tech-stack">
-                        <span class="tech-tag">Go</span>
-                        <span class="tech-tag">SNMP</span>
-                        <span class="tech-tag">Concurrency</span>
-                        <span class="tech-tag">Performance</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/scottpeterman/gosnmptk" class="project-link" target="_blank">
-                            GitHub Repository
-                        </a>
-                    </div>
-                </div>
-
-                <div class="project-card" onclick="openModal('textfsm-ports')">
-                    <div class="project-header">
-                        <div class="project-icon">
-                            <svg class="project-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-                                <rect width="200" height="200" fill="var(--bg-card)"/>
-                                <g fill="none" stroke="var(--primary)" stroke-width="3">
-                                    <rect x="30" y="50" width="50" height="100" rx="5"/>
-                                    <rect x="90" y="50" width="50" height="100" rx="5"/>
-                                    <rect x="150" y="50" width="20" height="100" rx="5"/>
-                                </g>
-                                <text x="100" y="110" fill="var(--secondary)" text-anchor="middle" font-family="monospace" font-size="16">FSM</text>
-                                <circle cx="55" cy="170" r="3" fill="#FFD700"/>
-                                <circle cx="115" cy="170" r="3" fill="var(--accent)"/>
-                                <circle cx="160" cy="170" r="3" fill="#FF6B6B"/>
-                                <text x="100" y="190" fill="var(--text-light)" text-anchor="middle" font-family="monospace" font-size="8">PY•JS•C#</text>
-                            </svg>
-                        </div>
-                        <div class="project-title">TextFSM Cross-Platform Ports</div>
-                    </div>
-                    <div class="project-description">
-                        Multi-language ports of Google's TextFSM template engine. JavaScript implementation for browser/Node.js environments and C# port for .NET 8, enabling network data parsing across diverse technology stacks.
-                    </div>
-                    <div class="tech-stack">
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">C#/.NET 8</span>
-                        <span class="tech-tag">Cross-Platform</span>
-                        <span class="tech-tag">Template Engine</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/scottpeterman/textfsm.net" class="project-link" target="_blank">
-                            C#/.NET Port
-                        </a>
-                        <a href="https://github.com/scottpeterman/tfsmjstester" class="project-link" target="_blank">
-                            JavaScript Port
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <h3 style="color: var(--primary); font-size: 1.8rem; margin: 4rem 0 2rem; text-align: center;">
-                <span class="tech-label">[VSCODE_EXTENSIONS]</span>
-                <span class="business-label" style="display: none;">Development Tools</span>
-            </h3>
-            <div class="projects-grid">
-                <div class="project-card" onclick="openModal('terminal-telemetry-vsc')">
-                    <div class="project-header">
-                        <div class="project-icon">
-                            <svg class="project-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-                                <rect width="200" height="200" fill="var(--bg-card)"/>
-                                <rect x="20" y="30" width="160" height="120" fill="none" stroke="var(--primary)" stroke-width="2"/>
-                                <rect x="25" y="35" width="150" height="20" fill="var(--primary)" opacity="0.3"/>
-                                <g stroke="var(--secondary)" stroke-width="1" fill="none">
-                                    <rect x="30" y="65" width="70" height="40"/>
-                                    <rect x="110" y="65" width="60" height="40"/>
-                                    <rect x="30" y="115" width="140" height="25"/>
-                                </g>
-                                <circle cx="160" cy="75" r="3" fill="var(--accent)">
-                                    <animate attributeName="opacity" values="1;0.3;1" dur="1s" repeatCount="indefinite"/>
-                                </circle>
-                                <text x="100" y="180" fill="var(--text-light)" text-anchor="middle" font-family="monospace" font-size="10">TERMINAL APP</text>
-                            </svg>
-                        </div>
-                        <div class="project-title">Terminal Telemetry VSC</div>
-                    </div>
-                    <div class="project-description">
-                        Complete terminal application with session manager built in JavaScript for VS Code. Full-featured terminal emulation with telemetry capabilities integrated directly into the development environment.
-                    </div>
-                    <div class="tech-stack">
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">VS Code API</span>
-                        <span class="tech-tag">Terminal Emulation</span>
-                        <span class="tech-tag">Session Management</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/scottpeterman/terminaltelemetryvsc" class="project-link" target="_blank">
-                            GitHub Repository
-                        </a>
-                    </div>
-                </div>
-
-                <div class="project-card" onclick="openModal('secure-cartography-vsc')">
-                    <div class="project-header">
-                        <div class="project-icon">
-                            <svg class="project-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-                                <rect width="200" height="200" fill="var(--bg-card)"/>
-                                <rect x="20" y="30" width="160" height="120" fill="none" stroke="var(--primary)" stroke-width="2"/>
-                                <rect x="25" y="35" width="150" height="20" fill="var(--primary)" opacity="0.3"/>
-                                <g fill="none" stroke="var(--secondary)" stroke-width="2">
-                                    <circle cx="80" cy="80" r="8"/>
-                                    <circle cx="120" cy="80" r="8"/>
-                                    <circle cx="100" cy="110" r="8"/>
-                                    <line x1="80" y1="80" x2="120" y2="80"/>
-                                    <line x1="80" y1="80" x2="100" y2="110"/>
-                                    <line x1="120" y1="80" x2="100" y2="110"/>
-                                </g>
-                                <text x="100" y="180" fill="var(--text-light)" text-anchor="middle" font-family="monospace" font-size="10">JS MAPPING</text>
-                            </svg>
-                        </div>
-                        <div class="project-title">Secure Cartography VSC</div>
-                    </div>
-                    <div class="project-description">
-                        Pure JavaScript VS Code extension for network topology mapping. Browser-based network discovery and visualization with interactive mapping capabilities built entirely in JavaScript.
-                    </div>
-                    <div class="tech-stack">
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">VS Code API</span>
-                        <span class="tech-tag">Network Mapping</span>
-                        <span class="tech-tag">Browser-Based</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/scottpeterman/securecartographyvsc" class="project-link" target="_blank">
-                            GitHub Repository
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    <!-- Experience Section -->
     <section id="experience" class="section">
         <div class="container">
-            <h2 class="section-title">Experience</h2>
+            <div class="section-header">
+                <h2 class="section-title">Professional Experience</h2>
+                <p class="section-subtitle">
+                    Progressive career in network engineering and automation across enterprise and service provider environments.
+                </p>
+            </div>
             <div class="experience-timeline">
-                <div class="experience-item">
+                <div class="experience-item fade-in">
                     <div class="experience-header">
                         <div class="experience-title">Principal Infrastructure Engineer</div>
                         <div class="experience-company">Columbia Sportswear Company</div>
-                        <div class="experience-period">
-                            <span class="tech-text">[2022-03] → [Present]</span>
-                            <span class="business-text" style="display: none;">March 2022 - Present</span>
-                        </div>
+                        <div class="experience-period">March 2022 - Present</div>
                     </div>
-                    <p>Spearheaded comprehensive Full Stack network automation solutions using Python Flask/FastAPI with MySQL. Built real-time automation jobs with Server-Sent Events streams. Developed custom integrations with Prisma SDWAN, PaloAlto Panorama, and LogicMonitor APIs.</p>
+                    <div class="experience-description">
+                        Lead comprehensive network automation initiatives, designing and deploying full-stack automation platforms using Python Flask/FastAPI with MySQL for device state collection, parsing, and compliance reporting.
+                    </div>
+                    <ul class="experience-highlights">
+                        <li>Developed custom API integrations with Prisma SDWAN, Palo Alto Panorama, and LogicMonitor</li>
+                        <li>Automated Cisco, Palo Alto, and HPE support contract reporting via vendor APIs</li>
+                        <li>Engineered simplified custom frontend for Cisco Webex Calling with RBAC automation</li>
+                        <li>Built fully automated provisioning for new retail store networks</li>
+                    </ul>
                 </div>
 
-                <div class="experience-item">
+                <div class="experience-item fade-in">
+                    <div class="experience-header">
+                        <div class="experience-title">Network Automation Engineer</div>
+                        <div class="experience-company">Maximus</div>
+                        <div class="experience-period">July 2021 - March 2022</div>
+                    </div>
+                    <div class="experience-description">
+                        Led development of "Single Pane of Glass" network visibility solutions with comprehensive integrations to enterprise systems.
+                    </div>
+                    <ul class="experience-highlights">
+                        <li>Implemented data-driven Infrastructure-as-Code architecture using GitLab CI/CD</li>
+                        <li>Utilized Nornir and Netmiko for multi-platform network automation</li>
+                        <li>Automated NAC 802.1x configuration management and compliance</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item fade-in">
                     <div class="experience-header">
                         <div class="experience-title">Principal Engineer - QA Network Automation Architect</div>
                         <div class="experience-company">Charter Communications</div>
-                        <div class="experience-period">
-                            <span class="tech-text">[2017-05] → [2021-03]</span>
-                            <span class="business-text" style="display: none;">May 2017 - March 2021</span>
-                        </div>
+                        <div class="experience-period">May 2017 - March 2021</div>
                     </div>
-                    <p>Led network automation architecture for QA environments. Implemented comprehensive testing frameworks and automation solutions for large-scale network infrastructure validation and deployment.</p>
+                    <div class="experience-description">
+                        Technical lead for QA Network Automation development in data center environments, designing and deploying full-stack custom solutions.
+                    </div>
+                    <ul class="experience-highlights">
+                        <li>Implemented Robot Framework and Python 3 test automation architecture within GitLab CI/CD</li>
+                        <li>Designed Docker container and VMware environments supporting DevOps methodologies</li>
+                        <li>Served as Python instructor and mentor for network engineering teams</li>
+                    </ul>
                 </div>
 
-                <div class="experience-item">
+                <div class="experience-item fade-in">
                     <div class="experience-header">
                         <div class="experience-title">Architect IP Edge Engineering</div>
                         <div class="experience-company">Level 3 Communications</div>
-                        <div class="experience-period">
-                            <span class="tech-text">[2013-04] → [2016-04]</span>
-                            <span class="business-text" style="display: none;">April 2013 - April 2016</span>
-                        </div>
+                        <div class="experience-period">April 2013 - April 2016</div>
                     </div>
-                    <p>Architected IP edge solutions for global internet backbone provider. Focused on scalable network designs and automation frameworks for high-performance networking infrastructure.</p>
+                    <div class="experience-description">
+                        Lead engineer for merger-initiated IPVPN product normalization and next-phase development across multiple service provider infrastructures.
+                    </div>
+                    <ul class="experience-highlights">
+                        <li>Managed IP Services (IPVPN, Converged VOIP/Data, managed Internet)</li>
+                        <li>Designed low-touch provisioning solutions for service automation</li>
+                        <li>Implemented Anycast solutions for DNS, syslog, and hosted Netflow</li>
+                    </ul>
                 </div>
-                <div class="experience-item">
+
+                <div class="experience-item fade-in">
                     <div class="experience-header">
-                        <div class="experience-title">Architect 3 MPLS Backbone and Datacenter</div>
-                        <div class="experience-company">Cricket Communications</div>
-                        <div class="experience-period">
-                            <span class="tech-text">[2008-04] → [2013-04]</span>
-                            <span class="business-text" style="display: none;">April 2013 - April 2016</span>
-                        </div>
+                        <div class="experience-title">Architect III</div>
+                        <div class="experience-company">Cricket Wireless (Now AT&T)</div>
+                        <div class="experience-period">November 2008 - April 2013</div>
                     </div>
-                    <p>Architected MPLS VPN Edge and Core services for 5.5 Million customer cellular service backbone.</p>
+                    <div class="experience-description">
+                        Led national IP design and architected Cricket's self-managed MPLS VPN network supporting cellular infrastructure.
+                    </div>
+                    <ul class="experience-highlights">
+                        <li>Designed and supported multiple data centers with 300+ switches</li>
+                        <li>Implemented redundant Cisco Nexus 7010/7018 core providing 10 GB backbone</li>
+                        <li>Led IPv6 testing, pilot, and national deployment for Cricket LTE launch</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Projects</h2>
+                <p class="section-subtitle">
+                    Open source tools and applications demonstrating expertise in network automation and full-stack development.
+                </p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div class="project-title">Secure Cartography</div>
+                        <div class="project-description">
+                            A secure, Python-based network discovery and mapping tool that generates comprehensive network topology maps using SSH-based device interrogation with security-focused design.
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">PyQt</span>
+                            <span class="tech-tag">SSH</span>
+                            <span class="tech-tag">Network Discovery</span>
+                            <span class="tech-tag">Topology Mapping</span>
+                        </div>
+                    </div>
+                    <div class="project-footer">
+                        <div class="project-links">
+                            <a href="https://github.com/scottpeterman/secure_cartography" class="project-link" target="_blank">
+                                GitHub Repository →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div class="project-title">RapidCMDB</div>
+                        <div class="project-description">
+                            Network discovery and CMDB reconciliation platform designed for asset auditing and compliance workflows with automated device correlation and confidence-based matching.
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Flask</span>
+                            <span class="tech-tag">SNMP Discovery</span>
+                            <span class="tech-tag">CMDB</span>
+                            <span class="tech-tag">Asset Management</span>
+                        </div>
+                    </div>
+                    <div class="project-footer">
+                        <div class="project-links">
+                            <a href="https://github.com/scottpeterman/rapidcmdb" class="project-link" target="_blank">
+                                GitHub Repository →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div class="project-title">GoSNMPTK</div>
+                        <div class="project-description">
+                            A comprehensive SNMP scanning and vendor fingerprinting toolkit built in Go with modern GUI interface, designed for high-performance network discovery and device identification.
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Go</span>
+                            <span class="tech-tag">SNMP</span>
+                            <span class="tech-tag">GUI</span>
+                            <span class="tech-tag">Network Scanning</span>
+                            <span class="tech-tag">Performance</span>
+                        </div>
+                    </div>
+                    <div class="project-footer">
+                        <div class="project-links">
+                            <a href="https://github.com/scottpeterman/gosnmptk" class="project-link" target="_blank">
+                                GitHub Repository →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div class="project-title">RetroTerm.NET</div>
+                        <div class="project-description">
+                            Nostalgic terminal emulator with authentic DOS-inspired interface providing modern SSH connectivity. Features 20+ retro themes and modern terminal functionality.
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tech-tag">C#/.NET 6</span>
+                            <span class="tech-tag">Windows Forms</span>
+                            <span class="tech-tag">SSH.NET</span>
+                            <span class="tech-tag">Terminal Emulation</span>
+                            <span class="tech-tag">Retro UI</span>
+                        </div>
+                    </div>
+                    <div class="project-footer">
+                        <div class="project-links">
+                            <a href="https://github.com/scottpeterman/retroterm.net" class="project-link" target="_blank">
+                                GitHub Repository →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div class="project-title">VelociTerm</div>
+                        <div class="project-description">
+                            Enterprise web SSH application with LDAP authentication. Multi-user jump host platform providing user-based session management and comprehensive terminal support.
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Web Application</span>
+                            <span class="tech-tag">LDAP Auth</span>
+                            <span class="tech-tag">Multi-User</span>
+                            <span class="tech-tag">Jump Host</span>
+                            <span class="tech-tag">Enterprise</span>
+                        </div>
+                    </div>
+                    <div class="project-footer">
+                        <div class="project-links">
+                            <a href="https://github.com/scottpeterman/velociterm" class="project-link" target="_blank">
+                                GitHub Repository →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div class="project-title">TextFSM Cross-Platform Ports</div>
+                        <div class="project-description">
+                            Multi-language ports of Google's TextFSM template engine. JavaScript and C#/.NET implementations enabling network data parsing across diverse technology stacks.
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">C#/.NET 8</span>
+                            <span class="tech-tag">Cross-Platform</span>
+                            <span class="tech-tag">Template Engine</span>
+                            <span class="tech-tag">Parsing</span>
+                        </div>
+                    </div>
+                    <div class="project-footer">
+                        <div class="project-links">
+                            <a href="https://github.com/scottpeterman/textfsm.net" class="project-link" target="_blank">
+                                C#/.NET Port →
+                            </a>
+                            <a href="https://github.com/scottpeterman/tfsmjstester" class="project-link" target="_blank">
+                                JavaScript Port →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
     <section id="contact" class="section">
         <div class="container">
-            <h2 class="section-title">Contact</h2>
-            <div class="contact-info">
-                <p style="font-size: 1.2rem; color: var(--text-light); margin-bottom: 1rem;">
-                    <span class="terminal-prompt">$</span>
-                    <span class="tech-text">Interested in network automation, infrastructure engineering, or collaboration?</span>
-                    <span class="business-text" style="display: none;">Ready to discuss how we can transform your network infrastructure together?</span>
+            <div class="section-header">
+                <h2 class="section-title">Let's Connect</h2>
+                <p class="section-subtitle">
+                    Interested in network automation, infrastructure engineering, or collaboration opportunities?
                 </p>
-                <p style="font-size: 1.1rem; color: var(--text-light);">
-                    <span style="color: var(--primary);" class="tech-label">[Looking For New Opportunity]</span>
-                    <span style="color: var(--primary);" class="business-label" style="display: none;"></span>
-                    <div>
-                        <span class="tech-text">Available for innovative solutions and challenging projects.</span>
-                        <span class="business-text" style="display: none;">Seeking roles where I can drive significant impact through strategic automation and infrastructure innovation.</span>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Ready to discuss your next project?</h3>
+                    <p>
+                        I'm currently seeking new opportunities where I can drive significant impact through strategic automation and infrastructure innovation. Let's explore how we can transform your network infrastructure together.
+                    </p>
+                    <div class="contact-links">
+                        <a href="mailto:scottpeterman@gmail.com" class="contact-link">
+                            📧 Email
+                        </a>
+                        <a href="https://linkedin.com/in/scott-peterman-networkeng" class="contact-link" target="_blank">
+                            💼 LinkedIn
+                        </a>
+                        <a href="https://github.com/scottpeterman" class="contact-link" target="_blank">
+                            🐙 GitHub
+                        </a>
                     </div>
-                </p>
-                <div class="contact-links">
-                    <a href="mailto:scottpeterman@gmail.com" class="contact-link">
-                        📧 Email
-                    </a>
-                    <a href="https://linkedin.com/in/scott-peterman-networkeng" class="contact-link" target="_blank">
-                        💼 LinkedIn
-                    </a>
-                    <a href="https://github.com/scottpeterman" class="contact-link" target="_blank">
-                        🐙 GitHub
-                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Enhanced Modals with Technical Details -->
-     <div id="rapidcmdb-details" class="modal">
-    <div class="modal-content" style="max-width: 1000px;">
-        <button class="modal-close" onclick="closeModal('rapidcmdb-details')">&times;</button>
-        <h2 style="margin-bottom: 1rem; color: var(--primary);">
-            <span class="tech-label">[RAPIDCMDB.ENTERPRISE]</span>
-            <span class="business-label" style="display: none;">RapidCMDB Enterprise Platform</span>
-        </h2>
-        <h3 style="margin-bottom: 1.5rem; color: var(--text-light);">
-            <span class="tech-text">Enterprise CMDB Reconciliation & Asset Intelligence Engine</span>
-            <span class="business-text" style="display: none;">Strategic Asset Intelligence for Enterprise Decision Making</span>
-        </h3>
-
-        <div style="margin-bottom: 2rem;">
-            <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
-                <span class="tech-label">[PURPOSE]</span>
-                <span class="business-label" style="display: none;">Solution Purpose</span>
-            </h4>
-            <p style="line-height: 1.6; color: var(--text-light);">
-                <span class="tech-text">
-                    Designed to address CMDB reconciliation challenges faced by enterprise IT teams: conflicting asset databases, 
-                    time-intensive manual audits, and incomplete network visibility. Purpose-built for asset reconciliation 
-                    workflows rather than general monitoring or security scanning.
-                </span>
-                <span class="business-text" style="display: none;">
-                    Built to support asset management teams dealing with multiple data sources, compliance requirements, 
-                    and the need for accurate inventory data. Focuses specifically on reconciliation workflows that 
-                    bridge discovered network reality with recorded asset databases.
-                </span>
-            </p>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Scott Peterman. All rights reserved.</p>
         </div>
-
-        <div style="margin-bottom: 2rem;">
-            <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
-                <span class="tech-label">[CORE_CAPABILITIES]</span>
-                <span class="business-label" style="display: none;">Key Capabilities</span>
-            </h4>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
-                <div>
-                    <h5 style="color: var(--primary); margin-bottom: 0.5rem;">
-                        <span class="tech-text">Discovery Engine</span>
-                        <span class="business-text" style="display: none;">Asset Discovery</span>
-                    </h5>
-                    <ul style="line-height: 1.8; color: var(--text-light); padding-left: 1.5rem;">
-                        <li>▸ Multi-protocol discovery (SNMP v2c/v3, SSH, HTTP)</li>
-                        <li>▸ Concurrent scanning with rate limiting</li>
-                        <li>▸ Serial number and hardware identification</li>
-                        <li>▸ Read-only network operations</li>
-                        <li>▸ Vendor-agnostic device support</li>
-                    </ul>
-                </div>
-                <div>
-                    <h5 style="color: var(--primary); margin-bottom: 0.5rem;">
-                        <span class="tech-text">Reconciliation Engine</span>
-                        <span class="business-text" style="display: none;">Data Reconciliation</span>
-                    </h5>
-                    <ul style="line-height: 1.8; color: var(--text-light); padding-left: 1.5rem;">
-                        <li>▸ Confidence-based device matching</li>
-                        <li>▸ Fuzzy correlation algorithms</li>
-                        <li>▸ Duplicate detection and merge suggestions</li>
-                        <li>▸ Gap analysis reporting</li>
-                        <li>▸ Vendor and model normalization</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-
-
-        <div style="margin-bottom: 2rem;">
-            <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
-                <span class="tech-label">[WORKFLOW_EXAMPLES]</span>
-                <span class="business-label" style="display: none;">Use Case Examples</span>
-            </h4>
-            <div style="background: var(--bg-alt); padding: 1.5rem; border-left: 4px solid var(--accent);">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
-                    <div>
-                        <h6 style="color: var(--accent); margin-bottom: 0.5rem;">Compliance Audits</h6>
-                        <ul style="color: var(--text-light); line-height: 1.6;">
-                            <li>• Network discovery and device enumeration</li>
-                            <li>• CMDB data import and correlation</li>
-                            <li>• Gap analysis and compliance reporting</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h6 style="color: var(--accent); margin-bottom: 0.5rem;">Asset Reconciliation</h6>
-                        <ul style="color: var(--text-light); line-height: 1.6;">
-                            <li>• Multi-source CMDB comparison</li>
-                            <li>• Automated confidence-based matching</li>
-                            <li>• Duplicate identification and cleanup</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div style="margin-bottom: 2rem;">
-            <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
-                <span class="tech-label">[DESIGN_APPROACH]</span>
-                <span class="business-label" style="display: none;">Design Philosophy</span>
-            </h4>
-            <div style="background: var(--bg-alt); padding: 1.5rem;">
-                <p style="line-height: 1.6; color: var(--text-light); margin-bottom: 1rem;">
-                    <span class="tech-text">
-                        Purpose-built for CMDB reconciliation rather than general network monitoring. Focuses on lightweight, 
-                        portable deployment with straightforward workflows for asset reconciliation teams and consultants.
-                    </span>
-                    <span class="business-text" style="display: none;">
-                        Designed for rapid deployment in enterprise environments where asset accuracy and reconciliation 
-                        workflows are the primary concern rather than ongoing monitoring or security assessment.
-                    </span>
-                </p>
-                <div style="color: var(--primary); font-weight: 600;">
-                    <span class="tech-text">
-                        ✓ Reconciliation-focused ✓ Portable deployment ✓ Multi-vendor support ✓ Confidence-based workflows
-                    </span>
-                    <span class="business-text" style="display: none;">
-                        ✓ Asset accuracy ✓ Compliance workflows ✓ Data correlation ✓ Audit preparation
-                    </span>
-                </div>
-            </div>
-        </div>
-
-        <div style="text-align: center; padding: 2rem; background: linear-gradient(135deg, rgba(0, 204, 204, 0.1), rgba(0, 255, 255, 0.1)); border: 1px solid var(--border);">
-            <h5 style="color: var(--primary); margin-bottom: 1rem;">
-                <span class="tech-text">Ready to Streamline Your Asset Reconciliation?</span>
-                <span class="business-text" style="display: none;">Ready to Improve Your Asset Management Process?</span>
-            </h5>
-            <p style="color: var(--text-light); margin-bottom: 1rem;">
-                <span class="tech-text">
-                    Designed for network discovery, CMDB correlation, and asset reconciliation workflows
-                </span>
-                <span class="business-text" style="display: none;">
-                    Built to support asset management teams with discovery, correlation, and reconciliation capabilities
-                </span>
-            </p>
-            <div style="color: var(--secondary); font-weight: 600;">
-                Streamline manual asset reconciliation processes with automated discovery and correlation
-            </div>
-        </div>
-    </div>
-</div>
-    <div id="secure-cartography" class="modal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('secure-cartography')">&times;</button>
-            <h2 style="margin-bottom: 1rem; color: var(--primary);">
-                <span class="tech-label">[SECURE_CARTOGRAPHY.EXE]</span>
-                <span class="business-label" style="display: none;">Secure Cartography Platform</span>
-            </h2>
-            <h3 style="margin-bottom: 1.5rem; color: var(--text-light);">Network Discovery & Topology Mapping</h3>
-
-            <div style="margin-bottom: 2rem;">
-                <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
-                    <span class="tech-label">[OVERVIEW]</span>
-                    <span class="business-label" style="display: none;">Solution Overview</span>
-                </h4>
-                <p style="line-height: 1.6; color: var(--text-light);">
-                    Secure network discovery and mapping solution providing automated topology generation through SSH-based device interrogation.
-                    Security-first design with powerful visualization capabilities for network infrastructure documentation and analysis.
-                </p>
-            </div>
-
-            <div style="margin-bottom: 2rem;">
-                <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
-                    <span class="tech-label">[FEATURES]</span>
-                    <span class="business-label" style="display: none;">Key Features</span>
-                </h4>
-                <ul style="line-height: 1.8; color: var(--text-light); padding-left: 1.5rem;">
-                    <li>▸ Automated SSH-based device discovery</li>
-                    <li>▸ Interactive topology map generation</li>
-                    <li>▸ Multi-vendor support (Cisco, Juniper, etc.)</li>
-                    <li>▸ Encrypted credential management</li>
-                    <li>▸ Real-time network state visualization</li>
-                    <li>▸ Export capabilities for documentation</li>
-                </ul>
-            </div>
-
-            <div style="margin-bottom: 2rem;">
-                <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
-                    <span class="tech-label">[IMPLEMENTATION]</span>
-                    <span class="business-label" style="display: none;">Technical Implementation</span>
-                </h4>
-                <p style="line-height: 1.6; color: var(--text-light);">
-                    Built with Python and PyQt framework, utilizing paramiko for secure SSH connections and networkx for graph-based topology representation.
-                    Implements threading for non-blocking operations and credential encryption for security compliance.
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <div id="terminal-telemetry" class="modal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('terminal-telemetry')">&times;</button>
-            <h2 style="margin-bottom: 1rem; color: var(--primary);">
-                <span class="tech-label">[TERMINAL_TELEMETRY.EXE]</span>
-                <span class="business-label" style="display: none;">Terminal Telemetry Platform</span>
-            </h2>
-            <h3 style="margin-bottom: 1.5rem; color: var(--text-light);">Advanced Network Monitoring & Analytics</h3>
-
-            <div style="margin-bottom: 2rem;">
-                <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
-                    <span class="tech-label">[OVERVIEW]</span>
-                    <span class="business-label" style="display: none;">Solution Overview</span>
-                </h4>
-                <p style="line-height: 1.6; color: var(--text-light);">
-                    Comprehensive network monitoring and telemetry collection through intuitive terminal interface.
-                    Real-time insights into network performance, device health, and operational metrics with minimal overhead.
-                </p>
-            </div>
-
-            <div style="margin-bottom: 2rem;">
-                <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
-                    <span class="tech-label">[CAPABILITIES]</span>
-                    <span class="business-label" style="display: none;">Core Capabilities</span>
-                </h4>
-                <ul style="line-height: 1.8; color: var(--text-light); padding-left: 1.5rem;">
-                    <li>▸ Real-time performance monitoring</li>
-                    <li>▸ Multi-protocol telemetry (SNMP, SSH, APIs)</li>
-                    <li>▸ Interactive terminal dashboards</li>
-                    <li>▸ Alert and threshold management</li>
-                    <li>▸ Historical analysis and trending</li>
-                    <li>▸ Custom metric definition</li>
-                </ul>
-            </div>
-
-            <div style="margin-bottom: 2rem;">
-                <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
-                    <span class="tech-label">[ARCHITECTURE]</span>
-                    <span class="business-label" style="display: none;">System Architecture</span>
-                </h4>
-                <p style="line-height: 1.6; color: var(--text-light);">
-                    Modular design supporting multiple data collection backends with real-time processing and efficient terminal rendering.
-                    Asynchronous processing for high-performance data collection with extensible plugin architecture.
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <div id="velociterm" class="modal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('velociterm')">&times;</button>
-            <h2 style="margin-bottom: 1rem; color: var(--primary);">
-                <span class="tech-label">[VELOCITERM.WEB]</span>
-                <span class="business-label" style="display: none;">VelociTerm Enterprise Platform</span>
-            </h2>
-            <h3 style="margin-bottom: 1.5rem; color: var(--text-light);">Enterprise Multi-User Jump Host Platform</h3>
-
-            <div style="margin-bottom: 2rem;">
-                <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
-                    <span class="tech-label">[ENTERPRISE_FEATURES]</span>
-                    <span class="business-label" style="display: none;">Enterprise Features</span>
-                </h4>
-                <p style="line-height: 1.6; color: var(--text-light);">
-                    Web-based enterprise terminal platform with LDAP authentication and multi-user capabilities.
-                    Provides secure jump host functionality with comprehensive session management for network operations teams.
-                </p>
-            </div>
-
-            <div style="margin-bottom: 2rem;">
-                <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
-                    <span class="tech-label">[CAPABILITIES]</span>
-                    <span class="business-label" style="display: none;">Platform Capabilities</span>
-                </h4>
-                <ul style="line-height: 1.8; color: var(--text-light); padding-left: 1.5rem;">
-                    <li>▸ LDAP/Active Directory integration</li>
-                    <li>▸ Multi-user concurrent sessions</li>
-                    <li>▸ User-based session isolation</li>
-                    <li>▸ Tabbed terminal interface</li>
-                    <li>▸ Secure jump host operations</li>
-                    <li>▸ Web-based accessibility</li>
-                    <li>▸ Enterprise authentication</li>
-                    <li>▸ Session recording and audit</li>
-                </ul>
-            </div>
-
-            <div style="margin-bottom: 2rem;">
-                <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
-                    <span class="tech-label">[DEPLOYMENT]</span>
-                    <span class="business-label" style="display: none;">Deployment Strategy</span>
-                </h4>
-                <p style="line-height: 1.6; color: var(--text-light);">
-                    Designed for enterprise environments requiring centralized terminal access with role-based permissions.
-                    Supports high-availability deployments and integrates with existing corporate authentication infrastructure.
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <div id="gosnmptk" class="modal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('gosnmptk')">&times;</button>
-            <h2 style="margin-bottom: 1rem; color: var(--primary);">
-                <span class="tech-label">[GOSNMPTK.EXE]</span>
-                <span class="business-label" style="display: none;">GoSNMPTK Performance Toolkit</span>
-            </h2>
-            <h3 style="margin-bottom: 1.5rem; color: var(--text-light);">High-Performance SNMP Toolkit</h3>
-
-            <div style="margin-bottom: 2rem;">
-                <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
-                    <span class="tech-label">[CONCURRENCY_ENGINE]</span>
-                    <span class="business-label" style="display: none;">Performance Engine</span>
-                </h4>
-                <p style="line-height: 1.6; color: var(--text-light);">
-                    Utilizes goroutines and channels for efficient concurrent processing, enabling simultaneous queries across hundreds of devices.
-                    Excellent scalability with low memory footprint and CPU usage.
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <div id="textfsm-ports" class="modal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('textfsm-ports')">&times;</button>
-            <h2 style="margin-bottom: 1rem; color: var(--primary);">
-                <span class="tech-label">[TEXTFSM_CROSS_PLATFORM.PKG]</span>
-                <span class="business-label" style="display: none;">TextFSM Cross-Platform Solutions</span>
-            </h2>
-            <h3 style="margin-bottom: 1.5rem; color: var(--text-light);">Multi-Language Template Engine Ports</h3>
-
-            <div style="margin-bottom: 2rem;">
-                <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
-                    <span class="tech-label">[OVERVIEW]</span>
-                    <span class="business-label" style="display: none;">Platform Overview</span>
-                </h4>
-                <p style="line-height: 1.6; color: var(--text-light);">
-                    Advanced cross-platform implementations of Google's TextFSM template engine. JavaScript port supports both browser and Node.js environments,
-                    while C# implementation targets .NET 8 for enterprise integration scenarios.
-                </p>
-            </div>
-
-            <div style="margin-bottom: 2rem;">
-                <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
-                    <span class="tech-label">[IMPLEMENTATIONS]</span>
-                    <span class="business-label" style="display: none;">Available Implementations</span>
-                </h4>
-                <ul style="line-height: 1.8; color: var(--text-light); padding-left: 1.5rem;">
-                    <li>▸ JavaScript: Browser + Node.js compatibility</li>
-                    <li>▸ C#/.NET 8: Enterprise integration ready</li>
-                    <li>▸ VS Code test UI for JavaScript version</li>
-                    <li>▸ Full template syntax compatibility</li>
-                    <li>▸ Network data parsing optimization</li>
-                    <li>▸ Cross-platform deployment capabilities</li>
-                </ul>
-            </div>
-
-            <div style="margin-bottom: 2rem;">
-                <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
-                    <span class="tech-label">[USE_CASES]</span>
-                    <span class="business-label" style="display: none;">Business Applications</span>
-                </h4>
-                <p style="line-height: 1.6; color: var(--text-light);">
-                    Enables network automation across diverse technology stacks. JavaScript version supports web-based tools and Node.js automation,
-                    while C# implementation integrates with enterprise .NET applications and microservices.
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <div id="terminal-telemetry-vsc" class="modal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('terminal-telemetry-vsc')">&times;</button>
-            <h2 style="margin-bottom: 1rem; color: var(--primary);">
-                <span class="tech-label">[TERMINAL_TELEMETRY_VSC.EXT]</span>
-                <span class="business-label" style="display: none;">Terminal Telemetry VS Code Extension</span>
-            </h2>
-            <h3 style="margin-bottom: 1.5rem; color: var(--text-light);">Full Terminal Application for VS Code</h3>
-
-            <div style="margin-bottom: 2rem;">
-                <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
-                    <span class="tech-label">[SYSTEM_SPECS]</span>
-                    <span class="business-label" style="display: none;">System Specifications</span>
-                </h4>
-                <p style="line-height: 1.6; color: var(--text-light);">
-                    Complete terminal application with session manager built entirely in JavaScript for VS Code.
-                    Provides full terminal emulation capabilities with telemetry integration directly within the development environment.
-                </p>
-            </div>
-
-            <div style="margin-bottom: 2rem;">
-                <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
-                    <span class="tech-label">[FEATURES]</span>
-                    <span class="business-label" style="display: none;">Key Features</span>
-                </h4>
-                <ul style="line-height: 1.8; color: var(--text-light); padding-left: 1.5rem;">
-                    <li>▸ Full terminal emulation in VS Code</li>
-                    <li>▸ Advanced session management</li>
-                    <li>▸ Telemetry data collection</li>
-                    <li>▸ JavaScript-based architecture</li>
-                    <li>▸ Seamless IDE integration</li>
-                    <li>▸ Multi-session support</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-<div id="retroterm-net" class="modal">
-    <div class="modal-content">
-        <button class="modal-close" onclick="closeModal('retroterm-net')">&times;</button>
-        <h2 style="margin-bottom: 1rem; color: var(--primary);">
-            <span class="tech-label">[RETROTERM.NET]</span>
-            <span class="business-label" style="display: none;">RetroTerm.NET Terminal Platform</span>
-        </h2>
-        <h3 style="margin-bottom: 1.5rem; color: var(--text-light);">Nostalgic DOS Terminal with Modern SSH Capabilities</h3>
-
-        <div style="margin-bottom: 2rem;">
-            <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
-                <span class="tech-label">[RETRO_AESTHETIC]</span>
-                <span class="business-label" style="display: none;">Design Philosophy</span>
-            </h4>
-            <p style="line-height: 1.6; color: var(--text-light);">
-                Combines authentic DOS-era aesthetics with modern terminal functionality. Features classic blue interface reminiscent of Borland IDE, 
-                Norton Commander, and other legendary DOS applications, complete with function key bars and double-line borders.
-            </p>
-        </div>
-
-        <div style="margin-bottom: 2rem;">
-            <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
-                <span class="tech-label">[CORE_FEATURES]</span>
-                <span class="business-label" style="display: none;">Key Features</span>
-            </h4>
-            <ul style="line-height: 1.8; color: var(--text-light); padding-left: 1.5rem;">
-                <li>▸ Authentic retro DOS interface with modern SSH connectivity</li>
-                <li>▸ Function key bar (F1-F10) with hotkey support</li>
-                <li>▸ 4 built-in themes + 20+ importable themes</li>
-                <li>▸ Tabbed interface for multiple simultaneous connections</li>
-                <li>▸ Session management with folder organization</li>
-                <li>▸ AES-256 encrypted password storage</li>
-                <li>▸ Full terminal emulation via xterm.js</li>
-                <li>▸ Theme import/export with JSON format</li>
-            </ul>
-        </div>
-
-        <div style="margin-bottom: 2rem;">
-            <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
-                <span class="tech-label">[THEME_ECOSYSTEM]</span>
-                <span class="business-label" style="display: none;">Rich Theming System</span>
-            </h4>
-            <p style="line-height: 1.6; color: var(--text-light);">
-                Extensive theme collection spanning classic computing (Borland, IBM DOS, Amiga), modern development (Solarized, Nord, Gruvbox), 
-                retro CRT simulations (Amber, Matrix), and cyberpunk styles (Neon City, Doom). Complete color control for all UI elements 
-                with synchronized terminal colors.
-            </p>
-        </div>
-
-        <div style="margin-bottom: 2rem;">
-            <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
-                <span class="tech-label">[ARCHITECTURE]</span>
-                <span class="business-label" style="display: none;">Technical Architecture</span>
-            </h4>
-            <p style="line-height: 1.6; color: var(--text-light);">
-                Layered architecture combining Windows Forms for classic DOS styling with WebView2 hosting xterm.js for modern terminal emulation. 
-                SSH.NET provides robust connectivity while custom-drawn components deliver authentic retro aesthetics. 
-                Security-first design with PBKDF2 key derivation and AES-256 encryption.
-            </p>
-        </div>
-
-        <div style="margin-bottom: 2rem;">
-            <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
-                <span class="tech-label">[PHILOSOPHY]</span>
-                <span class="business-label" style="display: none;">Design Philosophy</span>
-            </h4>
-            <p style="line-height: 1.6; color: var(--text-light); font-style: italic;">
-                "CLI's Never Die, They Just Change Their Prompt" - Bridging the gap between nostalgic computing aesthetics 
-                and modern network operations. For those who appreciate the elegance of classic interfaces but need contemporary functionality.
-            </p>
-        </div>
-    </div>
-</div>
-    <div id="secure-cartography-vsc" class="modal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('secure-cartography-vsc')">&times;</button>
-            <h2 style="margin-bottom: 1rem; color: var(--primary);">
-                <span class="tech-label">[SECURE_CARTOGRAPHY_VSC.EXT]</span>
-                <span class="business-label" style="display: none;">Secure Cartography VS Code Extension</span>
-            </h2>
-            <h3 style="margin-bottom: 1.5rem; color: var(--text-light);">Pure JavaScript Network Mapping</h3>
-
-            <div style="margin-bottom: 2rem;">
-                <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
-                    <span class="tech-label">[ARCHITECTURE]</span>
-                    <span class="business-label" style="display: none;">Technical Architecture</span>
-                </h4>
-                <p style="line-height: 1.6; color: var(--text-light);">
-                    Browser-based network discovery and topology mapping built entirely in JavaScript.
-                    Provides interactive network visualization capabilities without external dependencies.
-                </p>
-            </div>
-
-            <div style="margin-bottom: 2rem;">
-                <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
-                    <span class="tech-label">[CAPABILITIES]</span>
-                    <span class="business-label" style="display: none;">Platform Capabilities</span>
-                </h4>
-                <ul style="line-height: 1.8; color: var(--text-light); padding-left: 1.5rem;">
-                    <li>▸ Pure JavaScript implementation</li>
-                    <li>▸ Browser-based network mapping</li>
-                    <li>▸ Interactive topology visualization</li>
-                    <li>▸ VS Code integrated interface</li>
-                    <li>▸ Real-time network discovery</li>
-                    <li>▸ Cross-platform compatibility</li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    </footer>
 
     <script>
-        // Theme toggle functionality
-        function toggleTheme() {
-            const body = document.body;
-            const currentTheme = body.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-
-            body.setAttribute('data-theme', newTheme);
-
-            // Toggle visibility of theme-specific elements
-            const techElements = document.querySelectorAll('.tech-text, .tech-label, .tech-tagline');
-            const businessElements = document.querySelectorAll('.business-text, .business-label, .business-tagline');
-            const darkOnlyElements = document.querySelectorAll('.dark-only');
-            const lightOnlyElements = document.querySelectorAll('.light-only');
-
-            if (newTheme === 'light') {
-                techElements.forEach(el => el.style.display = 'none');
-                businessElements.forEach(el => el.style.display = 'inline');
-                darkOnlyElements.forEach(el => el.style.display = 'none');
-                lightOnlyElements.forEach(el => el.style.display = 'block');
-            } else {
-                techElements.forEach(el => el.style.display = 'inline');
-                businessElements.forEach(el => el.style.display = 'none');
-                darkOnlyElements.forEach(el => el.style.display = 'block');
-                lightOnlyElements.forEach(el => el.style.display = 'none');
-            }
-
-            // Save theme preference
-            localStorage.setItem('portfolio-theme', newTheme);
-        }
-
-        // Load saved theme preference
-        function loadTheme() {
-            const savedTheme = localStorage.getItem('portfolio-theme') || 'dark';
-            if (savedTheme === 'light') {
-                toggleTheme();
-            }
-        }
-
-        // Enhanced script with terminal-style interactions
+        // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                    const headerOffset = 80;
+                    const elementPosition = target.offsetTop;
+                    const offsetPosition = elementPosition - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
                     });
                 }
             });
@@ -2474,7 +1048,7 @@
         window.addEventListener('scroll', () => {
             const sections = document.querySelectorAll('section[id]');
             const navLinks = document.querySelectorAll('.nav-links a');
-
+            
             let current = '';
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
@@ -2491,36 +1065,7 @@
             });
         });
 
-        // Modal functions
-        function openModal(modalId) {
-            document.getElementById(modalId).style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        // Close modal when clicking outside
-        window.addEventListener('click', (e) => {
-            if (e.target.classList.contains('modal')) {
-                e.target.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        });
-
-        // Close modal with Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                document.querySelectorAll('.modal').forEach(modal => {
-                    modal.style.display = 'none';
-                });
-                document.body.style.overflow = 'auto';
-            }
-        });
-
-        // Enhanced scroll animations
+        // Intersection Observer for fade-in animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -2529,22 +1074,15 @@
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.classList.add('visible');
                 }
             });
         }, observerOptions);
 
-        // Observe elements with fade-in effect
-        document.querySelectorAll('.project-card, .experience-item, .skill-category').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        // Observe elements for animation
+        document.querySelectorAll('.fade-in').forEach(el => {
             observer.observe(el);
         });
-
-        // Initialize theme on page load
-        document.addEventListener('DOMContentLoaded', loadTheme);
     </script>
 </body>
 </html>
