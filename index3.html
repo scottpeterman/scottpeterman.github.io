@@ -12,7 +12,6 @@
             --primary-blue-dark: #1D4ED8;
             --secondary-blue: #0EA5E9;
             --accent-green: #059669;
-            --accent-purple: #7C3AED;
             --text-primary: #1F2937;
             --text-secondary: #6B7280;
             --text-light: #9CA3AF;
@@ -428,19 +427,6 @@
             opacity: 0.7;
         }
 
-        .project-card.personal .project-title {
-            color: var(--accent-purple);
-        }
-
-        .project-card.personal::after {
-            content: "";
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.2rem;
-            opacity: 0.8;
-        }
-
         .project-header {
             padding: 2rem 2rem 1rem;
         }
@@ -500,15 +486,6 @@
 
         .project-link.private {
             color: var(--accent-green);
-        }
-
-        .project-link.personal {
-            color: var(--accent-purple);
-        }
-
-        .project-link.personal:hover {
-            color: var(--accent-purple);
-            opacity: 0.8;
         }
 
         .project-card.incubator .project-title {
@@ -815,8 +792,7 @@
                 <ul class="nav-links">
                     <li><a href="#about">About</a></li>
                     <li><a href="#experience">Experience</a></li>
-                    <li><a href="#projects">Professional</a></li>
-                    <li><a href="#personal-projects">Personal</a></li>
+                    <li><a href="#projects">Projects</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -1025,13 +1001,13 @@
         </div>
     </section>
 
-    <!-- Professional Projects Section -->
+    <!-- Projects Section -->
     <section id="projects" class="section">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Professional Projects</h2>
+                <h2 class="section-title">Featured Projects</h2>
                 <p class="section-subtitle">
-                    Enterprise applications and tools demonstrating expertise in network automation and infrastructure engineering.
+                    Open source tools and enterprise applications demonstrating expertise in network automation and full-stack development.
                 </p>
             </div>
             <div class="projects-grid">
@@ -1041,7 +1017,7 @@
                     <div class="project-header">
                         <div class="project-title">RapidCMDB</div>
                         <div class="project-description">
-                            A TerminalTelemetry Plugin: Network Asset Discovery & CMDB Reconciliation platform. Transform weeks of manual network auditing into hours of automated intelligence. Currently in incubation with VC discussions.
+                            Network Asset Discovery & CMDB Reconciliation platform. Transform weeks of manual network auditing into hours of automated intelligence. Currently in incubation with VC discussions.
                         </div>
                         <div class="tech-stack">
                             <span class="tech-tag">Python</span>
@@ -1259,105 +1235,6 @@
         </div>
     </section>
 
-    <!-- Personal Projects Section -->
-    <section id="personal-projects" class="section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Personal Projects</h2>
-                <p class="section-subtitle">
-                    Creative applications showcasing diverse technical skills across different domains beyond networking.
-                </p>
-            </div>
-            <div class="projects-grid">
-
-                <!-- CoolPyTerm -->
-                <div class="project-card personal fade-in">
-                    <div class="project-header">
-                        <div class="project-title">CoolPyTerm</div>
-                        <div class="project-description">
-                            A hardware-accelerated SSH terminal emulator with authentic retro CRT effects, built with PyQt6 and OpenGL. Features connection profiles, multiple themes, and realistic phosphor glow effects.
-                        </div>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">PyQt6</span>
-                            <span class="tech-tag">OpenGL</span>
-                            <span class="tech-tag">SSH</span>
-                            <span class="tech-tag">Terminal Emulation</span>
-                            <span class="tech-tag">Graphics Programming</span>
-                        </div>
-                    </div>
-                    <div class="project-footer">
-                        <div class="project-links">
-                            <a href="https://github.com/scottpeterman/coolpyterm" class="project-link personal" target="_blank">
-                                GitHub Repository →
-                            </a>
-                            <a class="project-link personal" onclick="openModal('coolPyTermModal')">
-                                View Details →
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- MKV to MP4 UI -->
-                <div class="project-card personal fade-in">
-                    <div class="project-header">
-                        <div class="project-title">MKV to MP4 UI</div>
-                        <div class="project-description">
-                            A modern PyQt6 GUI application for batch converting MKV video files to MP4 format using FFmpeg. Features real-time progress tracking, configurable quality settings, and automatic FFmpeg installation.
-                        </div>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">PyQt6</span>
-                            <span class="tech-tag">FFmpeg</span>
-                            <span class="tech-tag">Video Processing</span>
-                            <span class="tech-tag">Cross-Platform</span>
-                            <span class="tech-tag">Batch Processing</span>
-                        </div>
-                    </div>
-                    <div class="project-footer">
-                        <div class="project-links">
-                            <a href="https://github.com/scottpeterman/mkvtomp4ui" class="project-link personal" target="_blank">
-                                GitHub Repository →
-                            </a>
-                            <a class="project-link personal" onclick="openModal('mkvToMp4Modal')">
-                                View Details →
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- AutiobooksQTA -->
-                <div class="project-card personal fade-in">
-                    <div class="project-header">
-                        <div class="project-title">AutiobooksQTA</div>
-                        <div class="project-description">
-                            PyQt6 port of the autiobooks project that generates M4B audiobooks from EPUB e-books using Kokoro's high-quality speech synthesis. Features voice selection, speed control, and chapter management.
-                        </div>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">PyQt6</span>
-                            <span class="tech-tag">Speech Synthesis</span>
-                            <span class="tech-tag">Audio Processing</span>
-                            <span class="tech-tag">EPUB Processing</span>
-                            <span class="tech-tag">AI/ML Integration</span>
-                        </div>
-                    </div>
-                    <div class="project-footer">
-                        <div class="project-links">
-                            <a href="https://github.com/scottpeterman/autiobooksqta" class="project-link personal" target="_blank">
-                                GitHub Repository →
-                            </a>
-                            <a class="project-link personal" onclick="openModal('autiobooksModal')">
-                                View Details →
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
     <!-- Project Modals -->
     <!-- RapidCMDB Modal -->
     <div id="rapidCMDBModal" class="modal">
@@ -1399,122 +1276,6 @@
             </div>
         </div>
     </div>
-
-    <!-- CoolPyTerm Modal -->
-    <div id="coolPyTermModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close" onclick="closeModal('coolPyTermModal')">&times;</span>
-                <h2 class="modal-title">CoolPyTerm</h2>
-                <p class="modal-subtitle">Hardware-Accelerated SSH Terminal with Retro CRT Effects</p>
-            </div>
-            <div class="modal-body">
-                <div class="modal-description">
-                    A sophisticated terminal emulator that combines modern SSH connectivity with authentic retro CRT aesthetics. Built with PyQt6 and OpenGL for hardware-accelerated rendering, featuring realistic phosphor glow effects, scanlines, and multiple retro themes.
-                </div>
-                <div class="modal-features">
-                    <h4>Key Features</h4>
-                    <ul>
-                        <li><strong>Hardware-accelerated rendering</strong> with OpenGL for smooth 60fps performance</li>
-                        <li><strong>Authentic CRT effects</strong> including phosphor glow, scanlines, and screen curvature</li>
-                        <li><strong>Multiple retro themes</strong> - Classic Green, Warm Amber, and DOS Blue</li>
-                        <li><strong>Connection profile management</strong> with password and SSH key authentication</li>
-                        <li><strong>Full-screen immersive mode</strong> with borderless display</li>
-                        <li><strong>Complete terminal emulation</strong> with ANSI color support and scrollback buffer</li>
-                        <li><strong>Adjustable effects</strong> with DPI-aware scaling and customizable intensity</li>
-                        <li><strong>Cross-platform compatibility</strong> for Windows, macOS, and Linux</li>
-                    </ul>
-                </div>
-                <div class="modal-features">
-                    <h4>Technical Innovation</h4>
-                    <ul>
-                        <li><strong>OpenGL shaders</strong> for custom fragment processing and realistic CRT simulation</li>
-                        <li><strong>Efficient grid rendering</strong> system for character-based terminal display</li>
-                        <li><strong>Dynamic resizing</strong> with proper PTY handling for responsive terminal sessions</li>
-                        <li><strong>Performance optimization</strong> with hardware acceleration and effect scaling</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MKV to MP4 Modal -->
-    <div id="mkvToMp4Modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close" onclick="closeModal('mkvToMp4Modal')">&times;</span>
-                <h2 class="modal-title">MKV to MP4 UI</h2>
-                <p class="modal-subtitle">Modern Batch Video Conversion Tool</p>
-            </div>
-            <div class="modal-body">
-                <div class="modal-description">
-                    A user-friendly PyQt6 application that simplifies batch video conversion from MKV to MP4 format. Features an intuitive interface with real-time progress tracking, configurable quality settings, and automatic FFmpeg installation for seamless user experience.
-                </div>
-                <div class="modal-features">
-                    <h4>Key Features</h4>
-                    <ul>
-                        <li><strong>Batch processing</strong> with multi-file selection and progress tracking</li>
-                        <li><strong>Real-time feedback</strong> showing encoding speed, progress percentage, and ETA</li>
-                        <li><strong>Configurable quality settings</strong> with CRF control and preset selection</li>
-                        <li><strong>Multiple codec support</strong> including H.264, H.265, and stream copying</li>
-                        <li><strong>Automatic FFmpeg setup</strong> with one-click download and installation</li>
-                        <li><strong>Flexible output options</strong> to source folder or custom directory</li>
-                        <li><strong>Detailed logging</strong> with color-coded status messages</li>
-                        <li><strong>Cross-platform compatibility</strong> for Windows, macOS, and Linux</li>
-                    </ul>
-                </div>
-                <div class="modal-features">
-                    <h4>Use Cases</h4>
-                    <ul>
-                        <li><strong>Movie collections</strong> - Perfect for converting MakeMKV or HandBrake rips</li>
-                        <li><strong>Media organization</strong> - Standardize container formats for better compatibility</li>
-                        <li><strong>Storage optimization</strong> - Choose encoding settings for size vs quality balance</li>
-                        <li><strong>Compatibility conversion</strong> - Ensure playback on various devices and platforms</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Autiobooks Modal -->
-    <div id="autiobooksModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close" onclick="closeModal('autiobooksModal')">&times;</span>
-                <h2 class="modal-title">AutiobooksQTA</h2>
-                <p class="modal-subtitle">EPUB to Audiobook Conversion with AI Speech Synthesis</p>
-            </div>
-            <div class="modal-body">
-                <div class="modal-description">
-                    A PyQt6-based application that transforms EPUB e-books into high-quality M4B audiobooks using Kokoro's advanced speech synthesis technology. This port of the original autiobooks project provides an enhanced user interface and additional features for audiobook creation.
-                </div>
-                <div class="modal-features">
-                    <h4>Key Features</h4>
-                    <ul>
-                        <li><strong>High-quality speech synthesis</strong> using Kokoro's advanced AI voice technology</li>
-                        <li><strong>Multiple output formats</strong> - M4B audiobooks, MP3 files, and WAV audio</li>
-                        <li><strong>Chapter-based organization</strong> with automatic chapter detection and management</li>
-                        <li><strong>Voice customization</strong> with multiple voice options and speed control</li>
-                        <li><strong>GPU acceleration support</strong> for faster processing on capable hardware</li>
-                        <li><strong>Automatic FFmpeg installation</strong> with user-friendly setup assistant</li>
-                        <li><strong>Selective conversion</strong> - Choose specific chapters to convert</li>
-                        <li><strong>PyPI distribution</strong> for easy installation and updates</li>
-                    </ul>
-                </div>
-                <div class="modal-features">
-                    <h4>Technical Capabilities</h4>
-                    <ul>
-                        <li><strong>EPUB parsing</strong> with intelligent text extraction and formatting</li>
-                        <li><strong>Audio processing pipeline</strong> from text-to-speech to final audiobook packaging</li>
-                        <li><strong>Cross-platform support</strong> with Python 3.8+ compatibility</li>
-                        <li><strong>Organized output structure</strong> with separate folders for different formats</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Other existing modals... -->
     <div id="gosnmptkModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
