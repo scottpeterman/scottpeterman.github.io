@@ -406,25 +406,11 @@
             border: 1px solid var(--border-gray);
             transition: all 0.3s ease;
             overflow: hidden;
-            position: relative;
         }
 
         .project-card:hover {
             transform: translateY(-4px);
             box-shadow: var(--shadow-lg);
-        }
-
-        .project-card.private .project-title {
-            color: var(--accent-green);
-        }
-
-        .project-card.private::after {
-            content: "🔒";
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.2rem;
-            opacity: 0.7;
         }
 
         .project-header {
@@ -477,145 +463,10 @@
             align-items: center;
             gap: 0.25rem;
             transition: color 0.3s ease;
-            cursor: pointer;
         }
 
         .project-link:hover {
             color: var(--primary-blue-dark);
-        }
-
-        .project-link.private {
-            color: var(--accent-green);
-        }
-
-        .project-card.incubator .project-title {
-            color: var(--accent-green);
-        }
-
-        .project-card.incubator::after {
-            content: "🚀";
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.2rem;
-            opacity: 0.8;
-        }
-
-        .project-link.incubator {
-            color: var(--accent-green);
-        }
-
-        .project-link.incubator:hover {
-            color: var(--accent-green);
-            opacity: 0.8;
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(4px);
-        }
-
-        .modal-content {
-            background: var(--bg-white);
-            margin: 2% auto;
-            padding: 0;
-            border-radius: 16px;
-            width: 90%;
-            max-width: 900px;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: var(--shadow-xl);
-            position: relative;
-        }
-
-        .modal-header {
-            padding: 2rem 2rem 1rem;
-            border-bottom: 1px solid var(--border-gray);
-            background: var(--bg-gray-50);
-            border-radius: 16px 16px 0 0;
-        }
-
-        .modal-title {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .modal-subtitle {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-        }
-
-        .modal-body {
-            padding: 2rem;
-        }
-
-        .modal-screenshot {
-            width: 100%;
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: var(--shadow-md);
-            margin-bottom: 2rem;
-        }
-
-        .modal-description {
-            color: var(--text-secondary);
-            line-height: 1.7;
-            margin-bottom: 2rem;
-        }
-
-        .modal-features {
-            margin-bottom: 2rem;
-        }
-
-        .modal-features h4 {
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .modal-features ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .modal-features li {
-            padding: 0.5rem 0 0.5rem 1.5rem;
-            position: relative;
-            color: var(--text-secondary);
-        }
-
-        .modal-features li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: var(--accent-green);
-            font-weight: 600;
-        }
-
-        .close {
-            position: absolute;
-            top: 1rem;
-            right: 1.5rem;
-            color: var(--text-light);
-            font-size: 2rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .close:hover {
-            color: var(--text-primary);
         }
 
         /* Contact Section */
@@ -703,11 +554,6 @@
             .nav-links {
                 gap: 1rem;
             }
-
-            .modal-content {
-                width: 95%;
-                margin: 5% auto;
-            }
         }
 
         @media (max-width: 768px) {
@@ -753,20 +599,6 @@
             .profile-stats {
                 flex-direction: column;
                 gap: 1rem;
-            }
-
-            .modal-content {
-                width: 98%;
-                margin: 1% auto;
-                max-height: 95vh;
-            }
-
-            .modal-header {
-                padding: 1.5rem 1.5rem 1rem;
-            }
-
-            .modal-body {
-                padding: 1.5rem;
             }
         }
 
@@ -826,7 +658,7 @@
                                 <div class="stat-label">Years Experience</div>
                             </div>
                             <div class="stat">
-                                <div class="stat-number">15+</div>
+                                <div class="stat-number">10+</div>
                                 <div class="stat-label">Open Source Projects</div>
                             </div>
                             <div class="stat">
@@ -1007,62 +839,12 @@
             <div class="section-header">
                 <h2 class="section-title">Featured Projects</h2>
                 <p class="section-subtitle">
-                    Open source tools and enterprise applications demonstrating expertise in network automation and full-stack development.
+                    Open source tools and applications demonstrating expertise in network automation and full-stack development.
                 </p>
             </div>
             <div class="projects-grid">
 
-                <!-- RapidCMDB - Incubator Project -->
-                <div class="project-card incubator fade-in">
-                    <div class="project-header">
-                        <div class="project-title">RapidCMDB</div>
-                        <div class="project-description">
-                            Network Asset Discovery & CMDB Reconciliation platform. Transform weeks of manual network auditing into hours of automated intelligence. Currently in incubation with VC discussions.
-                        </div>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Flask</span>
-                            <span class="tech-tag">NAPALM</span>
-                            <span class="tech-tag">SNMP</span>
-                            <span class="tech-tag">Network Discovery</span>
-                            <span class="tech-tag">CMDB</span>
-                        </div>
-                    </div>
-                    <div class="project-footer">
-                        <div class="project-links">
-                            <a class="project-link incubator" onclick="openModal('rapidCMDBModal')">
-                                View Details →
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- TerminalTelemetryVSC - Open Source Project -->
-                <div class="project-card fade-in">
-                    <div class="project-header">
-                        <div class="project-title">TerminalTelemetryVSC</div>
-                        <div class="project-description">
-                            Visual Studio Code extension for SSH terminal connections with network device fingerprinting and network discovery capabilities.
-                        </div>
-                        <div class="tech-stack">
-                            <span class="tech-tag">TypeScript</span>
-                            <span class="tech-tag">VS Code Extension</span>
-                            <span class="tech-tag">SSH</span>
-                            <span class="tech-tag">Network Discovery</span>
-                            <span class="tech-tag">Device Fingerprinting</span>
-                        </div>
-                    </div>
-                    <div class="project-footer">
-                        <div class="project-links">
-                            <a href="https://github.com/scottpeterman/terminaltelemetryvsc" class="project-link" target="_blank">
-                                GitHub Repository →
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- TerminalTelemetry - Original Open Source -->
-                <div class="project-card fade-in">
+<div class="project-card fade-in">
                     <div class="project-header">
                         <div class="project-title">TerminalTelemetry</div>
                         <div class="project-description">
@@ -1084,8 +866,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- RetroTerm.NET - Open Source -->
                 <div class="project-card fade-in">
                     <div class="project-header">
                         <div class="project-title">RetroTerm.NET</div>
@@ -1109,7 +889,6 @@
                     </div>
                 </div>
 
-                <!-- VelociTerm - Open Source -->
                 <div class="project-card fade-in">
                     <div class="project-header">
                         <div class="project-title">VelociTerm</div>
@@ -1133,79 +912,6 @@
                     </div>
                 </div>
 
-                <!-- Go SNMP Tool Kit - Private Project -->
-                <div class="project-card private fade-in">
-                    <div class="project-header">
-                        <div class="project-title">Go SNMP Tool Kit</div>
-                        <div class="project-description">
-                            Comprehensive SNMP testing and network discovery suite with modern GUI interfaces, vendor fingerprinting, and enterprise-grade network device discovery capabilities.
-                        </div>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Go</span>
-                            <span class="tech-tag">Fyne GUI</span>
-                            <span class="tech-tag">SNMP</span>
-                            <span class="tech-tag">Network Discovery</span>
-                            <span class="tech-tag">Vendor Fingerprinting</span>
-                        </div>
-                    </div>
-                    <div class="project-footer">
-                        <div class="project-links">
-                            <a class="project-link private" onclick="openModal('gosnmptkModal')">
-                                View Details →
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Secure Cartography - Private Project -->
-                <div class="project-card private fade-in">
-                    <div class="project-header">
-                        <div class="project-title">Secure Cartography</div>
-                        <div class="project-description">
-                            Comprehensive network discovery, mapping, and management toolkit with automated device interrogation, topology visualization, and configuration management for enterprise environments.
-                        </div>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">PyQt6</span>
-                            <span class="tech-tag">NetworkX</span>
-                            <span class="tech-tag">SSH Discovery</span>
-                            <span class="tech-tag">Network Mapping</span>
-                        </div>
-                    </div>
-                    <div class="project-footer">
-                        <div class="project-links">
-                            <a class="project-link private" onclick="openModal('secureCartographyModal')">
-                                View Details →
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SecureCartographyVSC - Private Project -->
-                <div class="project-card private fade-in">
-                    <div class="project-header">
-                        <div class="project-title">SecureCartographyVSC</div>
-                        <div class="project-description">
-                            Visual Studio Code extension bringing enterprise-grade network discovery and mapping capabilities directly into the development environment with pure JavaScript implementation.
-                        </div>
-                        <div class="tech-stack">
-                            <span class="tech-tag">TypeScript</span>
-                            <span class="tech-tag">VS Code Extension</span>
-                            <span class="tech-tag">Network Discovery</span>
-                            <span class="tech-tag">Interactive Visualization</span>
-                            <span class="tech-tag">Pure JavaScript</span>
-                        </div>
-                    </div>
-                    <div class="project-footer">
-                        <div class="project-links">
-                            <a class="project-link private" onclick="openModal('secureCartographyVSCModal')">
-                                View Details →
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- TextFSM Cross-Platform Ports - Open Source -->
                 <div class="project-card fade-in">
                     <div class="project-header">
                         <div class="project-title">TextFSM Cross-Platform Ports</div>
@@ -1234,137 +940,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Project Modals -->
-    <!-- RapidCMDB Modal -->
-    <div id="rapidCMDBModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close" onclick="closeModal('rapidCMDBModal')">&times;</span>
-                <h2 class="modal-title">RapidCMDB</h2>
-                <p class="modal-subtitle">Network Asset Discovery & CMDB Reconciliation Platform</p>
-            </div>
-            <div class="modal-body">
-                <img src="RapidCMDB.gif" alt="RapidCMDB Platform Screenshots" class="modal-screenshot">
-                <div class="modal-description">
-                    <strong>Incubator Project:</strong> Transform weeks of manual network auditing into hours of automated intelligence. RapidCMDB is currently in development with venture capital discussions underway, representing the next generation of network asset management and CMDB reconciliation.
-                </div>
-                <div class="modal-features">
-                    <h4>Key Results & Capabilities</h4>
-                    <ul>
-                        <li><strong>65k+ hosts scanned</strong> in minutes with enterprise-scale /16 network support</li>
-                        <li><strong>Enterprise SNMPv3</strong> with SHA256/AES256 encryption for secure environments</li>
-                        <li><strong>Multi-vendor support</strong> for Cisco, Aruba, Palo Alto, Fortinet, Juniper, Dell, HP, and more</li>
-                        <li><strong>Real-time topology</strong> with LLDP-based mapping and bidirectional consistency validation</li>
-                        <li><strong>Zero-touch NAPALM compatibility</strong> analysis for automation planning</li>
-                        <li><strong>Interactive web dashboard</strong> with WebSocket-powered real-time updates</li>
-                        <li><strong>Advanced analytics</strong> with vendor intelligence and confidence scoring</li>
-                        <li><strong>Multi-format export</strong> capabilities (Mermaid, JSON, Draw.io, CSV)</li>
-                    </ul>
-                </div>
-                <div class="modal-features">
-                    <h4>Market Position</h4>
-                    <ul>
-                        <li><strong>Problem:</strong> Manual network auditing takes weeks and produces incomplete, outdated documentation</li>
-                        <li><strong>Solution:</strong> Automated discovery and intelligence that transforms network operations</li>
-                        <li><strong>Target:</strong> Network engineers, security teams, IT managers, consultants, and DevOps teams</li>
-                        <li><strong>Status:</strong> Proof of concept with active VC discussions and technical validation</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="gosnmptkModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close" onclick="closeModal('gosnmptkModal')">&times;</span>
-                <h2 class="modal-title">Go SNMP Tool Kit</h2>
-                <p class="modal-subtitle">Enterprise SNMP Testing and Network Discovery Suite</p>
-            </div>
-            <div class="modal-body">
-                <img src="gosnmptk.gif" alt="Go SNMP Tool Kit Screenshot" class="modal-screenshot">
-                <div class="modal-description">
-                    A comprehensive SNMP testing and network discovery suite built in Go with modern GUI interfaces. This toolkit provides enterprise-grade network device discovery, SNMP operations, vendor-specific fingerprinting, and advanced network scanning capabilities with data persistence.
-                </div>
-                <div class="modal-features">
-                    <h4>Key Features</h4>
-                    <ul>
-                        <li>Comprehensive vendor fingerprinting for Cisco, Dell, Arista, Aruba, HP, Fortinet, Palo Alto, and more</li>
-                        <li>SNMPv2c and SNMPv3 support with multiple authentication and privacy protocols</li>
-                        <li>High-performance concurrent network scanning with dynamic timeout scaling</li>
-                        <li>Device persistence and deduplication with complete audit trail</li>
-                        <li>Interactive SNMP client with real-time results and detailed logging</li>
-                        <li>Cross-platform GUI applications built with Fyne framework</li>
-                        <li>YAML-based vendor configuration system for easy extensibility</li>
-                        <li>CSV and JSON export capabilities for integration</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Secure Cartography Modal -->
-    <div id="secureCartographyModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close" onclick="closeModal('secureCartographyModal')">&times;</span>
-                <h2 class="modal-title">Secure Cartography & Surveyor Suite</h2>
-                <p class="modal-subtitle">Network Discovery, Mapping, and Management Toolkit</p>
-            </div>
-            <div class="modal-body">
-                <img src="secure_cartography.gif" alt="Secure Cartography Screenshot" class="modal-screenshot">
-                <div class="modal-description">
-                    A comprehensive Python-based network discovery, mapping, and management toolkit designed for network engineers and IT administrators. Provides robust features for automated device interrogation, network topology visualization, and configuration management while maintaining strict security standards.
-                </div>
-                <div class="modal-features">
-                    <h4>Key Features</h4>
-                    <ul>
-                        <li>Automated SSH-based discovery with platform auto-detection for Cisco, Arista, and Aruba devices</li>
-                        <li>Interactive Mermaid-based network topology visualization with multiple layout algorithms</li>
-                        <li>PyQt6-based modern interface with dark/light mode support</li>
-                        <li>Multiple export formats: SVG, GraphML for yEd, Draw.io compatible format</li>
-                        <li>Master password-based encryption system with machine-specific keyring integration</li>
-                        <li>Device inventory parsing using TextFSM templates with multiprocessing support</li>
-                        <li>Configuration backup and management with SQLite database integration</li>
-                        <li>Interactive topology enhancement with node editing and icon customization</li>
-                        <li>Advanced CLI tool for automation and scripting workflows</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SecureCartographyVSC Modal -->
-    <div id="secureCartographyVSCModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close" onclick="closeModal('secureCartographyVSCModal')">&times;</span>
-                <h2 class="modal-title">SecureCartographyVSC</h2>
-                <p class="modal-subtitle">Network Discovery and Visualization for Visual Studio Code</p>
-            </div>
-            <div class="modal-body">
-                <img src="securecartographyvsc.gif" alt="SecureCartographyVSC Screenshot" class="modal-screenshot">
-                <div class="modal-description">
-                    A comprehensive VS Code extension that brings enterprise-grade network discovery, mapping, and visualization capabilities directly into your development environment. Map your entire network infrastructure with a few clicks using pure JavaScript implementation with no external dependencies.
-                </div>
-                <div class="modal-features">
-                    <h4>Key Features</h4>
-                    <ul>
-                        <li>Pure JavaScript implementation with no external dependencies or commands required</li>
-                        <li>Enterprise-grade network discovery using CDP/LLDP protocols</li>
-                        <li>Multi-device support for Cisco, Juniper, and other network vendors</li>
-                        <li>Interactive topology visualization with comprehensive graphical interface</li>
-                        <li>Multiple export formats: Draw.io, GraphML, JSON, and more</li>
-                        <li>Flexible authentication support including SSH keys and enable passwords</li>
-                        <li>Recursive discovery with configurable hop count limits</li>
-                        <li>TextFSM and regex-based parsing for device outputs</li>
-                        <li>Detailed device information collection (interfaces, models, OS versions)</li>
-                        <li>Configurable exclusion patterns for precise discovery scope control</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Contact Section -->
     <section id="contact" class="section">
@@ -1405,41 +980,6 @@
     </footer>
 
     <script>
-        // Modal functionality
-        function openModal(modalId) {
-            document.getElementById(modalId).style.display = "block";
-            document.body.style.overflow = "hidden";
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = "none";
-            document.body.style.overflow = "auto";
-        }
-
-        // Close modal when clicking outside of it
-        window.onclick = function(event) {
-            const modals = document.querySelectorAll('.modal');
-            modals.forEach(modal => {
-                if (event.target === modal) {
-                    modal.style.display = "none";
-                    document.body.style.overflow = "auto";
-                }
-            });
-        }
-
-        // Close modal with Escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                const modals = document.querySelectorAll('.modal');
-                modals.forEach(modal => {
-                    if (modal.style.display === "block") {
-                        modal.style.display = "none";
-                        document.body.style.overflow = "auto";
-                    }
-                });
-            }
-        });
-
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {

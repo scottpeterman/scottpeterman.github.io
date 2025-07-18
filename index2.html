@@ -488,24 +488,7 @@
             color: var(--accent-green);
         }
 
-        .project-card.incubator .project-title {
-            color: var(--accent-green);
-        }
-
-        .project-card.incubator::after {
-            content: "🚀";
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.2rem;
-            opacity: 0.8;
-        }
-
-        .project-link.incubator {
-            color: var(--accent-green);
-        }
-
-        .project-link.incubator:hover {
+        .project-link.private:hover {
             color: var(--accent-green);
             opacity: 0.8;
         }
@@ -1012,32 +995,7 @@
             </div>
             <div class="projects-grid">
 
-                <!-- RapidCMDB - Incubator Project -->
-                <div class="project-card incubator fade-in">
-                    <div class="project-header">
-                        <div class="project-title">RapidCMDB</div>
-                        <div class="project-description">
-                            Network Asset Discovery & CMDB Reconciliation platform. Transform weeks of manual network auditing into hours of automated intelligence. Currently in incubation with VC discussions.
-                        </div>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Flask</span>
-                            <span class="tech-tag">NAPALM</span>
-                            <span class="tech-tag">SNMP</span>
-                            <span class="tech-tag">Network Discovery</span>
-                            <span class="tech-tag">CMDB</span>
-                        </div>
-                    </div>
-                    <div class="project-footer">
-                        <div class="project-links">
-                            <a class="project-link incubator" onclick="openModal('rapidCMDBModal')">
-                                View Details →
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- TerminalTelemetryVSC - Open Source Project -->
+                <!-- TerminalTelemetryVSC - New Open Source Project -->
                 <div class="project-card fade-in">
                     <div class="project-header">
                         <div class="project-title">TerminalTelemetryVSC</div>
@@ -1236,44 +1194,7 @@
     </section>
 
     <!-- Project Modals -->
-    <!-- RapidCMDB Modal -->
-    <div id="rapidCMDBModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close" onclick="closeModal('rapidCMDBModal')">&times;</span>
-                <h2 class="modal-title">RapidCMDB</h2>
-                <p class="modal-subtitle">Network Asset Discovery & CMDB Reconciliation Platform</p>
-            </div>
-            <div class="modal-body">
-                <img src="RapidCMDB.gif" alt="RapidCMDB Platform Screenshots" class="modal-screenshot">
-                <div class="modal-description">
-                    <strong>Incubator Project:</strong> Transform weeks of manual network auditing into hours of automated intelligence. RapidCMDB is currently in development with venture capital discussions underway, representing the next generation of network asset management and CMDB reconciliation.
-                </div>
-                <div class="modal-features">
-                    <h4>Key Results & Capabilities</h4>
-                    <ul>
-                        <li><strong>65k+ hosts scanned</strong> in minutes with enterprise-scale /16 network support</li>
-                        <li><strong>Enterprise SNMPv3</strong> with SHA256/AES256 encryption for secure environments</li>
-                        <li><strong>Multi-vendor support</strong> for Cisco, Aruba, Palo Alto, Fortinet, Juniper, Dell, HP, and more</li>
-                        <li><strong>Real-time topology</strong> with LLDP-based mapping and bidirectional consistency validation</li>
-                        <li><strong>Zero-touch NAPALM compatibility</strong> analysis for automation planning</li>
-                        <li><strong>Interactive web dashboard</strong> with WebSocket-powered real-time updates</li>
-                        <li><strong>Advanced analytics</strong> with vendor intelligence and confidence scoring</li>
-                        <li><strong>Multi-format export</strong> capabilities (Mermaid, JSON, Draw.io, CSV)</li>
-                    </ul>
-                </div>
-                <div class="modal-features">
-                    <h4>Market Position</h4>
-                    <ul>
-                        <li><strong>Problem:</strong> Manual network auditing takes weeks and produces incomplete, outdated documentation</li>
-                        <li><strong>Solution:</strong> Automated discovery and intelligence that transforms network operations</li>
-                        <li><strong>Target:</strong> Network engineers, security teams, IT managers, consultants, and DevOps teams</li>
-                        <li><strong>Status:</strong> Proof of concept with active VC discussions and technical validation</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Go SNMP Tool Kit Modal -->
     <div id="gosnmptkModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
