@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TerminalTelemetry & RapidCMDB - Next-Gen Network Management</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a; /* Deep dark background */
+            color: #e0e0e0; /* Light grey text */
+            line-height: 1.6;
+        }
+        .text-neon-cyan {
+            color: #00ffff; /* Bright cyan */
+        }
+        .bg-gradient-to-r-cyberpunk {
+            background-image: linear-gradient(to right, #00ffff, #8a2be2); /* Cyan to BlueViolet */
+        }
+        .border-neon {
+            border-color: #00ffff;
+        }
+        .shadow-neon {
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.6), 0 0 30px rgba(138, 43, 226, 0.4);
+        }
+        .feature-card {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 255, 255, 0.2);
+        }
+        .btn-primary {
+            background-image: linear-gradient(to right, #00ffff, #8a2be2);
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.4);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 255, 255, 0.6);
+        }
+        .section-heading {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 70%;
+            height: 3px;
+            background-image: linear-gradient(to right, #00ffff, transparent);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header/Navigation (Optional, could be added for multi-page site) -->
+    <header class="py-6 px-4 md:px-8 lg:px-16">
+        <nav class="flex justify-between items-center max-w-7xl mx-auto">
+            <div class="text-2xl font-extrabold text-neon-cyan">
+                Network<span class="text-white">OS</span>
+            </div>
+            <!-- Navigation links can go here if needed -->
+            <!-- <div class="hidden md:flex space-x-8">
+                <a href="#" class="text-gray-300 hover:text-neon-cyan transition-colors duration-300">Features</a>
+                <a href="#" class="text-gray-300 hover:text-neon-cyan transition-colors duration-300">About Us</a>
+                <a href="#" class="text-gray-300 hover:text-neon-cyan transition-colors duration-300">Contact</a>
+            </div> -->
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden py-20 md:py-32 text-center bg-gradient-to-b from-black to-[#0a0a0a]">
+        <div class="absolute inset-0 opacity-10" style="background-image: url('https://placehold.co/1920x1080/000000/00ffff?text=CYBERPUNK_GRID'); background-size: cover; background-position: center;"></div>
+        <div class="relative z-10 max-w-4xl mx-auto px-4">
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight text-white mb-6">
+                Unleash <span class="text-neon-cyan">Real-Time Network Intelligence</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-400 mb-10">
+                Revolutionary platforms for advanced network device monitoring, configuration management, and deep insights.
+                Experience the future of network operations.
+            </p>
+            <a href="#contact" class="btn-primary inline-block">
+                Request a Demo
+            </a>
+        </div>
+    </section>
+
+    <!-- TerminalTelemetry Overview -->
+    <section class="py-16 md:py-24 bg-[#0a0a0a] px-4">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <div class="order-2 md:order-1">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 section-heading">
+                    TerminalTelemetry: <span class="text-neon-cyan">Live Insights, Retro Style</span>
+                </h2>
+                <p class="text-gray-400 mb-6">
+                    Dive into real-time network device monitoring with a cyberpunk-inspired terminal emulator.
+                    TerminalTelemetry provides live CPU, memory, interface monitoring, and network discovery directly within your SSH workflow,
+                    all without requiring agents or complex infrastructure.
+                </p>
+                <ul class="space-y-3 text-gray-300 mb-8">
+                    <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-neon-cyan" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Real-Time Data Collection (CPU, Memory, Interfaces)</li>
+                    <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-neon-cyan" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Multi-Vendor Support (Cisco, Arista, Juniper, Linux)</li>
+                    <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-neon-cyan" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Advanced Theming & Interactive Widgets</li>
+                    <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-neon-cyan" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>SSH-Only Monitoring (No Agents Required)</li>
+                </ul>
+                <a href="#contact" class="text-neon-cyan hover:underline font-medium">Learn More about TerminalTelemetry &rarr;</a>
+            </div>
+            <div class="order-1 md:order-2 flex justify-center">
+                <img src="https://placehold.co/600x400/1e1e1e/00ffff?text=TerminalTelemetry_Interface" alt="TerminalTelemetry Interface" class="rounded-lg shadow-xl shadow-neon border-2 border-neon object-cover w-full max-w-md md:max-w-lg">
+            </div>
+        </div>
+    </section>
+
+    <!-- RapidCMDB Overview -->
+    <section class="py-16 md:py-24 bg-[#111] px-4">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <div class="flex justify-center">
+                <img src="https://placehold.co/600x400/1e1e1e/8a2be2?text=RapidCMDB_Topology" alt="RapidCMDB Topology Visualization" class="rounded-lg shadow-xl shadow-neon border-2 border-neon object-cover w-full max-w-md md:max-w-lg">
+            </div>
+            <div>
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 section-heading">
+                    RapidCMDB: <span class="text-purple-400">Enterprise Network Intelligence</span>
+                </h2>
+                <p class="text-gray-400 mb-6">
+                    RapidCMDB is your comprehensive solution for automated network discovery, configuration management,
+                    and topology visualization. Designed for enterprise-scale deployments, it seamlessly integrates
+                    with your existing network management workflows, providing a single source of truth for your infrastructure.
+                </p>
+                <ul class="space-y-3 text-gray-300 mb-8">
+                    <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Automated Network Discovery & Fingerprinting</li>
+                    <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Configuration Management & Versioning</li>
+                    <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Interactive Network Topology Visualization</li>
+                    <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-purple-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Enterprise Integration (NetBox, LogicMonitor)</li>
+                </ul>
+                <a href="#contact" class="text-purple-400 hover:underline font-medium">Explore RapidCMDB Further &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Synergy Section -->
+    <section class="py-16 md:py-24 bg-[#0a0a0a] px-4 text-center">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 section-heading mx-auto w-fit">
+                The Power of <span class="text-neon-cyan">Synergy</span>
+            </h2>
+            <p class="text-gray-400 text-lg mb-10">
+                While powerful on their own, TerminalTelemetry and RapidCMDB are designed to complement each other,
+                creating a comprehensive network management workflow. From real-time operational insights to
+                long-term configuration control and inventory, our integrated solution provides unparalleled visibility
+                and control over your network infrastructure.
+            </p>
+            <div class="flex flex-col md:flex-row justify-center items-center space-y-8 md:space-y-0 md:space-x-12">
+                <div class="feature-card p-6 rounded-lg shadow-lg w-full md:w-1/3">
+                    <h3 class="text-xl font-semibold text-neon-cyan mb-3">Operational Agility</h3>
+                    <p class="text-gray-300 text-sm">
+                        Get immediate, granular insights into device performance and status with TerminalTelemetry.
+                    </p>
+                </div>
+                <div class="feature-card p-6 rounded-lg shadow-lg w-full md:w-1/3">
+                    <h3 class="text-xl font-semibold text-purple-400 mb-3">Strategic Control</h3>
+                    <p class="text-gray-300 text-sm">
+                        Manage your entire network inventory and configurations with the robust capabilities of RapidCMDB.
+                    </p>
+                </div>
+                <div class="feature-card p-6 rounded-lg shadow-lg w-full md:w-1/3">
+                    <h3 class="text-xl font-semibold text-white mb-3">Unified Visibility</h3>
+                    <p class="text-gray-300 text-sm">
+                        Combine real-time data with comprehensive inventory for a complete network overview.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action / Contact Section -->
+    <section id="contact" class="py-16 md:py-24 bg-[#111] px-4 text-center">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 section-heading mx-auto w-fit">
+                Ready to Transform Your Network?
+            </h2>
+            <p class="text-gray-400 text-lg mb-10">
+                Discover how TerminalTelemetry and RapidCMDB can revolutionize your network operations.
+                Contact us today for a personalized demo or to learn more about our solutions.
+            </p>
+            <a href="#" class="btn-primary inline-block">
+                Get Started Now
+            </a>
+            <p class="text-sm text-gray-500 mt-8">
+                Or email us at <a href="mailto:info@networkos.com" class="text-neon-cyan hover:underline">info@networkos.com</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 px-4 bg-black text-center text-gray-500 text-sm">
+        <p>&copy; 2025 NetworkOS. All rights reserved.</p>
+        <p class="mt-2">
+            <a href="#" class="hover:text-neon-cyan mx-2">Privacy Policy</a> |
+            <a href="#" class="hover:text-neon-cyan mx-2">Terms of Service</a>
+        </p>
+    </footer>
+
+</body>
+</html>
