@@ -6,8 +6,10 @@
     <title>Scott Peterman - Principal Infrastructure Engineer</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 
         :root {
+            /* Professional Theme */
             --primary-blue: #2563EB;
             --primary-blue-dark: #1D4ED8;
             --secondary-blue: #0EA5E9;
@@ -21,10 +23,72 @@
             --bg-gray-100: #F3F4F6;
             --border-gray: #E5E7EB;
             --border-gray-light: #F3F4F6;
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Cyber Theme Variables */
+        body.cyber-theme {
+            --primary-blue: #00FF41;
+            --primary-blue-dark: #00DD35;
+            --secondary-blue: #0CF;
+            --accent-green: #0F0;
+            --accent-purple: #F0F;
+            --text-primary: #00FF41;
+            --text-secondary: #0CF;
+            --text-light: #0A8;
+            --bg-white: #0A0E27;
+            --bg-gray-50: #0D1129;
+            --bg-gray-100: #101529;
+            --border-gray: #1A2332;
+            --border-gray-light: #151D2C;
+        }
+
+        body.cyber-theme {
+            background: #0A0E27;
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        body.cyber-theme::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(0, 255, 65, 0.03),
+                    rgba(0, 255, 65, 0.03) 1px,
+                    transparent 1px,
+                    transparent 2px
+                );
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        body.cyber-theme .section,
+        body.cyber-theme .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        body.cyber-theme .skill-card,
+        body.cyber-theme .experience-item,
+        body.cyber-theme .project-card,
+        body.cyber-theme .contact-info,
+        body.cyber-theme .profile-card {
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+            border: 1px solid rgba(0, 255, 65, 0.3);
+        }
+
+        body.cyber-theme .btn-primary {
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
+        }
+
+        body.cyber-theme .project-title,
+        body.cyber-theme .section-title,
+        body.cyber-theme .hero-text h1 {
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
         }
 
         * {
@@ -38,12 +102,69 @@
             line-height: 1.6;
             color: var(--text-primary);
             background: var(--bg-white);
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 80px;
+            right: 2rem;
+            z-index: 1001;
+            background: var(--bg-white);
+            border: 2px solid var(--primary-blue);
+            border-radius: 50px;
+            padding: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        body.cyber-theme .theme-toggle {
+            background: rgba(0, 255, 65, 0.1);
+            border: 2px solid var(--primary-blue);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+            backdrop-filter: blur(10px);
+            z-index: 10000 !important;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        body.cyber-theme .theme-toggle:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.5);
+        }
+
+        .theme-toggle-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+            color: var(--primary-blue);
+        }
+
+        .theme-toggle:hover .theme-toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .theme-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            padding: 0 0.5rem;
+        }
+
+        body.cyber-theme .theme-label {
+            color: var(--primary-blue);
         }
 
         /* Header & Navigation */
@@ -57,6 +178,12 @@
             z-index: 1000;
             backdrop-filter: blur(10px);
             background: rgba(255, 255, 255, 0.95);
+            transition: all 0.3s ease;
+        }
+
+        body.cyber-theme .header {
+            background: rgba(10, 14, 39, 0.95);
+            border-bottom-color: rgba(0, 255, 65, 0.3);
         }
 
         .nav {
@@ -156,7 +283,7 @@
             background: var(--primary-blue-dark);
             border-color: var(--primary-blue-dark);
             transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
 
         .btn-secondary {
@@ -169,7 +296,7 @@
             background: var(--primary-blue);
             color: white;
             transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
 
         .hero-visual {
@@ -182,7 +309,7 @@
             background: var(--bg-white);
             padding: 2rem;
             border-radius: 16px;
-            box-shadow: var(--shadow-xl);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             text-align: center;
             border: 1px solid var(--border-gray-light);
         }
@@ -296,14 +423,14 @@
             background: var(--bg-white);
             padding: 2rem;
             border-radius: 12px;
-            box-shadow: var(--shadow-md);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             border: 1px solid var(--border-gray);
             transition: all 0.3s ease;
         }
 
         .skill-card:hover {
             transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
 
         .skill-card h3 {
@@ -340,7 +467,7 @@
             background: var(--bg-white);
             padding: 2.5rem;
             border-radius: 12px;
-            box-shadow: var(--shadow-md);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             margin-bottom: 2rem;
             border-left: 4px solid var(--primary-blue);
             position: relative;
@@ -403,7 +530,7 @@
         .project-card {
             background: var(--bg-white);
             border-radius: 12px;
-            box-shadow: var(--shadow-md);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             border: 1px solid var(--border-gray);
             transition: all 0.3s ease;
             overflow: hidden;
@@ -412,33 +539,7 @@
 
         .project-card:hover {
             transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .project-card.private .project-title {
-            color: var(--accent-green);
-        }
-
-        .project-card.private::after {
-            content: "🔒";
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.2rem;
-            opacity: 0.7;
-        }
-
-        .project-card.personal .project-title {
-            color: var(--accent-purple);
-        }
-
-        .project-card.personal::after {
-            content: "";
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.2rem;
-            opacity: 0.8;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
 
         .project-header {
@@ -498,149 +599,6 @@
             color: var(--primary-blue-dark);
         }
 
-        .project-link.private {
-            color: var(--accent-green);
-        }
-
-        .project-link.personal {
-            color: var(--accent-purple);
-        }
-
-        .project-link.personal:hover {
-            color: var(--accent-purple);
-            opacity: 0.8;
-        }
-
-        .project-card.incubator .project-title {
-            color: var(--accent-green);
-        }
-
-        .project-card.incubator::after {
-            content: "🚀";
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.2rem;
-            opacity: 0.8;
-        }
-
-        .project-link.incubator {
-            color: var(--accent-green);
-        }
-
-        .project-link.incubator:hover {
-            color: var(--accent-green);
-            opacity: 0.8;
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(4px);
-        }
-
-        .modal-content {
-            background: var(--bg-white);
-            margin: 2% auto;
-            padding: 0;
-            border-radius: 16px;
-            width: 90%;
-            max-width: 900px;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: var(--shadow-xl);
-            position: relative;
-        }
-
-        .modal-header {
-            padding: 2rem 2rem 1rem;
-            border-bottom: 1px solid var(--border-gray);
-            background: var(--bg-gray-50);
-            border-radius: 16px 16px 0 0;
-        }
-
-        .modal-title {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .modal-subtitle {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-        }
-
-        .modal-body {
-            padding: 2rem;
-        }
-
-        .modal-screenshot {
-            width: 100%;
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: var(--shadow-md);
-            margin-bottom: 2rem;
-        }
-
-        .modal-description {
-            color: var(--text-secondary);
-            line-height: 1.7;
-            margin-bottom: 2rem;
-        }
-
-        .modal-features {
-            margin-bottom: 2rem;
-        }
-
-        .modal-features h4 {
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .modal-features ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .modal-features li {
-            padding: 0.5rem 0 0.5rem 1.5rem;
-            position: relative;
-            color: var(--text-secondary);
-        }
-
-        .modal-features li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: var(--accent-green);
-            font-weight: 600;
-        }
-
-        .close {
-            position: absolute;
-            top: 1rem;
-            right: 1.5rem;
-            color: var(--text-light);
-            font-size: 2rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .close:hover {
-            color: var(--text-primary);
-        }
-
         /* Contact Section */
         .contact-content {
             max-width: 600px;
@@ -652,7 +610,7 @@
             background: var(--bg-white);
             padding: 3rem;
             border-radius: 16px;
-            box-shadow: var(--shadow-lg);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             border: 1px solid var(--border-gray);
         }
 
@@ -691,7 +649,7 @@
             background: var(--primary-blue);
             color: white;
             transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
 
         /* Footer */
@@ -727,9 +685,9 @@
                 gap: 1rem;
             }
 
-            .modal-content {
-                width: 95%;
-                margin: 5% auto;
+            .theme-toggle {
+                top: 70px;
+                right: 1rem;
             }
         }
 
@@ -778,18 +736,9 @@
                 gap: 1rem;
             }
 
-            .modal-content {
-                width: 98%;
-                margin: 1% auto;
-                max-height: 95vh;
-            }
-
-            .modal-header {
-                padding: 1.5rem 1.5rem 1rem;
-            }
-
-            .modal-body {
-                padding: 1.5rem;
+            .theme-toggle {
+                top: 10px;
+                right: 1rem;
             }
         }
 
@@ -807,6 +756,12 @@
     </style>
 </head>
 <body>
+    <!-- Theme Toggle -->
+    <div id="theme-toggle" class="theme-toggle">
+        <i data-lucide="zap" class="theme-toggle-icon"></i>
+        <span class="theme-label">Cyber Mode</span>
+    </div>
+
     <!-- Header & Navigation -->
     <header class="header">
         <div class="container">
@@ -815,8 +770,7 @@
                 <ul class="nav-links">
                     <li><a href="#about">About</a></li>
                     <li><a href="#experience">Experience</a></li>
-                    <li><a href="#projects">Professional</a></li>
-                    <li><a href="#personal-projects">Personal</a></li>
+                    <li><a href="#projects">Projects</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -829,10 +783,10 @@
             <div class="hero-content">
                 <div class="hero-text">
                     <h1>Principal Infrastructure Engineer</h1>
-                    <div class="subtitle">Network Automation & NetDevOps Expert</div>
+                    <div class="subtitle">Network Automation & Observability Expert</div>
                     <div class="description">
-                        Transforming network operations through innovative automation solutions and strategic infrastructure engineering. 
-                        20+ years of progressive experience designing, implementing, and optimizing complex global network infrastructures.
+                        Building innovative network automation solutions and tools that transform how network engineers interact with infrastructure. 
+                        30+ years of experience spanning traditional networking to cutting-edge automation platforms.
                     </div>
                     <div class="cta-buttons">
                         <a href="#projects" class="btn btn-primary">View Projects</a>
@@ -843,19 +797,19 @@
                     <div class="profile-card">
                         <div class="profile-image">SP</div>
                         <h3>Scott Peterman</h3>
-                        <p>Littleton, Colorado</p>
+                        <p>Highlands Ranch, Colorado</p>
                         <div class="profile-stats">
                             <div class="stat">
-                                <div class="stat-number">20+</div>
+                                <div class="stat-number">30+</div>
                                 <div class="stat-label">Years Experience</div>
                             </div>
                             <div class="stat">
-                                <div class="stat-number">15+</div>
+                                <div class="stat-number">20+</div>
                                 <div class="stat-label">Open Source Projects</div>
                             </div>
                             <div class="stat">
-                                <div class="stat-number">5+</div>
-                                <div class="stat-label">Certifications</div>
+                                <div class="stat-number">1.7K+</div>
+                                <div class="stat-label">LinkedIn Followers</div>
                             </div>
                         </div>
                     </div>
@@ -870,60 +824,60 @@
             <div class="section-header">
                 <h2 class="section-title">About</h2>
                 <p class="section-subtitle">
-                    Passionate about operational efficiency, visibility, and leveraging advanced network automation to enhance network agility, resilience, and MTTR.
+                    Passionate about network observability, automation, and building tools that make network engineers more effective.
                 </p>
             </div>
             <div class="about-content">
                 <div class="about-text">
                     <p>
-                        As a <span class="highlight">Principal Infrastructure Engineer</span> with over two decades of experience, I specialize in designing and implementing comprehensive network automation solutions that drive operational excellence and business growth.
+                        As a <span class="highlight">Principal Infrastructure Engineer at Kentik</span>, I leverage over three decades of network engineering experience to build innovative solutions in network observability and automation. My journey has taken me from traditional network engineering to becoming a polyglot developer creating production-grade network automation tools.
                     </p>
                     <p>
-                        My core philosophy: <em>"If you can't see it, you can't fix it."</em> I focus on comprehensive visibility and operational consistency through intelligent automation, ensuring networks are not just functional, but optimized for future growth.
+                        My core philosophy: <em>"Work the problem, build the solution, make it better."</em> I focus on creating practical tools that solve real operational problems, not theoretical dashboards. This approach has led to the creation of comprehensive network automation ecosystems that are actively used by network engineers worldwide.
                     </p>
                     <p>
-                        Currently at <span class="highlight">Columbia Sportswear Company</span>, I lead the development of full-stack network automation platforms, custom API integrations, and innovative solutions that streamline network operations across global infrastructure.
+                        I'm the creator of the <span class="highlight">VelociTerm ecosystem</span> - a comprehensive suite of network engineering tools including web-based SSH terminal managers, desktop terminals with real-time monitoring, and network topology discovery platforms. My work has gained recognition from NetBox Labs leadership and is actively shared with the network automation community.
                     </p>
                 </div>
                 <div class="skills-grid">
-                    <div class="skill-card">
-                        <h3>🔧 Automation & DevOps</h3>
+                    <div class="skill-card fade-in">
+                        <h3><i data-lucide="code-2"></i> Development & Languages</h3>
                         <ul class="skill-list">
                             <li>Python, Go, JavaScript</li>
-                            <li>Ansible, Tower/AWX, Rundeck</li>
-                            <li>Docker, GitLab CI/CD</li>
-                            <li>Napalm, Nornir, pyATS</li>
-                            <li>Infrastructure-as-Code (IaC)</li>
-                        </ul>
-                    </div>
-                    <div class="skill-card">
-                        <h3>🌐 Networking</h3>
-                        <ul class="skill-list">
-                            <li>SD-WAN (Prisma/CloudGenix)</li>
-                            <li>MPLS Edge/Core</li>
-                            <li>BGP, OSPF, EIGRP, IPv6</li>
-                            <li>Datacenter Architecture</li>
-                            <li>VPN, QoS, VoIP</li>
-                        </ul>
-                    </div>
-                    <div class="skill-card">
-                        <h3>💻 Development</h3>
-                        <ul class="skill-list">
-                            <li>Flask, FastAPI, Node.js</li>
-                            <li>MySQL, MongoDB, PostgreSQL</li>
-                            <li>REST APIs, WebSockets</li>
-                            <li>Modern UI/UX Design</li>
+                            <li>TypeScript, C#, Java</li>
+                            <li>PyQt6, Flask, FastAPI</li>
+                            <li>Node.js, React</li>
                             <li>Full-Stack Development</li>
                         </ul>
                     </div>
-                    <div class="skill-card">
-                        <h3>🏢 Vendor Platforms</h3>
+                    <div class="skill-card fade-in">
+                        <h3><i data-lucide="network"></i> Network Automation</h3>
                         <ul class="skill-list">
-                            <li>Cisco (IOS-XE, NX-OS, ASR, ISR)</li>
-                            <li>Juniper (MX, M, EX)</li>
-                            <li>Arista, Palo Alto, F5, A10</li>
-                            <li>Aruba/HPE Solutions</li>
+                            <li>NAPALM, Netmiko, Paramiko</li>
+                            <li>TextFSM, Nornir, pyATS</li>
+                            <li>SSH Automation Libraries</li>
+                            <li>Network Discovery & Mapping</li>
                             <li>Multi-vendor Integration</li>
+                        </ul>
+                    </div>
+                    <div class="skill-card fade-in">
+                        <h3><i data-lucide="server"></i> Network Platforms</h3>
+                        <ul class="skill-list">
+                            <li>Cisco (IOS-XE, NX-OS)</li>
+                            <li>Arista, Juniper, Aruba</li>
+                            <li>Network Observability</li>
+                            <li>NetBox Integration</li>
+                            <li>SNMP, CDP/LLDP</li>
+                        </ul>
+                    </div>
+                    <div class="skill-card fade-in">
+                        <h3><i data-lucide="layers"></i> Infrastructure</h3>
+                        <ul class="skill-list">
+                            <li>SD-WAN, MPLS, BGP</li>
+                            <li>Docker, CI/CD</li>
+                            <li>Database Design (SQL, NoSQL)</li>
+                            <li>REST APIs, WebSockets</li>
+                            <li>Infrastructure-as-Code</li>
                         </ul>
                     </div>
                 </div>
@@ -937,24 +891,41 @@
             <div class="section-header">
                 <h2 class="section-title">Professional Experience</h2>
                 <p class="section-subtitle">
-                    Progressive career in network engineering and automation across enterprise and service provider environments.
+                    Career journey from traditional networking to AI-assisted polyglot development and network automation innovation.
                 </p>
             </div>
             <div class="experience-timeline">
                 <div class="experience-item fade-in">
                     <div class="experience-header">
                         <div class="experience-title">Principal Infrastructure Engineer</div>
-                        <div class="experience-company">Columbia Sportswear Company</div>
-                        <div class="experience-period">March 2022 - Present</div>
+                        <div class="experience-company">Kentik</div>
+                        <div class="experience-period">October 2025 - Present</div>
                     </div>
                     <div class="experience-description">
-                        Lead comprehensive network automation initiatives, designing and deploying full-stack automation platforms using Python Flask/FastAPI with MySQL for device state collection, parsing, and compliance reporting.
+                        Contributing network automation and infrastructure engineering expertise to a leading network observability SaaS Company.
+                    </div>
+                    <ul class="experience-highlights">
+                        <li>Developing network automation solutions and tooling</li>
+                        <li>Supporting network platform engineering initiatives</li>
+                        <li>Applying 30+ years of network engineering experience to critical infrastructure</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item fade-in">
+                    <div class="experience-header">
+                        <div class="experience-title">Principal Infrastructure Engineer</div>
+                        <div class="experience-company">Columbia Sportswear Company</div>
+                        <div class="experience-period">March 2022 - October 2025</div>
+                    </div>
+                    <div class="experience-description">
+                        Led comprehensive network automation initiatives, designing and deploying full-stack automation platforms using Python Flask/FastAPI with MySQL for device state collection, parsing, and compliance reporting. Built network automation foundation that later evolved into open source tools.
                     </div>
                     <ul class="experience-highlights">
                         <li>Developed custom API integrations with Prisma SDWAN, Palo Alto Panorama, and LogicMonitor</li>
                         <li>Automated Cisco, Palo Alto, and HPE support contract reporting via vendor APIs</li>
                         <li>Engineered simplified custom frontend for Cisco Webex Calling with RBAC automation</li>
                         <li>Built fully automated provisioning for new retail store networks</li>
+                        <li>Created foundation for tools that became AngusNMS and other open source projects</li>
                     </ul>
                 </div>
 
@@ -1005,350 +976,195 @@
                         <li>Implemented Anycast solutions for DNS, syslog, and hosted Netflow</li>
                     </ul>
                 </div>
-
-                <div class="experience-item fade-in">
-                    <div class="experience-header">
-                        <div class="experience-title">Architect III</div>
-                        <div class="experience-company">Cricket Wireless (Now AT&T)</div>
-                        <div class="experience-period">November 2008 - April 2013</div>
-                    </div>
-                    <div class="experience-description">
-                        Led national IP design and architected Cricket's self-managed MPLS VPN network supporting cellular infrastructure.
-                    </div>
-                    <ul class="experience-highlights">
-                        <li>Designed and supported multiple data centers with 300+ switches</li>
-                        <li>Implemented redundant Cisco Nexus 7010/7018 core providing 10 GB backbone</li>
-                        <li>Led IPv6 testing, pilot, and national deployment for Cricket LTE launch</li>
-                    </ul>
-                </div>
             </div>
         </div>
     </section>
 
-    <!-- Professional Projects Section -->
+    <!-- Projects Section -->
     <section id="projects" class="section">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Professional Projects</h2>
+                <h2 class="section-title">Banner Projects</h2>
                 <p class="section-subtitle">
-                    Enterprise applications and tools demonstrating expertise in network automation and infrastructure engineering.
+                    Production-grade network automation tools and ecosystems actively used by network engineers worldwide.
                 </p>
             </div>
             <div class="projects-grid">
 
-                <!-- RapidCMDB - Incubator Project -->
-                <div class="project-card incubator fade-in">
+                <!-- Secure Cartography -->
+                <div class="project-card fade-in">
                     <div class="project-header">
-                        <div class="project-title">RapidCMDB</div>
+                        <div class="project-title">Secure Cartography</div>
                         <div class="project-description">
-                            A TerminalTelemetry Plugin: Network Asset Discovery & CMDB Reconciliation platform. Transform weeks of manual network auditing into hours of automated intelligence. Currently in incubation with VC discussions.
+                            Comprehensive network discovery and mapping tool that automates network topology documentation through SSH-based device interrogation. Leverages CDP/LLDP protocols to discover device relationships and generates professional-grade network diagrams with customizable icons and multiple export formats.
                         </div>
                         <div class="tech-stack">
                             <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Flask</span>
-                            <span class="tech-tag">NAPALM</span>
-                            <span class="tech-tag">SNMP</span>
-                            <span class="tech-tag">Network Discovery</span>
-                            <span class="tech-tag">CMDB</span>
+                            <span class="tech-tag">PyQt6</span>
+                            <span class="tech-tag">SSH Discovery</span>
+                            <span class="tech-tag">TextFSM</span>
+                            <span class="tech-tag">Network Mapping</span>
+                            <span class="tech-tag">Multi-vendor</span>
                         </div>
                     </div>
                     <div class="project-footer">
                         <div class="project-links">
-                            <a class="project-link incubator" onclick="openModal('rapidCMDBModal')">
-                                View Details →
+                            <a href="https://github.com/scottpeterman/secure_cartography" class="project-link" target="_blank">
+                                <i data-lucide="github"></i> GitHub
+                            </a>
+                            <a href="https://pypi.org/project/secure-cartography/" class="project-link" target="_blank">
+                                <i data-lucide="package"></i> PyPI
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- TerminalTelemetryVSC - Open Source Project -->
+                <!-- TerminalTelemetry -->
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div class="project-title">TerminalTelemetry</div>
+                        <div class="project-description">
+                            Modern cyberpunk-inspired terminal emulator and network telemetry platform built with PyQt6. Combines powerful SSH terminal capabilities with real-time network device monitoring in a sleek, themeable interface. Features 20+ built-in themes, live telemetry dashboards, and comprehensive platform support.
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">PyQt6</span>
+                            <span class="tech-tag">SSH/Telemetry</span>
+                            <span class="tech-tag">Real-time Monitoring</span>
+                            <span class="tech-tag">Multi-platform</span>
+                        </div>
+                    </div>
+                    <div class="project-footer">
+                        <div class="project-links">
+                            <a href="https://github.com/scottpeterman/terminaltelemetry" class="project-link" target="_blank">
+                                <i data-lucide="github"></i> GitHub
+                            </a>
+                            <a href="https://pypi.org/project/TerminalTelemetry/" class="project-link" target="_blank">
+                                <i data-lucide="package"></i> PyPI
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VelocityCMDB -->
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div class="project-title">VelocityCMDB</div>
+                        <div class="project-description">
+                            Tactical, highly portable network CMDB with automated discovery, change detection, and operational intelligence. Combines asset management, configuration tracking, and real-time monitoring in a unified pip-installable platform. Managing 357+ devices across 53 sites with 99.3% classification accuracy.
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Flask</span>
+                            <span class="tech-tag">CMDB</span>
+                            <span class="tech-tag">Network Discovery</span>
+                            <span class="tech-tag">Change Detection</span>
+                            <span class="tech-tag">Material Design</span>
+                        </div>
+                    </div>
+                    <div class="project-footer">
+                        <div class="project-links">
+                            <a href="https://github.com/scottpeterman/velocitycmdb" class="project-link" target="_blank">
+                                <i data-lucide="github"></i> GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VelociTerm -->
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <div class="project-title">VelociTerm NB</div>
+                        <div class="project-description">
+                            Web-based platform that organizes and manages SSH connections to network devices with advanced session filtering, NetBox integration, and multi-terminal capabilities. Enterprise jump host solution with user-based session management and LDAP authentication support.
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">FastAPI</span>
+                            <span class="tech-tag">WebSockets</span>
+                            <span class="tech-tag">NetBox Integration</span>
+                            <span class="tech-tag">LDAP Auth</span>
+                        </div>
+                    </div>
+                    <div class="project-footer">
+                        <div class="project-links">
+                            <a href="https://github.com/scottpeterman/velociterm" class="project-link" target="_blank">
+                                <i data-lucide="github"></i> GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TerminalTelemetryVSC -->
                 <div class="project-card fade-in">
                     <div class="project-header">
                         <div class="project-title">TerminalTelemetryVSC</div>
                         <div class="project-description">
-                            Visual Studio Code extension for SSH terminal connections with network device fingerprinting and network discovery capabilities.
+                            Visual Studio Code extension making SSH terminals first-class citizens in the editor. Powerful utilities for managing and organizing SSH connections with advanced terminal features, device fingerprinting, and network discovery capabilities directly in VS Code.
                         </div>
                         <div class="tech-stack">
                             <span class="tech-tag">TypeScript</span>
                             <span class="tech-tag">VS Code Extension</span>
                             <span class="tech-tag">SSH</span>
                             <span class="tech-tag">Network Discovery</span>
-                            <span class="tech-tag">Device Fingerprinting</span>
+                            <span class="tech-tag">Terminal Mgmt</span>
                         </div>
                     </div>
                     <div class="project-footer">
                         <div class="project-links">
                             <a href="https://github.com/scottpeterman/terminaltelemetryvsc" class="project-link" target="_blank">
-                                GitHub Repository →
+                                <i data-lucide="github"></i> GitHub
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- TerminalTelemetry - Original Open Source -->
+                <!-- Python LibreNMS MIBs -->
                 <div class="project-card fade-in">
                     <div class="project-header">
-                        <div class="project-title">TerminalTelemetry</div>
+                        <div class="project-title">Python LibreNMS MIBs</div>
                         <div class="project-description">
-                            SSH Terminal Telemetry combines interactive terminal access, automatic device fingerprinting, and network visualization into a single, integrated interface.
+                            Comprehensive collection of 298 vendor MIB libraries compiled for use with PySNMP, sourced from LibreNMS's curated MIB repository. Includes tools to compile, validate, and manage SNMP MIBs for network monitoring and automation workflows.
                         </div>
                         <div class="tech-stack">
                             <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Paramiko</span>
-                            <span class="tech-tag">Napalm</span>
-                            <span class="tech-tag">Terminal Emulation</span>
-                            <span class="tech-tag">Retro UI</span>
-                        </div>
-                    </div>
-                    <div class="project-footer">
-                        <div class="project-links">
-                            <a href="https://github.com/scottpeterman/terminaltelemetry" class="project-link" target="_blank">
-                                GitHub Repository →
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- RetroTerm.NET - Open Source -->
-                <div class="project-card fade-in">
-                    <div class="project-header">
-                        <div class="project-title">RetroTerm.NET</div>
-                        <div class="project-description">
-                            Nostalgic terminal emulator with authentic DOS-inspired interface providing modern SSH connectivity. Features 20+ retro themes and modern terminal functionality.
-                        </div>
-                        <div class="tech-stack">
-                            <span class="tech-tag">C#/.NET 6</span>
-                            <span class="tech-tag">Windows Forms</span>
-                            <span class="tech-tag">SSH.NET</span>
-                            <span class="tech-tag">Terminal Emulation</span>
-                            <span class="tech-tag">Retro UI</span>
-                        </div>
-                    </div>
-                    <div class="project-footer">
-                        <div class="project-links">
-                            <a href="https://github.com/scottpeterman/retroterm.net" class="project-link" target="_blank">
-                                GitHub Repository →
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- VelociTerm - Open Source -->
-                <div class="project-card fade-in">
-                    <div class="project-header">
-                        <div class="project-title">VelociTerm</div>
-                        <div class="project-description">
-                            Enterprise web SSH application with LDAP authentication. Multi-user jump host platform providing user-based session management and comprehensive terminal support.
-                        </div>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Python Web Application</span>
-                            <span class="tech-tag">LDAP Auth</span>
-                            <span class="tech-tag">Multi-User</span>
-                            <span class="tech-tag">FastAPI</span>
-                            <span class="tech-tag">HTML/CSS/Javascript</span>
-                        </div>
-                    </div>
-                    <div class="project-footer">
-                        <div class="project-links">
-                            <a href="https://github.com/scottpeterman/velociterm" class="project-link" target="_blank">
-                                GitHub Repository →
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Go SNMP Tool Kit - Private Project -->
-                <div class="project-card private fade-in">
-                    <div class="project-header">
-                        <div class="project-title">Go SNMP Tool Kit</div>
-                        <div class="project-description">
-                            Comprehensive SNMP testing and network discovery suite with modern GUI interfaces, vendor fingerprinting, and enterprise-grade network device discovery capabilities.
-                        </div>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Go</span>
-                            <span class="tech-tag">Fyne GUI</span>
                             <span class="tech-tag">SNMP</span>
-                            <span class="tech-tag">Network Discovery</span>
-                            <span class="tech-tag">Vendor Fingerprinting</span>
+                            <span class="tech-tag">PySNMP</span>
+                            <span class="tech-tag">MIB Management</span>
+                            <span class="tech-tag">Multi-vendor</span>
                         </div>
                     </div>
                     <div class="project-footer">
                         <div class="project-links">
-                            <a class="project-link private" onclick="openModal('gosnmptkModal')">
-                                View Details →
+                            <a href="https://github.com/scottpeterman/python-librenms-mibs" class="project-link" target="_blank">
+                                <i data-lucide="github"></i> GitHub
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Secure Cartography - Private Project -->
-                <div class="project-card private fade-in">
-                    <div class="project-header">
-                        <div class="project-title">Secure Cartography</div>
-                        <div class="project-description">
-                            Comprehensive network discovery, mapping, and management toolkit with automated device interrogation, topology visualization, and configuration management for enterprise environments.
-                        </div>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">PyQt6</span>
-                            <span class="tech-tag">NetworkX</span>
-                            <span class="tech-tag">SSH Discovery</span>
-                            <span class="tech-tag">Network Mapping</span>
-                        </div>
-                    </div>
-                    <div class="project-footer">
-                        <div class="project-links">
-                            <a class="project-link private" onclick="openModal('secureCartographyModal')">
-                                View Details →
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SecureCartographyVSC - Private Project -->
-                <div class="project-card private fade-in">
-                    <div class="project-header">
-                        <div class="project-title">SecureCartographyVSC</div>
-                        <div class="project-description">
-                            Visual Studio Code extension bringing enterprise-grade network discovery and mapping capabilities directly into the development environment with pure JavaScript implementation.
-                        </div>
-                        <div class="tech-stack">
-                            <span class="tech-tag">TypeScript</span>
-                            <span class="tech-tag">VS Code Extension</span>
-                            <span class="tech-tag">Network Discovery</span>
-                            <span class="tech-tag">Interactive Visualization</span>
-                            <span class="tech-tag">Pure JavaScript</span>
-                        </div>
-                    </div>
-                    <div class="project-footer">
-                        <div class="project-links">
-                            <a class="project-link private" onclick="openModal('secureCartographyVSCModal')">
-                                View Details →
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- TextFSM Cross-Platform Ports - Open Source -->
+                <!-- TextFSM Cross-Platform -->
                 <div class="project-card fade-in">
                     <div class="project-header">
                         <div class="project-title">TextFSM Cross-Platform Ports</div>
                         <div class="project-description">
-                            Multi-language ports of Google's TextFSM template engine. JavaScript and C#/.NET implementations enabling network data parsing across diverse technology stacks.
+                            Multi-language implementations of Google's TextFSM template engine. JavaScript and C#/.NET ports enabling network data parsing across diverse technology stacks with over 92% compatibility with the original Python library.
                         </div>
                         <div class="tech-stack">
                             <span class="tech-tag">JavaScript</span>
                             <span class="tech-tag">C#/.NET 8</span>
                             <span class="tech-tag">Cross-Platform</span>
                             <span class="tech-tag">Template Engine</span>
-                            <span class="tech-tag">Parsing</span>
+                            <span class="tech-tag">Network Parsing</span>
                         </div>
                     </div>
                     <div class="project-footer">
                         <div class="project-links">
                             <a href="https://github.com/scottpeterman/textfsm.net" class="project-link" target="_blank">
-                                C#/.NET Port →
+                                <i data-lucide="github"></i> C#/.NET
                             </a>
-                            <a href="https://github.com/scottpeterman/tfsmjstester" class="project-link" target="_blank">
-                                JavaScript Port →
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Personal Projects Section -->
-    <section id="personal-projects" class="section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Personal Projects</h2>
-                <p class="section-subtitle">
-                    Creative applications showcasing diverse technical skills across different domains beyond networking.
-                </p>
-            </div>
-            <div class="projects-grid">
-
-                <!-- CoolPyTerm -->
-                <div class="project-card personal fade-in">
-                    <div class="project-header">
-                        <div class="project-title">CoolPyTerm</div>
-                        <div class="project-description">
-                            A hardware-accelerated SSH terminal emulator with authentic retro CRT effects, built with PyQt6 and OpenGL. Features connection profiles, multiple themes, and realistic phosphor glow effects.
-                        </div>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">PyQt6</span>
-                            <span class="tech-tag">OpenGL</span>
-                            <span class="tech-tag">SSH</span>
-                            <span class="tech-tag">Terminal Emulation</span>
-                            <span class="tech-tag">Graphics Programming</span>
-                        </div>
-                    </div>
-                    <div class="project-footer">
-                        <div class="project-links">
-                            <a href="https://github.com/scottpeterman/coolpyterm" class="project-link personal" target="_blank">
-                                GitHub Repository →
-                            </a>
-                            <a class="project-link personal" onclick="openModal('coolPyTermModal')">
-                                View Details →
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- MKV to MP4 UI -->
-                <div class="project-card personal fade-in">
-                    <div class="project-header">
-                        <div class="project-title">MKV to MP4 UI</div>
-                        <div class="project-description">
-                            A modern PyQt6 GUI application for batch converting MKV video files to MP4 format using FFmpeg. Features real-time progress tracking, configurable quality settings, and automatic FFmpeg installation.
-                        </div>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">PyQt6</span>
-                            <span class="tech-tag">FFmpeg</span>
-                            <span class="tech-tag">Video Processing</span>
-                            <span class="tech-tag">Cross-Platform</span>
-                            <span class="tech-tag">Batch Processing</span>
-                        </div>
-                    </div>
-                    <div class="project-footer">
-                        <div class="project-links">
-                            <a href="https://github.com/scottpeterman/mkvtomp4ui" class="project-link personal" target="_blank">
-                                GitHub Repository →
-                            </a>
-                            <a class="project-link personal" onclick="openModal('mkvToMp4Modal')">
-                                View Details →
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- AutiobooksQTA -->
-                <div class="project-card personal fade-in">
-                    <div class="project-header">
-                        <div class="project-title">AutiobooksQTA</div>
-                        <div class="project-description">
-                            PyQt6 port of the autiobooks project that generates M4B audiobooks from EPUB e-books using Kokoro's high-quality speech synthesis. Features voice selection, speed control, and chapter management.
-                        </div>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">PyQt6</span>
-                            <span class="tech-tag">Speech Synthesis</span>
-                            <span class="tech-tag">Audio Processing</span>
-                            <span class="tech-tag">EPUB Processing</span>
-                            <span class="tech-tag">AI/ML Integration</span>
-                        </div>
-                    </div>
-                    <div class="project-footer">
-                        <div class="project-links">
-                            <a href="https://github.com/scottpeterman/autiobooksqta" class="project-link personal" target="_blank">
-                                GitHub Repository →
-                            </a>
-                            <a class="project-link personal" onclick="openModal('autiobooksModal')">
-                                View Details →
+                            <a href="https://github.com/scottpeterman/tfsmjs" class="project-link" target="_blank">
+                                <i data-lucide="github"></i> JavaScript
                             </a>
                         </div>
                     </div>
@@ -1357,255 +1173,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Project Modals -->
-    <!-- RapidCMDB Modal -->
-    <div id="rapidCMDBModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close" onclick="closeModal('rapidCMDBModal')">&times;</span>
-                <h2 class="modal-title">RapidCMDB</h2>
-                <p class="modal-subtitle">Network Asset Discovery & CMDB Reconciliation Platform</p>
-            </div>
-            <div class="modal-body">
-                <img src="RapidCMDB.gif" alt="RapidCMDB Platform Screenshots" class="modal-screenshot">
-                <div class="modal-description">
-                    <strong>Incubator Project:</strong> Transform weeks of manual network auditing into hours of automated intelligence. RapidCMDB is currently in development with venture capital discussions underway, representing the next generation of network asset management and CMDB reconciliation.
-                </div>
-                <div class="modal-features">
-                    <h4>Key Results & Capabilities</h4>
-                    <ul>
-                        <li><strong>65k+ hosts scanned</strong> in minutes not hours with enterprise-scale /16 network support</li>
-                        <li><strong>Enterprise SNMPv3</strong> with SHA256/AES256 encryption for secure environments</li>
-                        <li><strong>Multi-vendor support</strong> for Cisco, Aruba, Palo Alto, Fortinet, Juniper, Dell, HP, and more</li>
-                        <li><strong>Real-time topology</strong> with LLDP-based mapping and bidirectional consistency validation</li>
-                        <li><strong>Zero-touch NAPALM compatibility</strong> analysis for automation planning</li>
-                        <li><strong>Configuration backup and revision tracking</strong> Multi-platform device backup</li>
-                        <li><strong>Operational state collection and Search</strong> Search anything Napalm collects - Configuration, ARP, MAC, Route, LLDP etc</li>
-                        <li><strong>Interactive web dashboard</strong> with WebSocket-powered real-time updates</li>
-                        <li><strong>Advanced analytics</strong> with vendor intelligence and confidence scoring</li>
-                        <li><strong>Multi-format export</strong> capabilities (Mermaid, JSON, Draw.io, CSV)</li>
-                    </ul>
-                </div>
-                <div class="modal-features">
-                    <h4>Market Position</h4>
-                    <ul>
-                        <li><strong>Problem:</strong> Manual network auditing takes weeks and produces incomplete, outdated documentation</li>
-                        <li><strong>Solution:</strong> Automated discovery and intelligence that transforms network operations</li>
-                        <li><strong>Target:</strong> Network engineers, security teams, IT managers, consultants, and DevOps teams</li>
-                        <li><strong>Status:</strong> Proof of concept with active VC discussions and technical validation</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- CoolPyTerm Modal -->
-    <div id="coolPyTermModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close" onclick="closeModal('coolPyTermModal')">&times;</span>
-                <h2 class="modal-title">CoolPyTerm</h2>
-                <p class="modal-subtitle">Hardware-Accelerated SSH Terminal with Retro CRT Effects</p>
-            </div>
-            <div class="modal-body">
-                <div class="modal-description">
-                    A sophisticated terminal emulator that combines modern SSH connectivity with authentic retro CRT aesthetics. Built with PyQt6 and OpenGL for hardware-accelerated rendering, featuring realistic phosphor glow effects, scanlines, and multiple retro themes.
-                </div>
-                <div class="modal-features">
-                    <h4>Key Features</h4>
-                    <ul>
-                        <li><strong>Hardware-accelerated rendering</strong> with OpenGL for smooth 60fps performance</li>
-                        <li><strong>Authentic CRT effects</strong> including phosphor glow, scanlines, and screen curvature</li>
-                        <li><strong>Multiple retro themes</strong> - Classic Green, Warm Amber, and DOS Blue</li>
-                        <li><strong>Connection profile management</strong> with password and SSH key authentication</li>
-                        <li><strong>Full-screen immersive mode</strong> with borderless display</li>
-                        <li><strong>Complete terminal emulation</strong> with ANSI color support and scrollback buffer</li>
-                        <li><strong>Adjustable effects</strong> with DPI-aware scaling and customizable intensity</li>
-                        <li><strong>Cross-platform compatibility</strong> for Windows, macOS, and Linux</li>
-                    </ul>
-                </div>
-                <div class="modal-features">
-                    <h4>Technical Innovation</h4>
-                    <ul>
-                        <li><strong>OpenGL shaders</strong> for custom fragment processing and realistic CRT simulation</li>
-                        <li><strong>Efficient grid rendering</strong> system for character-based terminal display</li>
-                        <li><strong>Dynamic resizing</strong> with proper PTY handling for responsive terminal sessions</li>
-                        <li><strong>Performance optimization</strong> with hardware acceleration and effect scaling</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MKV to MP4 Modal -->
-    <div id="mkvToMp4Modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close" onclick="closeModal('mkvToMp4Modal')">&times;</span>
-                <h2 class="modal-title">MKV to MP4 UI</h2>
-                <p class="modal-subtitle">Modern Batch Video Conversion Tool</p>
-            </div>
-            <div class="modal-body">
-                <div class="modal-description">
-                    A user-friendly PyQt6 application that simplifies batch video conversion from MKV to MP4 format. Features an intuitive interface with real-time progress tracking, configurable quality settings, and automatic FFmpeg installation for seamless user experience.
-                </div>
-                <div class="modal-features">
-                    <h4>Key Features</h4>
-                    <ul>
-                        <li><strong>Batch processing</strong> with multi-file selection and progress tracking</li>
-                        <li><strong>Real-time feedback</strong> showing encoding speed, progress percentage, and ETA</li>
-                        <li><strong>Configurable quality settings</strong> with CRF control and preset selection</li>
-                        <li><strong>Multiple codec support</strong> including H.264, H.265, and stream copying</li>
-                        <li><strong>Automatic FFmpeg setup</strong> with one-click download and installation</li>
-                        <li><strong>Flexible output options</strong> to source folder or custom directory</li>
-                        <li><strong>Detailed logging</strong> with color-coded status messages</li>
-                        <li><strong>Cross-platform compatibility</strong> for Windows, macOS, and Linux</li>
-                    </ul>
-                </div>
-                <div class="modal-features">
-                    <h4>Use Cases</h4>
-                    <ul>
-                        <li><strong>Movie collections</strong> - Perfect for converting MakeMKV or HandBrake rips</li>
-                        <li><strong>Media organization</strong> - Standardize container formats for better compatibility</li>
-                        <li><strong>Storage optimization</strong> - Choose encoding settings for size vs quality balance</li>
-                        <li><strong>Compatibility conversion</strong> - Ensure playback on various devices and platforms</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Autiobooks Modal -->
-    <div id="autiobooksModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close" onclick="closeModal('autiobooksModal')">&times;</span>
-                <h2 class="modal-title">AutiobooksQTA</h2>
-                <p class="modal-subtitle">EPUB to Audiobook Conversion with AI Speech Synthesis</p>
-            </div>
-            <div class="modal-body">
-                <div class="modal-description">
-                    A PyQt6-based application that transforms EPUB e-books into high-quality M4B audiobooks using Kokoro's advanced speech synthesis technology. This port of the original autiobooks project provides an enhanced user interface and additional features for audiobook creation.
-                </div>
-                <div class="modal-features">
-                    <h4>Key Features</h4>
-                    <ul>
-                        <li><strong>High-quality speech synthesis</strong> using Kokoro's advanced AI voice technology</li>
-                        <li><strong>Multiple output formats</strong> - M4B audiobooks, MP3 files, and WAV audio</li>
-                        <li><strong>Chapter-based organization</strong> with automatic chapter detection and management</li>
-                        <li><strong>Voice customization</strong> with multiple voice options and speed control</li>
-                        <li><strong>GPU acceleration support</strong> for faster processing on capable hardware</li>
-                        <li><strong>Automatic FFmpeg installation</strong> with user-friendly setup assistant</li>
-                        <li><strong>Selective conversion</strong> - Choose specific chapters to convert</li>
-                        <li><strong>PyPI distribution</strong> for easy installation and updates</li>
-                    </ul>
-                </div>
-                <div class="modal-features">
-                    <h4>Technical Capabilities</h4>
-                    <ul>
-                        <li><strong>EPUB parsing</strong> with intelligent text extraction and formatting</li>
-                        <li><strong>Audio processing pipeline</strong> from text-to-speech to final audiobook packaging</li>
-                        <li><strong>Cross-platform support</strong> with Python 3.8+ compatibility</li>
-                        <li><strong>Organized output structure</strong> with separate folders for different formats</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Other existing modals... -->
-    <div id="gosnmptkModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close" onclick="closeModal('gosnmptkModal')">&times;</span>
-                <h2 class="modal-title">Go SNMP Tool Kit</h2>
-                <p class="modal-subtitle">Enterprise SNMP Testing and Network Discovery Suite</p>
-            </div>
-            <div class="modal-body">
-                <img src="gosnmptk.gif" alt="Go SNMP Tool Kit Screenshot" class="modal-screenshot">
-                <div class="modal-description">
-                    A comprehensive SNMP testing and network discovery suite built in Go with modern GUI interfaces. This toolkit provides enterprise-grade network device discovery, SNMP operations, vendor-specific fingerprinting, and advanced network scanning capabilities with data persistence.
-                </div>
-                <div class="modal-features">
-                    <h4>Key Features</h4>
-                    <ul>
-                        <li>Comprehensive vendor fingerprinting for Cisco, Dell, Arista, Aruba, HP, Fortinet, Palo Alto, and more</li>
-                        <li>SNMPv2c and SNMPv3 support with multiple authentication and privacy protocols</li>
-                        <li>High-performance concurrent network scanning with dynamic timeout scaling</li>
-                        <li>Device persistence and deduplication with complete audit trail</li>
-                        <li>Interactive SNMP client with real-time results and detailed logging</li>
-                        <li>Cross-platform GUI applications built with Fyne framework</li>
-                        <li>YAML-based vendor configuration system for easy extensibility</li>
-                        <li>CSV and JSON export capabilities for integration</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Secure Cartography Modal -->
-    <div id="secureCartographyModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close" onclick="closeModal('secureCartographyModal')">&times;</span>
-                <h2 class="modal-title">Secure Cartography & Surveyor Suite</h2>
-                <p class="modal-subtitle">Network Discovery, Mapping, and Management Toolkit</p>
-            </div>
-            <div class="modal-body">
-                <img src="secure_cartography.gif" alt="Secure Cartography Screenshot" class="modal-screenshot">
-                <div class="modal-description">
-                    A comprehensive Python-based network discovery, mapping, and management toolkit designed for network engineers and IT administrators. Provides robust features for automated device interrogation, network topology visualization, and configuration management while maintaining strict security standards.
-                </div>
-                <div class="modal-features">
-                    <h4>Key Features</h4>
-                    <ul>
-                        <li>Automated SSH-based discovery with platform auto-detection for Cisco, Arista, and Aruba devices</li>
-                        <li>Interactive Mermaid-based network topology visualization with multiple layout algorithms</li>
-                        <li>PyQt6-based modern interface with dark/light mode support</li>
-                        <li>Multiple export formats: SVG, GraphML for yEd, Draw.io compatible format</li>
-                        <li>Master password-based encryption system with machine-specific keyring integration</li>
-                        <li>Device inventory parsing using TextFSM templates with multiprocessing support</li>
-                        <li>Configuration backup and management with SQLite database integration</li>
-                        <li>Interactive topology enhancement with node editing and icon customization</li>
-                        <li>Advanced CLI tool for automation and scripting workflows</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SecureCartographyVSC Modal -->
-    <div id="secureCartographyVSCModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close" onclick="closeModal('secureCartographyVSCModal')">&times;</span>
-                <h2 class="modal-title">SecureCartographyVSC</h2>
-                <p class="modal-subtitle">Network Discovery and Visualization for Visual Studio Code</p>
-            </div>
-            <div class="modal-body">
-                <img src="securecartographyvsc.gif" alt="SecureCartographyVSC Screenshot" class="modal-screenshot">
-                <div class="modal-description">
-                    A comprehensive VS Code extension that brings enterprise-grade network discovery, mapping, and visualization capabilities directly into your development environment. Map your entire network infrastructure with a few clicks using pure JavaScript implementation with no external dependencies.
-                </div>
-                <div class="modal-features">
-                    <h4>Key Features</h4>
-                    <ul>
-                        <li>Pure JavaScript implementation with no external dependencies or commands required</li>
-                        <li>Enterprise-grade network discovery using CDP/LLDP protocols</li>
-                        <li>Multi-device support for Cisco, Juniper, and other network vendors</li>
-                        <li>Interactive topology visualization with comprehensive graphical interface</li>
-                        <li>Multiple export formats: Draw.io, GraphML, JSON, and more</li>
-                        <li>Flexible authentication support including SSH keys and enable passwords</li>
-                        <li>Recursive discovery with configurable hop count limits</li>
-                        <li>TextFSM and regex-based parsing for device outputs</li>
-                        <li>Detailed device information collection (interfaces, models, OS versions)</li>
-                        <li>Configurable exclusion patterns for precise discovery scope control</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Contact Section -->
     <section id="contact" class="section">
@@ -1613,24 +1180,24 @@
             <div class="section-header">
                 <h2 class="section-title">Let's Connect</h2>
                 <p class="section-subtitle">
-                    Interested in network automation, infrastructure engineering, or collaboration opportunities?
+                    Interested in network automation, open source collaboration, or discussing network observability?
                 </p>
             </div>
             <div class="contact-content">
                 <div class="contact-info">
-                    <h3>Ready to discuss your next project?</h3>
+                    <h3>Get in Touch</h3>
                     <p>
-                        I'm currently seeking new opportunities where I can drive significant impact through strategic automation and infrastructure innovation. Let's explore how we can transform your network infrastructure together.
+                        I'm always interested in connecting with fellow network engineers, discussing automation approaches, and exploring opportunities to collaborate on innovative network tools and platforms.
                     </p>
                     <div class="contact-links">
                         <a href="mailto:scottpeterman@gmail.com" class="contact-link">
-                            📧 Email
+                            <i data-lucide="mail"></i> Email
                         </a>
                         <a href="https://linkedin.com/in/scott-peterman-networkeng" class="contact-link" target="_blank">
-                            💼 LinkedIn
+                            <i data-lucide="linkedin"></i> LinkedIn
                         </a>
                         <a href="https://github.com/scottpeterman" class="contact-link" target="_blank">
-                            🐙 GitHub
+                            <i data-lucide="github"></i> GitHub
                         </a>
                     </div>
                 </div>
@@ -1645,99 +1212,368 @@
         </div>
     </footer>
 
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Portfolio Application Script -->
     <script>
-        // Modal functionality
-        function openModal(modalId) {
-            document.getElementById(modalId).style.display = "block";
-            document.body.style.overflow = "hidden";
-        }
+/**
+ * Scott Peterman Portfolio - Robust JavaScript
+ * Handles theme toggling, smooth scrolling, navigation, and animations
+ */
 
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = "none";
-            document.body.style.overflow = "auto";
-        }
+(function() {
+    'use strict';
 
-        // Close modal when clicking outside of it
-        window.onclick = function(event) {
-            const modals = document.querySelectorAll('.modal');
-            modals.forEach(modal => {
-                if (event.target === modal) {
-                    modal.style.display = "none";
-                    document.body.style.overflow = "auto";
+    // Configuration
+    const CONFIG = {
+        headerOffset: 80,
+        scrollThreshold: 200,
+        observerThreshold: 0.1,
+        observerRootMargin: '0px 0px -50px 0px'
+    };
+
+    // State management
+    const state = {
+        isInitialized: false,
+        currentTheme: 'professional'
+    };
+
+    /**
+     * Theme Management
+     */
+    const ThemeManager = {
+        init() {
+            this.loadSavedTheme();
+            this.attachEventListeners();
+        },
+
+        loadSavedTheme() {
+            try {
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'cyber') {
+                    this.setCyberTheme();
+                } else {
+                    this.setProfessionalTheme();
                 }
-            });
-        }
-
-        // Close modal with Escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                const modals = document.querySelectorAll('.modal');
-                modals.forEach(modal => {
-                    if (modal.style.display === "block") {
-                        modal.style.display = "none";
-                        document.body.style.overflow = "auto";
-                    }
-                });
+            } catch (error) {
+                console.warn('Could not load saved theme:', error);
+                this.setProfessionalTheme();
             }
-        });
+        },
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    const headerOffset = 80;
-                    const elementPosition = target.offsetTop;
-                    const offsetPosition = elementPosition - headerOffset;
+        attachEventListeners() {
+            const themeToggle = document.getElementById('theme-toggle');
+            if (themeToggle) {
+                themeToggle.addEventListener('click', () => this.toggleTheme());
+            } else {
+                console.warn('Theme toggle button not found');
+            }
+        },
 
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                    });
+        toggleTheme() {
+            if (state.currentTheme === 'professional') {
+                this.setCyberTheme();
+            } else {
+                this.setProfessionalTheme();
+            }
+        },
+
+        setCyberTheme() {
+            document.body.classList.add('cyber-theme');
+            state.currentTheme = 'cyber';
+            this.updateThemeLabel('Pro Mode');
+            this.saveTheme('cyber');
+        },
+
+        setProfessionalTheme() {
+            document.body.classList.remove('cyber-theme');
+            state.currentTheme = 'professional';
+            this.updateThemeLabel('Cyber Mode');
+            this.saveTheme('professional');
+        },
+
+        updateThemeLabel(text) {
+            const label = document.querySelector('.theme-label');
+            if (label) {
+                label.textContent = text;
+            }
+        },
+
+        saveTheme(theme) {
+            try {
+                localStorage.setItem('theme', theme);
+            } catch (error) {
+                console.warn('Could not save theme preference:', error);
+            }
+        }
+    };
+
+    /**
+     * Navigation Management
+     */
+    const NavigationManager = {
+        init() {
+            this.attachSmoothScrolling();
+            this.attachScrollSpy();
+        },
+
+        attachSmoothScrolling() {
+            // Use event delegation on document for better reliability
+            document.addEventListener('click', (e) => {
+                const anchor = e.target.closest('a[href^="#"]');
+                if (anchor && anchor.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    this.smoothScrollToTarget(anchor.getAttribute('href'));
                 }
             });
-        });
+        },
 
-        // Active navigation highlighting
-        window.addEventListener('scroll', () => {
+        smoothScrollToTarget(targetId) {
+            const target = document.querySelector(targetId);
+            if (!target) {
+                console.warn(`Target element ${targetId} not found`);
+                return;
+            }
+
+            const elementPosition = target.offsetTop;
+            const offsetPosition = elementPosition - CONFIG.headerOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        },
+
+        attachScrollSpy() {
+            let ticking = false;
+
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        this.updateActiveNavLink();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+
+            // Initial check
+            this.updateActiveNavLink();
+        },
+
+        updateActiveNavLink() {
             const sections = document.querySelectorAll('section[id]');
             const navLinks = document.querySelectorAll('.nav-links a');
             
-            let current = '';
+            if (sections.length === 0 || navLinks.length === 0) {
+                return;
+            }
+
+            const scrollPosition = window.scrollY + CONFIG.scrollThreshold;
+            let currentSection = '';
+
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
-                if (scrollY >= sectionTop - 200) {
-                    current = section.getAttribute('id');
+                const sectionHeight = section.offsetHeight;
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    currentSection = section.getAttribute('id');
                 }
             });
 
             navLinks.forEach(link => {
                 link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
+                const href = link.getAttribute('href');
+                if (href === `#${currentSection}`) {
                     link.classList.add('active');
                 }
             });
-        });
+        }
+    };
 
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+    /**
+     * Animation Management
+     */
+    const AnimationManager = {
+        observer: null,
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+        init() {
+            this.createObserver();
+            this.observeElements();
+        },
+
+        createObserver() {
+            const options = {
+                threshold: CONFIG.observerThreshold,
+                rootMargin: CONFIG.observerRootMargin
+            };
+
+            this.observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        // Optionally unobserve after animation triggers
+                        // this.observer.unobserve(entry.target);
+                    }
+                });
+            }, options);
+        },
+
+        observeElements() {
+            const elements = document.querySelectorAll('.fade-in');
+            
+            if (elements.length === 0) {
+                console.warn('No .fade-in elements found to observe');
+                return;
+            }
+
+            elements.forEach(element => {
+                this.observer.observe(element);
             });
-        }, observerOptions);
 
-        // Observe elements for animation
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
+            console.log(`Observing ${elements.length} fade-in elements`);
+        },
+
+        destroy() {
+            if (this.observer) {
+                this.observer.disconnect();
+            }
+        }
+    };
+
+    /**
+     * Icon Management
+     */
+    const IconManager = {
+        init() {
+            this.loadLucideIcons();
+        },
+
+        loadLucideIcons() {
+            if (typeof lucide !== 'undefined') {
+                try {
+                    lucide.createIcons();
+                    console.log('Lucide icons initialized successfully');
+                } catch (error) {
+                    console.error('Error initializing Lucide icons:', error);
+                }
+            } else {
+                console.warn('Lucide library not loaded');
+            }
+        }
+    };
+
+    /**
+     * Utility Functions
+     */
+    const Utils = {
+        debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        },
+
+        throttle(func, limit) {
+            let inThrottle;
+            return function(...args) {
+                if (!inThrottle) {
+                    func.apply(this, args);
+                    inThrottle = true;
+                    setTimeout(() => inThrottle = false, limit);
+                }
+            };
+        }
+    };
+
+    /**
+     * Main Application Initialization
+     */
+    const App = {
+        init() {
+            if (state.isInitialized) {
+                console.warn('Application already initialized');
+                return;
+            }
+
+            console.log('Initializing portfolio application...');
+
+            try {
+                // Initialize all managers
+                ThemeManager.init();
+                NavigationManager.init();
+                AnimationManager.init();
+                IconManager.init();
+
+                state.isInitialized = true;
+                console.log('Portfolio application initialized successfully');
+
+                // Log diagnostic information
+                this.logDiagnostics();
+            } catch (error) {
+                console.error('Error during initialization:', error);
+            }
+        },
+
+        logDiagnostics() {
+            console.log('=== Diagnostics ===');
+            console.log('Theme toggle button:', document.getElementById('theme-toggle') ? 'Found' : 'Not found');
+            console.log('Navigation links:', document.querySelectorAll('.nav-links a').length);
+            console.log('Sections with IDs:', document.querySelectorAll('section[id]').length);
+            console.log('Fade-in elements:', document.querySelectorAll('.fade-in').length);
+            console.log('Current theme:', state.currentTheme);
+            console.log('==================');
+        },
+
+        destroy() {
+            AnimationManager.destroy();
+            state.isInitialized = false;
+        }
+    };
+
+    /**
+     * Initialize when DOM is ready
+     */
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => App.init());
+    } else {
+        // DOM is already loaded
+        App.init();
+    }
+
+    /**
+     * Handle page visibility changes
+     */
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden && state.isInitialized) {
+            // Refresh icons when page becomes visible
+            IconManager.loadLucideIcons();
+        }
+    });
+
+    /**
+     * Expose App to global scope for debugging (optional)
+     */
+    window.PortfolioApp = {
+        state,
+        reinitialize: () => App.init(),
+        getTheme: () => state.currentTheme,
+        setTheme: (theme) => {
+            if (theme === 'cyber') {
+                ThemeManager.setCyberTheme();
+            } else {
+                ThemeManager.setProfessionalTheme();
+            }
+        }
+    };
+
+})();
     </script>
 </body>
 </html>
