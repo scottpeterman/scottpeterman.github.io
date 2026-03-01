@@ -1,465 +1,405 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scott Peterman | Network Engineer & Automation</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scott Peterman | Network Engineer & Automation Specialist</title>
+<meta name="description" content="Principal Infrastructure Engineer building open source network automation tools across Python, Go, C#, and JavaScript.">
+<meta property="og:title" content="Scott Peterman - Network Engineer & Automation Specialist">
+<meta property="og:description" content="A career spent building enterprise networks and the tools to automate them.">
+<meta property="og:url" content="https://scottpeterman.github.io">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=JetBrains+Mono:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+<style>
+:root{--bg-primary:#0a0e14;--bg-panel:#111820;--bg-panel-header:#151d27;--border:#1e2a38;--border-accent:#2a3a4e;--text-primary:#c8d6e5;--text-secondary:#6b7d93;--text-dim:#3d4f63;--green:#00e676;--green-dim:rgba(0,230,118,0.12);--amber:#ffab00;--amber-dim:rgba(255,171,0,0.12);--red:#ff5252;--cyan:#00e5ff;--cyan-dim:rgba(0,229,255,0.08);--blue:#2979ff;--purple:#d500f9;--font-display:'Orbitron',sans-serif;--font-mono:'JetBrains Mono',monospace;--font-data:'Share Tech Mono',monospace;--panel-radius:4px;--transition:0.3s ease}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{background:var(--bg-primary);color:var(--text-primary);font-family:var(--font-mono);font-size:13px;line-height:1.6;overflow-x:hidden}
+body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,229,255,0.015) 2px,rgba(0,229,255,0.015) 4px);pointer-events:none;z-index:9999}
+a{color:var(--cyan);text-decoration:none;transition:color var(--transition)}a:hover{color:var(--text-primary)}
 
-        :root {
-            --primary-slate: #334155;
-            --dark-slate: #1e293b;
-            --accent-blue: #3b82f6;
-            --text-main: #0f172a;
-            --text-muted: #475569;
-            --bg-body: #ffffff;
-            --bg-subtle: #f8fafc;
-            --border-color: #e2e8f0;
-            --mono-font: 'JetBrains Mono', monospace;
-        }
+.header{position:fixed;top:0;left:0;right:0;z-index:1000;background:linear-gradient(180deg,#0f1822 0%,rgba(10,14,20,0.95) 100%);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between}
+.header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:0.3}
+.header-left{display:flex;align-items:center;gap:16px}
+.logo-mark{width:32px;height:32px;border:2px solid var(--cyan);border-radius:3px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:900;font-size:14px;color:var(--cyan);position:relative}
+.logo-mark::before{content:'';position:absolute;inset:-1px;border-radius:3px;box-shadow:0 0 8px rgba(0,229,255,0.2)}
+.header-title{font-family:var(--font-display);font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-primary)}
+.header-subtitle{font-family:var(--font-data);font-size:10px;color:var(--text-dim);letter-spacing:0.08em}
+.header-nav{display:flex;align-items:center;gap:24px}
+.header-nav a{font-family:var(--font-display);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-secondary);transition:color var(--transition)}
+.header-nav a:hover{color:var(--cyan)}
+.header-status{display:flex;align-items:center;gap:8px;font-family:var(--font-data);font-size:10px;color:var(--green)}
+.status-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+.main{max-width:1200px;margin:0 auto;padding:80px 20px 40px}
+.panel{background:var(--bg-panel);border:1px solid var(--border);border-radius:var(--panel-radius);overflow:hidden;transition:border-color var(--transition)}
+.panel:hover{border-color:var(--border-accent)}
+.panel-header{background:var(--bg-panel-header);border-bottom:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;justify-content:space-between}
+.panel-title{font-family:var(--font-display);font-size:9px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-secondary)}
+.panel-indicator{font-family:var(--font-data);font-size:10px;color:var(--green);display:flex;align-items:center;gap:6px}
+.panel-body{padding:16px}
 
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: var(--text-main);
-            background: var(--bg-body);
-        }
+.hero{margin-bottom:32px;display:grid;grid-template-columns:1fr 320px;gap:20px}
+.hero-main .panel-body{padding:32px}
+.hero-callsign{font-family:var(--font-display);font-size:clamp(22px,4vw,34px);font-weight:700;letter-spacing:-0.02em;color:var(--text-primary);margin-bottom:6px;line-height:1.2}
+.hero-role{font-family:var(--font-display);font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:20px}
+.hero-desc{font-size:13px;color:var(--text-secondary);line-height:1.75;max-width:580px}
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
+.telem-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)}
+.telem-cell{background:var(--bg-panel);padding:16px;text-align:center}
+.telem-value{font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--text-primary);line-height:1;margin-bottom:4px}
+.telem-value.accent{color:var(--cyan)}.telem-value.green{color:var(--green)}.telem-value.amber{color:var(--amber)}
+.telem-label{font-family:var(--font-data);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-dim)}
 
-        header {
-            border-bottom: 1px solid var(--border-color);
-            padding: 1.5rem 0;
-            background: var(--bg-body);
-        }
+.polyglot-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:32px}
+.lang-card{background:var(--bg-panel);border:1px solid var(--border);border-radius:var(--panel-radius);padding:16px;transition:all var(--transition);position:relative;overflow:hidden}
+.lang-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--cyan);opacity:0;transition:opacity var(--transition)}
+.lang-card:hover{border-color:var(--border-accent)}.lang-card:hover::before{opacity:1}
+.lang-name{font-family:var(--font-display);font-size:11px;font-weight:600;letter-spacing:0.08em;color:var(--text-primary);margin-bottom:2px}
+.lang-count{font-family:var(--font-data);font-size:10px;color:var(--text-dim);margin-bottom:10px}
+.lang-repos{list-style:none;font-family:var(--font-data);font-size:11px}
+.lang-repos li{padding:2px 0}.lang-repos a{color:var(--text-secondary)}.lang-repos a:hover{color:var(--cyan)}.lang-repos .more{color:var(--text-dim);font-style:italic}
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+.day-section{margin-bottom:32px}
+.day-bar{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.day-badge{font-family:var(--font-display);font-size:9px;font-weight:700;letter-spacing:0.12em;padding:3px 10px;border-radius:2px;background:var(--cyan-dim);color:var(--cyan);border:1px solid rgba(0,229,255,0.15)}
+.day-bar-label{font-family:var(--font-data);font-size:11px;color:var(--text-dim);letter-spacing:0.06em}
 
-        .logo {
-            font-weight: 700;
-            font-size: 1.2rem;
-            letter-spacing: -0.5px;
-        }
+.project-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+.project-card{background:var(--bg-panel);border:1px solid var(--border);border-radius:var(--panel-radius);padding:20px;transition:all var(--transition);display:flex;flex-direction:column}
+.project-card:hover{border-color:var(--border-accent);transform:translateY(-1px)}
+.project-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.project-card-badge{font-family:var(--font-display);font-size:8px;font-weight:600;letter-spacing:0.1em;padding:2px 8px;border-radius:2px;background:var(--cyan-dim);color:var(--cyan)}
+.project-card-badge.go{background:var(--green-dim);color:var(--green)}
+.project-card-badge.csharp{background:var(--amber-dim);color:var(--amber)}
+.project-card-badge.js{background:rgba(255,213,79,0.1);color:#ffd54f}
+.project-card-badge.lib{background:rgba(41,121,255,0.1);color:var(--blue)}
+.project-card-badge.tool{background:rgba(213,0,249,0.1);color:var(--purple)}
+.project-card-link a{color:var(--text-dim);transition:color var(--transition)}.project-card-link a:hover{color:var(--cyan)}
+.project-card-link svg{width:16px;height:16px}
+.project-card-name{font-family:var(--font-mono);font-size:14px;font-weight:600;color:var(--text-primary);margin-bottom:6px}
+.project-card-desc{font-size:12px;color:var(--text-secondary);line-height:1.65;flex:1;margin-bottom:14px}
+.project-tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-family:var(--font-data);font-size:10px;padding:2px 8px;border-radius:2px;background:var(--cyan-dim);color:var(--cyan);border:1px solid rgba(0,229,255,0.08)}
+.tag.star{background:var(--amber-dim);color:var(--amber);border-color:rgba(255,171,0,0.1)}
 
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
+.personal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.personal-card{background:var(--bg-panel);border:1px solid var(--border);border-radius:var(--panel-radius);padding:16px;transition:all var(--transition)}
+.personal-card:hover{border-color:var(--border-accent)}
+.personal-name{font-family:var(--font-mono);font-size:13px;font-weight:600;margin-bottom:4px}
+.personal-desc{font-size:11px;color:var(--text-secondary);line-height:1.6;margin-bottom:10px}
 
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
+.timeline{display:flex;flex-direction:column}
+.timeline-row{display:grid;grid-template-columns:180px 1fr;border-bottom:1px solid var(--border);padding:18px 16px;gap:24px}
+.timeline-row:last-child{border-bottom:none}
+.timeline-meta{text-align:right;padding-right:20px;border-right:1px solid var(--border)}
+.timeline-company{font-family:var(--font-mono);font-weight:600;font-size:13px;color:var(--text-primary)}
+.timeline-dates{font-family:var(--font-data);font-size:10px;color:var(--text-dim);margin-top:2px}
+.timeline-role{font-family:var(--font-mono);font-weight:600;font-size:13px;color:var(--cyan);margin-bottom:6px}
+.timeline-detail{font-size:12px;color:var(--text-secondary);line-height:1.7}
+.timeline-detail p{margin-bottom:4px}
 
-        .nav-links a:hover {
-            color: var(--accent-blue);
-        }
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--border);border-radius:var(--panel-radius);overflow:hidden}
+.skill-cell{background:var(--bg-panel);padding:16px}
+.skill-cell-title{font-family:var(--font-display);font-size:9px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.skill-cell-title svg{width:13px;height:13px}
+.skill-cell-items{font-family:var(--font-data);font-size:11px;color:var(--text-secondary);line-height:1.8}
 
-        /* Hero Section */
-        .hero {
-            padding: 6rem 0;
-            background: var(--bg-subtle);
-            border-bottom: 1px solid var(--border-color);
-        }
+.section-block{margin-bottom:32px}
+.section-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.section-label{font-family:var(--font-display);font-size:13px;font-weight:600;letter-spacing:0.08em;color:var(--text-primary)}
+.section-line{flex:1;height:1px;background:linear-gradient(90deg,var(--border-accent),transparent)}
+.section-sub{font-family:var(--font-data);font-size:11px;color:var(--text-dim);margin-bottom:20px;max-width:600px}
 
-        .hero-content h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--dark-slate);
-            margin-bottom: 1rem;
-        }
+.footer{margin-top:48px;padding:20px;border-top:1px solid var(--border);text-align:center}
+.footer-links{display:flex;justify-content:center;gap:24px;margin-bottom:12px}
+.footer-links a{display:flex;align-items:center;gap:6px;font-family:var(--font-data);font-size:11px;color:var(--text-secondary)}
+.footer-links a:hover{color:var(--cyan)}.footer-links svg{width:14px;height:14px}
+.footer-copy{font-family:var(--font-data);font-size:10px;color:var(--text-dim)}
 
-        .hero-description {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            max-width: 750px;
-            margin-bottom: 2rem;
-        }
+/* === SCREENSHOT PREVIEW === */
+.project-card-img{margin:0 -20px;margin-bottom:14px;overflow:hidden;cursor:pointer;position:relative;border-top:1px solid var(--border);border-bottom:1px solid var(--border);max-height:160px}
+.project-card-img img{width:100%;display:block;object-fit:cover;object-position:top;opacity:0.85;transition:opacity var(--transition)}
+.project-card-img:hover img{opacity:1}
+.project-card-img::after{content:'⤢ PREVIEW';position:absolute;bottom:8px;right:12px;font-family:var(--font-display);font-size:8px;letter-spacing:0.1em;color:var(--cyan);background:rgba(10,14,20,0.85);padding:3px 8px;border-radius:2px;border:1px solid rgba(0,229,255,0.15);opacity:0;transition:opacity var(--transition)}
+.project-card-img:hover::after{opacity:1}
 
-        /* Section Layout */
-        .section {
-            padding: 5rem 0;
-        }
+/* === MODAL === */
+.modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:10000;background:rgba(5,8,12,0.92);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:40px;cursor:pointer}
+.modal-overlay.active{display:flex}
+.modal-content{position:relative;max-width:1100px;max-height:90vh;width:100%;cursor:default}
+.modal-content img{width:100%;max-height:85vh;object-fit:contain;border:1px solid var(--border);border-radius:var(--panel-radius);display:block}
+.modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.modal-title{font-family:var(--font-display);font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--cyan)}
+.modal-close{font-family:var(--font-display);font-size:10px;letter-spacing:0.1em;color:var(--text-dim);cursor:pointer;padding:4px 12px;border:1px solid var(--border);border-radius:2px;background:var(--bg-panel);transition:all var(--transition)}
+.modal-close:hover{color:var(--cyan);border-color:var(--cyan)}
 
-        .section-title {
-            font-family: var(--mono-font);
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--accent-blue);
-            margin-bottom: 1.5rem;
-            display: block;
-        }
-
-        /* Experience & Projects */
-        .entry {
-            margin-bottom: 3rem;
-        }
-
-        .entry-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 0.5rem;
-        }
-
-        .entry-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-        }
-
-        .entry-meta {
-            font-family: var(--mono-font);
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        .entry-org {
-            color: var(--accent-blue);
-            font-weight: 600;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .entry-content {
-            color: var(--text-muted);
-            font-size: 1rem;
-        }
-
-        .bullet-list {
-            margin-top: 1rem;
-            list-style: none;
-        }
-
-        .bullet-list li {
-            position: relative;
-            padding-left: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .bullet-list li::before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: var(--accent-blue);
-        }
-
-        /* Project Cards */
-        .project-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-        }
-
-        .project-card {
-            padding: 2rem;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            transition: border-color 0.2s;
-        }
-
-        .project-card:hover {
-            border-color: var(--accent-blue);
-        }
-
-        .tech-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .tech-tag {
-            font-family: var(--mono-font);
-            font-size: 0.75rem;
-            background: var(--bg-subtle);
-            padding: 0.2rem 0.6rem;
-            border: 1px solid var(--border-color);
-            border-radius: 3px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 0.6rem 1.2rem;
-            background: var(--dark-slate);
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .btn:hover {
-            background: var(--accent-blue);
-        }
-
-        @media (max-width: 768px) {
-            .project-grid { grid-template-columns: 1fr; }
-            .entry-header { flex-direction: column; }
-        }
-    </style>
+@media(max-width:900px){.hero{grid-template-columns:1fr}.polyglot-strip{grid-template-columns:repeat(2,1fr)}.header-nav a.nav-text{display:none}}
+@media(max-width:600px){.polyglot-strip{grid-template-columns:1fr}.project-grid{grid-template-columns:1fr}.timeline-row{grid-template-columns:1fr}.timeline-meta{text-align:left;border-right:none;padding-right:0;border-bottom:1px solid var(--border);padding-bottom:8px;margin-bottom:8px}}
+</style>
 </head>
 <body>
-
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo">SCOTT PETERMAN</div>
-                <ul class="nav-links">
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#experience">Experience</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Network Engineer & Automation Specialist</h1>
-                <p class="hero-description">
-                    20+ years in enterprise and service provider networking. BGP, MPLS, datacenter fabrics, multi-vendor environments. 
-                    I build tooling to automate what I do—discovery, state collection, compliance, migrations.
-                </p>
-                <a href="#projects" class="btn">View Projects</a>
+<header class="header">
+    <div class="header-left">
+        <div class="logo-mark">SP</div>
+        <div><div class="header-title">Scott Peterman</div><div class="header-subtitle">Network Operations Console</div></div>
+    </div>
+    <div class="header-nav">
+        <a href="#about" class="nav-text">Systems</a>
+        <a href="#polyglot" class="nav-text">Languages</a>
+        <a href="#projects" class="nav-text">Projects</a>
+        <a href="#experience" class="nav-text">Timeline</a>
+        <div class="header-status"><div class="status-dot"></div>OPERATIONAL</div>
+    </div>
+</header>
+<div class="main">
+    <section class="hero" id="about">
+        <div class="panel hero-main">
+            <div class="panel-header"><div class="panel-title">Operator Profile</div><div class="panel-indicator"><div class="status-dot"></div>Active</div></div>
+            <div class="panel-body">
+                <div class="hero-callsign">Network Engineer &<br>Automation Specialist</div>
+                <div class="hero-role">Principal Infrastructure Engineer — Kentik</div>
+                <div class="hero-desc">A career spent building enterprise and service provider networks — and the tools to automate them. BGP, MPLS, datacenter fabrics, multi-vendor environments. I focus on operational problems: discovery, configuration drift, migration validation, compliance auditing. If it's repetitive and error-prone, I automate it — across Python, Go, C#, and JavaScript.</div>
             </div>
         </div>
-    </section>
-
-    <section id="about" class="section">
-        <div class="container">
-            <span class="section-title">Background</span>
-            <div class="entry-content">
-                <p style="margin-bottom: 1rem;">
-                    Started in networking before automation was an option—CLI, console cables, and physical installation. Now I build the tools I wish I had back then. 
-                    Service provider background (Cricket Communications, Charter, TW Telecom) gave me BGP, MPLS L3VPN, and carrier-scale operations. 
-                    Enterprise roles added SD-WAN, security stack integration, and retail network deployments.
-                </p>
-                <p>
-                    I focus on operational problems: discovery, configuration drift, migration validation, compliance auditing. 
-                    If it's repetitive and error-prone, I automate it.
-                </p>
-            </div>
-            
-            <div style="margin-top: 2.5rem;">
-                <span class="section-title">Platforms & Protocols</span>
-                <div class="tech-tags" style="margin-top: 1rem;">
-                    <span class="tech-tag">Cisco IOS/IOS-XE/NX-OS</span>
-                    <span class="tech-tag">Arista EOS</span>
-                    <span class="tech-tag">Juniper</span>
-                    <span class="tech-tag">Palo Alto</span>
-                    <span class="tech-tag">Aruba/HPE</span>
-                    <span class="tech-tag">F5</span>
-                </div>
-                <div class="tech-tags" style="margin-top: 0.5rem;">
-                    <span class="tech-tag">BGP</span>
-                    <span class="tech-tag">MPLS L3VPN</span>
-                    <span class="tech-tag">EVPN/VXLAN</span>
-                    <span class="tech-tag">OSPF/ISIS</span>
-                    <span class="tech-tag">SD-WAN</span>
-                </div>
-            </div>
-
-            <div style="margin-top: 2rem;">
-                <span class="section-title">Automation Stack</span>
-                <div class="tech-tags" style="margin-top: 1rem;">
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">Ansible</span>
-                    <span class="tech-tag">Netmiko/NAPALM</span>
-                    <span class="tech-tag">TextFSM</span>
-                    <span class="tech-tag">Nornir</span>
-                    <span class="tech-tag">pyATS</span>
-                </div>
-                <div class="tech-tags" style="margin-top: 0.5rem;">
-                    <span class="tech-tag">Flask/FastAPI</span>
-                    <span class="tech-tag">Git/GitLab CI</span>
-                    <span class="tech-tag">Docker</span>
-                    <span class="tech-tag">Linux</span>
-                </div>
-            </div>
-
-            <div style="margin-top: 2rem;">
-                <span class="section-title">Certifications & Training</span>
-                <div class="tech-tags" style="margin-top: 1rem;">
-                    <span class="tech-tag">CCNP</span>
-                    <span class="tech-tag">CCIP</span>
-                    <span class="tech-tag">JNCIS</span>
-                </div>
-                <p class="entry-content" style="margin-top: 1rem;">
-                    Cisco Certified Instructor (4 years)—taught full CCNP track, BGP, MPLS, ASA firewalls, load balancers.
-                </p>
+        <div class="panel">
+            <div class="panel-header"><div class="panel-title">Telemetry</div><div class="panel-indicator" style="color:var(--cyan)">LIVE</div></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);">
+                <div style="background:var(--bg-panel);padding:4px 0;"><div id="gauge-repos" style="width:100%;height:120px;"></div></div>
+                <div style="background:var(--bg-panel);padding:4px 0;"><div id="gauge-langs" style="width:100%;height:120px;"></div></div>
+                <div style="background:var(--bg-panel);padding:4px 0;"><div id="gauge-stars" style="width:100%;height:120px;"></div></div>
+                <div style="background:var(--bg-panel);padding:4px 0;"><div id="gauge-followers" style="width:100%;height:120px;"></div></div>
+                <div style="background:var(--bg-panel);padding:4px 0;"><div id="gauge-linkedin" style="width:100%;height:120px;"></div></div>
+                <div style="background:var(--bg-panel);padding:4px 0;"><div id="gauge-impressions" style="width:100%;height:120px;"></div></div>
             </div>
         </div>
     </section>
 
-    <section id="experience" class="section" style="background: var(--bg-subtle);">
-        <div class="container">
-            <span class="section-title">Experience</span>
-
-            <div class="entry">
-                <div class="entry-header">
-                    <h3 class="entry-title">Principal Infrastructure Engineer</h3>
-                </div>
-                <span class="entry-org">Kentik</span>
-                <ul class="bullet-list">
-                    <li>Datacenter and peering infrastructure on Arista and Juniper deployments, circuit turn-ups, PNI implementations.</li>
-                    <li>BGP peer migrations across 6 edge devices (89 peers)—pre-flight validation, state auditing, cutover execution.</li>
-                    <li>Python tooling for migration automation and operational auditing.</li>
-                </ul>
+    <section class="section-block" id="polyglot">
+        <div class="section-header"><span class="section-label">Polyglot Development</span><div class="section-line"></div></div>
+        <div class="section-sub">Same problems, solved across multiple languages and frameworks. Every SSH terminal implements the same core pattern — invoke-shell automation with real device compatibility.</div>
+        <div class="panel" style="margin-bottom:20px">
+            <div class="panel-header">
+                <div class="panel-title">Application Languages — 312 Repos</div>
+                <div class="panel-indicator" style="color:var(--text-dim)">3.3 GB · 11 Languages · Markup Excluded</div>
             </div>
-
-            <div class="entry">
-                <div class="entry-header">
-                    <h3 class="entry-title">Principal Infrastructure Engineer</h3>
+            <div class="panel-body" style="padding:16px 16px 12px">
+                <div style="display:flex;height:10px;border-radius:3px;overflow:hidden;gap:1px;">
+                    <span style="width:76.00%;background:#3572A5" title="Python 76.0%"></span>
+                    <span style="width:19.20%;background:#f1e05a" title="JavaScript 19.2%"></span>
+                    <span style="width:2.17%;background:#00ADD8" title="Go 2.2%"></span>
+                    <span style="width:0.82%;background:#178600" title="C# 0.8%"></span>
+                    <span style="width:0.49%;background:#A97BFF" title="RobotFramework 0.5%"></span>
+                    <span style="width:0.40%;background:#555555" title="C 0.4%"></span>
+                    <span style="width:0.34%;background:#b07219" title="Java 0.3%"></span>
+                    <span style="width:0.24%;background:#3178c6" title="TypeScript 0.2%"></span>
+                    <span style="width:0.34%;background:#8b949e" title="C++, Vue, Shell"></span>
                 </div>
-                <span class="entry-org">Columbia Sportswear Company</span>
-                <ul class="bullet-list">
-                    <li>Enterprise network supporting 600+ retail locations, DCs, and corporate sites across Cisco, Aruba, Palo Alto.</li>
-                    <li>Prisma SD-WAN deployment and API integration with Aruba Central for change logging to SIEM.</li>
-                    <li>Built device state collection platform (Flask/FastAPI, MySQL) for auditing and compliance reporting.</li>
-                    <li>Automated support contract gap analysis via Cisco, Palo Alto, HPE APIs.</li>
-                </ul>
-            </div>
-
-            <div class="entry">
-                <div class="entry-header">
-                    <h3 class="entry-title">Principal Engineer - QA Network Automation</h3>
+                <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:4px 16px;font-family:var(--font-data);font-size:10px;color:var(--text-secondary);line-height:1.8;">
+                    <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#3572A5;display:inline-block;"></span>Python <span style="color:var(--text-dim)">76.0%</span></span>
+                    <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#f1e05a;display:inline-block;"></span>JavaScript <span style="color:var(--text-dim)">19.2%</span></span>
+                    <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#00ADD8;display:inline-block;"></span>Go <span style="color:var(--text-dim)">2.2%</span></span>
+                    <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#178600;display:inline-block;"></span>C# <span style="color:var(--text-dim)">0.8%</span></span>
+                    <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#A97BFF;display:inline-block;"></span>Robot <span style="color:var(--text-dim)">0.5%</span></span>
+                    <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#555555;display:inline-block;"></span>C <span style="color:var(--text-dim)">0.4%</span></span>
+                    <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#b07219;display:inline-block;"></span>Java <span style="color:var(--text-dim)">0.3%</span></span>
+                    <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#3178c6;display:inline-block;"></span>TypeScript <span style="color:var(--text-dim)">0.2%</span></span>
+                    <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#8b949e;display:inline-block;"></span>C++ · Vue · Shell</span>
                 </div>
-                <span class="entry-org">Charter Communications</span>
-                <ul class="bullet-list">
-                    <li>Test automation architecture for network infrastructure using Robot Framework, pyATS, Python.</li>
-                    <li>GitLab CI/CD pipelines for network validation in datacenter environments.</li>
-                    <li>Docker and VMware test environments for DevOps workflows.</li>
-                </ul>
             </div>
-
-            <div class="entry">
-                <div class="entry-header">
-                    <h3 class="entry-title">Architect IP Edge Engineering</h3>
-                </div>
-                <span class="entry-org">Level 3 Communications</span>
-                <ul class="bullet-list">
-                    <li>IP Services architecture—IPVPN, Converged VOIP/Data, Managed Internet across carrier backbone.</li>
-                    <li>Low-touch provisioning design for service automation at scale.</li>
-                    <li>Anycast implementations for DNS, syslog, hosted Netflow services.</li>
-                </ul>
-            </div>
-
-            <div class="entry">
-                <div class="entry-header">
-                    <h3 class="entry-title">Architect III</h3>
-                </div>
-                <span class="entry-org">Cricket Wireless (AT&T)</span>
-                <ul class="bullet-list">
-                    <li>Mobile carrier network architecture and engineering.</li>
-                    <li>Self managed MPLS Core, OSPF-TE</li>
-                    <li>MVNO Peering</li>
-                    <li>Datacenter design and implmentation, largest had ~300 switches</li>
-                </ul>
-            </div>
-
+        </div>
+        <div class="polyglot-strip">
+            <div class="lang-card"><div class="lang-name">Python</div><div class="lang-count">15 REPOS</div><ul class="lang-repos"><li><a href="https://github.com/scottpeterman/secure_cartography">secure_cartography</a></li><li><a href="https://github.com/scottpeterman/nterm-ng">nterm-ng</a></li><li><a href="https://github.com/scottpeterman/velocitycmdb">velocitycmdb</a></li><li><a href="https://github.com/scottpeterman/fibtrace">fibtrace</a></li><li class="more">+ 11 more</li></ul></div>
+            <div class="lang-card"><div class="lang-name">Go</div><div class="lang-count">2 REPOS</div><ul class="lang-repos"><li><a href="https://github.com/scottpeterman/tetherssh">tetherssh</a></li><li><a href="https://github.com/scottpeterman/gsshpass">gsshpass</a></li></ul></div>
+            <div class="lang-card"><div class="lang-name">C# / .NET</div><div class="lang-count">1 REPO</div><ul class="lang-repos"><li><a href="https://github.com/scottpeterman/retroterm.net">retroterm.net</a></li></ul></div>
+            <div class="lang-card"><div class="lang-name">JavaScript</div><div class="lang-count">1 REPO</div><ul class="lang-repos"><li><a href="https://github.com/scottpeterman/velociterm">velociterm</a></li></ul></div>
         </div>
     </section>
 
-    <section id="projects" class="section">
-        <div class="container">
-            <span class="section-title">Open Source & Projects</span>
-            <div class="project-grid">
-                
-                <div class="project-card">
-                    <h3 class="entry-title">Secure Cartography</h3>
-                    <p class="entry-content" style="margin-top: 0.5rem;">
-                        SSH-based network discovery tool that interrogates devices via CDP/LLDP to automate topology documentation and diagram generation.
-                    </p>
-                    <div class="tech-tags">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">PyQt6</span>
-                        <span class="tech-tag">TextFSM</span>
-                        <span class="tech-tag">Multi-vendor</span>
-                    </div>
-                </div>
+    <section class="section-block" id="projects">
+        <div class="section-header"><span class="section-label">Open Source Projects</span><div class="section-line"></div></div>
+        <div class="section-sub">Organized around the network lifecycle: Day 0 is discovery, Day 1 is inventory and provisioning, Day 2 is operational validation.</div>
 
-                <div class="project-card">
-                    <h3 class="entry-title">nterm</h3>
-                    <p class="entry-content" style="margin-top: 0.5rem;">
-                        PyQt6 SSH terminal emulator featuring YubiKey authentication, HashiCorp Vault integration, and session scripting APIs.
-                    </p>
-                    <div class="tech-tags">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">SSH</span>
-                        <span class="tech-tag">Vault</span>
-                        <span class="tech-tag">Security</span>
-                    </div>
-                </div>
+        <div class="day-section"><div class="day-bar"><span class="day-badge">DAY 0</span><span class="day-bar-label">Discovery & Topology</span></div>
+        <div class="project-grid">
+            <div class="project-card"><div class="project-card-top"><span class="project-card-badge">DAY 0</span><div class="project-card-link"><a href="https://github.com/scottpeterman/secure_cartography"><i data-lucide="github"></i></a></div></div><div class="project-card-name">Secure Cartography</div><div class="project-card-img" onclick="openModal('https://raw.githubusercontent.com/scottpeterman/secure_cartography/refs/heads/main/screenshots/slides2.gif','Secure Cartography')"><img src="https://raw.githubusercontent.com/scottpeterman/secure_cartography/refs/heads/main/screenshots/slides2.gif" alt="Secure Cartography" loading="lazy"></div><div class="project-card-desc">SSH-based network discovery that interrogates devices via CDP/LLDP to automate topology documentation and diagram generation. Multi-vendor support across Cisco, Arista, Juniper.</div><div class="project-tags"><span class="tag">Python</span><span class="tag">PyQt6</span><span class="tag">TextFSM</span><span class="tag star">149★</span></div></div>
+        </div></div>
 
-                <div class="project-card">
-                    <h3 class="entry-title">VelocityCMDB</h3>
-                    <p class="entry-content" style="margin-top: 0.5rem;">
-                        Portable network CMDB for asset management and change detection. Currently managing 350+ devices across 50+ sites.
-                    </p>
-                    <div class="tech-tags">
-                        <span class="tech-tag">Flask</span>
-                        <span class="tech-tag">MySQL</span>
-                        <span class="tech-tag">CMDB</span>
-                        <span class="tech-tag">Inventory</span>
-                    </div>
-                </div>
+        <div class="day-section"><div class="day-bar"><span class="day-badge">DAY 1</span><span class="day-bar-label">Inventory & Provisioning</span></div>
+        <div class="project-grid">
+            <div class="project-card"><div class="project-card-top"><span class="project-card-badge">DAY 1</span><div class="project-card-link"><a href="https://github.com/scottpeterman/velocitycmdb"><i data-lucide="github"></i></a></div></div><div class="project-card-name">VelocityCMDB</div><div class="project-card-img" onclick="openModal('https://raw.githubusercontent.com/scottpeterman/velocitycmdb/main/screenshots/dark/slides.gif','VelocityCMDB')"><img src="https://raw.githubusercontent.com/scottpeterman/velocitycmdb/main/screenshots/dark/slides.gif" alt="VelocityCMDB" loading="lazy"></div><div class="project-card-desc">Tactical, portable network CMDB with automated discovery, change detection, and operational intelligence. Currently managing 357+ devices across 53 sites.</div><div class="project-tags"><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">SQLite</span></div></div>
+            <div class="project-card"><div class="project-card-top"><span class="project-card-badge">DAY 1</span><div class="project-card-link"><a href="https://github.com/scottpeterman/python-librenms-mibs"><i data-lucide="github"></i></a></div></div><div class="project-card-name">Python LibreNMS MIBs</div><div class="project-card-desc">4,242 compiled MIBs from 298 vendors for PySNMP. The most comprehensive open-source compiled MIB collection available.</div><div class="project-tags"><span class="tag">Python</span><span class="tag">SNMP</span><span class="tag">298 Vendors</span></div></div>
+        </div></div>
 
-                <div class="project-card">
-                    <h3 class="entry-title">VelociTerm NB</h3>
-                    <p class="entry-content" style="margin-top: 0.5rem;">
-                        Web-based SSH gateway with NetBox integration and WebSocket-driven terminal sessions for enterprise jump hosts.
-                    </p>
-                    <div class="tech-tags">
-                        <span class="tech-tag">FastAPI</span>
-                        <span class="tech-tag">WebSockets</span>
-                        <span class="tech-tag">NetBox</span>
-                    </div>
-                </div>
+        <div class="day-section"><div class="day-bar"><span class="day-badge">DAY 2</span><span class="day-bar-label">Operational Validation</span></div>
+        <div class="project-grid">
+            <div class="project-card"><div class="project-card-top"><span class="project-card-badge">DAY 2</span><div class="project-card-link"><a href="https://github.com/scottpeterman/nterm-ng"><i data-lucide="github"></i></a></div></div><div class="project-card-name">nterm-ng</div><div class="project-card-img" onclick="openModal('https://raw.githubusercontent.com/scottpeterman/nterm-ng/refs/heads/main/screenshots/slides2.gif','nterm-ng')"><img src="https://raw.githubusercontent.com/scottpeterman/nterm-ng/refs/heads/main/screenshots/slides2.gif" alt="nterm-ng" loading="lazy"></div><div class="project-card-desc">A network-aware SSH terminal that understands what it sees. Sniffer/gutter/parse chain architecture with vault integration and real-time telemetry.</div><div class="project-tags"><span class="tag">Python</span><span class="tag">PyQt6</span><span class="tag">Telemetry</span></div></div>
+            <div class="project-card"><div class="project-card-top"><span class="project-card-badge">DAY 2</span><div class="project-card-link"><a href="https://github.com/scottpeterman/fibtrace"><i data-lucide="github"></i></a></div></div><div class="project-card-name">FibTrace</div><div class="project-card-img" onclick="openModal('https://raw.githubusercontent.com/scottpeterman/fibtrace/refs/heads/main/screenshots/tui_debug.png','FibTrace')"><img src="https://raw.githubusercontent.com/scottpeterman/fibtrace/refs/heads/main/screenshots/tui_debug.png" alt="FibTrace" loading="lazy"></div><div class="project-card-desc">Hop-by-hop forwarding chain validation from the device perspective. Proves traffic follows the path you expect.</div><div class="project-tags"><span class="tag">Python</span><span class="tag">Routing</span><span class="tag">Validation</span></div></div>
+            <div class="project-card"><div class="project-card-top"><span class="project-card-badge">DAY 2</span><div class="project-card-link"><a href="https://github.com/scottpeterman/trafikwatch"><i data-lucide="github"></i></a></div></div><div class="project-card-name">TrafikWatch</div><div class="project-card-img" onclick="openModal('https://raw.githubusercontent.com/scottpeterman/trafikwatch/refs/heads/main/screenshots/spine_leaf.png','TrafikWatch')"><img src="https://raw.githubusercontent.com/scottpeterman/trafikwatch/refs/heads/main/screenshots/spine_leaf.png" alt="TrafikWatch" loading="lazy"></div><div class="project-card-desc">Real-time SNMP interface monitoring from the terminal. Built for watching migrations, maintenance windows, and traffic shifts live.</div><div class="project-tags"><span class="tag">Python</span><span class="tag">SNMP</span><span class="tag">TUI</span></div></div>
+        </div></div>
 
-            </div>
+        <div class="day-section"><div class="day-bar"><span class="day-badge">SSH TERMINALS</span><span class="day-bar-label">Same problem — every stack</span></div>
+        <div class="project-grid">
+            <div class="project-card"><div class="project-card-top"><span class="project-card-badge go">GO</span><div class="project-card-link"><a href="https://github.com/scottpeterman/tetherssh"><i data-lucide="github"></i></a></div></div><div class="project-card-name">TetherSSH</div><div class="project-card-img" onclick="openModal('https://raw.githubusercontent.com/scottpeterman/tetherssh/main/screenshots/session_detail.png','TetherSSH')"><img src="https://raw.githubusercontent.com/scottpeterman/tetherssh/main/screenshots/session_detail.png" alt="TetherSSH" loading="lazy"></div><div class="project-card-desc">Go-based terminal on Fyne 2 with gopyte — a custom terminal emulation library. Session management, tree navigator, full alternate screen buffer.</div><div class="project-tags"><span class="tag">Go</span><span class="tag">Fyne</span><span class="tag">SSH</span></div></div>
+            <div class="project-card"><div class="project-card-top"><span class="project-card-badge csharp">C#</span><div class="project-card-link"><a href="https://github.com/scottpeterman/retroterm.net"><i data-lucide="github"></i></a></div></div><div class="project-card-name">RetroTerm.NET</div><div class="project-card-img" onclick="openModal('https://raw.githubusercontent.com/scottpeterman/retroterm.net/main/screenshots/slides1.gif','RetroTerm.NET')"><img src="https://raw.githubusercontent.com/scottpeterman/retroterm.net/main/screenshots/slides1.gif" alt="RetroTerm.NET" loading="lazy"></div><div class="project-card-desc">Retro DOS-inspired terminal in C#/.NET. Modern SSH connectivity wrapped in classic aesthetics.</div><div class="project-tags"><span class="tag">C#</span><span class="tag">.NET</span><span class="tag">SSH</span></div></div>
+            <div class="project-card"><div class="project-card-top"><span class="project-card-badge js">JS</span><div class="project-card-link"><a href="https://github.com/scottpeterman/velociterm"><i data-lucide="github"></i></a></div></div><div class="project-card-name">VelociTerm</div><div class="project-card-img" onclick="openModal('https://raw.githubusercontent.com/scottpeterman/velociterm/refs/heads/dev/screenshots/slides3.gif','VelociTerm')"><img src="https://raw.githubusercontent.com/scottpeterman/velociterm/refs/heads/dev/screenshots/slides3.gif" alt="VelociTerm" loading="lazy"></div><div class="project-card-desc">Web-based SSH gateway with WebSocket terminal sessions. Enterprise jump host with advanced session filtering.</div><div class="project-tags"><span class="tag">JavaScript</span><span class="tag">FastAPI</span><span class="tag">WebSocket</span></div></div>
+            <div class="project-card"><div class="project-card-top"><span class="project-card-badge">PYTHON/GL</span><div class="project-card-link"><a href="https://github.com/scottpeterman/coolpyterm"><i data-lucide="github"></i></a></div></div><div class="project-card-name">CoolPyTerm</div><div class="project-card-img" onclick="openModal('https://raw.githubusercontent.com/scottpeterman/coolpyterm/refs/heads/main/screenshots/slides.gif','CoolPyTerm')"><img src="https://raw.githubusercontent.com/scottpeterman/coolpyterm/refs/heads/main/screenshots/slides.gif" alt="CoolPyTerm" loading="lazy"></div><div class="project-card-desc">Hardware-accelerated SSH terminal with authentic CRT effects. PyQt6 + OpenGL with phosphor glow and scan lines.</div><div class="project-tags"><span class="tag">Python</span><span class="tag">OpenGL</span><span class="tag">PyQt6</span></div></div>
+        </div></div>
+
+        <div class="day-section"><div class="day-bar"><span class="day-badge" style="background:rgba(41,121,255,0.1);color:var(--blue);border-color:rgba(41,121,255,0.15)">TOOLS & LIBS</span><span class="day-bar-label">Reusable components and dev utilities</span></div>
+        <div class="project-grid">
+            <div class="project-card"><div class="project-card-top"><span class="project-card-badge lib">LIB</span><div class="project-card-link"><a href="https://github.com/scottpeterman/nterm-qt"><i data-lucide="github"></i></a></div></div><div class="project-card-name">nterm-qt</div><div class="project-card-desc">Themeable SSH terminal widget for PyQt6 with enterprise features. Embeddable component for building network tools.</div><div class="project-tags"><span class="tag">Python</span><span class="tag">Widget</span></div></div>
+            <div class="project-card"><div class="project-card-top"><span class="project-card-badge lib">LIB</span><div class="project-card-link"><a href="https://github.com/scottpeterman/gsshpass"><i data-lucide="github"></i></a></div></div><div class="project-card-name">gsshpass</div><div class="project-card-desc">Go SSH utility for automating commands. Designed for scripted workflows and older equipment compatibility.</div><div class="project-tags"><span class="tag">Go</span><span class="tag">SSH</span></div></div>
+            <div class="project-card"><div class="project-card-top"><span class="project-card-badge tool">TOOL</span><div class="project-card-link"><a href="https://github.com/scottpeterman/tptpy"><i data-lucide="github"></i></a></div></div><div class="project-card-name">tptpy</div><div class="project-card-desc">Textual TUI for interactively testing TextFSM and TTP templates against device output.</div><div class="project-tags"><span class="tag">Python</span><span class="tag">TextFSM</span><span class="tag">TUI</span></div></div>
+            <div class="project-card"><div class="project-card-top"><span class="project-card-badge lib">LIB</span><div class="project-card-link"><a href="https://github.com/scottpeterman/tinyscp"><i data-lucide="github"></i></a></div></div><div class="project-card-name">TinySCP</div><div class="project-card-desc">Minimal, embeddable SCP server for network automation workflows.</div><div class="project-tags"><span class="tag">Python</span><span class="tag">SCP</span></div></div>
+        </div></div>
+    </section>
+
+    <section class="section-block" id="personal">
+        <div class="section-header"><span class="section-label">Personal Projects</span><div class="section-line"></div></div>
+        <div class="section-sub">Built because problems exist, not because a job required it.</div>
+        <div class="personal-grid">
+            <div class="personal-card"><div class="personal-name"><a href="https://github.com/scottpeterman/velocidictate">VelociDictate</a></div><div class="personal-desc">Cross-platform speech-to-text optimized for technical dictation.</div><div class="project-tags"><span class="tag">Python</span><span class="tag">AI/ML</span></div></div>
+            <div class="personal-card"><div class="personal-name"><a href="https://github.com/scottpeterman/autiobooksqta">AutiobooksQTA</a></div><div class="personal-desc">Audiobook generator from EPUB using Kokoro speech synthesis.</div><div class="project-tags"><span class="tag">Python</span><span class="tag">TTS</span></div></div>
+            <div class="personal-card"><div class="personal-name"><a href="https://github.com/scottpeterman/couchguitar">CouchGuitar</a></div><div class="personal-desc">Teleprompter-style song display for musicians with chord charts.</div><div class="project-tags"><span class="tag">Python</span><span class="tag">PyQt6</span></div></div>
+            <div class="personal-card"><div class="personal-name"><a href="https://github.com/scottpeterman/pywboard">PyWBoard</a></div><div class="personal-desc">Whiteboard built with PyQt6 + QWebEngine. Zero CDN, fully offline.</div><div class="project-tags"><span class="tag">HTML</span><span class="tag">PyQt6</span></div></div>
         </div>
     </section>
 
-    <section id="contact" class="section" style="background: var(--bg-subtle);">
-        <div class="container">
-            <span class="section-title">Contact</span>
-            <div class="entry-content">
-                <p style="margin-bottom: 1.5rem;">
-                    <a href="https://github.com/scottpeterman" style="color: var(--accent-blue); text-decoration: none; font-weight: 500;">github.com/scottpeterman</a>
-                </p>
-                <p>
-                    <a href="https://linkedin.com/in/scott-peterman-networkeng" style="color: var(--accent-blue); text-decoration: none; font-weight: 500;">linkedin.com/in/scott-peterman-networkeng</a>
-                </p>
-            </div>
-        </div>
+    <section class="section-block" id="experience">
+        <div class="panel"><div class="panel-header"><div class="panel-title">Mission Timeline</div><div class="panel-indicator">Cisco Certified Instructor · 4 Years</div></div>
+        <div class="panel-body" style="padding:0"><div class="timeline">
+            <div class="timeline-row"><div class="timeline-meta"><div class="timeline-company">Kentik</div><div class="timeline-dates">Oct 2024 — Present</div></div><div><div class="timeline-role">Principal Infrastructure Engineer</div><div class="timeline-detail"><p>Datacenter and peering infrastructure on Arista and Juniper. Circuit turn-ups, PNI implementations.</p><p>BGP peer migrations across 6 edge devices (89 peers) — pre-flight validation, state auditing, cutover execution.</p></div></div></div>
+            <div class="timeline-row"><div class="timeline-meta"><div class="timeline-company">Columbia Sportswear</div><div class="timeline-dates">Mar 2022 — Oct 2024</div></div><div><div class="timeline-role">Principal Infrastructure Engineer</div><div class="timeline-detail"><p>Enterprise network: 600+ retail locations, DCs, corporate sites across Cisco, Aruba, Palo Alto.</p><p>Device state collection platform (Flask/FastAPI, MySQL) for auditing and compliance.</p></div></div></div>
+            <div class="timeline-row"><div class="timeline-meta"><div class="timeline-company">Charter</div><div class="timeline-dates">2019 — 2022</div></div><div><div class="timeline-role">Principal Engineer — QA Network Automation</div><div class="timeline-detail"><p>Test automation architecture using Robot Framework, pyATS, Python. GitLab CI/CD for network validation.</p></div></div></div>
+            <div class="timeline-row"><div class="timeline-meta"><div class="timeline-company">Level 3 / TW Telecom</div><div class="timeline-dates">2012 — 2019</div></div><div><div class="timeline-role">Architect — IP Edge Engineering</div><div class="timeline-detail"><p>IP Services architecture — IPVPN, Converged VOIP/Data, Managed Internet. Anycast DNS, syslog, Netflow.</p></div></div></div>
+            <div class="timeline-row"><div class="timeline-meta"><div class="timeline-company">Cricket (AT&T)</div><div class="timeline-dates">2006 — 2012</div></div><div><div class="timeline-role">Architect III</div><div class="timeline-detail"><p>Mobile carrier network architecture. MPLS core, OSPF-TE, MVNO peering. Datacenter design — largest ~300 switches.</p></div></div></div>
+        </div></div></div>
     </section>
 
-    <footer style="padding: 3rem 0; border-top: 1px solid var(--border-color); background: var(--bg-subtle);">
-        <div class="container" style="text-align: center;">
-            <p class="entry-meta">© 2026 Scott Peterman | Littleton, Colorado</p>
-        </div>
+    <section class="section-block" id="skills">
+        <div class="panel"><div class="panel-header"><div class="panel-title">System Capabilities</div><div class="panel-indicator" style="color:var(--cyan)">CCNP · CCIP · JNCIS</div></div>
+        <div class="skills-grid">
+            <div class="skill-cell"><div class="skill-cell-title"><i data-lucide="network"></i> Platforms & Protocols</div><div class="skill-cell-items">Cisco IOS/IOS-XE/NX-OS, Arista EOS, Juniper, Palo Alto, Aruba/HPE, F5, BGP, MPLS L3VPN, EVPN/VXLAN, OSPF/ISIS, SD-WAN</div></div>
+            <div class="skill-cell"><div class="skill-cell-title"><i data-lucide="code-2"></i> Languages</div><div class="skill-cell-items">Python, Go, C#/.NET, JavaScript/TypeScript, Shell, PyQt6, Fyne, FastAPI, Flask, Textual</div></div>
+            <div class="skill-cell"><div class="skill-cell-title"><i data-lucide="wrench"></i> Automation</div><div class="skill-cell-items">Netmiko, NAPALM, TextFSM, Nornir, pyATS, Ansible, PySNMP, Paramiko</div></div>
+            <div class="skill-cell"><div class="skill-cell-title"><i data-lucide="server"></i> Infrastructure</div><div class="skill-cell-items">Git/GitLab CI, Docker, Linux, MySQL, SQLite, Redis</div></div>
+        </div></div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-links"><a href="https://github.com/scottpeterman"><i data-lucide="github"></i> GitHub</a><a href="https://linkedin.com/in/scott-peterman-networkeng"><i data-lucide="linkedin"></i> LinkedIn</a></div>
+        <div class="footer-copy">&copy; 2026 Scott Peterman &middot; Littleton, Colorado</div>
     </footer>
+</div>
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <div class="modal-header">
+            <div class="modal-title" id="modal-title"></div>
+            <div class="modal-close" onclick="forceClose()">ESC · CLOSE</div>
+        </div>
+        <img id="modal-img" src="" alt="">
+    </div>
+</div>
+<script>
+function openModal(src, title) {
+    var modal = document.getElementById('modal');
+    var img = document.getElementById('modal-img');
+    var titleEl = document.getElementById('modal-title');
+    img.src = src;
+    titleEl.textContent = title;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+function closeModal(e) {
+    if (e && e.target !== document.getElementById('modal')) return;
+    document.getElementById('modal').classList.remove('active');
+    document.body.style.overflow = '';
+}
+function forceClose() {
+    document.getElementById('modal').classList.remove('active');
+    document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') forceClose();
+});
 
+function makeGauge(elId, value, max, label, color, suffix) {
+    var chart = echarts.init(document.getElementById(elId), null, { renderer: 'canvas' });
+    var pct = value / max;
+    var displayVal = suffix ? value + suffix : value.toString();
+
+    chart.setOption({
+        series: [{
+            type: 'gauge',
+            startAngle: 225,
+            endAngle: -45,
+            radius: '85%',
+            center: ['50%', '52%'],
+            min: 0,
+            max: max,
+            progress: {
+                show: true,
+                width: 6,
+                roundCap: true,
+                itemStyle: { color: color }
+            },
+            axisLine: {
+                lineStyle: {
+                    width: 6,
+                    color: [[1, '#1e2a38']]
+                }
+            },
+            axisTick: { show: false },
+            splitLine: { show: false },
+            axisLabel: { show: false },
+            pointer: { show: false },
+            anchor: { show: false },
+            title: {
+                show: true,
+                offsetCenter: [0, '62%'],
+                fontSize: 9,
+                fontFamily: 'Share Tech Mono, monospace',
+                color: '#3d4f63',
+                letterSpacing: 1
+            },
+            detail: {
+                valueAnimation: true,
+                offsetCenter: [0, '10%'],
+                fontSize: 18,
+                fontFamily: 'Orbitron, sans-serif',
+                fontWeight: 700,
+                color: color,
+                formatter: function() { return displayVal; }
+            },
+            data: [{ value: value, name: label.toUpperCase() }]
+        }]
+    });
+    return chart;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    if (typeof lucide !== 'undefined') { lucide.createIcons(); }
+
+    if (typeof echarts !== 'undefined') {
+        var charts = [];
+        charts.push(makeGauge('gauge-repos', 312, 400, 'Repos', '#00e5ff', ''));
+        charts.push(makeGauge('gauge-langs', 11, 15, 'Languages', '#00e676', ''));
+        charts.push(makeGauge('gauge-stars', 149, 200, 'Stars', '#ffab00', '+'));
+        charts.push(makeGauge('gauge-followers', 111, 200, 'Followers', '#c8d6e5', ''));
+        charts.push(makeGauge('gauge-linkedin', 1712, 2500, 'LinkedIn', '#00e5ff', ''));
+        charts.push(makeGauge('gauge-impressions', 573, 750, 'Impressions', '#00e676', 'K'));
+
+        window.addEventListener('resize', function() {
+            charts.forEach(function(c) { c.resize(); });
+        });
+    }
+});
+</script>
 </body>
 </html>
