@@ -191,8 +191,6 @@ a{color:var(--cyan);text-decoration:none;transition:color var(--transition)}a:ho
                 <div style="background:var(--bg-panel);padding:4px 0;"><div id="gauge-langs" style="width:100%;height:120px;"></div></div>
                 <div style="background:var(--bg-panel);padding:4px 0;"><div id="gauge-pypi" style="width:100%;height:120px;"></div></div>
                 <div style="background:var(--bg-panel);padding:4px 0;"><div id="gauge-followers" style="width:100%;height:120px;"></div></div>
-                <div style="background:var(--bg-panel);padding:4px 0;"><div id="gauge-linkedin" style="width:100%;height:120px;"></div></div>
-                <div style="background:var(--bg-panel);padding:4px 0;"><div id="gauge-impressions" style="width:100%;height:120px;"></div></div>
             </div>
         </div>
     </section>
@@ -453,9 +451,9 @@ document.addEventListener('DOMContentLoaded', function() {
         charts.push(makeGauge('gauge-repos', 312, 400, 'Repos', '#00e5ff', ''));
         charts.push(makeGauge('gauge-langs', 11, 15, 'Languages', '#00e676', ''));
         charts.push(makeGauge('gauge-pypi', 32, 40, 'PyPI Packages', '#3775a9', ''));
-        charts.push(makeGauge('gauge-followers', 111, 200, 'Followers', '#c8d6e5', ''));
-        charts.push(makeGauge('gauge-linkedin', 1712, 2500, 'LinkedIn', '#00e5ff', ''));
-        charts.push(makeGauge('gauge-impressions', 573, 750, 'Impressions', '#00e676', 'K'));
+        charts.push(makeGauge('gauge-followers', 111, 200, 'Github Followers', '#c8d6e5', ''));
+        // charts.push(makeGauge('gauge-linkedin', 1712, 2500, 'LinkedIn', '#00e5ff', ''));
+        // charts.push(makeGauge('gauge-impressions', 573, 750, 'Impressions', '#00e676', 'K'));
 
         window.addEventListener('resize', function() {
             charts.forEach(function(c) { c.resize(); });
