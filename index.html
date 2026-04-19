@@ -12,7 +12,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=JetBrains+Mono:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/lucide@latest"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
 <style>
 :root{--bg-primary:#0a0e14;--bg-panel:#111820;--bg-panel-header:#151d27;--border:#1e2a38;--border-accent:#2a3a4e;--text-primary:#c8d6e5;--text-secondary:#6b7d93;--text-dim:#3d4f63;--green:#00e676;--green-dim:rgba(0,230,118,0.12);--amber:#ffab00;--amber-dim:rgba(255,171,0,0.12);--red:#ff5252;--cyan:#00e5ff;--cyan-dim:rgba(0,229,255,0.08);--blue:#2979ff;--purple:#d500f9;--font-display:'Orbitron',sans-serif;--font-mono:'JetBrains Mono',monospace;--font-data:'Share Tech Mono',monospace;--panel-radius:4px;--transition:0.3s ease}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -168,7 +167,6 @@ a{color:var(--cyan);text-decoration:none;transition:color var(--transition)}a:ho
     <div class="header-nav">
         <a href="#about" class="nav-text">Systems</a>
         <a href="#methodology" class="nav-text">Method</a>
-        <a href="#polyglot" class="nav-text">Languages</a>
         <a href="#projects" class="nav-text">Projects</a>
         <a href="#experience" class="nav-text">Timeline</a>
         <div class="header-status"><div class="status-dot"></div>OPERATIONAL</div>
@@ -185,12 +183,30 @@ a{color:var(--cyan);text-decoration:none;transition:color var(--transition)}a:ho
             </div>
         </div>
         <div class="panel">
-            <div class="panel-header"><div class="panel-title">Telemetry</div><div class="panel-indicator" style="color:var(--cyan)">LIVE</div></div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);">
-                <div style="background:var(--bg-panel);padding:4px 0;"><div id="gauge-repos" style="width:100%;height:120px;"></div></div>
-                <div style="background:var(--bg-panel);padding:4px 0;"><div id="gauge-langs" style="width:100%;height:120px;"></div></div>
-                <div style="background:var(--bg-panel);padding:4px 0;"><div id="gauge-pypi" style="width:100%;height:120px;"></div></div>
-                <div style="background:var(--bg-panel);padding:4px 0;"><div id="gauge-followers" style="width:100%;height:120px;"></div></div>
+            <div class="panel-header">
+                <div class="panel-title">Application Languages — 312 Repos</div>
+                <div class="panel-indicator" style="color:var(--text-dim)">Markup Excluded</div>
+            </div>
+            <div class="panel-body" style="padding:16px 16px 12px">
+                <div style="display:flex;height:10px;border-radius:3px;overflow:hidden;gap:1px;">
+                    <span style="width:76.00%;background:#3572A5" title="Python 76.0%"></span>
+                    <span style="width:19.20%;background:#f1e05a" title="JavaScript 19.2%"></span>
+                    <span style="width:2.17%;background:#00ADD8" title="Go 2.2%"></span>
+                    <span style="width:0.82%;background:#178600" title="C# 0.8%"></span>
+                    <span style="width:0.49%;background:#A97BFF" title="RobotFramework 0.5%"></span>
+                    <span style="width:0.40%;background:#555555" title="C 0.4%"></span>
+                    <span style="width:0.34%;background:#b07219" title="Java 0.3%"></span>
+                    <span style="width:0.24%;background:#3178c6" title="TypeScript 0.2%"></span>
+                    <span style="width:0.34%;background:#8b949e" title="C++, Vue, Shell"></span>
+                </div>
+                <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:4px 16px;font-family:var(--font-data);font-size:10px;color:var(--text-secondary);line-height:1.8;">
+                    <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#3572A5;display:inline-block;"></span>Python <span style="color:var(--text-dim)">76.0%</span></span>
+                    <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#f1e05a;display:inline-block;"></span>JavaScript <span style="color:var(--text-dim)">19.2%</span></span>
+                    <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#00ADD8;display:inline-block;"></span>Go <span style="color:var(--text-dim)">2.2%</span></span>
+                    <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#178600;display:inline-block;"></span>C# <span style="color:var(--text-dim)">0.8%</span></span>
+                    <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#A97BFF;display:inline-block;"></span>Robot <span style="color:var(--text-dim)">0.5%</span></span>
+                    <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#8b949e;display:inline-block;"></span>Other</span>
+                </div>
             </div>
         </div>
     </section>
@@ -233,47 +249,6 @@ a{color:var(--cyan);text-decoration:none;transition:color var(--transition)}a:ho
                 <div class="featured-card-body"><div class="featured-card-sub">Incident Response</div></div>
             </a>
         </div>
-    </section>
-
-    <section class="section-block" id="polyglot">
-        <div class="section-header"><span class="section-label">Multi-Language/Multi-Framework Development</span><div class="section-line"></div></div>
-        <div class="section-sub">Same problems, solved across multiple languages and frameworks. Every SSH terminal implements the same core pattern — invoke-shell automation with real device compatibility.</div>
-        <div class="panel" style="margin-bottom:20px">
-            <div class="panel-header">
-                <div class="panel-title">Application Languages — 312 Repos</div>
-                <div class="panel-indicator" style="color:var(--text-dim)">3.3 GB · 11 Languages · Markup Excluded</div>
-            </div>
-            <div class="panel-body" style="padding:16px 16px 12px">
-                <div style="display:flex;height:10px;border-radius:3px;overflow:hidden;gap:1px;">
-                    <span style="width:76.00%;background:#3572A5" title="Python 76.0%"></span>
-                    <span style="width:19.20%;background:#f1e05a" title="JavaScript 19.2%"></span>
-                    <span style="width:2.17%;background:#00ADD8" title="Go 2.2%"></span>
-                    <span style="width:0.82%;background:#178600" title="C# 0.8%"></span>
-                    <span style="width:0.49%;background:#A97BFF" title="RobotFramework 0.5%"></span>
-                    <span style="width:0.40%;background:#555555" title="C 0.4%"></span>
-                    <span style="width:0.34%;background:#b07219" title="Java 0.3%"></span>
-                    <span style="width:0.24%;background:#3178c6" title="TypeScript 0.2%"></span>
-                    <span style="width:0.34%;background:#8b949e" title="C++, Vue, Shell"></span>
-                </div>
-                <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:4px 16px;font-family:var(--font-data);font-size:10px;color:var(--text-secondary);line-height:1.8;">
-                    <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#3572A5;display:inline-block;"></span>Python <span style="color:var(--text-dim)">76.0%</span></span>
-                    <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#f1e05a;display:inline-block;"></span>JavaScript <span style="color:var(--text-dim)">19.2%</span></span>
-                    <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#00ADD8;display:inline-block;"></span>Go <span style="color:var(--text-dim)">2.2%</span></span>
-                    <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#178600;display:inline-block;"></span>C# <span style="color:var(--text-dim)">0.8%</span></span>
-                    <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#A97BFF;display:inline-block;"></span>Robot <span style="color:var(--text-dim)">0.5%</span></span>
-                    <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#555555;display:inline-block;"></span>C <span style="color:var(--text-dim)">0.4%</span></span>
-                    <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#b07219;display:inline-block;"></span>Java <span style="color:var(--text-dim)">0.3%</span></span>
-                    <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#3178c6;display:inline-block;"></span>TypeScript <span style="color:var(--text-dim)">0.2%</span></span>
-                    <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#8b949e;display:inline-block;"></span>C++ · Vue · Shell</span>
-                </div>
-            </div>
-        </div>
-        <!-- <div class="polyglot-strip">
-            <div class="lang-card"><div class="lang-name">Python</div><div class="lang-count">15 REPOS</div><ul class="lang-repos"><li><a href="https://github.com/scottpeterman/secure_cartography">secure_cartography</a></li><li><a href="https://github.com/scottpeterman/nterm-ng">nterm-ng</a></li><li><a href="https://github.com/scottpeterman/velocitycmdb">velocitycmdb</a></li><li><a href="https://github.com/scottpeterman/trafikwatch">trafikwatch</a></li><li class="more">+ 11 more</li></ul></div>
-            <div class="lang-card"><div class="lang-name">Go</div><div class="lang-count">3 REPOS</div><ul class="lang-repos"><li><a href="https://github.com/scottpeterman/tetherssh">tetherssh</a></li><li><a href="https://github.com/scottpeterman/gosnmptk">gosnmptk</a></li><li><a href="https://github.com/scottpeterman/gsshpass">gsshpass</a></li></ul></div>
-            <div class="lang-card"><div class="lang-name">C# / .NET</div><div class="lang-count">2 REPOS</div><ul class="lang-repos"><li><a href="https://github.com/scottpeterman/retroterm.net">retroterm.net</a></li><li><a href="https://github.com/scottpeterman/textfsm.net">textfsm.net</a></li></ul></div>
-            <div class="lang-card"><div class="lang-name">JavaScript</div><div class="lang-count">2 REPOS</div><ul class="lang-repos"><li><a href="https://github.com/scottpeterman/velociterm">velociterm</a></li><li><a href="https://github.com/scottpeterman/tfsmjs">tfsmjs</a></li></ul></div>
-        </div> -->
     </section>
 
     <section class="section-block" id="projects">
@@ -412,76 +387,8 @@ document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') forceClose();
 });
 
-function makeGauge(elId, value, max, label, color, suffix) {
-    var chart = echarts.init(document.getElementById(elId), null, { renderer: 'canvas' });
-    var pct = value / max;
-    var displayVal = suffix ? value + suffix : value.toString();
-
-    chart.setOption({
-        series: [{
-            type: 'gauge',
-            startAngle: 225,
-            endAngle: -45,
-            radius: '85%',
-            center: ['50%', '52%'],
-            min: 0,
-            max: max,
-            progress: {
-                show: true,
-                width: 6,
-                roundCap: true,
-                itemStyle: { color: color }
-            },
-            axisLine: {
-                lineStyle: {
-                    width: 6,
-                    color: [[1, '#1e2a38']]
-                }
-            },
-            axisTick: { show: false },
-            splitLine: { show: false },
-            axisLabel: { show: false },
-            pointer: { show: false },
-            anchor: { show: false },
-            title: {
-                show: true,
-                offsetCenter: [0, '62%'],
-                fontSize: 9,
-                fontFamily: 'Share Tech Mono, monospace',
-                color: '#3d4f63',
-                letterSpacing: 1
-            },
-            detail: {
-                valueAnimation: true,
-                offsetCenter: [0, '10%'],
-                fontSize: 18,
-                fontFamily: 'Orbitron, sans-serif',
-                fontWeight: 700,
-                color: color,
-                formatter: function() { return displayVal; }
-            },
-            data: [{ value: value, name: label.toUpperCase() }]
-        }]
-    });
-    return chart;
-}
-
 document.addEventListener('DOMContentLoaded', function() {
     if (typeof lucide !== 'undefined') { lucide.createIcons(); }
-
-    if (typeof echarts !== 'undefined') {
-        var charts = [];
-        charts.push(makeGauge('gauge-repos', 312, 400, 'Repos', '#00e5ff', ''));
-        charts.push(makeGauge('gauge-langs', 11, 15, 'Languages', '#00e676', ''));
-        charts.push(makeGauge('gauge-pypi', 32, 40, 'PyPI Packages', '#3775a9', ''));
-        charts.push(makeGauge('gauge-followers', 111, 200, 'Github Followers', '#c8d6e5', ''));
-        // charts.push(makeGauge('gauge-linkedin', 1712, 2500, 'LinkedIn', '#00e5ff', ''));
-        // charts.push(makeGauge('gauge-impressions', 573, 750, 'Impressions', '#00e676', 'K'));
-
-        window.addEventListener('resize', function() {
-            charts.forEach(function(c) { c.resize(); });
-        });
-    }
 });
 </script>
 </body>
