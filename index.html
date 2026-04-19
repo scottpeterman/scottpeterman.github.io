@@ -167,6 +167,7 @@ a{color:var(--cyan);text-decoration:none;transition:color var(--transition)}a:ho
     </div>
     <div class="header-nav">
         <a href="#about" class="nav-text">Systems</a>
+        <a href="#methodology" class="nav-text">Method</a>
         <a href="#polyglot" class="nav-text">Languages</a>
         <a href="#projects" class="nav-text">Projects</a>
         <a href="#experience" class="nav-text">Timeline</a>
@@ -191,6 +192,28 @@ a{color:var(--cyan);text-decoration:none;transition:color var(--transition)}a:ho
                 <div style="background:var(--bg-panel);padding:4px 0;"><div id="gauge-langs" style="width:100%;height:120px;"></div></div>
                 <div style="background:var(--bg-panel);padding:4px 0;"><div id="gauge-pypi" style="width:100%;height:120px;"></div></div>
                 <div style="background:var(--bg-panel);padding:4px 0;"><div id="gauge-followers" style="width:100%;height:120px;"></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-block" id="methodology">
+        <div class="panel" style="border-color:rgba(0,229,255,0.15)">
+            <div class="panel-header">
+                <div class="panel-title">Engineering Methodology</div>
+                <div class="panel-indicator" style="color:var(--cyan)">How This Portfolio Was Built</div>
+            </div>
+            <div class="panel-body" style="padding:20px 24px">
+                <div style="font-size:14px;color:var(--text-secondary);line-height:1.85;max-width:860px">
+                    Every networking tool in this portfolio was validated against real multi-vendor hardware — Arista, Cisco, and Juniper gear running real routing tables and real failure scenarios in a dedicated lab environment. Nothing here was tested first against mocked data or simulations. Once thoroughly validated, these tools are used to solve real operational problems.
+                </div>
+                <div style="margin-top:16px;font-size:14px;color:var(--text-secondary);line-height:1.85;max-width:860px">
+                    The development process follows four years of formal QA engineering — Robot Framework, pyATS, GitLab CI test suites against datacenter hardware at Charter. That discipline carries forward: architecture and design intent are defined upfront, implementation is systematic, and validation is continuous against environments where a bad parse or a missed edge case has operational consequences. These tools work because they were tested where failure matters.
+                </div>
+                <div style="margin-top:20px;display:flex;flex-wrap:wrap;gap:10px">
+                    <span style="font-family:var(--font-data);font-size:10px;padding:4px 12px;border-radius:2px;background:rgba(0,229,255,0.06);color:var(--cyan);border:1px solid rgba(0,229,255,0.12);letter-spacing:0.06em">HARDWARE-VALIDATED</span>
+                    <span style="font-family:var(--font-data);font-size:10px;padding:4px 12px;border-radius:2px;background:rgba(0,230,118,0.06);color:var(--green);border:1px solid rgba(0,230,118,0.12);letter-spacing:0.06em">MULTI-VENDOR</span>
+                    <span style="font-family:var(--font-data);font-size:10px;padding:4px 12px;border-radius:2px;background:rgba(255,171,0,0.06);color:var(--amber);border:1px solid rgba(255,171,0,0.12);letter-spacing:0.06em">QA-DRIVEN DEVELOPMENT</span>
+                </div>
             </div>
         </div>
     </section>
@@ -288,6 +311,7 @@ a{color:var(--cyan);text-decoration:none;transition:color var(--transition)}a:ho
             <div class="project-card"><div class="project-card-top"><span class="project-card-badge csharp">C#</span><div class="project-card-link"><a href="https://github.com/scottpeterman/retroterm.net"><i data-lucide="github"></i></a></div></div><div class="project-card-name">RetroTerm.NET</div><div class="project-card-img" onclick="openModal('https://raw.githubusercontent.com/scottpeterman/retroterm.net/main/screenshots/slides1.gif','RetroTerm.NET')"><img src="https://raw.githubusercontent.com/scottpeterman/retroterm.net/main/screenshots/slides1.gif" alt="RetroTerm.NET" loading="lazy"></div><div class="project-card-desc">Retro DOS-inspired terminal in C#/.NET. Modern SSH connectivity wrapped in classic aesthetics.</div><div class="project-tags"><span class="tag">C#</span><span class="tag">.NET</span><span class="tag">SSH</span></div></div>
             <div class="project-card"><div class="project-card-top"><span class="project-card-badge js">JS</span><div class="project-card-link"><a href="https://github.com/scottpeterman/velociterm"><i data-lucide="github"></i></a></div></div><div class="project-card-name">VelociTerm</div><div class="project-card-img" onclick="openModal('https://raw.githubusercontent.com/scottpeterman/velociterm/refs/heads/dev/screenshots/slides3.gif','VelociTerm')"><img src="https://raw.githubusercontent.com/scottpeterman/velociterm/refs/heads/dev/screenshots/slides3.gif" alt="VelociTerm" loading="lazy"></div><div class="project-card-desc">Web-based SSH gateway with WebSocket terminal sessions. Enterprise jump host with advanced session filtering.</div><div class="project-tags"><span class="tag">JavaScript</span><span class="tag">FastAPI</span><span class="tag">WebSocket</span></div></div>
             <div class="project-card"><div class="project-card-top"><span class="project-card-badge">PYTHON/GL</span><div class="project-card-link"><a href="https://github.com/scottpeterman/coolpyterm"><i data-lucide="github"></i></a></div></div><div class="project-card-name">CoolPyTerm</div><div class="project-card-img" onclick="openModal('https://raw.githubusercontent.com/scottpeterman/coolpyterm/refs/heads/main/screenshots/slides.gif','CoolPyTerm')"><img src="https://raw.githubusercontent.com/scottpeterman/coolpyterm/refs/heads/main/screenshots/slides.gif" alt="CoolPyTerm" loading="lazy"></div><div class="project-card-desc">Hardware-accelerated SSH terminal with authentic CRT effects. PyQt6 + OpenGL with phosphor glow and scan lines.</div><div class="project-tags"><span class="tag">Python</span><span class="tag">OpenGL</span><span class="tag">PyQt6</span><span class="tag pypi"><a href="https://pypi.org/project/coolpyterm/">pip install coolpyterm</a></span></div></div>
+            <div class="project-card"><div class="project-card-top"><span class="project-card-badge">ELECTRON/TS</span><div class="project-card-link"><a href="https://github.com/scottpeterman/nterm-js"><i data-lucide="github"></i></a></div></div><div class="project-card-name">nterm-js</div><div class="project-card-img" onclick="openModal('https://raw.githubusercontent.com/scottpeterman/nterm-js/refs/heads/main/screenshots/nterm1.gif','nterm-js')"><img src="https://raw.githubusercontent.com/scottpeterman/nterm-js/refs/heads/main/screenshots/nterm1.gif" alt="nterm-js" loading="lazy"></div><div class="project-card-desc">Cross-platform desktop SSH terminal with session manager and AES-256-GCM credential vault. Electron + xterm.js with installers for Windows, macOS, and Linux — a FOSS alternative to SecureCRT.</div><div class="project-tags"><span class="tag">TypeScript</span><span class="tag">Electron</span><span class="tag">xterm.js</span><span class="tag">SSH</span></div></div>
         </div></div>
 
         <div class="day-section"><div class="day-bar"><span class="day-badge" style="background:rgba(41,121,255,0.1);color:var(--blue);border-color:rgba(41,121,255,0.15)">TOOLS & LIBS</span><span class="day-bar-label">Reusable components and dev utilities</span></div>
