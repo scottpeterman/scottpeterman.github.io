@@ -3,398 +3,477 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Scott Peterman | Network Engineer & Automation Specialist</title>
-<meta name="description" content="Principal Infrastructure Engineer building open source network automation tools across Python, Go, C#, and JavaScript.">
-<meta property="og:title" content="Scott Peterman - Network Engineer & Automation Specialist">
-<meta property="og:description" content="A career spent building enterprise networks and the tools to automate them.">
+<title>Scott Peterman — Principal Network Engineer &amp; Automation</title>
+<meta name="description" content="Principal network engineer and software author. MPLS, BGP, EVPN across Arista, Juniper, and Cisco — plus 300+ open-source automation tools, hardware-validated across multiple vendors.">
+<meta property="og:title" content="Scott Peterman — Principal Network Engineer & Automation">
+<meta property="og:description" content="Thirty years running production networks; five building the automation that operates them.">
 <meta property="og:url" content="https://scottpeterman.github.io">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=JetBrains+Mono:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-<script src="https://unpkg.com/lucide@latest"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg-primary:#0a0e14;--bg-panel:#111820;--bg-panel-header:#151d27;--border:#1e2a38;--border-accent:#2a3a4e;--text-primary:#c8d6e5;--text-secondary:#6b7d93;--text-dim:#3d4f63;--green:#00e676;--green-dim:rgba(0,230,118,0.12);--amber:#ffab00;--amber-dim:rgba(255,171,0,0.12);--red:#ff5252;--cyan:#00e5ff;--cyan-dim:rgba(0,229,255,0.08);--blue:#2979ff;--purple:#d500f9;--font-display:'Orbitron',sans-serif;--font-mono:'JetBrains Mono',monospace;--font-data:'Share Tech Mono',monospace;--panel-radius:4px;--transition:0.3s ease}
+:root{
+  --paper:#F5F7F9; --card:#FFFFFF; --card-2:#FAFBFC;
+  --ink:#111D28; --ink-2:#41556A; --ink-3:#7B8EA0;
+  --rule:#E3E9EE; --rule-2:#EEF2F5;
+  --accent:#0E6BA8; --accent-deep:#0A4E7A; --accent-soft:#E9F1F8;
+  --v-green:#2D8659; --v-blue:#036897; --v-orange:#C25E17;
+  --crit:#C1352E; --warn:#B3730B; --ok:#1F7A4D;
+  --sans:'IBM Plex Sans',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  --mono:'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace;
+  --maxw:1120px; --r:6px;
+  --t:.22s cubic-bezier(.4,0,.2,1);
+}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:70px}
-body{background:var(--bg-primary);color:var(--text-primary);font-family:var(--font-mono);font-size:14px;line-height:1.6;overflow-x:hidden}
-body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,229,255,0.015) 2px,rgba(0,229,255,0.015) 4px);pointer-events:none;z-index:9999}
-a{color:var(--cyan);text-decoration:none;transition:color var(--transition)}a:hover{color:var(--text-primary)}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--accent);text-decoration:none;transition:color var(--t)}
+a:hover{color:var(--accent-deep)}
+img,svg{max-width:100%;display:block}
+::selection{background:var(--accent-soft)}
 
-.header{position:fixed;top:0;left:0;right:0;z-index:1000;background:linear-gradient(180deg,#0f1822 0%,rgba(10,14,20,0.95) 100%);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between}
-.header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:0.3}
-.header-left{display:flex;align-items:center;gap:16px}
-.logo-mark{width:32px;height:32px;border:2px solid var(--cyan);border-radius:3px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:900;font-size:14px;color:var(--cyan);position:relative}
-.logo-mark::before{content:'';position:absolute;inset:-1px;border-radius:3px;box-shadow:0 0 8px rgba(0,229,255,0.2)}
-.header-title{font-family:var(--font-display);font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-primary)}
-.header-subtitle{font-family:var(--font-data);font-size:10px;color:var(--text-dim);letter-spacing:0.08em}
-.header-nav{display:flex;align-items:center;gap:24px}
-.header-nav a{font-family:var(--font-display);font-size:9px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-secondary);transition:color var(--transition)}
-.header-nav a:hover{color:var(--cyan)}
-.header-status{display:flex;align-items:center;gap:8px;font-family:var(--font-data);font-size:10px;color:var(--green)}
-.status-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+/* ---- utility type ---- */
+.eyebrow{font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.mono{font-family:var(--mono)}
+.muted{color:var(--ink-2)}
 
-.main{max-width:1200px;margin:0 auto;padding:80px 20px 40px}
-.panel{background:var(--bg-panel);border:1px solid var(--border);border-radius:var(--panel-radius);overflow:hidden;transition:border-color var(--transition)}
-.panel:hover{border-color:var(--border-accent)}
-.panel-header{background:var(--bg-panel-header);border-bottom:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;justify-content:space-between}
-.panel-title{font-family:var(--font-display);font-size:9px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-secondary)}
-.panel-indicator{font-family:var(--font-data);font-size:10px;color:var(--green);display:flex;align-items:center;gap:6px}
-.panel-body{padding:16px}
+/* ---- header ---- */
+.nav{position:fixed;inset:0 0 auto 0;z-index:100;height:60px;background:rgba(245,247,249,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule);display:flex;align-items:center}
+.nav-inner{max-width:var(--maxw);width:100%;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-mark{width:30px;height:30px;border:1.5px solid var(--ink);border-radius:5px;display:grid;place-items:center;font-family:var(--mono);font-weight:600;font-size:12px;letter-spacing:.02em;color:var(--ink)}
+.brand-name{font-weight:600;font-size:14.5px;letter-spacing:-.01em}
+.brand-sub{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.04em}
+.nav-links{display:flex;align-items:center;gap:26px}
+.nav-links a{font-family:var(--mono);font-size:12px;letter-spacing:.05em;color:var(--ink-2);text-transform:uppercase}
+.nav-links a:hover{color:var(--accent)}
+@media(max-width:760px){.nav-links a.hide-sm{display:none}}
 
-.hero{margin-bottom:32px;display:grid;grid-template-columns:1fr 320px;gap:20px}
-.hero-main .panel-body{padding:32px}
-.hero-callsign{font-family:var(--font-display);font-size:clamp(22px,4vw,34px);font-weight:700;letter-spacing:-0.02em;color:var(--text-primary);margin-bottom:6px;line-height:1.2}
-.hero-role{font-family:var(--font-display);font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:20px}
-.hero-desc{font-size:14px;color:var(--text-secondary);line-height:1.75;max-width:580px}
+/* ---- layout ---- */
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+section{scroll-margin-top:72px}
+.sec{padding:64px 0}
+.sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:8px}
+.sec-num{font-family:var(--mono);font-size:12px;color:var(--ink-3);letter-spacing:.08em}
+.sec-title{font-size:26px;font-weight:600;letter-spacing:-.02em}
+.sec-rule{height:1px;background:var(--rule);flex:1;align-self:center;margin-left:4px}
+.sec-lede{color:var(--ink-2);max-width:640px;margin-top:10px;font-size:15.5px}
 
-.telem-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)}
-.telem-cell{background:var(--bg-panel);padding:16px;text-align:center}
-.telem-value{font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--text-primary);line-height:1;margin-bottom:4px}
-.telem-value.accent{color:var(--cyan)}.telem-value.green{color:var(--green)}.telem-value.amber{color:var(--amber)}
-.telem-label{font-family:var(--font-data);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-dim)}
+/* ---- hero ---- */
+.hero{padding:104px 0 40px}
+.hero-grid{display:grid;grid-template-columns:1.55fr 1fr;gap:40px;align-items:start}
+.hero h1{font-size:clamp(30px,4.6vw,46px);line-height:1.08;font-weight:600;letter-spacing:-.025em;margin:18px 0 22px}
+.hero h1 .em{color:var(--accent)}
+.hero-lede{font-size:17px;color:var(--ink-2);max-width:600px;line-height:1.7}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{font-family:var(--mono);font-size:12.5px;letter-spacing:.03em;padding:10px 18px;border-radius:var(--r);border:1px solid var(--rule);background:var(--card);color:var(--ink);display:inline-flex;align-items:center;gap:8px;transition:all var(--t)}
+.btn:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{background:var(--accent-deep);border-color:var(--accent-deep);color:#fff}
+.btn svg{width:15px;height:15px}
 
-.polyglot-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:32px}
-.lang-card{background:var(--bg-panel);border:1px solid var(--border);border-radius:var(--panel-radius);padding:16px;transition:all var(--transition);position:relative;overflow:hidden}
-.lang-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--cyan);opacity:0;transition:opacity var(--transition)}
-.lang-card:hover{border-color:var(--border-accent)}.lang-card:hover::before{opacity:1}
-.lang-name{font-family:var(--font-display);font-size:11px;font-weight:600;letter-spacing:0.08em;color:var(--text-primary);margin-bottom:2px}
-.lang-count{font-family:var(--font-data);font-size:10px;color:var(--text-dim);margin-bottom:10px}
-.lang-repos{list-style:none;font-family:var(--font-data);font-size:11px}
-.lang-repos li{padding:2px 0}.lang-repos a{color:var(--text-secondary)}.lang-repos a:hover{color:var(--cyan)}.lang-repos .more{color:var(--text-dim);font-style:italic}
+/* title-block spec card (signature element) */
+.spec{background:var(--card);border:1px solid var(--rule);border-radius:var(--r);position:relative}
+.spec::before,.spec::after{content:'';position:absolute;width:9px;height:9px;border:1px solid var(--ink-3)}
+.spec::before{top:-1px;left:-1px;border-right:none;border-bottom:none}
+.spec::after{bottom:-1px;right:-1px;border-left:none;border-top:none}
+.spec-hd{display:flex;justify-content:space-between;align-items:center;padding:11px 16px;border-bottom:1px solid var(--rule);font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.spec-row{display:grid;grid-template-columns:auto 1fr;gap:16px;padding:11px 16px;border-bottom:1px solid var(--rule-2);align-items:baseline}
+.spec-row:last-child{border-bottom:none}
+.spec-k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.spec-v{font-size:14px;font-weight:500;text-align:right;color:var(--ink)}
+.spec-v .hl{color:var(--accent)}
 
-.day-section{margin-bottom:32px}
-.day-bar{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border)}
-.day-badge{font-family:var(--font-display);font-size:9px;font-weight:700;letter-spacing:0.12em;padding:3px 10px;border-radius:2px;background:var(--cyan-dim);color:var(--cyan);border:1px solid rgba(0,229,255,0.15)}
-.day-bar-label{font-family:var(--font-data);font-size:11px;color:var(--text-dim);letter-spacing:0.06em}
+/* language bar */
+.langbar{margin-top:22px;background:var(--card);border:1px solid var(--rule);border-radius:var(--r);padding:16px}
+.langbar-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
+.langbar-title{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.langbar-track{display:flex;height:9px;border-radius:5px;overflow:hidden;gap:1.5px}
+.langbar-key{margin-top:11px;display:flex;flex-wrap:wrap;gap:5px 16px;font-family:var(--mono);font-size:11px;color:var(--ink-2)}
+.langbar-key span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:8px;height:8px;border-radius:2px;display:inline-block}
 
-.project-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
-.project-card{background:var(--bg-panel);border:1px solid var(--border);border-radius:var(--panel-radius);padding:20px;transition:all var(--transition);display:flex;flex-direction:column}
-.project-card:hover{border-color:var(--border-accent);transform:translateY(-1px)}
-.project-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.project-card-badge{font-family:var(--font-display);font-size:8px;font-weight:600;letter-spacing:0.1em;padding:2px 8px;border-radius:2px;background:var(--cyan-dim);color:var(--cyan)}
-.project-card-badge.go{background:var(--green-dim);color:var(--green)}
-.project-card-badge.csharp{background:var(--amber-dim);color:var(--amber)}
-.project-card-badge.js{background:rgba(255,213,79,0.1);color:#ffd54f}
-.project-card-badge.lib{background:rgba(41,121,255,0.1);color:var(--blue)}
-.project-card-badge.tool{background:rgba(213,0,249,0.1);color:var(--purple)}
-.project-card-link a{color:var(--text-dim);transition:color var(--transition)}.project-card-link a:hover{color:var(--cyan)}
-.project-card-link svg{width:16px;height:16px}
-.project-card-name{font-family:var(--font-mono);font-size:14px;font-weight:600;color:var(--text-primary);margin-bottom:6px}
-.project-card-desc{font-size:13px;color:var(--text-secondary);line-height:1.65;flex:1;margin-bottom:14px}
-.project-tags{display:flex;flex-wrap:wrap;gap:6px}
-.tag{font-family:var(--font-data);font-size:10px;padding:2px 8px;border-radius:2px;background:var(--cyan-dim);color:var(--cyan);border:1px solid rgba(0,229,255,0.08)}
-.tag.star{background:var(--amber-dim);color:var(--amber);border-color:rgba(255,171,0,0.1)}
-.tag.pypi{background:rgba(55,117,169,0.12);color:#5a9fd4;border-color:rgba(55,117,169,0.25);font-weight:500}
-.tag.pypi a{color:inherit;text-decoration:none}
-.tag.pypi:hover{background:rgba(55,117,169,0.2);border-color:rgba(55,117,169,0.4)}
+/* ---- panel (methodology) ---- */
+.panel{background:var(--card);border:1px solid var(--rule);border-radius:var(--r);padding:28px 30px}
+.panel .eyebrow{margin-bottom:12px;display:block}
+.panel p{color:var(--ink-2);font-size:15.5px;line-height:1.75;max-width:820px}
+.panel p+p{margin-top:14px}
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}
+.chip{font-family:var(--mono);font-size:11px;letter-spacing:.05em;padding:5px 12px;border-radius:20px;border:1px solid var(--rule);color:var(--ink-2);background:var(--card-2)}
+.chip.g{color:var(--v-green);border-color:rgba(45,134,89,.28);background:rgba(45,134,89,.06)}
+.chip.b{color:var(--accent);border-color:rgba(14,107,168,.28);background:var(--accent-soft)}
+.chip.o{color:var(--v-orange);border-color:rgba(194,94,23,.28);background:rgba(194,94,23,.06)}
 
-.personal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
-.personal-card{background:var(--bg-panel);border:1px solid var(--border);border-radius:var(--panel-radius);padding:16px;transition:all var(--transition)}
-.personal-card:hover{border-color:var(--border-accent)}
-.personal-name{font-family:var(--font-mono);font-size:13px;font-weight:600;margin-bottom:4px}
-.personal-desc{font-size:11px;color:var(--text-secondary);line-height:1.6;margin-bottom:10px}
+/* ---- deep dives ---- */
+.fig{background:var(--card);border:1px solid var(--rule);border-radius:var(--r);overflow:hidden;margin-bottom:26px}
+.fig-hd{padding:22px 30px 18px;border-bottom:1px solid var(--rule)}
+.fig-eyebrow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:12px}
+.fig-no{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.08em;color:#fff;background:var(--ink);padding:3px 9px;border-radius:4px}
+.fig-tagpair{font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--ink-3)}
+.fig-vendors{font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--ink-3);margin-left:auto}
+.fig-title{font-size:22px;font-weight:600;letter-spacing:-.02em;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.fig-title a{display:inline-flex;color:var(--ink-3)}
+.fig-title a:hover{color:var(--accent)}
+.fig-title a svg{width:17px;height:17px}
+.fig-premise{color:var(--ink-2);font-size:15.5px;margin-top:7px;font-style:italic}
+.fig-body{padding:26px 30px 30px}
+.fig-diagram{border:1px solid var(--rule);border-radius:var(--r);background:#fff;padding:8px;cursor:zoom-in;position:relative;overflow:hidden}
+.fig-diagram img{width:100%}
+.fig-diagram .zoomtag{position:absolute;bottom:10px;right:12px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--accent);background:rgba(255,255,255,.9);border:1px solid var(--rule);padding:3px 8px;border-radius:4px;opacity:0;transition:opacity var(--t)}
+.fig-diagram:hover .zoomtag{opacity:1}
+.fig-cap{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.02em}
+.fig-narr{margin-top:22px;font-size:15.5px;color:var(--ink-2);line-height:1.75;max-width:840px}
+.fig-narr strong{color:var(--ink);font-weight:600}
+.fig-narr p+p{margin-top:13px}
+.callout{margin-top:20px;border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:0 var(--r) var(--r) 0;padding:15px 20px}
+.callout .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);display:block;margin-bottom:6px}
+.callout p{font-size:15px;color:var(--ink-2);line-height:1.7;max-width:820px}
+.callout.g{border-left-color:var(--v-green);background:rgba(45,134,89,.06)}
+.callout.g .lbl{color:var(--v-green)}
+.callout.o{border-left-color:var(--v-orange);background:rgba(194,94,23,.055)}
+.callout.o .lbl{color:var(--v-orange)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+.split .fig-cap{margin-top:8px}
+@media(max-width:760px){.split{grid-template-columns:1fr}}
+.fig-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.tag{font-family:var(--mono);font-size:11px;letter-spacing:.03em;padding:4px 11px;border-radius:4px;background:var(--card-2);border:1px solid var(--rule);color:var(--ink-2)}
+.tag.pill{background:var(--accent-soft);border-color:rgba(14,107,168,.22);color:var(--accent)}
+.tag.pill a{color:inherit}
 
-.timeline{display:flex;flex-direction:column}
-.timeline-row{display:grid;grid-template-columns:180px 1fr;border-bottom:1px solid var(--border);padding:18px 16px;gap:24px}
-.timeline-row:last-child{border-bottom:none}
-.timeline-meta{text-align:right;padding-right:20px;border-right:1px solid var(--border)}
-.timeline-company{font-family:var(--font-mono);font-weight:600;font-size:13px;color:var(--text-primary)}
-.timeline-dates{font-family:var(--font-data);font-size:10px;color:var(--text-dim);margin-top:2px}
-.timeline-role{font-family:var(--font-mono);font-weight:600;font-size:13px;color:var(--cyan);margin-bottom:6px}
-.timeline-detail{font-size:13px;color:var(--text-secondary);line-height:1.7}
-.timeline-detail p{margin-bottom:4px}
+/* bridge note */
+.bridge{background:linear-gradient(180deg,var(--card),var(--card-2));border:1px solid var(--rule);border-radius:var(--r);padding:26px 30px;display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:center}
+.bridge-key{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);writing-mode:vertical-rl;transform:rotate(180deg);border-right:1px solid var(--rule);padding-right:20px;align-self:stretch;display:flex;align-items:center}
+.bridge h3{font-size:18px;font-weight:600;letter-spacing:-.01em;margin-bottom:8px}
+.bridge p{color:var(--ink-2);font-size:15px;line-height:1.7;max-width:820px}
+.bridge-legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:14px;font-family:var(--mono);font-size:11.5px;color:var(--ink-2)}
+.bridge-legend span{display:inline-flex;align-items:center;gap:7px}
+@media(max-width:640px){.bridge{grid-template-columns:1fr}.bridge-key{writing-mode:horizontal-tb;transform:none;border-right:none;border-bottom:1px solid var(--rule);padding:0 0 12px}}
 
-.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--border);border-radius:var(--panel-radius);overflow:hidden}
-.skill-cell{background:var(--bg-panel);padding:16px}
-.skill-cell-title{font-family:var(--font-display);font-size:9px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:8px;display:flex;align-items:center;gap:6px}
-.skill-cell-title svg{width:13px;height:13px}
-.skill-cell-items{font-family:var(--font-data);font-size:11px;color:var(--text-secondary);line-height:1.8}
+/* ---- selected work ---- */
+.lifecycle{margin-top:10px}
+.day{margin-bottom:34px}
+.day-bar{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.day-badge{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.1em;padding:4px 11px;border-radius:4px;background:var(--ink);color:#fff}
+.day-badge.b{background:var(--accent)}
+.day-badge.p{background:#6B3FA0}
+.day-label{font-family:var(--mono);font-size:12px;color:var(--ink-3);letter-spacing:.04em}
+.day-line{flex:1;height:1px;background:var(--rule)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--rule);border-radius:var(--r);padding:20px 22px;display:flex;flex-direction:column;transition:all var(--t)}
+.card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 6px 22px -12px rgba(17,29,40,.25)}
+.card.wide{grid-column:1/-1}
+.card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.card-badge{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.08em;padding:3px 9px;border-radius:4px;background:var(--card-2);border:1px solid var(--rule);color:var(--ink-2)}
+.card-badge.feat{background:var(--accent);border-color:var(--accent);color:#fff}
+.card-badge.go{background:rgba(0,173,216,.1);border-color:rgba(0,173,216,.3);color:#0284a8}
+.card-badge.js{background:rgba(180,150,0,.1);border-color:rgba(180,150,0,.28);color:#8a7400}
+.card-badge.cs{background:rgba(107,63,160,.1);border-color:rgba(107,63,160,.28);color:#6B3FA0}
+.card-link{color:var(--ink-3)}.card-link:hover{color:var(--accent)}
+.card-link svg{width:17px;height:17px}
+.card-name{font-size:16.5px;font-weight:600;letter-spacing:-.01em;margin-bottom:3px}
+.card-meta{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.03em;margin-bottom:9px}
+.card-desc{font-size:14px;color:var(--ink-2);line-height:1.65;flex:1;margin-bottom:14px}
+.card-desc strong{color:var(--ink);font-weight:600}
+.card-desc code{font-family:var(--mono);font-size:12.5px;color:var(--accent);background:var(--accent-soft);padding:1px 5px;border-radius:3px}
+.card-tags{display:flex;flex-wrap:wrap;gap:6px}
 
-.section-block{margin-bottom:32px}
-.section-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
-.section-label{font-family:var(--font-display);font-size:13px;font-weight:600;letter-spacing:0.08em;color:var(--text-primary)}
-.section-line{flex:1;height:1px;background:linear-gradient(90deg,var(--border-accent),transparent)}
-.section-sub{font-family:var(--font-data);font-size:12px;color:var(--text-dim);margin-bottom:20px;max-width:600px}
+/* ---- timeline ---- */
+.tl{background:var(--card);border:1px solid var(--rule);border-radius:var(--r);overflow:hidden}
+.tl-row{display:grid;grid-template-columns:210px 1fr;gap:28px;padding:22px 26px;border-bottom:1px solid var(--rule-2)}
+.tl-row:last-child{border-bottom:none}
+.tl-meta{text-align:right;border-right:1px solid var(--rule);padding-right:24px}
+.tl-org{font-weight:600;font-size:14.5px}
+.tl-org.cur{color:var(--ink-3);font-style:italic;font-weight:500}
+.tl-dates{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-top:3px;letter-spacing:.02em}
+.tl-role{font-weight:600;font-size:15px;color:var(--accent);margin-bottom:7px}
+.tl-detail{font-size:14.5px;color:var(--ink-2);line-height:1.7}
+.tl-detail p+p{margin-top:5px}
+@media(max-width:640px){.tl-row{grid-template-columns:1fr;gap:12px}.tl-meta{text-align:left;border-right:none;border-bottom:1px solid var(--rule-2);padding:0 0 10px}}
 
-.footer{margin-top:48px;padding:20px;border-top:1px solid var(--border);text-align:center}
-.footer-links{display:flex;justify-content:center;gap:24px;margin-bottom:12px}
-.footer-links a{display:flex;align-items:center;gap:6px;font-family:var(--font-data);font-size:11px;color:var(--text-secondary)}
-.footer-links a:hover{color:var(--cyan)}.footer-links svg{width:14px;height:14px}
-.footer-copy{font-family:var(--font-data);font-size:10px;color:var(--text-dim)}
+/* ---- capabilities ---- */
+.caps{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:var(--r);overflow:hidden}
+.cap{background:var(--card);padding:20px 22px}
+.cap-t{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.cap-i{font-size:13.5px;color:var(--ink-2);line-height:1.8}
 
-/* === SCREENSHOT PREVIEW === */
-.project-card-img{margin:0 -20px;margin-bottom:14px;overflow:hidden;cursor:pointer;position:relative;border-top:1px solid var(--border);border-bottom:1px solid var(--border);max-height:160px}
-.project-card-img img{width:100%;display:block;object-fit:cover;object-position:top;opacity:0.85;transition:opacity var(--transition)}
-.project-card-img:hover img{opacity:1}
-.project-card-img::after{content:'⤢ PREVIEW';position:absolute;bottom:8px;right:12px;font-family:var(--font-display);font-size:8px;letter-spacing:0.1em;color:var(--cyan);background:rgba(10,14,20,0.85);padding:3px 8px;border-radius:2px;border:1px solid rgba(0,229,255,0.15);opacity:0;transition:opacity var(--transition)}
-.project-card-img:hover::after{opacity:1}
+/* ---- footer ---- */
+.footer{border-top:1px solid var(--rule);padding:34px 0;margin-top:40px}
+.footer-inner{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px}
+.footer-links{display:flex;gap:22px}
+.footer-links a{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:12.5px;color:var(--ink-2)}
+.footer-links a:hover{color:var(--accent)}
+.footer-links svg{width:15px;height:15px}
+.footer-copy{font-family:var(--mono);font-size:11.5px;color:var(--ink-3)}
 
-/* === MODAL === */
-.modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:10000;background:rgba(5,8,12,0.92);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:40px;cursor:pointer}
-.modal-overlay.active{display:flex}
-.modal-content{position:relative;max-width:1100px;max-height:90vh;width:100%;cursor:default}
-.modal-content img{width:100%;max-height:85vh;object-fit:contain;border:1px solid var(--border);border-radius:var(--panel-radius);display:block}
-.modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.modal-title{font-family:var(--font-display);font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--cyan)}
-.modal-close{font-family:var(--font-display);font-size:10px;letter-spacing:0.1em;color:var(--text-dim);cursor:pointer;padding:4px 12px;border:1px solid var(--border);border-radius:2px;background:var(--bg-panel);transition:all var(--transition)}
-.modal-close:hover{color:var(--cyan);border-color:var(--cyan)}
+/* ---- modal ---- */
+.modal{display:none;position:fixed;inset:0;z-index:1000;background:rgba(17,29,40,.78);backdrop-filter:blur(6px);padding:36px;cursor:zoom-out}
+.modal.on{display:flex;align-items:center;justify-content:center}
+.modal-box{max-width:1300px;width:100%;max-height:92vh;cursor:default;background:var(--card);border-radius:var(--r);border:1px solid var(--rule);overflow:hidden;display:flex;flex-direction:column}
+.modal-hd{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;border-bottom:1px solid var(--rule)}
+.modal-title{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--ink-2)}
+.modal-x{font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--ink-3);cursor:pointer;border:1px solid var(--rule);border-radius:4px;padding:5px 12px}
+.modal-x:hover{color:var(--accent);border-color:var(--accent)}
+.modal-body{overflow:auto;padding:16px;background:var(--card-2)}
+.modal-body img{width:100%}
 
-/* === FEATURED STRIP (quick-jump thumbnails) === */
-.featured-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:32px}
-.featured-card{background:var(--bg-panel);border:1px solid var(--border);border-radius:var(--panel-radius);overflow:hidden;transition:all var(--transition);display:block;color:inherit;position:relative}
-.featured-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--cyan);opacity:0;transition:opacity var(--transition);z-index:2}
-.featured-card:hover{border-color:var(--cyan);transform:translateY(-2px)}
-.featured-card:hover::before{opacity:1}
-.featured-card-img{width:100%;aspect-ratio:16/9;overflow:hidden;border-bottom:1px solid var(--border);background:var(--bg-primary);position:relative}
-.featured-card-img img{width:100%;height:100%;object-fit:cover;object-position:top;opacity:0.78;transition:all var(--transition)}
-.featured-card:hover .featured-card-img img{opacity:1;transform:scale(1.03)}
-.featured-card-img::after{content:'↓ JUMP';position:absolute;bottom:6px;right:8px;font-family:var(--font-display);font-size:8px;letter-spacing:0.1em;color:var(--cyan);background:rgba(10,14,20,0.85);padding:2px 6px;border-radius:2px;border:1px solid rgba(0,229,255,0.2);opacity:0;transition:opacity var(--transition)}
-.featured-card:hover .featured-card-img::after{opacity:1}
-.featured-card-body{padding:9px 12px;text-align:center}
-.featured-card-sub{font-family:var(--font-display);font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--cyan)}
-
-@media(max-width:900px){.hero{grid-template-columns:1fr}.polyglot-strip{grid-template-columns:repeat(2,1fr)}.header-nav a.nav-text{display:none}}
-@media(max-width:600px){.polyglot-strip{grid-template-columns:1fr}.project-grid{grid-template-columns:1fr}.timeline-row{grid-template-columns:1fr}.timeline-meta{text-align:left;border-right:none;padding-right:0;border-bottom:1px solid var(--border);padding-bottom:8px;margin-bottom:8px}.featured-strip{grid-template-columns:repeat(2,1fr);gap:6px}.featured-card-body{padding:7px 6px}.featured-card-sub{font-size:8px;letter-spacing:0.1em}}
+/* ---- reveal ---- */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}.reveal{opacity:1;transform:none;transition:none}.card:hover{transform:none}}
+@media(max-width:860px){.hero-grid{grid-template-columns:1fr;gap:28px}}
 </style>
 </head>
 <body>
-<header class="header">
-    <div class="header-left">
-        <div class="logo-mark">SP</div>
-        <div><div class="header-title">Scott Peterman</div><div class="header-subtitle">Network Operations Console</div></div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="brand">
+      <div class="brand-mark">SP</div>
+      <div>
+        <div class="brand-name">Scott Peterman</div>
+        <div class="brand-sub">Principal Network Engineer</div>
+      </div>
     </div>
-    <div class="header-nav">
-        <a href="#about" class="nav-text">Systems</a>
-        <a href="#methodology" class="nav-text">Method</a>
-        <a href="#projects" class="nav-text">Projects</a>
-        <a href="#experience" class="nav-text">Timeline</a>
-        <div class="header-status"><div class="status-dot"></div>OPERATIONAL</div>
-    </div>
+    <nav class="nav-links">
+      <a href="#deepdives" class="hide-sm">Deep Dives</a>
+      <a href="#experience" class="hide-sm">Experience</a>
+      <a href="#capabilities" class="hide-sm">Skills</a>
+      <a href="https://github.com/scottpeterman" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </div>
 </header>
-<div class="main">
-    <section class="hero" id="about">
-        <div class="panel hero-main">
-            <div class="panel-header"><div class="panel-title">Operator Profile</div><div class="panel-indicator"><div class="status-dot"></div>Active</div></div>
-            <div class="panel-body">
-                <div class="hero-callsign">Network Engineer ·<br>Software Developer</div>
-                <div class="hero-role">Principal Infrastructure Engineer · Open Source</div>
-                <div class="hero-desc">Two decades building enterprise and service provider networks — and writing the software that operates them. Python, Go, C#, and JavaScript — four ecosystems, one engineering discipline.</div>
-            </div>
+
+<main>
+  <!-- HERO -->
+  <section class="hero wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Principal Network Engineer — Network Automation</span>
+        <h1>I operate the network and build the <span class="em">software that runs it</span>.</h1>
+        <p class="hero-lede">Thirty years designing and running enterprise and service-provider networks — MPLS, BGP, and EVPN/VXLAN across Arista, Juniper, and Cisco. Five years turning that operational experience into production-grade automation: 300+ open-source repositories, packages other engineers install, and every networking tool validated against real multi-vendor hardware before it ships.</p>
+        <div class="hero-cta">
+          <a href="#deepdives" class="btn primary">Read the deep dives</a>
+          <a href="https://github.com/scottpeterman" target="_blank" rel="noopener" class="btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.09.68-.22.68-.49v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.49-1.11-1.49-.91-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.35 9.35 0 015 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9v2.82c0 .27.18.59.69.49A10.26 10.26 0 0022 12.25C22 6.58 17.52 2 12 2z"/></svg>GitHub</a>
+          <a href="https://linkedin.com/in/scott-peterman-networkeng" target="_blank" rel="noopener" class="btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14zM8.34 17.34V10.5H6.06v6.84h2.28zM7.2 9.36a1.32 1.32 0 100-2.64 1.32 1.32 0 000 2.64zm10.14 7.98v-3.75c0-2-1.07-2.94-2.5-2.94a2.16 2.16 0 00-1.96 1.08v-.93h-2.28c.03.64 0 6.84 0 6.84h2.28v-3.82c0-.2.01-.41.07-.56.17-.41.54-.83 1.18-.83.83 0 1.16.63 1.16 1.56v3.65h2.28z"/></svg>LinkedIn</a>
         </div>
-        <div class="panel">
-            <div class="panel-header">
-                <div class="panel-title">Application Languages — 312 Repos</div>
-                <div class="panel-indicator" style="color:var(--text-dim)">Markup Excluded</div>
-            </div>
-            <div class="panel-body" style="padding:16px 16px 12px">
-                <div style="display:flex;height:10px;border-radius:3px;overflow:hidden;gap:1px;">
-                    <span style="width:76.00%;background:#3572A5" title="Python 76.0%"></span>
-                    <span style="width:19.20%;background:#f1e05a" title="JavaScript 19.2%"></span>
-                    <span style="width:2.17%;background:#00ADD8" title="Go 2.2%"></span>
-                    <span style="width:0.82%;background:#178600" title="C# 0.8%"></span>
-                    <span style="width:0.49%;background:#A97BFF" title="RobotFramework 0.5%"></span>
-                    <span style="width:0.40%;background:#555555" title="C 0.4%"></span>
-                    <span style="width:0.34%;background:#b07219" title="Java 0.3%"></span>
-                    <span style="width:0.24%;background:#3178c6" title="TypeScript 0.2%"></span>
-                    <span style="width:0.34%;background:#8b949e" title="C++, Vue, Shell"></span>
-                </div>
-                <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:4px 16px;font-family:var(--font-data);font-size:10px;color:var(--text-secondary);line-height:1.8;">
-                    <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#3572A5;display:inline-block;"></span>Python <span style="color:var(--text-dim)">76.0%</span></span>
-                    <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#f1e05a;display:inline-block;"></span>JavaScript <span style="color:var(--text-dim)">19.2%</span></span>
-                    <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#00ADD8;display:inline-block;"></span>Go <span style="color:var(--text-dim)">2.2%</span></span>
-                    <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#178600;display:inline-block;"></span>C# <span style="color:var(--text-dim)">0.8%</span></span>
-                    <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#A97BFF;display:inline-block;"></span>Robot <span style="color:var(--text-dim)">0.5%</span></span>
-                    <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#8b949e;display:inline-block;"></span>Other</span>
-                </div>
-            </div>
+      </div>
+      <div>
+        <div class="spec">
+          <div class="spec-hd"><span>Operator Profile</span><span>REV 2026</span></div>
+          <div class="spec-row"><span class="spec-k">Experience</span><span class="spec-v"><span class="hl">30</span> yrs network eng</span></div>
+          <div class="spec-row"><span class="spec-k">Primary lang</span><span class="spec-v">Python</span></div>
+          <div class="spec-row"><span class="spec-k">Also ships</span><span class="spec-v">Go · C#/.NET · JS/TS</span></div>
+          <div class="spec-row"><span class="spec-k">Domain</span><span class="spec-v">Datacenter · Peering · SP</span></div>
+          <div class="spec-row"><span class="spec-k">Vendors</span><span class="spec-v">Arista · Juniper · Cisco</span></div>
+          <div class="spec-row"><span class="spec-k">Certs</span><span class="spec-v">CCNP · CCIP · JNCIS</span></div>
+          <div class="spec-row"><span class="spec-k">Base</span><span class="spec-v">Littleton, Colorado</span></div>
         </div>
-    </section>
-
-    <section class="section-block" id="methodology">
-        <div class="panel" style="border-color:rgba(0,229,255,0.15)">
-            <div class="panel-header">
-                <div class="panel-title">Engineering Methodology</div>
-                <div class="panel-indicator" style="color:var(--cyan)">How This Portfolio Was Built</div>
-            </div>
-            <div class="panel-body" style="padding:20px 24px">
-                <div style="font-size:14px;color:var(--text-secondary);line-height:1.85;max-width:860px">
-                    Every networking tool in this portfolio was validated against real multi-vendor hardware — Arista, Cisco, and Juniper gear running real routing tables and real failure scenarios in a dedicated lab environment. Nothing here was tested first against mocked data or simulations. Once thoroughly validated, these tools are used to solve real operational problems.
-                </div>
-                <div style="margin-top:16px;font-size:14px;color:var(--text-secondary);line-height:1.85;max-width:860px">
-                    The development process follows four years of formal QA engineering — Robot Framework, pyATS, GitLab CI test suites against datacenter hardware at Charter. That discipline carries forward: architecture and design intent are defined upfront, implementation is systematic, and validation is continuous against environments where a bad parse or a missed edge case has operational consequences. These tools work because they were tested where failure matters.
-                </div>
-                <div style="margin-top:20px;display:flex;flex-wrap:wrap;gap:10px">
-                    <span style="font-family:var(--font-data);font-size:10px;padding:4px 12px;border-radius:2px;background:rgba(0,229,255,0.06);color:var(--cyan);border:1px solid rgba(0,229,255,0.12);letter-spacing:0.06em">HARDWARE-VALIDATED</span>
-                    <span style="font-family:var(--font-data);font-size:10px;padding:4px 12px;border-radius:2px;background:rgba(0,230,118,0.06);color:var(--green);border:1px solid rgba(0,230,118,0.12);letter-spacing:0.06em">MULTI-VENDOR</span>
-                    <span style="font-family:var(--font-data);font-size:10px;padding:4px 12px;border-radius:2px;background:rgba(255,171,0,0.06);color:var(--amber);border:1px solid rgba(255,171,0,0.12);letter-spacing:0.06em">QA-DRIVEN DEVELOPMENT</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section-block" id="featured">
-        <div class="section-header"><span class="section-label">Technical Deep Dives</span><div class="section-line"></div></div>
-        <div class="featured-strip">
-            <a href="#project-netlapse" class="featured-card">
-                <div class="featured-card-img"><img src="https://raw.githubusercontent.com/scottpeterman/netlapse/main/screenshots/slides.gif" alt="Netlapse" loading="lazy"></div>
-                <div class="featured-card-body"><div class="featured-card-sub">Change Detection</div></div>
-            </a>
-            <a href="#project-fibtrace" class="featured-card">
-                <div class="featured-card-img"><img src="https://raw.githubusercontent.com/scottpeterman/fibtrace/refs/heads/main/screenshots/slides.gif" alt="fibtrace" loading="lazy"></div>
-                <div class="featured-card-body"><div class="featured-card-sub">Diagnostics</div></div>
-            </a>
-            <a href="#project-nterm-ng" class="featured-card">
-                <div class="featured-card-img"><img src="https://raw.githubusercontent.com/scottpeterman/nterm-ng/refs/heads/main/screenshots/slides2.gif" alt="nterm-ng" loading="lazy"></div>
-                <div class="featured-card-body"><div class="featured-card-sub">Telemetry</div></div>
-            </a>
-            <a href="#project-nethuds" class="featured-card">
-                <div class="featured-card-img"><img src="https://raw.githubusercontent.com/scottpeterman/nethuds/refs/heads/main/screenshots/screens.gif" alt="NetHUDs" loading="lazy"></div>
-                <div class="featured-card-body"><div class="featured-card-sub">Incident Response</div></div>
-            </a>
-        </div>
-    </section>
-
-    <section class="section-block" id="projects">
-        <div class="section-header"><span class="section-label">Open Source Projects</span><div class="section-line"></div></div>
-        <div class="section-sub">Organized around the network lifecycle: Day 0 is discovery, Day 1 is inventory and provisioning, Day 2 is operational validation.</div>
-
-        <div class="day-section"><div class="day-bar"><span class="day-badge">DAY 0</span><span class="day-bar-label">Discovery & Topology</span></div>
-        <div class="project-grid">
-            <div class="project-card"><div class="project-card-top"><span class="project-card-badge">DAY 0</span><div class="project-card-link"><a href="https://github.com/scottpeterman/secure_cartography"><i data-lucide="github"></i></a></div></div><div class="project-card-name">Secure Cartography</div><div class="project-card-img" onclick="openModal('https://raw.githubusercontent.com/scottpeterman/secure_cartography/refs/heads/main/screenshots/slides2.gif','Secure Cartography')"><img src="https://raw.githubusercontent.com/scottpeterman/secure_cartography/refs/heads/main/screenshots/slides2.gif" alt="Secure Cartography" loading="lazy"></div><div class="project-card-desc">SSH-based network discovery that interrogates devices via CDP/LLDP to automate topology documentation and diagram generation. Multi-vendor support across Cisco, Arista, Juniper.</div><div class="project-tags"><span class="tag">Python</span><span class="tag">PyQt6</span><span class="tag">TextFSM</span><span class="tag pypi"><a href="https://pypi.org/project/secure-cartography/">pip install secure-cartography</a></span></div></div>
-            <div class="project-card"><div class="project-card-top"><span class="project-card-badge go">GO</span><div class="project-card-link"><a href="https://github.com/scottpeterman/gosnmptk"><i data-lucide="github"></i></a></div></div><div class="project-card-name">GoSNMPTK</div><div class="project-card-img" onclick="openModal('https://raw.githubusercontent.com/scottpeterman/gosnmptk/refs/heads/main/screenshots/screens4.gif','GoSNMPTK')"><img src="https://raw.githubusercontent.com/scottpeterman/gosnmptk/refs/heads/main/screenshots/screens4.gif" alt="GoSNMPTK" loading="lazy"></div><div class="project-card-desc">Go SNMP toolkit with interactive client, network scanner, and vendor fingerprinting. Multi-layer device detection across Cisco, Arista, Palo Alto, Fortinet, Dell iDRAC — with Fyne GUI.</div><div class="project-tags"><span class="tag">Go</span><span class="tag">Fyne</span><span class="tag">SNMP</span></div></div>
-        </div></div>
-
-        <div class="day-section"><div class="day-bar"><span class="day-badge">DAY 1</span><span class="day-bar-label">Inventory & Provisioning</span></div>
-        <div class="project-grid">
-            <div class="project-card"><div class="project-card-top"><span class="project-card-badge">DAY 1</span><div class="project-card-link"><a href="https://github.com/scottpeterman/velocitycmdb"><i data-lucide="github"></i></a></div></div><div class="project-card-name">VelocityCMDB</div><div class="project-card-desc">Tactical, portable network CMDB with automated discovery, change detection, and operational intelligence. Flask/SQLite, pip-installable; validated across 357 devices and 53 sites. The DCIM lessons here fed directly into Netlapse's self-seeding inventory.</div><div class="project-tags"><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">SQLite</span><span class="tag pypi"><a href="https://pypi.org/project/velocitycmdb/">pip install velocitycmdb</a></span></div></div>
-            <div class="project-card"><div class="project-card-top"><span class="project-card-badge">DAY 1</span><div class="project-card-link"><a href="https://github.com/scottpeterman/python-librenms-mibs"><i data-lucide="github"></i></a></div></div><div class="project-card-name">Python LibreNMS MIBs</div><div class="project-card-desc">4,242 compiled MIBs from 298 vendors for PySNMP. The most comprehensive open-source compiled MIB collection available.</div><div class="project-tags"><span class="tag">Python</span><span class="tag">SNMP</span><span class="tag">298 Vendors</span></div></div>
-        </div></div>
-
-        <div class="day-section"><div class="day-bar"><span class="day-badge">DAY 2</span><span class="day-bar-label">Operational Validation</span></div>
-        <div class="project-grid">
-            <div class="project-card" id="project-netlapse" style="grid-column:1/-1;border-color:rgba(0,229,255,0.25)"><div class="project-card-top"><span class="project-card-badge" style="background:rgba(0,229,255,0.15);color:var(--cyan)">FEATURED · NEW</span><div class="project-card-link"><a href="https://github.com/scottpeterman/netlapse"><i data-lucide="github"></i></a></div></div><div class="project-card-name">Netlapse · Network State Time-Lapse</div><div style="font-family:var(--font-data);font-size:10px;color:var(--text-dim);margin:-4px 0 8px 0;letter-spacing:0.06em">v0.1.0 · GPLv3 · Arista · Juniper · Cisco · NX-OS · Oxidized-compatible</div><div class="project-card-img" style="max-height:none" onclick="openModal('https://raw.githubusercontent.com/scottpeterman/netlapse/main/screenshots/slides.gif','Netlapse')"><img src="https://raw.githubusercontent.com/scottpeterman/netlapse/main/screenshots/slides.gif" alt="Netlapse — network state time-lapse" loading="lazy" style="object-fit:contain"></div><div class="project-card-desc">An Oxidized replacement that captures <em>any</em> CLI output — configs, ARP, BGP state, routing and interface tables — parses each into structured JSON, versions both the raw text and the parsed records, and answers the one question that matters at 2 AM: <strong style="color:var(--text-primary)">what changed?</strong> Not a wall of red and green — semantic diffs: "peer 10.0.0.1 went Established &rarr; Idle, prefix count 4200 &rarr; 0," "Gi0/3 MTU 9000 &rarr; 1500." Point LibreNMS at it unchanged; it speaks the Oxidized API.<br><br><strong style="color:var(--text-primary)">What makes it different — the parser picks the template:</strong> tfsm-fire scores a 1,276-template library spanning 15+ vendor families against the actual shape of each capture and auto-selects the best match, so there's no per-command template mapping to maintain. <strong style="color:var(--text-primary)">One Search</strong> takes a single token — IP, MAC, ASN, hostname, serial — and returns every reference across the fleet, octet-anchored and vendor-format-aware, grouped by what it means. Self-seeding from a Secure Cartography map; no NetBox required.</div><div class="project-tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">tfsm-fire</span><span class="tag">WebSocket</span><span class="tag">Multi-Vendor</span><span class="tag star">GPLv3</span></div></div>
-            <div class="project-card" id="project-fibtrace" style="grid-column:1/-1;border-color:rgba(0,229,255,0.25)"><div class="project-card-top"><span class="project-card-badge" style="background:rgba(0,229,255,0.15);color:var(--cyan)">FEATURED · NEW</span><div class="project-card-link"><a href="https://github.com/scottpeterman/fibtrace"><i data-lucide="github"></i></a></div></div><div class="project-card-name">fibtrace · Forwarding-Graph Analysis</div><div style="font-family:var(--font-data);font-size:10px;color:var(--text-dim);margin:-4px 0 8px 0;letter-spacing:0.06em">v0.4.0 · MIT · Arista · Juniper · Cisco · Multi-vendor FIB</div><div class="project-card-img" style="max-height:none" onclick="openModal('https://raw.githubusercontent.com/scottpeterman/fibtrace/refs/heads/main/screenshots/slides.gif','fibtrace')"><img src="https://raw.githubusercontent.com/scottpeterman/fibtrace/refs/heads/main/screenshots/slides.gif" alt="fibtrace — forwarding graph analysis" loading="lazy" style="object-fit:contain"></div><div class="project-card-desc">Visual forwarding-graph analysis for ECMP networks. Collects the FIB from each hop and renders every path a packet can take from source to destination — every ECMP branch, every convergence point, every terminal node — as an interactive graph. Multi-vendor. No agents, no controllers, just SSH and a browser.<br><br><strong style="color:var(--text-primary)">What makes it different — <code style="color:var(--cyan);font-family:var(--font-mono)">fibtrace.diff</code>:</strong> load a pre-change JSON, load a post-change JSON, see quantified impairment metrics — paths, edges, ECMP width, churn — with a <span style="color:var(--red);font-family:var(--font-display);font-weight:600;font-size:11px">CRITICAL</span> / <span style="color:var(--amber);font-family:var(--font-display);font-weight:600;font-size:11px">WARN</span> / <span style="color:var(--green);font-family:var(--font-display);font-weight:600;font-size:11px">OK</span> triage band at the top. Hover any listed path and it renders on both graphs simultaneously — you're not mentally diffing two pictures, the tool is doing it for you. Export JSON for programmatic use, SVG/PNG for MOP artifacts and IR write-ups. Change validation you can hand to a reviewer.</div><div class="project-tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">ECMP</span><span class="tag">Multi-Vendor</span><span class="tag star">MIT</span><span class="tag pypi"><a href="https://pypi.org/project/fibtrace/">pip install fibtrace</a></span></div></div>
-            <div class="project-card" id="project-nterm-ng"><div class="project-card-top"><span class="project-card-badge">DAY 2</span><div class="project-card-link"><a href="https://github.com/scottpeterman/nterm-ng"><i data-lucide="github"></i></a></div></div><div class="project-card-name">nterm-ng</div><div class="project-card-img" onclick="openModal('https://raw.githubusercontent.com/scottpeterman/nterm-ng/refs/heads/main/screenshots/slides2.gif','nterm-ng')"><img src="https://raw.githubusercontent.com/scottpeterman/nterm-ng/refs/heads/main/screenshots/slides2.gif" alt="nterm-ng" loading="lazy"></div><div class="project-card-desc">A network-aware SSH terminal that understands what it sees. Sniffer/gutter/parse chain architecture with vault integration and real-time telemetry.</div><div class="project-tags"><span class="tag">Python</span><span class="tag">PyQt6</span><span class="tag">Telemetry</span><span class="tag pypi"><a href="https://pypi.org/project/nterm-ng/">pip install nterm-ng</a></span></div></div>
-            <div class="project-card"><div class="project-card-top"><span class="project-card-badge">DAY 2</span><div class="project-card-link"><a href="https://github.com/scottpeterman/trafikwatch"><i data-lucide="github"></i></a></div></div><div class="project-card-name">TrafikWatch</div><div class="project-card-img" onclick="openModal('https://raw.githubusercontent.com/scottpeterman/trafikwatch/refs/heads/main/screenshots/spine_leaf.png','TrafikWatch')"><img src="https://raw.githubusercontent.com/scottpeterman/trafikwatch/refs/heads/main/screenshots/spine_leaf.png" alt="TrafikWatch" loading="lazy"></div><div class="project-card-desc">Real-time SNMP interface monitoring from the terminal. Built for watching migrations, maintenance windows, and traffic shifts live.</div><div class="project-tags"><span class="tag">Python</span><span class="tag">SNMP</span><span class="tag">TUI</span><span class="tag pypi"><a href="https://pypi.org/project/trafikwatch/">pip install trafikwatch</a></span></div></div>
-        </div></div>
-
-        <div class="day-section"><div class="day-bar"><span class="day-badge" style="background:rgba(213,0,249,0.1);color:var(--purple);border-color:rgba(213,0,249,0.15)">DAY 2+</span><span class="day-bar-label">Live Operations & Incident Response</span></div>
-        <div class="project-grid">
-            <div class="project-card" id="project-nethuds" style="grid-column:1/-1;border-color:rgba(213,0,249,0.25)"><div class="project-card-top"><span class="project-card-badge" style="background:rgba(213,0,249,0.1);color:var(--purple)">FEATURED · NEW</span><div class="project-card-link"><a href="https://github.com/scottpeterman/nethuds"><i data-lucide="github"></i></a></div></div><div class="project-card-name">NetHUDs · Network Device HUD</div><div style="font-family:var(--font-data);font-size:10px;color:var(--text-dim);margin:-4px 0 8px 0;letter-spacing:0.06em">First release 2026 · MIT · Arista · Juniper · Cisco IOS · Linux</div><div class="project-card-img" style="max-height:none" onclick="openModal('https://raw.githubusercontent.com/scottpeterman/nethuds/refs/heads/main/screenshots/screens.gif','NetHUDs')"><img src="https://raw.githubusercontent.com/scottpeterman/nethuds/refs/heads/main/screenshots/screens.gif" alt="NetHUDs" loading="lazy" style="object-fit:contain"></div><div class="project-card-desc">Real-time telemetry dashboard for any device with SSH access — no agents, no SNMP infrastructure, no vendor lock-in. One SSH session, one WebSocket, one HTML page, plus an embedded terminal so you never leave the glass. Built for the 90-second "what is this box actually doing right now" view that incident response demands.<br><br><strong style="color:var(--text-primary)">What makes it different:</strong> the Linux collector probes the host on first connect and only runs collectors whose capability gates are satisfied — same HUD renders different panels for a Cumulus switch, an Ubuntu server, an Alpine container, or a Proxmox hypervisor. Any system that can produce a URL (Grafana, NetBox, PagerDuty, Slack) can deep-link into a live session.</div><div class="project-tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">WebSocket</span><span class="tag">Docker</span><span class="tag">Netmiko</span><span class="tag">xterm.js</span><span class="tag star">MIT</span></div></div>
-        </div></div>
-
-        <div class="day-section"><div class="day-bar"><span class="day-badge">SSH TERMINALS</span><span class="day-bar-label">Same problem — every stack</span></div>
-        <div class="project-grid">
-            <div class="project-card"><div class="project-card-top"><span class="project-card-badge go">GO</span><div class="project-card-link"><a href="https://github.com/scottpeterman/tetherssh"><i data-lucide="github"></i></a></div></div><div class="project-card-name">TetherSSH</div><div style="font-family:var(--font-data);font-size:10px;color:var(--text-dim);margin:-4px 0 8px 0;letter-spacing:0.06em">v0.4.2 · SSH · Telnet · Serial · Fyne Apps Showcase</div><div class="project-card-img" onclick="openModal('https://raw.githubusercontent.com/scottpeterman/tetherssh/main/screenshots/4.1/slides.gif','TetherSSH')"><img src="https://raw.githubusercontent.com/scottpeterman/tetherssh/main/screenshots/4.1/slides.gif" alt="TetherSSH" loading="lazy"></div><div class="project-card-desc">Go terminal on Fyne 2 + gopyte that reaches gear three ways through one tabbed emulator: SSH, telnet, and local serial console (USB adapters and console servers, 9600 8N1, RFC 854 negotiation handled in-backend). Every transport is the same <code style="color:var(--cyan);font-family:var(--font-mono)">TerminalBackend</code>, so scrollback, selection, theming, and logging are identical across all three. Auto-reconnect on input preserves the tab and its scrollback; an anti-idle keystroke defeats device-side <code style="color:var(--cyan);font-family:var(--font-mono)">exec-timeout</code> that TCP keepalives don't reset. A data-driven theme registry loads YAML themes from a directory at startup — a 30-theme pack (Dracula, Nord, Gruvbox, Tokyo Night, CRT) ships in the repo, each carrying its own 16-color ANSI palette. The author's daily driver.</div><div class="project-tags"><span class="tag">Go</span><span class="tag">Fyne</span><span class="tag">SSH</span><span class="tag">Telnet</span><span class="tag">Serial</span></div></div>
-            <div class="project-card"><div class="project-card-top"><span class="project-card-badge csharp">C#</span><div class="project-card-link"><a href="https://github.com/scottpeterman/retroterm.net"><i data-lucide="github"></i></a></div></div><div class="project-card-name">RetroTerm.NET</div><div class="project-card-img" onclick="openModal('https://raw.githubusercontent.com/scottpeterman/retroterm.net/main/screenshots/slides1.gif','RetroTerm.NET')"><img src="https://raw.githubusercontent.com/scottpeterman/retroterm.net/main/screenshots/slides1.gif" alt="RetroTerm.NET" loading="lazy"></div><div class="project-card-desc">Retro DOS-inspired terminal in C#/.NET. Modern SSH connectivity wrapped in classic aesthetics.</div><div class="project-tags"><span class="tag">C#</span><span class="tag">.NET</span><span class="tag">SSH</span></div></div>
-            <div class="project-card"><div class="project-card-top"><span class="project-card-badge js">JS</span><div class="project-card-link"><a href="https://github.com/scottpeterman/velociterm"><i data-lucide="github"></i></a></div></div><div class="project-card-name">VelociTerm</div><div class="project-card-img" onclick="openModal('https://raw.githubusercontent.com/scottpeterman/velociterm/refs/heads/dev/screenshots/slides3.gif','VelociTerm')"><img src="https://raw.githubusercontent.com/scottpeterman/velociterm/refs/heads/dev/screenshots/slides3.gif" alt="VelociTerm" loading="lazy"></div><div class="project-card-desc">Web-based SSH gateway with WebSocket terminal sessions. Enterprise jump host with advanced session filtering.</div><div class="project-tags"><span class="tag">JavaScript</span><span class="tag">FastAPI</span><span class="tag">WebSocket</span></div></div>
-            <div class="project-card"><div class="project-card-top"><span class="project-card-badge">PYTHON/GL</span><div class="project-card-link"><a href="https://github.com/scottpeterman/coolpyterm"><i data-lucide="github"></i></a></div></div><div class="project-card-name">CoolPyTerm</div><div class="project-card-img" onclick="openModal('https://raw.githubusercontent.com/scottpeterman/coolpyterm/refs/heads/main/screenshots/slides.gif','CoolPyTerm')"><img src="https://raw.githubusercontent.com/scottpeterman/coolpyterm/refs/heads/main/screenshots/slides.gif" alt="CoolPyTerm" loading="lazy"></div><div class="project-card-desc">Hardware-accelerated SSH terminal with authentic CRT effects. PyQt6 + OpenGL with phosphor glow and scan lines.</div><div class="project-tags"><span class="tag">Python</span><span class="tag">OpenGL</span><span class="tag">PyQt6</span><span class="tag pypi"><a href="https://pypi.org/project/coolpyterm/">pip install coolpyterm</a></span></div></div>
-            <div class="project-card"><div class="project-card-top"><span class="project-card-badge">ELECTRON/TS</span><div class="project-card-link"><a href="https://github.com/scottpeterman/nterm-js"><i data-lucide="github"></i></a></div></div><div class="project-card-name">nterm-js</div><div class="project-card-img" onclick="openModal('https://raw.githubusercontent.com/scottpeterman/nterm-js/refs/heads/main/screenshots/nterm1.gif','nterm-js')"><img src="https://raw.githubusercontent.com/scottpeterman/nterm-js/refs/heads/main/screenshots/nterm1.gif" alt="nterm-js" loading="lazy"></div><div class="project-card-desc">Cross-platform desktop SSH terminal with session manager and AES-256-GCM credential vault. Electron + xterm.js with installers for Windows, macOS, and Linux — a FOSS alternative to SecureCRT.</div><div class="project-tags"><span class="tag">TypeScript</span><span class="tag">Electron</span><span class="tag">xterm.js</span><span class="tag">SSH</span></div></div>
-        </div></div>
-
-        <div class="day-section"><div class="day-bar"><span class="day-badge" style="background:rgba(41,121,255,0.1);color:var(--blue);border-color:rgba(41,121,255,0.15)">TOOLS & LIBS</span><span class="day-bar-label">Reusable components and dev utilities</span></div>
-        <div class="project-grid">
-            <div class="project-card"><div class="project-card-top"><span class="project-card-badge lib">LIB</span><div class="project-card-link"><a href="https://github.com/scottpeterman/nterm-qt"><i data-lucide="github"></i></a></div></div><div class="project-card-name">nterm-qt</div><div class="project-card-desc">Themeable SSH terminal widget for PyQt6 with enterprise features. Embeddable component for building network tools.</div><div class="project-tags"><span class="tag">Python</span><span class="tag">Widget</span><span class="tag pypi"><a href="https://pypi.org/project/ntermqt/">pip install ntermqt</a></span></div></div>
-            <div class="project-card"><div class="project-card-top"><span class="project-card-badge lib">LIB</span><div class="project-card-link"><a href="https://github.com/scottpeterman/gsshpass"><i data-lucide="github"></i></a></div></div><div class="project-card-name">gsshpass</div><div class="project-card-desc">Go SSH utility for automating commands. Designed for scripted workflows and older equipment compatibility.</div><div class="project-tags"><span class="tag">Go</span><span class="tag">SSH</span></div></div>
-            <div class="project-card"><div class="project-card-top"><span class="project-card-badge tool">TOOL</span><div class="project-card-link"><a href="https://github.com/scottpeterman/tptpy"><i data-lucide="github"></i></a></div></div><div class="project-card-name">tptpy</div><div class="project-card-desc">Textual TUI for interactively testing TextFSM and TTP templates against device output.</div><div class="project-tags"><span class="tag">Python</span><span class="tag">TextFSM</span><span class="tag">TUI</span><span class="tag pypi"><a href="https://pypi.org/project/tptpy/">pip install tptpy</a></span></div></div>
-            <div class="project-card"><div class="project-card-top"><span class="project-card-badge lib">LIB</span><div class="project-card-link"><a href="https://github.com/scottpeterman/tinyscp"><i data-lucide="github"></i></a></div></div><div class="project-card-name">TinySCP</div><div class="project-card-desc">Minimal, embeddable SCP server for network automation workflows.</div><div class="project-tags"><span class="tag">Python</span><span class="tag">SCP</span><span class="tag pypi"><a href="https://pypi.org/project/tinyscp/">pip install tinyscp</a></span></div></div>
-            <div class="project-card"><div class="project-card-top"><span class="project-card-badge js">JS</span><div class="project-card-link"><a href="https://github.com/scottpeterman/tfsmjs"><i data-lucide="github"></i></a></div></div><div class="project-card-name">tfsmjs</div><div class="project-card-desc">Re-implementation of Google's TextFSM state machine in native JavaScript — not a wrapper. Full template compatibility, runs in Node.js and browser. Often faster than the Python original.</div><div class="project-tags"><span class="tag">JavaScript</span><span class="tag">TextFSM</span><span class="tag">Parser</span></div></div>
-            <div class="project-card"><div class="project-card-top"><span class="project-card-badge csharp">C#</span><div class="project-card-link"><a href="https://github.com/scottpeterman/textfsm.net"><i data-lucide="github"></i></a></div></div><div class="project-card-name">TextFSM.NET</div><div class="project-card-desc">Re-implementation of Google's TextFSM parsing engine in native C#. Same template format, same state machine, zero Python runtime dependency — bringing network text parsing to the .NET ecosystem.</div><div class="project-tags"><span class="tag">C#</span><span class="tag">.NET</span><span class="tag">TextFSM</span></div></div>
-        </div></div>
-    </section>
-
-    <section class="section-block" id="personal">
-        <div class="section-header"><span class="section-label">Personal Projects</span><div class="section-line"></div></div>
-        <div class="section-sub">Built because problems exist, not because a job required it.</div>
-        <div class="personal-grid">
-            <div class="personal-card"><div class="personal-name"><a href="https://github.com/scottpeterman/velocidictate">VelociDictate</a></div><div class="personal-desc">Cross-platform speech-to-text optimized for technical dictation.</div><div class="project-tags"><span class="tag">Python</span><span class="tag">AI/ML</span><span class="tag pypi"><a href="https://pypi.org/project/velocidictate/">pip install velocidictate</a></span></div></div>
-            <div class="personal-card"><div class="personal-name"><a href="https://github.com/scottpeterman/autiobooksqta">AutiobooksQTA</a></div><div class="personal-desc">Audiobook generator from EPUB using Kokoro speech synthesis.</div><div class="project-tags"><span class="tag">Python</span><span class="tag">TTS</span><span class="tag pypi"><a href="https://pypi.org/project/autiobooksqta/">pip install autiobooksqta</a></span></div></div>
-            <div class="personal-card"><div class="personal-name"><a href="https://github.com/scottpeterman/couchguitar">CouchGuitar</a></div><div class="personal-desc">Teleprompter-style song display for musicians with chord charts.</div><div class="project-tags"><span class="tag">Python</span><span class="tag">PyQt6</span><span class="tag pypi"><a href="https://pypi.org/project/couchguitar/">pip install couchguitar</a></span></div></div>
-            <div class="personal-card"><div class="personal-name"><a href="https://github.com/scottpeterman/pywboard">PyWBoard</a></div><div class="personal-desc">Whiteboard built with PyQt6 + QWebEngine. Zero CDN, fully offline.</div><div class="project-tags"><span class="tag">HTML</span><span class="tag">PyQt6</span><span class="tag pypi"><a href="https://pypi.org/project/pywboard/">pip install pywboard</a></span></div></div>
-        </div>
-    </section>
-
-    <section class="section-block" id="archive">
-        <div class="panel">
-            <div class="panel-header">
-                <div class="panel-title">Archive</div>
-                <div class="panel-indicator" style="color:var(--text-dim)">20 Additional PyPI Packages · 2023 — 2025</div>
-            </div>
-            <div class="panel-body">
-                <div style="font-family:var(--font-data);font-size:13px;color:var(--text-secondary);line-height:1.9">
-                    Earlier experiments shipped across multiple ecosystems: Tkinter and PyQt6 SSH terminals (uglypty, uglierpty, securetkterminal, tkwinterm, multisshift, pyRetroTerm, TerminalTelemetry); TTP template tooling (ttpbuilder, ttp-assistant); network automation frameworks (pysimplenet, pysshpass); editor widgets built on QScintilla and Ace.js (pyeasyedit, sshifted); developer utilities (uglygrep, pymerdoc); SNMP discovery tools (velocitymaps, velocitycollector, tfsm-fire); and a PyQt6 media batch converter (mkv2mp4ui).
-                </div>
-                <div style="margin-top:16px;padding-top:12px;border-top:1px solid var(--border);font-family:var(--font-data);font-size:11px;display:flex;align-items:center;gap:8px">
-                    <span style="color:var(--text-dim)">COMPLETE CATALOG:</span>
-                    <a href="https://pypi.org/user/scottpeterman/" style="color:var(--cyan)">pypi.org/user/scottpeterman</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section-block" id="experience">
-        <div class="panel"><div class="panel-header"><div class="panel-title">Mission Timeline</div><div class="panel-indicator">Cisco Certified Instructor · 4 Years</div></div>
-        <div class="panel-body" style="padding:0"><div class="timeline">
-            <div class="timeline-row"><div class="timeline-meta"><div class="timeline-company" style="color:var(--text-dim);font-weight:400;font-style:italic">Current</div><div class="timeline-dates">Oct 2024 — Present</div></div><div><div class="timeline-role">Principal Infrastructure Engineer</div><div class="timeline-detail"><p>Datacenter and peering infrastructure on Arista and Juniper. Circuit turn-ups, PNI implementations.</p><p>BGP peer migrations — pre-flight validation, state auditing, cutover execution.</p></div></div></div>
-            <div class="timeline-row"><div class="timeline-meta"><div class="timeline-company">Columbia Sportswear</div><div class="timeline-dates">Mar 2022 — Oct 2024</div></div><div><div class="timeline-role">Principal Infrastructure Engineer</div><div class="timeline-detail"><p>Enterprise network: 600+ retail locations, DCs, corporate sites across Cisco, Aruba, Palo Alto.</p><p>Device state collection platform (Flask/FastAPI, MySQL) for auditing and compliance.</p></div></div></div>
-            <div class="timeline-row"><div class="timeline-meta"><div class="timeline-company">Charter</div><div class="timeline-dates">2019 — 2022</div></div><div><div class="timeline-role">Principal Engineer — Datacenter QA Network Automation</div><div class="timeline-detail"><p>Built network test automation from the ground up in Robot Framework and pyATS — Python test suites running against real Arista and Cisco datacenter hardware, triggered from GitLab CI on every config and image change.</p><p>VxLAN/EVPN fabric validation, leaf-spine topology verification, control-plane and data-plane convergence testing.</p></div></div></div>
-            <div class="timeline-row"><div class="timeline-meta"><div class="timeline-company">Level 3 / TW Telecom</div><div class="timeline-dates">2012 — 2019</div></div><div><div class="timeline-role">Architect — IP Edge Engineering</div><div class="timeline-detail"><p>IP Services architecture across a tier-1 backbone — MPLS L3VPN, VPLS, IPVPN, Converged VOIP/Data, Managed Internet.</p><p>Anycast DNS, syslog infrastructure, Netflow collection and analysis at carrier scale.</p></div></div></div>
-            <div class="timeline-row"><div class="timeline-meta"><div class="timeline-company">Cricket (AT&T)</div><div class="timeline-dates">2006 — 2012</div></div><div><div class="timeline-role">Architect III</div><div class="timeline-detail"><p>Mobile carrier network architecture. MPLS core with OSPF-TE, VPLS, MVNO peering. Datacenter design — largest fabric ~300 switches.</p></div></div></div>
-        </div></div></div>
-    </section>
-
-    <section class="section-block" id="skills">
-        <div class="panel"><div class="panel-header"><div class="panel-title">System Capabilities</div><div class="panel-indicator" style="color:var(--cyan)">CCNP · CCIP · JNCIS</div></div>
-        <div class="skills-grid">
-            <div class="skill-cell"><div class="skill-cell-title"><i data-lucide="network"></i> Platforms & Protocols</div><div class="skill-cell-items">Cisco IOS/IOS-XE/NX-OS, Arista EOS, Juniper, Palo Alto, Aruba/HPE, F5, BGP, MPLS L3VPN, VPLS, EVPN/VXLAN, OSPF/ISIS, SD-WAN</div></div>
-            <div class="skill-cell"><div class="skill-cell-title"><i data-lucide="code-2"></i> Languages</div><div class="skill-cell-items">Python, Go, C#/.NET, JavaScript/TypeScript, Shell, PyQt6, Fyne, FastAPI, Flask, Textual</div></div>
-            <div class="skill-cell"><div class="skill-cell-title"><i data-lucide="wrench"></i> Automation</div><div class="skill-cell-items">Netmiko, NAPALM, TextFSM, Nornir, pyATS, Ansible, PySNMP, Paramiko</div></div>
-            <div class="skill-cell"><div class="skill-cell-title"><i data-lucide="server"></i> Infrastructure</div><div class="skill-cell-items">Git/GitLab CI, Docker, Linux, MySQL, SQLite, Redis</div></div>
-        </div></div>
-    </section>
-
-    <footer class="footer">
-        <div class="footer-links"><a href="https://github.com/scottpeterman"><i data-lucide="github"></i> GitHub</a><a href="https://linkedin.com/in/scott-peterman-networkeng"><i data-lucide="linkedin"></i> LinkedIn</a></div>
-        <div class="footer-copy">&copy; 2026 Scott Peterman &middot; Littleton, Colorado</div>
-    </footer>
-</div>
-<!-- MODAL -->
-<div class="modal-overlay" id="modal" onclick="closeModal(event)">
-    <div class="modal-content" onclick="event.stopPropagation()">
-        <div class="modal-header">
-            <div class="modal-title" id="modal-title"></div>
-            <div class="modal-close" onclick="forceClose()">ESC · CLOSE</div>
-        </div>
-        <img id="modal-img" src="" alt="">
+       
+      </div>
     </div>
-</div>
-<script>
-function openModal(src, title) {
-    var modal = document.getElementById('modal');
-    var img = document.getElementById('modal-img');
-    var titleEl = document.getElementById('modal-title');
-    img.src = src;
-    titleEl.textContent = title;
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
-function closeModal(e) {
-    if (e && e.target !== document.getElementById('modal')) return;
-    document.getElementById('modal').classList.remove('active');
-    document.body.style.overflow = '';
-}
-function forceClose() {
-    document.getElementById('modal').classList.remove('active');
-    document.body.style.overflow = '';
-}
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') forceClose();
-});
+  </section>
 
-document.addEventListener('DOMContentLoaded', function() {
-    if (typeof lucide !== 'undefined') { lucide.createIcons(); }
-});
+  <!-- METHODOLOGY -->
+  <section class="sec wrap" id="methodology">
+    <div class="panel reveal">
+      <span class="eyebrow">How these tools are built</span>
+      <p>Every networking tool here was validated against real multi-vendor hardware — Arista, Juniper, and Cisco gear running real routing tables and real failure scenarios in a dedicated lab — <strong style="color:var(--ink)">before</strong> it was trusted in production. Nothing was tested first against mocked data.</p>
+      <p>That discipline comes from four years of formal QA network automation: Robot Framework and pyATS suites triggered from GitLab CI against datacenter hardware, where a bad parse or a missed edge case had operational consequences. Design intent is defined upfront, implementation is systematic, and validation is continuous. These tools work because they were tested where failure matters.</p>
+      <div class="chips">
+        <span class="chip b">Hardware-validated</span>
+        <span class="chip g">Multi-vendor</span>
+        <span class="chip o">QA-driven development</span>
+        <span class="chip">Inheritable code · no exotic dependencies</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEEP DIVES -->
+  <section class="sec wrap" id="deepdives">
+    <div class="sec-head reveal">
+      <span class="sec-num">§ 01</span>
+      <h2 class="sec-title">Technical deep dives</h2>
+      <span class="sec-rule"></span>
+    </div>
+    <p class="sec-lede reveal">Three tools, taken apart. Each is a small system with one non-obvious engineering decision at its center — and the three share a foundation, which is the point.</p>
+
+    <!-- FIG 01 -->
+    <article class="fig reveal" style="margin-top:26px">
+      <div class="fig-hd">
+        <div class="fig-eyebrow">
+          <span class="fig-no">FIG.01</span>
+          <span class="fig-tagpair">Python · PyQt6 · GPLv3</span>
+          <span class="fig-vendors">Cisco · Arista · Juniper</span>
+        </div>
+        <div class="fig-title">Secure Cartography
+          <a href="https://github.com/scottpeterman/secure_cartography" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.09.68-.22.68-.49v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.49-1.11-1.49-.91-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.35 9.35 0 015 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9v2.82c0 .27.18.59.69.49A10.26 10.26 0 0022 12.25C22 6.58 17.52 2 12 2z"/></svg></a>
+        </div>
+        <div class="fig-premise">SSH-based multi-vendor discovery that turns a live network into documented topology.</div>
+      </div>
+      <div class="fig-body">
+        <div class="fig-diagram" onclick="zoomEl(this,'FIG.01 — Secure Cartography architecture')">
+          <img src="assets/fig01_secure_cartography.svg" alt="Secure Cartography architecture diagram" loading="lazy">
+          <span class="zoomtag">⤢ Enlarge</span>
+        </div>
+        <div class="fig-cap">Fig. 01 — Layered architecture. Left rail: reusable libraries. Center: discovery pipeline. Right: the seed artifact fanning out to consumers.</div>
+        <div class="fig-narr">
+          <p>Point it at a seed device and it crawls the network over SSH and SNMP, reading CDP/LLDP neighbors, fingerprinting each device, and emitting a normalized topology map. Downstream, that map becomes Draw.io and GraphML diagrams and a security-posture audit — but the map is written once and consumed at import time, with no runtime coupling between discovery and its consumers.</p>
+          <p>The architecture is deliberately layered so the hard parts are reusable on their own: a Paramiko SSH client hardened for legacy gear (invoke-shell only, old ciphers and KEX, ANSI filtering, prompt detection), an encrypted credential vault (PBKDF2-HMAC-SHA256 key derivation, Fernet at rest), a resolver that finds working credentials per device, and a parsing engine that selects its own templates — <strong>FIG.02</strong>.</p>
+        </div>
+        <div class="callout g">
+          <span class="lbl">What makes it different</span>
+          <p>It's built from libraries you could hand to another engineer tomorrow. The SSH client, the vault, and the parser each stand alone — and the same SSH client is the one powering fibtrace (FIG.03). The topology map is a seed artifact: the file is the contract, so anything can consume it without importing the tool that made it.</p>
+        </div>
+        <div class="fig-tags">
+          <span class="tag">Paramiko</span><span class="tag">SNMP + SSH</span><span class="tag">TextFSM</span><span class="tag">PBKDF2 · Fernet</span><span class="tag">Draw.io / GraphML</span>
+          <span class="tag pill"><a href="https://pypi.org/project/secure-cartography/" target="_blank" rel="noopener">pip install secure-cartography</a></span>
+        </div>
+      </div>
+    </article>
+
+    <!-- FIG 02 -->
+    <article class="fig reveal">
+      <div class="fig-hd">
+        <div class="fig-eyebrow">
+          <span class="fig-no">FIG.02</span>
+          <span class="fig-tagpair">Python · SQLite · TextFSM</span>
+          <span class="fig-vendors">15+ vendor families</span>
+        </div>
+        <div class="fig-title">tfsm-fire</div>
+        <div class="fig-premise">Multi-vendor CLI parsing where the output selects the template — not the engineer.</div>
+      </div>
+      <div class="fig-body">
+        <div class="fig-diagram" onclick="zoomEl(this,'FIG.02 — tfsm-fire engine architecture')">
+          <img src="assets/fig02_tfsm_fire.svg" alt="tfsm-fire architecture diagram" loading="lazy">
+          <span class="zoomtag">⤢ Enlarge</span>
+        </div>
+        <div class="fig-cap">Fig. 02a — The inversion and the scoring pipeline. Raw output plus a loose hint in; the highest-scoring parse out.</div>
+        <div class="fig-narr">
+          <p>Conventional TextFSM makes you pick the right template up front. Guess wrong and you get silent garbage, and every new command or vendor means another hand-wired selection branch. tfsm-fire inverts that: hand it raw CLI output and a loose hint, and it runs every candidate template, scoring each parse on a 100-point rubric — record count, field richness, population rate, and consistency — then returns the best match. <strong>There is no selection logic to maintain.</strong></p>
+        </div>
+        <div class="split">
+          <div>
+            <div class="fig-diagram" onclick="zoomEl(this,'FIG.02b — tfsm-fire scoring a live capture')">
+              <img src="assets/fig02_tfsm_fire_live.jpg" alt="tfsm-fire scoring a live Cisco IOS capture" loading="lazy">
+              <span class="zoomtag">⤢ Enlarge</span>
+            </div>
+            <div class="fig-cap">Fig. 02b — The rubric, live: a Cisco IOS <span class="mono">show interfaces</span> capture scored and parsed into structured records.</div>
+          </div>
+          <div class="callout" style="margin-top:0;height:100%">
+            <span class="lbl">What makes it different</span>
+            <p>The four bars in the screenshot — records, fields, population, consistency — are the exact scoring factors from the diagram, running against a real capture. The engine scales to 1,200+ templates across 15+ vendor families with zero per-command mapping, and it's the parsing core inside Secure Cartography. Thread-safe by construction, so it parses a whole fleet in parallel.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- FIG 03 -->
+    <article class="fig reveal">
+      <div class="fig-hd">
+        <div class="fig-eyebrow">
+          <span class="fig-no">FIG.03</span>
+          <span class="fig-tagpair">Python · FastAPI · MIT</span>
+          <span class="fig-vendors">Cisco · Arista · Juniper</span>
+        </div>
+        <div class="fig-title">fibtrace
+          <a href="https://github.com/scottpeterman/fibtrace" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.09.68-.22.68-.49v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.49-1.11-1.49-.91-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.35 9.35 0 015 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9v2.82c0 .27.18.59.69.49A10.26 10.26 0 0022 12.25C22 6.58 17.52 2 12 2z"/></svg></a>
+        </div>
+        <div class="fig-premise">Hop-by-hop forwarding-plane validation from the device's own perspective. Not a traceroute.</div>
+      </div>
+      <div class="fig-body">
+        <div class="fig-diagram" onclick="zoomEl(this,'FIG.03 — fibtrace architecture')">
+          <img src="assets/fig03_fibtrace.svg" alt="fibtrace architecture diagram" loading="lazy">
+          <span class="zoomtag">⤢ Enlarge</span>
+        </div>
+        <div class="fig-cap">Fig. 03 — The BFS walk and the four forwarding questions, feeding a directed graph of every path a packet can take.</div>
+        <div class="fig-narr">
+          <p>A traceroute probes from the outside with ICMP and sees hop IPs. It's blind to RIB-versus-FIB divergence, incomplete ARP, and any ECMP path it didn't happen to hash into. fibtrace goes inside-out: it SSHes into each device and reads that device's <strong>own</strong> forwarding tables, asking four questions at every hop — is there a route, is it in the FIB, is the next-hop resolved, is the link healthy — and identifies devices by CLI-prompt hostname rather than IP, because in real networks the management address rarely matches the forwarding plane.</p>
+          <p>The result is a directed graph of every path a packet can take from source to destination — ECMP fan-out, convergence points, and terminal nodes included. No agents, no controllers; just SSH and a browser.</p>
+        </div>
+        <div class="callout o">
+          <span class="lbl">What makes it different — fibtrace.diff</span>
+          <p>Load a pre-change graph and a post-change graph and get quantified impairment — paths, edges, ECMP width — with a CRITICAL / WARN / OK triage band across the top. Hover any path and it renders on both graphs at once, so you're not mentally diffing two pictures. Export JSON for automation, SVG/PNG for a MOP or an incident write-up. Change validation you can hand to a reviewer.</p>
+        </div>
+        <div class="fig-tags">
+          <span class="tag">FastAPI</span><span class="tag">ECMP / FIB</span><span class="tag">3-tier parse: JSON → TextFSM → regex</span><span class="tag">DAG</span>
+          <span class="tag pill"><a href="https://pypi.org/project/fibtrace/" target="_blank" rel="noopener">pip install fibtrace</a></span>
+        </div>
+      </div>
+    </article>
+
+    <!-- BRIDGE -->
+    <div class="bridge reveal">
+      <div class="bridge-key">One foundation</div>
+      <div>
+        <h3>Two systems, one foundation</h3>
+        <p>Secure Cartography discovers <em>what exists</em>; fibtrace validates <em>how it forwards</em>. They aren't the same tool, but they rest on the same three ideas — which is why building the second one was fast. The same hardened SSH client drives both (fibtrace's copy still carries the original module path in its docstring). Both let structure win where they can get it, rather than hand-wiring parser selection. And both treat a structured JSON file as the interface between stages, so downstream tools consume the artifact without importing the producer.</p>
+        <div class="bridge-legend">
+          <span><i class="dot" style="background:var(--v-green)"></i>Shared SSH client</span>
+          <span><i class="dot" style="background:var(--v-blue)"></i>Structure-first parsing</span>
+          <span><i class="dot" style="background:var(--v-orange)"></i>JSON artifact as contract</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="sec wrap" id="experience">
+    <div class="sec-head reveal">
+      <span class="sec-num">§ 02</span>
+      <h2 class="sec-title">Experience</h2>
+      <span class="sec-rule"></span>
+    </div>
+    <p class="sec-lede reveal">Principal and architect roles across datacenter, peering, and tier-1 service-provider networks — plus four years building network test automation for a datacenter QA org.</p>
+    <div class="tl reveal" style="margin-top:22px">
+      <div class="tl-row"><div class="tl-meta"><div class="tl-org cur">Current</div><div class="tl-dates">Oct 2024 — Present</div></div><div><div class="tl-role">Principal Infrastructure Engineer</div><div class="tl-detail"><p>Datacenter and peering infrastructure on Arista and Juniper. Circuit turn-ups and PNI implementations.</p><p>BGP peer migrations — pre-flight validation, state auditing, cutover execution.</p></div></div></div>
+      <div class="tl-row"><div class="tl-meta"><div class="tl-org">Columbia Sportswear</div><div class="tl-dates">Mar 2022 — Oct 2024</div></div><div><div class="tl-role">Principal Infrastructure Engineer</div><div class="tl-detail"><p>Enterprise network across 600+ retail locations, datacenters, and corporate sites — Cisco, Aruba, Palo Alto.</p><p>Built a device-state collection platform (Flask/FastAPI, MySQL) for auditing and compliance.</p></div></div></div>
+      <div class="tl-row"><div class="tl-meta"><div class="tl-org">Charter</div><div class="tl-dates">2019 — 2022</div></div><div><div class="tl-role">Principal Engineer — Datacenter QA Network Automation</div><div class="tl-detail"><p>Built network test automation from the ground up in Robot Framework and pyATS — Python suites running against real Arista and Cisco datacenter hardware, triggered from GitLab CI on every config and image change.</p><p>VXLAN/EVPN fabric validation, leaf-spine verification, control-plane and data-plane convergence testing.</p></div></div></div>
+      <div class="tl-row"><div class="tl-meta"><div class="tl-org">Level 3 / TW Telecom</div><div class="tl-dates">2012 — 2019</div></div><div><div class="tl-role">Architect — IP Edge Engineering</div><div class="tl-detail"><p>IP services architecture across a tier-1 backbone — MPLS L3VPN, VPLS, IPVPN, converged voice/data, managed internet.</p><p>Anycast DNS, syslog infrastructure, and NetFlow collection and analysis at carrier scale.</p></div></div></div>
+      <div class="tl-row"><div class="tl-meta"><div class="tl-org">Cricket (AT&amp;T)</div><div class="tl-dates">2006 — 2012</div></div><div><div class="tl-role">Architect III</div><div class="tl-detail"><p>Mobile carrier network architecture — MPLS core with OSPF-TE, VPLS, MVNO peering. Datacenter fabrics up to ~300 switches.</p></div></div></div>
+    </div>
+  </section>
+
+  <!-- CAPABILITIES -->
+  <section class="sec wrap" id="capabilities">
+    <div class="sec-head reveal">
+      <span class="sec-num">§ 03</span>
+      <h2 class="sec-title">Capabilities</h2>
+      <span class="sec-rule"></span>
+    </div>
+    <div class="caps reveal" style="margin-top:22px">
+      <div class="cap"><div class="cap-t">Platforms &amp; protocols</div><div class="cap-i">Cisco IOS / IOS-XE / NX-OS, Arista EOS, Juniper Junos, Palo Alto, Aruba/HPE, F5 · BGP, MPLS L3VPN, VPLS, EVPN/VXLAN, OSPF/IS-IS, SD-WAN</div></div>
+      <div class="cap"><div class="cap-t">Languages</div><div class="cap-i">Python, Go, C#/.NET, JavaScript/TypeScript, Shell · PyQt6, Fyne, FastAPI, Flask, Textual</div></div>
+      <div class="cap"><div class="cap-t">Automation &amp; test</div><div class="cap-i">Netmiko, NAPALM, TextFSM, Nornir, pyATS, Robot Framework, Ansible, PySNMP, Paramiko · GitLab CI</div></div>
+      <div class="cap"><div class="cap-t">Infrastructure</div><div class="cap-i">Git/GitLab CI, Docker, Linux, MySQL, SQLite, Redis, WebSocket services</div></div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-links">
+      <a href="https://github.com/scottpeterman" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.09.68-.22.68-.49v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.49-1.11-1.49-.91-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.35 9.35 0 015 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9v2.82c0 .27.18.59.69.49A10.26 10.26 0 0022 12.25C22 6.58 17.52 2 12 2z"/></svg>github.com/scottpeterman</a>
+      <a href="https://linkedin.com/in/scott-peterman-networkeng" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14zM8.34 17.34V10.5H6.06v6.84h2.28zM7.2 9.36a1.32 1.32 0 100-2.64 1.32 1.32 0 000 2.64zm10.14 7.98v-3.75c0-2-1.07-2.94-2.5-2.94a2.16 2.16 0 00-1.96 1.08v-.93h-2.28c.03.64 0 6.84 0 6.84h2.28v-3.82c0-.2.01-.41.07-.56.17-.41.54-.83 1.18-.83.83 0 1.16.63 1.16 1.56v3.65h2.28z"/></svg>LinkedIn</a>
+    </div>
+    <div class="footer-copy">© 2026 Scott Peterman · Littleton, Colorado</div>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal" id="modal" onclick="closeZoom(event)">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <div class="modal-hd"><span class="modal-title" id="modalTitle"></span><span class="modal-x" onclick="closeZoom()">ESC · close</span></div>
+    <div class="modal-body"><img id="modalImg" src="" alt=""></div>
+  </div>
+</div>
+
+<script>
+function zoomEl(el,title){var img=el.querySelector('img');var m=document.getElementById('modal');document.getElementById('modalImg').src=img.currentSrc||img.src;document.getElementById('modalTitle').textContent=title;m.classList.add('on');document.body.style.overflow='hidden';}
+function closeZoom(e){if(e&&e.target.id&&e.target.id!=='modal'&&e.target.className!=='modal-x')return;document.getElementById('modal').classList.remove('on');document.body.style.overflow='';}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeZoom();});
+// scroll reveal
+var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 </script>
 </body>
 </html>

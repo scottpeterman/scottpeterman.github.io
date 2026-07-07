@@ -1,0 +1,94 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.2.5 Chrome/138.0.7204.251 Electron/37.6.1 Safari/537.36" version="28.2.5">
+  <diagram name="tfsm-fire — output-selects-template" id="tfsm-fire-arch-light">
+    <mxGraphModel dx="1378" dy="816" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="860" background="#ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n11" value="THE INVERSION  —  why tfsm-fire is a different animal" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#e2e8f0;dashed=1;strokeWidth=1;fontColor=#2D8659;fontSize=11;fontStyle=1;align=left;verticalAlign=top;spacing=6;spacingLeft=10;spacingTop=6;arcSize=3;" parent="1" vertex="1">
+          <mxGeometry x="40" y="50" width="1520" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="n12" value="&lt;b&gt;Conventional TextFSM&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;Human picks the template &amp;nbsp;→&amp;nbsp; parse.&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;Wrong guess = silent garbage. Every new command / vendor&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;means another hand-wired template-selection branch.&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fdecec;strokeColor=#dc2626;strokeWidth=1.5;fontColor=#1e293b;fontSize=11;align=left;verticalAlign=top;spacing=8;spacingLeft=10;arcSize=6;" parent="1" vertex="1">
+          <mxGeometry x="70" y="92" width="700" height="92" as="geometry" />
+        </mxCell>
+        <mxCell id="n13" value="&lt;b&gt;tfsm-fire  ·  output-selects-template&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;Hand it raw output + a loose hint. The engine tries every&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;candidate and lets the parse quality of the OUTPUT pick the&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;winning template. No selection logic to maintain.&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf4ef;strokeColor=#2D8659;strokeWidth=1.5;fontColor=#1e293b;fontSize=11;align=left;verticalAlign=top;spacing=8;spacingLeft=10;arcSize=6;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="800" y="92" width="730" height="92" as="geometry" />
+        </mxCell>
+        <mxCell id="n14" value="PARSE PIPELINE  ·  TextFSMAutoEngine.find_best_template()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#e2e8f0;dashed=1;strokeWidth=1;fontColor=#036897;fontSize=11;fontStyle=1;align=left;verticalAlign=top;spacing=6;spacingLeft=10;spacingTop=6;arcSize=3;" parent="1" vertex="1">
+          <mxGeometry x="40" y="240" width="1520" height="560" as="geometry" />
+        </mxCell>
+        <mxCell id="n15" value="&lt;b&gt;device_output&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;raw CLI text&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;(one device, one command)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1.5;fontColor=#1e293b;fontSize=11;align=left;verticalAlign=top;spacing=8;spacingLeft=10;arcSize=6;" parent="1" vertex="1">
+          <mxGeometry x="60" y="300" width="250" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="n16" value="&lt;b&gt;filter_string  (optional)&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;loose hint, e.g.&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;cisco_ios_show_version&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;— narrows, does NOT select&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1.5;fontColor=#1e293b;fontSize=11;align=left;verticalAlign=top;spacing=8;spacingLeft=10;arcSize=6;" parent="1" vertex="1">
+          <mxGeometry x="60" y="410" width="250" height="92" as="geometry" />
+        </mxCell>
+        <mxCell id="n17" value="&lt;b&gt;ThreadSafeConnection&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;thread-local SQLite conn · row_factory=Row · closes on error&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf4ef;strokeColor=#2D8659;strokeWidth=1.5;fontColor=#1e293b;fontSize=11;align=left;verticalAlign=top;spacing=8;spacingLeft=10;arcSize=6;" parent="1" vertex="1">
+          <mxGeometry x="340" y="292" width="320" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="n18" value="&lt;b&gt;Template DB&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;templates(cli_command,&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;textfsm_content) · 212 rows&lt;/font&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;fillColor=#eaf4ef;strokeColor=#2D8659;fontColor=#1e293b;fontSize=10;verticalAlign=top;spacingTop=6;" parent="1" vertex="1">
+          <mxGeometry x="370" y="370" width="260" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="n19" value="&lt;b&gt;get_filtered_templates()&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;split hint on -/_ · terms &amp;gt; 2 chars&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;AND cli_command LIKE %term%&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;⇒ candidate set of N templates&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf4ef;strokeColor=#2D8659;strokeWidth=1.5;fontColor=#1e293b;fontSize=11;align=left;verticalAlign=top;spacing=8;spacingLeft=10;arcSize=6;" parent="1" vertex="1">
+          <mxGeometry x="340" y="472" width="320" height="108" as="geometry" />
+        </mxCell>
+        <mxCell id="n20" value="&lt;b&gt;for each candidate template:&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;textfsm.TextFSM(content).ParseText(device_output)&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;→ rows → [dict]  (zip with header)&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;score = _calculate_template_score(...)&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;keep running max · parse exception ⇒ score 0, continue&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e7f0f6;strokeColor=#036897;strokeWidth=1.5;fontColor=#1e293b;fontSize=11;align=left;verticalAlign=top;spacing=8;spacingLeft=10;arcSize=6;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="700" y="300" width="440" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="n_score" value="SCORING  ·  _calculate_template_score() → 0–100  (highest wins)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#e2e8f0;dashed=1;strokeWidth=1;fontColor=#036897;fontSize=11;fontStyle=1;align=left;verticalAlign=top;spacing=6;spacingLeft=10;spacingTop=6;arcSize=3;" parent="1" vertex="1">
+          <mxGeometry x="700" y="480" width="440" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="n21" value="&lt;b&gt;Record&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;0–30&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#036897;strokeColor=#ffffff;strokeWidth=1;fontColor=#ffffff;fontSize=10;align=center;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="720" y="520" width="132" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="n22" value="&lt;b&gt;Field&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;0–30&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0a76a8;strokeColor=#ffffff;strokeWidth=1;fontColor=#ffffff;fontSize=10;align=center;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="852" y="520" width="132" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="n23" value="&lt;b&gt;Populate&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;0–25&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0284c7;strokeColor=#ffffff;strokeWidth=1;fontColor=#ffffff;fontSize=10;align=center;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="984" y="520" width="110" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="n24" value="&lt;b&gt;Consist&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;0–15&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#38a5da;strokeColor=#ffffff;strokeWidth=1;fontColor=#ffffff;fontSize=10;align=center;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="1094" y="520" width="46" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="n25" value="&lt;font style=&quot;font-size:9px;color:#334155&quot;&gt;&lt;b&gt;Record count&lt;/b&gt; — version cmd ⇒ expect exactly 1 record; else log-scaled&lt;br&gt;&lt;b&gt;Field richness&lt;/b&gt; — more fields/record = richer extraction (10+ ⇒ full)&lt;br&gt;&lt;b&gt;Population rate&lt;/b&gt; — % of cells actually filled (non-empty)&lt;br&gt;&lt;b&gt;Consistency&lt;/b&gt; — fields uniformly filled/empty across all records&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#e2e8f0;strokeWidth=1.5;fontColor=#1e293b;fontSize=11;align=left;verticalAlign=top;spacing=8;spacingLeft=10;arcSize=6;strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="720" y="576" width="400" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="n26" value="&lt;b&gt;return (best_template,&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;best_parsed_output,&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;best_score)&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;— winner chosen by the data itself&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1.5;fontColor=#1e293b;fontSize=11;align=left;verticalAlign=top;spacing=8;spacingLeft=10;arcSize=6;" parent="1" vertex="1">
+          <mxGeometry x="1180" y="300" width="360" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="n27" value="&lt;b&gt;ValidationEngine  ·  tfsm_engine.py&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;score &amp;gt; min_score  ⇒  is_valid&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;the no-cruft gate: only clean parses&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;flow on to the collector / audit&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fdf0e6;strokeColor=#F58536;strokeWidth=1.5;fontColor=#1e293b;fontSize=11;align=left;verticalAlign=top;spacing=8;spacingLeft=10;arcSize=6;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="1180" y="424" width="360" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="n28" value="&lt;b&gt;Concurrency &amp;amp; isolation&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;each thread → its own SQLite conn&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;(ThreadSafeConnection) ⇒ engine is&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;thread-safe · parallel multi-device parse.&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;Tester harness runs each parse in a&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;subprocess (Process/Queue) w/ timeout —&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;a pathological template can&#39;t hang the run.&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf4ef;strokeColor=#2D8659;strokeWidth=1.5;fontColor=#1e293b;fontSize=11;align=left;verticalAlign=top;spacing=8;spacingLeft=10;arcSize=6;dashed=1;" parent="1" vertex="1">
+          <mxGeometry x="1180" y="576" width="360" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="n29" value="raw text" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;fontColor=#475569;fontSize=10;labelBackgroundColor=#ffffff;strokeColor=#64748b;" parent="1" source="n15" target="n20" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n30" value="hint" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;fontColor=#475569;fontSize=10;labelBackgroundColor=#ffffff;strokeColor=#64748b;" parent="1" source="n16" target="n19" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n31" value="conn" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;fontColor=#475569;fontSize=10;labelBackgroundColor=#ffffff;strokeColor=#2D8659;dashed=1;endArrow=open;" parent="1" source="n17" target="n18" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n32" value="SELECT" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;fontColor=#475569;fontSize=10;labelBackgroundColor=#ffffff;strokeColor=#2D8659;" parent="1" source="n18" target="n19" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n33" value="candidate set (N)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;fontColor=#475569;fontSize=10;labelBackgroundColor=#ffffff;strokeColor=#036897;" parent="1" source="n19" target="n20" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n34" value="each candidate" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;fontColor=#475569;fontSize=10;labelBackgroundColor=#ffffff;strokeColor=#036897;exitX=0.35;exitY=1;entryX=0.35;entryY=0;" parent="1" source="n20" target="n_score" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n35" value="score" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;fontColor=#475569;fontSize=10;labelBackgroundColor=#ffffff;strokeColor=#036897;exitX=0.65;exitY=0;entryX=0.65;entryY=1;dashed=1;endArrow=open;" parent="1" source="n_score" target="n20" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n36" value="best" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;fontColor=#475569;fontSize=10;labelBackgroundColor=#ffffff;strokeColor=#036897;" parent="1" source="n20" target="n26" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n37" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;fontColor=#475569;fontSize=10;labelBackgroundColor=#ffffff;strokeColor=#F58536;" parent="1" source="n26" target="n27" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

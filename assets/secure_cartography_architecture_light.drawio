@@ -1,0 +1,130 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.2.5 Chrome/138.0.7204.251 Electron/37.6.1 Safari/537.36" version="28.2.5">
+  <diagram name="secure_cartography — architecture" id="sc2-arch-light">
+    <mxGraphModel dx="1426" dy="946" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1050" background="#ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n11" value="REUSABLE LIBRARIES  —  lift &amp;amp; hand to another engineer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#e2e8f0;dashed=1;strokeWidth=1;fontColor=#2D8659;fontSize=11;fontStyle=1;align=left;verticalAlign=top;spacing=6;spacingLeft=10;spacingTop=6;arcSize=3;" parent="1" vertex="1">
+          <mxGeometry x="40" y="70" width="340" height="590" as="geometry" />
+        </mxCell>
+        <mxCell id="n12" value="&lt;b&gt;Credential Vault &amp;nbsp;·&amp;nbsp; scng/creds&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;encryption.py — PBKDF2-HMAC-SHA256 (480k)&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;Fernet (AES-128-CBC + HMAC-SHA256)&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;vault.py — CRUD · unlock / lock&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;resolver.py — cred discovery + conn test&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf4ef;strokeColor=#2D8659;strokeWidth=1.5;fontColor=#1e293b;fontSize=11;align=left;verticalAlign=top;spacing=8;spacingLeft=10;arcSize=6;" parent="1" vertex="1">
+          <mxGeometry x="60" y="118" width="300" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="n13" value="&lt;b&gt;SSH Client &amp;nbsp;·&amp;nbsp; discovery/ssh/client.py&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;Paramiko · invoke-shell only (no exec)&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;legacy cipher / KEX · ANSI filter&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;prompt detect · pagination off&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;NetEmulate mock-device mode&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf4ef;strokeColor=#2D8659;strokeWidth=1.5;fontColor=#1e293b;fontSize=11;align=left;verticalAlign=top;spacing=8;spacingLeft=10;arcSize=6;" parent="1" vertex="1">
+          <mxGeometry x="60" y="300" width="300" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="n14" value="&lt;b&gt;tfsm-fire &amp;nbsp;·&amp;nbsp; utils/tfsm_fire.py&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;output-selects-template inversion&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;thread-safe SQLite · scoring engine&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;score &amp;gt; 0 = valid (no cruft)&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;212 templates&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf4ef;strokeColor=#2D8659;strokeWidth=1.5;fontColor=#1e293b;fontSize=11;align=left;verticalAlign=top;spacing=8;spacingLeft=10;arcSize=6;" parent="1" vertex="1">
+          <mxGeometry x="60" y="482" width="300" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="n15" value="ENTRY SURFACES" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#e2e8f0;dashed=1;strokeWidth=1;fontColor=#64748b;fontSize=11;fontStyle=1;align=left;verticalAlign=top;spacing=6;spacingLeft=10;spacingTop=6;arcSize=3;" parent="1" vertex="1">
+          <mxGeometry x="440" y="70" width="1020" height="92" as="geometry" />
+        </mxCell>
+        <mxCell id="n16" value="&lt;b&gt;PyQt6 Cockpit&lt;/b&gt;&amp;nbsp; sc2.ui.__main__" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1.5;fontColor=#1e293b;fontSize=11;align=left;verticalAlign=top;spacing=8;spacingLeft=10;arcSize=6;" parent="1" vertex="1">
+          <mxGeometry x="462" y="106" width="300" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="n17" value="&lt;b&gt;sc2-discover&lt;/b&gt;&amp;nbsp; CLI" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1.5;fontColor=#1e293b;fontSize=11;align=left;verticalAlign=top;spacing=8;spacingLeft=10;arcSize=6;" parent="1" vertex="1">
+          <mxGeometry x="786" y="106" width="300" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="n18" value="&lt;b&gt;sc2-creds&lt;/b&gt;&amp;nbsp; CLI" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1.5;fontColor=#1e293b;fontSize=11;align=left;verticalAlign=top;spacing=8;spacingLeft=10;arcSize=6;" parent="1" vertex="1">
+          <mxGeometry x="1110" y="106" width="328" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="n19" value="&lt;b&gt;Discovery Engine &amp;nbsp;·&amp;nbsp; discovery/engine.py&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;concurrent async orchestrator · SNMP-first / SSH-fallback&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;per-depth parallelism · subnet cred cache · atomic dedup&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;structured events · cancellation · async file I/O&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e7f0f6;strokeColor=#036897;strokeWidth=1.5;fontColor=#1e293b;fontSize=11;align=left;verticalAlign=top;spacing=8;spacingLeft=10;arcSize=6;strokeWidth=2;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="560" y="200" width="780" height="108" as="geometry" />
+        </mxCell>
+        <mxCell id="n20" value="COLLECTION &amp;amp; PARSING" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#e2e8f0;dashed=1;strokeWidth=1;fontColor=#036897;fontSize=11;fontStyle=1;align=left;verticalAlign=top;spacing=6;spacingLeft=10;spacingTop=6;arcSize=3;" parent="1" vertex="1">
+          <mxGeometry x="440" y="350" width="1020" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="n21" value="&lt;b&gt;SNMP Path &amp;nbsp;·&amp;nbsp; snmp/walker.py&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;async GETBULK · table-boundary detect&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;collectors: arp · cdp · lldp&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;interfaces · system · parsers&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e7f0f6;strokeColor=#036897;strokeWidth=1.5;fontColor=#1e293b;fontSize=11;align=left;verticalAlign=top;spacing=8;spacingLeft=10;arcSize=6;" parent="1" vertex="1">
+          <mxGeometry x="462" y="388" width="300" height="132" as="geometry" />
+        </mxCell>
+        <mxCell id="n22" value="&lt;b&gt;SSH Collector &amp;nbsp;·&amp;nbsp; ssh/collector.py&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;CDP / LLDP neighbor discovery&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;runs when SNMP lacks neighbors&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;TextFSM multi-vendor parse&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e7f0f6;strokeColor=#036897;strokeWidth=1.5;fontColor=#1e293b;fontSize=11;align=left;verticalAlign=top;spacing=8;spacingLeft=10;arcSize=6;" parent="1" vertex="1">
+          <mxGeometry x="786" y="388" width="300" height="132" as="geometry" />
+        </mxCell>
+        <mxCell id="n23" value="&lt;b&gt;Fingerprint &amp;nbsp;·&amp;nbsp; fingerprint.py&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;Recog sysDescr / sysObjectID&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;OUI vendor lookup (MAC)&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;ARP / interface correlation&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e7f0f6;strokeColor=#036897;strokeWidth=1.5;fontColor=#1e293b;fontSize=11;align=left;verticalAlign=top;spacing=8;spacingLeft=10;arcSize=6;" parent="1" vertex="1">
+          <mxGeometry x="1110" y="388" width="328" height="132" as="geometry" />
+        </mxCell>
+        <mxCell id="n24" value="&lt;b&gt;Seed Artifact &amp;nbsp;·&amp;nbsp; discovery_to_map.py&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;discovery_summary.json &amp;nbsp;→&amp;nbsp; map.json&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;consumed at import time — no runtime coupling (stigmergy)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fdf0e6;strokeColor=#F58536;strokeWidth=1.5;fontColor=#1e293b;fontSize=11;align=left;verticalAlign=top;spacing=8;spacingLeft=10;arcSize=6;strokeWidth=2;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="560" y="580" width="780" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="n25" value="CONSUMERS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#e2e8f0;dashed=1;strokeWidth=1;fontColor=#F58536;fontSize=11;fontStyle=1;align=left;verticalAlign=top;spacing=6;spacingLeft=10;spacingTop=6;arcSize=3;" parent="1" vertex="1">
+          <mxGeometry x="440" y="720" width="1020" height="172" as="geometry" />
+        </mxCell>
+        <mxCell id="n26" value="&lt;b&gt;Draw.io Exporter&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;export/drawio_exporter.py&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;Cisco stencils · vendor color&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;tree / balloon / grid layouts&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fdf0e6;strokeColor=#F58536;strokeWidth=1.5;fontColor=#1e293b;fontSize=11;align=left;verticalAlign=top;spacing=8;spacingLeft=10;arcSize=6;" parent="1" vertex="1">
+          <mxGeometry x="462" y="758" width="300" height="118" as="geometry" />
+        </mxCell>
+        <mxCell id="n27" value="&lt;b&gt;GraphML Exporter&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;export/graphml_exporter.py&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;yEd-compatible&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;embedded icons&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fdf0e6;strokeColor=#F58536;strokeWidth=1.5;fontColor=#1e293b;fontSize=11;align=left;verticalAlign=top;spacing=8;spacingLeft=10;arcSize=6;" parent="1" vertex="1">
+          <mxGeometry x="786" y="758" width="300" height="118" as="geometry" />
+        </mxCell>
+        <mxCell id="n28" value="&lt;b&gt;Audit Pipeline &amp;nbsp;·&amp;nbsp; scng/audit&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;2nd pass: config + inventory&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;reuses SSH client + vault&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;report.py → PDF (security posture)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fdecec;strokeColor=#dc2626;strokeWidth=1.5;fontColor=#1e293b;fontSize=11;align=left;verticalAlign=top;spacing=8;spacingLeft=10;arcSize=6;" parent="1" vertex="1">
+          <mxGeometry x="1110" y="758" width="328" height="118" as="geometry" />
+        </mxCell>
+        <mxCell id="n29" value="&lt;b&gt;fibtrace &amp;nbsp;(downstream project)&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;consumes the map artifact&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px;color:#475569&quot;&gt;baseline-vs-change path diff&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eef2ff;strokeColor=#2563eb;strokeWidth=1.5;fontColor=#1e293b;fontSize=11;align=left;verticalAlign=top;spacing=8;spacingLeft=10;arcSize=6;dashed=1;" parent="1" vertex="1">
+          <mxGeometry x="786" y="930" width="300" height="66" as="geometry" />
+        </mxCell>
+        <mxCell id="n30" value="LEGEND" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#e2e8f0;dashed=1;strokeWidth=1;fontColor=#475569;fontSize=11;fontStyle=1;align=left;verticalAlign=top;spacing=6;spacingLeft=10;spacingTop=6;arcSize=3;" parent="1" vertex="1">
+          <mxGeometry x="40" y="700" width="340" height="196" as="geometry" />
+        </mxCell>
+        <mxCell id="n31" value="&lt;b&gt;Reusable library&lt;/b&gt; — lift &amp;amp; reuse" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf4ef;strokeColor=#2D8659;strokeWidth=1.5;fontColor=#1e293b;fontSize=11;align=left;verticalAlign=top;spacing=8;spacingLeft=10;arcSize=6;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="60" y="738" width="300" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="n32" value="&lt;b&gt;Engine / collection system&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e7f0f6;strokeColor=#036897;strokeWidth=1.5;fontColor=#1e293b;fontSize=11;align=left;verticalAlign=top;spacing=8;spacingLeft=10;arcSize=6;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="60" y="774" width="300" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="n33" value="&lt;b&gt;Seed artifact + map consumer&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fdf0e6;strokeColor=#F58536;strokeWidth=1.5;fontColor=#1e293b;fontSize=11;align=left;verticalAlign=top;spacing=8;spacingLeft=10;arcSize=6;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="60" y="810" width="300" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="n34" value="&lt;b&gt;Security posture / audit&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fdecec;strokeColor=#dc2626;strokeWidth=1.5;fontColor=#1e293b;fontSize=11;align=left;verticalAlign=top;spacing=8;spacingLeft=10;arcSize=6;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="60" y="846" width="300" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="n35" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;endArrow=block;endFill=1;fontColor=#475569;fontSize=10;labelBackgroundColor=#ffffff;strokeColor=#64748b;" parent="1" source="n16" target="n19" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n36" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;endArrow=block;endFill=1;fontColor=#475569;fontSize=10;labelBackgroundColor=#ffffff;strokeColor=#64748b;" parent="1" source="n17" target="n19" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n37" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;endArrow=block;endFill=1;fontColor=#475569;fontSize=10;labelBackgroundColor=#ffffff;strokeColor=#036897;" parent="1" source="n19" target="n21" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n38" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;endArrow=block;endFill=1;fontColor=#475569;fontSize=10;labelBackgroundColor=#ffffff;strokeColor=#036897;" parent="1" source="n19" target="n22" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n39" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;endArrow=block;endFill=1;fontColor=#475569;fontSize=10;labelBackgroundColor=#ffffff;strokeColor=#036897;" parent="1" source="n19" target="n23" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n40" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;endArrow=block;endFill=1;fontColor=#475569;fontSize=10;labelBackgroundColor=#ffffff;strokeColor=#036897;" parent="1" source="n21" target="n24" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n41" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;endArrow=block;endFill=1;fontColor=#475569;fontSize=10;labelBackgroundColor=#ffffff;strokeColor=#036897;" parent="1" source="n22" target="n24" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n42" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;endArrow=block;endFill=1;fontColor=#475569;fontSize=10;labelBackgroundColor=#ffffff;strokeColor=#036897;" parent="1" source="n23" target="n24" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n43" value="map.json" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;endArrow=block;endFill=1;fontColor=#475569;fontSize=10;labelBackgroundColor=#ffffff;strokeColor=#F58536;" parent="1" source="n24" target="n26" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n44" value="map.json" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;endArrow=block;endFill=1;fontColor=#475569;fontSize=10;labelBackgroundColor=#ffffff;strokeColor=#F58536;" parent="1" source="n24" target="n27" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n45" value="discovery output" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;endArrow=block;endFill=1;fontColor=#475569;fontSize=10;labelBackgroundColor=#ffffff;strokeColor=#F58536;" parent="1" source="n24" target="n28" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n46" value="map.json" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;endArrow=block;endFill=1;fontColor=#475569;fontSize=10;labelBackgroundColor=#ffffff;strokeColor=#2563eb;dashed=1;exitX=0.3;exitY=1;entryX=0.3;entryY=0;" parent="1" source="n24" target="n29" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n47" value="provides creds" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;endArrow=block;endFill=1;fontColor=#475569;fontSize=10;labelBackgroundColor=#ffffff;strokeColor=#2D8659;dashed=1;endArrow=open;exitX=1;exitY=0.2;" parent="1" source="n12" target="n19" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n48" value="uses" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;endArrow=block;endFill=1;fontColor=#475569;fontSize=10;labelBackgroundColor=#ffffff;strokeColor=#2D8659;dashed=1;endArrow=open;exitX=1;exitY=0.5;" parent="1" source="n13" target="n22" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n49" value="reuses" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;endArrow=block;endFill=1;fontColor=#475569;fontSize=10;labelBackgroundColor=#ffffff;strokeColor=#2D8659;dashed=1;endArrow=open;exitX=1;exitY=0.8;" parent="1" source="n13" target="n28" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n50" value="parses" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;endArrow=block;endFill=1;fontColor=#475569;fontSize=10;labelBackgroundColor=#ffffff;strokeColor=#2D8659;dashed=1;endArrow=open;exitX=1;exitY=0.5;" parent="1" source="n14" target="n22" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
