@@ -3,477 +3,532 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Scott Peterman — Principal Network Engineer &amp; Automation</title>
-<meta name="description" content="Principal network engineer and software author. MPLS, BGP, EVPN across Arista, Juniper, and Cisco — plus 300+ open-source automation tools, hardware-validated across multiple vendors.">
-<meta property="og:title" content="Scott Peterman — Principal Network Engineer & Automation">
-<meta property="og:description" content="Thirty years running production networks; five building the automation that operates them.">
-<meta property="og:url" content="https://scottpeterman.github.io">
+<title>Scott Peterman — Network Systems Engineering</title>
+<meta name="description" content="Thirty years operating multi-vendor networks. The last five building the tooling that makes their real state something you can query, trust, and automate against — validated against real network OSes in functional labs, not mock data.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{
-  --paper:#F5F7F9; --card:#FFFFFF; --card-2:#FAFBFC;
-  --ink:#111D28; --ink-2:#41556A; --ink-3:#7B8EA0;
-  --rule:#E3E9EE; --rule-2:#EEF2F5;
-  --accent:#0E6BA8; --accent-deep:#0A4E7A; --accent-soft:#E9F1F8;
-  --v-green:#2D8659; --v-blue:#036897; --v-orange:#C25E17;
-  --crit:#C1352E; --warn:#B3730B; --ok:#1F7A4D;
-  --sans:'IBM Plex Sans',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-  --mono:'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace;
-  --maxw:1120px; --r:6px;
-  --t:.22s cubic-bezier(.4,0,.2,1);
-}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:72px}
-body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-a{color:var(--accent);text-decoration:none;transition:color var(--t)}
-a:hover{color:var(--accent-deep)}
-img,svg{max-width:100%;display:block}
-::selection{background:var(--accent-soft)}
+  :root{
+    --ink:#14211e; --ink-2:#38473f;
+    --paper:#f3f6f2; --surface:#ffffff; --sunken:#eef2ee;
+    --route:#0d6e5f; --route-bright:#12a08a; --route-wash:#e6f1ee;
+    --line:#d7ded8; --line-2:#c3ccc4; --faint:#78847c;
+    --display:'Space Grotesk',system-ui,sans-serif;
+    --body:'IBM Plex Sans',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --wrap:1080px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper); color:var(--ink); font-family:var(--body);
+    font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 28px}
 
-/* ---- utility type ---- */
-.eyebrow{font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
-.mono{font-family:var(--mono)}
-.muted{color:var(--ink-2)}
+  /* ---- shared type devices ---------------------------------------------- */
+  .eyebrow{
+    font-family:var(--mono); font-size:12px; font-weight:500; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--route); display:inline-flex; gap:10px; align-items:center;
+  }
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--route);display:inline-block}
+  h2.sec{font-family:var(--display);font-weight:600;font-size:clamp(1.5rem,3.4vw,2.15rem);letter-spacing:-.01em;line-height:1.1}
+  .lede{color:var(--ink-2);max-width:56ch}
 
-/* ---- header ---- */
-.nav{position:fixed;inset:0 0 auto 0;z-index:100;height:60px;background:rgba(245,247,249,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule);display:flex;align-items:center}
-.nav-inner{max-width:var(--maxw);width:100%;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
-.brand{display:flex;align-items:center;gap:12px}
-.brand-mark{width:30px;height:30px;border:1.5px solid var(--ink);border-radius:5px;display:grid;place-items:center;font-family:var(--mono);font-weight:600;font-size:12px;letter-spacing:.02em;color:var(--ink)}
-.brand-name{font-weight:600;font-size:14.5px;letter-spacing:-.01em}
-.brand-sub{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.04em}
-.nav-links{display:flex;align-items:center;gap:26px}
-.nav-links a{font-family:var(--mono);font-size:12px;letter-spacing:.05em;color:var(--ink-2);text-transform:uppercase}
-.nav-links a:hover{color:var(--accent)}
-@media(max-width:760px){.nav-links a.hide-sm{display:none}}
+  /* ---- top bar ---------------------------------------------------------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    background:color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter:blur(8px); border-bottom:1px solid var(--line);
+  }
+  .bar{display:flex;align-items:center;height:58px;gap:16px}
+  .brand{font-family:var(--mono);font-weight:600;font-size:14px;letter-spacing:.04em;display:flex;align-items:center;gap:10px}
+  .brand b{
+    background:var(--ink);color:var(--paper);font-family:var(--display);font-weight:700;
+    width:26px;height:26px;display:grid;place-items:center;border-radius:5px;font-size:13px;letter-spacing:0;
+  }
+  .bar nav{margin-left:auto;display:flex;gap:26px;font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;color:var(--ink-2)}
+  .bar nav a{position:relative;padding:4px 0}
+  .bar nav a:hover{color:var(--route)}
+  .bar nav a::after{content:"";position:absolute;left:0;right:100%;bottom:-1px;height:1.5px;background:var(--route);transition:right .25s ease}
+  .bar nav a:hover::after{right:0}
+  @media(max-width:640px){.bar nav{display:none}}
 
-/* ---- layout ---- */
-.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
-section{scroll-margin-top:72px}
-.sec{padding:64px 0}
-.sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:8px}
-.sec-num{font-family:var(--mono);font-size:12px;color:var(--ink-3);letter-spacing:.08em}
-.sec-title{font-size:26px;font-weight:600;letter-spacing:-.02em}
-.sec-rule{height:1px;background:var(--rule);flex:1;align-self:center;margin-left:4px}
-.sec-lede{color:var(--ink-2);max-width:640px;margin-top:10px;font-size:15.5px}
+  /* ---- hero ------------------------------------------------------------- */
+  .hero{position:relative;padding:150px 0 90px;overflow:hidden}
+  .hero::before{ /* graph-paper substrate — the structure the whole page rests on */
+    content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+    background-image:
+      linear-gradient(var(--line) 1px,transparent 1px),
+      linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:34px 34px;
+    -webkit-mask-image:radial-gradient(120% 90% at 15% 0%,#000 0%,transparent 62%);
+            mask-image:radial-gradient(120% 90% at 15% 0%,#000 0%,transparent 62%);
+    opacity:.5;
+  }
+  .hero .wrap{position:relative;z-index:1}
+  .hero h1{
+    font-family:var(--display);font-weight:700;letter-spacing:-.02em;line-height:1.03;
+    font-size:clamp(2.35rem,6.3vw,4.35rem);margin:22px 0 26px;max-width:16ch;
+  }
+  .hero h1 .hl{color:var(--route);position:relative;white-space:nowrap}
+  .hook{font-size:clamp(1.02rem,1.7vw,1.22rem);color:var(--ink-2);max-width:52ch;line-height:1.55}
+  .hook b{color:var(--ink);font-weight:600}
+  .cta{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:34px}
+  .btn{
+    font-family:var(--mono);font-size:13px;font-weight:500;letter-spacing:.03em;
+    padding:12px 20px;border-radius:7px;border:1px solid var(--ink);display:inline-flex;gap:9px;align-items:center;
+    transition:transform .15s ease, background .2s ease, color .2s ease;
+  }
+  .btn.solid{background:var(--ink);color:var(--paper)}
+  .btn.solid:hover{background:var(--route);border-color:var(--route);transform:translateY(-2px)}
+  .btn.ghost:hover{border-color:var(--route);color:var(--route);transform:translateY(-2px)}
+  .dossier{
+    margin-top:46px;font-family:var(--mono);font-size:12.5px;letter-spacing:.02em;color:var(--faint);
+    display:flex;flex-wrap:wrap;gap:8px 22px;border-top:1px solid var(--line);padding-top:18px;max-width:760px;
+  }
+  .dossier span{color:var(--ink-2)}
+  .dossier b{color:var(--route);font-weight:600}
 
-/* ---- hero ---- */
-.hero{padding:104px 0 40px}
-.hero-grid{display:grid;grid-template-columns:1.55fr 1fr;gap:40px;align-items:start}
-.hero h1{font-size:clamp(30px,4.6vw,46px);line-height:1.08;font-weight:600;letter-spacing:-.025em;margin:18px 0 22px}
-.hero h1 .em{color:var(--accent)}
-.hero-lede{font-size:17px;color:var(--ink-2);max-width:600px;line-height:1.7}
-.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
-.btn{font-family:var(--mono);font-size:12.5px;letter-spacing:.03em;padding:10px 18px;border-radius:var(--r);border:1px solid var(--rule);background:var(--card);color:var(--ink);display:inline-flex;align-items:center;gap:8px;transition:all var(--t)}
-.btn:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
-.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
-.btn.primary:hover{background:var(--accent-deep);border-color:var(--accent-deep);color:#fff}
-.btn svg{width:15px;height:15px}
+  /* ---- method band ------------------------------------------------------ */
+  .method{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--surface)}
+  .method .wrap{padding-top:40px;padding-bottom:40px}
+  .method p.claim{font-size:1.08rem;max-width:64ch;margin:14px 0 26px;color:var(--ink)}
+  .tenets{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .tenet{background:var(--surface);padding:18px 18px}
+  .tenet .k{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--route);margin-bottom:6px}
+  .tenet .v{font-size:14px;color:var(--ink-2);line-height:1.4}
+  @media(max-width:760px){.tenets{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:420px){.tenets{grid-template-columns:1fr}}
 
-/* title-block spec card (signature element) */
-.spec{background:var(--card);border:1px solid var(--rule);border-radius:var(--r);position:relative}
-.spec::before,.spec::after{content:'';position:absolute;width:9px;height:9px;border:1px solid var(--ink-3)}
-.spec::before{top:-1px;left:-1px;border-right:none;border-bottom:none}
-.spec::after{bottom:-1px;right:-1px;border-left:none;border-top:none}
-.spec-hd{display:flex;justify-content:space-between;align-items:center;padding:11px 16px;border-bottom:1px solid var(--rule);font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
-.spec-row{display:grid;grid-template-columns:auto 1fr;gap:16px;padding:11px 16px;border-bottom:1px solid var(--rule-2);align-items:baseline}
-.spec-row:last-child{border-bottom:none}
-.spec-k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
-.spec-v{font-size:14px;font-weight:500;text-align:right;color:var(--ink)}
-.spec-v .hl{color:var(--accent)}
+  /* ---- work ------------------------------------------------------------- */
+  .work{padding:78px 0 30px}
+  .work .head{max-width:60ch;margin-bottom:40px}
+  .work .head h2{margin:16px 0 12px}
 
-/* language bar */
-.langbar{margin-top:22px;background:var(--card);border:1px solid var(--rule);border-radius:var(--r);padding:16px}
-.langbar-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
-.langbar-title{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
-.langbar-track{display:flex;height:9px;border-radius:5px;overflow:hidden;gap:1.5px}
-.langbar-key{margin-top:11px;display:flex;flex-wrap:wrap;gap:5px 16px;font-family:var(--mono);font-size:11px;color:var(--ink-2)}
-.langbar-key span{display:inline-flex;align-items:center;gap:6px}
-.dot{width:8px;height:8px;border-radius:2px;display:inline-block}
+  .proof{
+    position:relative;background:var(--surface);border:1px solid var(--line);border-radius:12px;
+    padding:30px 30px 26px;margin-bottom:22px;
+    display:grid;grid-template-columns:150px 1fr;gap:8px 34px;
+    transition:border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+  }
+  .proof::before{content:"";position:absolute;left:0;top:22px;bottom:22px;width:2px;background:var(--line-2);border-radius:2px;transition:background .2s ease}
+  .proof:hover{border-color:var(--line-2);box-shadow:0 12px 34px -22px rgba(20,33,30,.4);transform:translateY(-2px)}
+  .proof:hover::before{background:var(--route)}
+  .proof .rail{display:flex;flex-direction:column;gap:6px}
+  .proof .verb{font-family:var(--display);font-weight:700;font-size:1.35rem;letter-spacing:-.01em;color:var(--ink)}
+  .proof .fig{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--faint)}
+  .proof .stacktag{font-family:var(--mono);font-size:11px;color:var(--faint);line-height:1.7;margin-top:6px}
+  .proof .body h3{font-family:var(--display);font-weight:600;font-size:1.22rem;margin-bottom:8px;letter-spacing:-.01em}
+  .proof .prob{color:var(--ink-2);font-size:15.5px;margin-bottom:16px;max-width:64ch}
+  .decision{background:var(--route-wash);border-left:2px solid var(--route);border-radius:0 7px 7px 0;padding:12px 16px;max-width:66ch}
+  .decision .dk{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--route);font-weight:600;display:block;margin-bottom:5px}
+  .decision p{font-size:15px;color:var(--ink);line-height:1.5}
+  .proof .links{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+  .chip{font-family:var(--mono);font-size:12px;letter-spacing:.02em;padding:6px 12px;border:1px solid var(--line-2);border-radius:6px;color:var(--ink-2);transition:all .18s ease}
+  a.chip:hover{border-color:var(--route);color:var(--route)}
+  .chip.mut{border-style:dashed;color:var(--faint)}
+  @media(max-width:720px){
+    .proof{grid-template-columns:1fr;gap:16px;padding:24px 22px}
+    .proof::before{display:none}
+    .proof .rail{flex-direction:row;align-items:baseline;gap:12px;flex-wrap:wrap}
+    .proof .stacktag{display:none}
+  }
 
-/* ---- panel (methodology) ---- */
-.panel{background:var(--card);border:1px solid var(--rule);border-radius:var(--r);padding:28px 30px}
-.panel .eyebrow{margin-bottom:12px;display:block}
-.panel p{color:var(--ink-2);font-size:15.5px;line-height:1.75;max-width:820px}
-.panel p+p{margin-top:14px}
-.chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}
-.chip{font-family:var(--mono);font-size:11px;letter-spacing:.05em;padding:5px 12px;border-radius:20px;border:1px solid var(--rule);color:var(--ink-2);background:var(--card-2)}
-.chip.g{color:var(--v-green);border-color:rgba(45,134,89,.28);background:rgba(45,134,89,.06)}
-.chip.b{color:var(--accent);border-color:rgba(14,107,168,.28);background:var(--accent-soft)}
-.chip.o{color:var(--v-orange);border-color:rgba(194,94,23,.28);background:rgba(194,94,23,.06)}
+  /* ---- figure thumbnail (opens the modal) ------------------------------- */
+  .figure{
+    display:block;width:100%;margin-top:18px;padding:0;text-align:left;font:inherit;color:inherit;cursor:pointer;
+    position:relative;border:1px solid var(--line-2);border-radius:9px;overflow:hidden;background:var(--sunken);
+    aspect-ratio:16/5.4;transition:border-color .2s ease, box-shadow .2s ease;
+  }
+  .figure::before{ /* datasheet grid, so an empty poster still reads as a figure */
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:22px 22px;opacity:.55;
+  }
+  .figure .figinner{position:absolute;inset:0;display:flex;align-items:center;gap:16px;padding:0 22px}
+  .figure .play{
+    width:46px;height:46px;flex:none;border-radius:50%;background:var(--route);color:#fff;display:grid;place-items:center;
+    box-shadow:0 6px 18px -6px rgba(13,110,95,.55);transition:transform .2s ease;
+  }
+  .figure .play svg{width:16px;height:16px;margin-left:2px}
+  .figure .figmeta .fl{display:block;font-family:var(--display);font-weight:600;font-size:1rem;color:var(--ink)}
+  .figure .figmeta .fs{display:block;font-family:var(--mono);font-size:11.5px;color:var(--faint);letter-spacing:.02em;margin-top:2px}
+  .figure:hover{border-color:var(--route);box-shadow:0 10px 28px -20px rgba(20,33,30,.5)}
+  .figure:hover .play{transform:scale(1.08)}
+  @media(max-width:720px){.figure{aspect-ratio:16/7}.figure .figmeta .fs{display:none}}
 
-/* ---- deep dives ---- */
-.fig{background:var(--card);border:1px solid var(--rule);border-radius:var(--r);overflow:hidden;margin-bottom:26px}
-.fig-hd{padding:22px 30px 18px;border-bottom:1px solid var(--rule)}
-.fig-eyebrow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:12px}
-.fig-no{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.08em;color:#fff;background:var(--ink);padding:3px 9px;border-radius:4px}
-.fig-tagpair{font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--ink-3)}
-.fig-vendors{font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--ink-3);margin-left:auto}
-.fig-title{font-size:22px;font-weight:600;letter-spacing:-.02em;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.fig-title a{display:inline-flex;color:var(--ink-3)}
-.fig-title a:hover{color:var(--accent)}
-.fig-title a svg{width:17px;height:17px}
-.fig-premise{color:var(--ink-2);font-size:15.5px;margin-top:7px;font-style:italic}
-.fig-body{padding:26px 30px 30px}
-.fig-diagram{border:1px solid var(--rule);border-radius:var(--r);background:#fff;padding:8px;cursor:zoom-in;position:relative;overflow:hidden}
-.fig-diagram img{width:100%}
-.fig-diagram .zoomtag{position:absolute;bottom:10px;right:12px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--accent);background:rgba(255,255,255,.9);border:1px solid var(--rule);padding:3px 8px;border-radius:4px;opacity:0;transition:opacity var(--t)}
-.fig-diagram:hover .zoomtag{opacity:1}
-.fig-cap{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.02em}
-.fig-narr{margin-top:22px;font-size:15.5px;color:var(--ink-2);line-height:1.75;max-width:840px}
-.fig-narr strong{color:var(--ink);font-weight:600}
-.fig-narr p+p{margin-top:13px}
-.callout{margin-top:20px;border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:0 var(--r) var(--r) 0;padding:15px 20px}
-.callout .lbl{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep);display:block;margin-bottom:6px}
-.callout p{font-size:15px;color:var(--ink-2);line-height:1.7;max-width:820px}
-.callout.g{border-left-color:var(--v-green);background:rgba(45,134,89,.06)}
-.callout.g .lbl{color:var(--v-green)}
-.callout.o{border-left-color:var(--v-orange);background:rgba(194,94,23,.055)}
-.callout.o .lbl{color:var(--v-orange)}
-.split{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
-.split .fig-cap{margin-top:8px}
-@media(max-width:760px){.split{grid-template-columns:1fr}}
-.fig-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
-.tag{font-family:var(--mono);font-size:11px;letter-spacing:.03em;padding:4px 11px;border-radius:4px;background:var(--card-2);border:1px solid var(--rule);color:var(--ink-2)}
-.tag.pill{background:var(--accent-soft);border-color:rgba(14,107,168,.22);color:var(--accent)}
-.tag.pill a{color:inherit}
+  /* ---- one architecture note -------------------------------------------- */
+  .foundation{
+    border:1px dashed var(--line-2);border-radius:12px;background:var(--sunken);
+    padding:26px 30px;margin:14px 0 8px;display:grid;grid-template-columns:150px 1fr;gap:34px;align-items:center;
+  }
+  .foundation .fk{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--route)}
+  .foundation p{font-size:15.5px;color:var(--ink-2);max-width:70ch}
+  .foundation p b{color:var(--ink);font-weight:600}
+  @media(max-width:720px){.foundation{grid-template-columns:1fr;gap:12px;padding:22px}}
 
-/* bridge note */
-.bridge{background:linear-gradient(180deg,var(--card),var(--card-2));border:1px solid var(--rule);border-radius:var(--r);padding:26px 30px;display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:center}
-.bridge-key{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);writing-mode:vertical-rl;transform:rotate(180deg);border-right:1px solid var(--rule);padding-right:20px;align-self:stretch;display:flex;align-items:center}
-.bridge h3{font-size:18px;font-weight:600;letter-spacing:-.01em;margin-bottom:8px}
-.bridge p{color:var(--ink-2);font-size:15px;line-height:1.7;max-width:820px}
-.bridge-legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:14px;font-family:var(--mono);font-size:11.5px;color:var(--ink-2)}
-.bridge-legend span{display:inline-flex;align-items:center;gap:7px}
-@media(max-width:640px){.bridge{grid-template-columns:1fr}.bridge-key{writing-mode:horizontal-tb;transform:none;border-right:none;border-bottom:1px solid var(--rule);padding:0 0 12px}}
+  /* ---- experience ------------------------------------------------------- */
+  .exp{padding:76px 0 40px}
+  .exp .head{margin-bottom:38px}
+  .exp .head h2{margin-top:14px}
+  .timeline{border-top:1px solid var(--line)}
+  .row{
+    display:grid;grid-template-columns:132px 1fr;gap:28px;padding:22px 0;border-bottom:1px solid var(--line);
+    transition:background .2s ease;
+  }
+  .row:hover{background:var(--surface)}
+  .row .when{font-family:var(--mono);font-size:12.5px;color:var(--faint);letter-spacing:.02em;padding-top:3px}
+  .row .role{font-family:var(--display);font-weight:600;font-size:1.06rem;margin-bottom:4px}
+  .row .role .tag{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--route);border:1px solid var(--route);border-radius:4px;padding:1px 7px;margin-left:10px;vertical-align:middle;white-space:nowrap}
+  .row .what{color:var(--ink-2);font-size:15px;max-width:70ch}
+  @media(max-width:600px){.row{grid-template-columns:1fr;gap:6px}.row .role .tag{display:inline-block;margin:6px 0 0}}
 
-/* ---- selected work ---- */
-.lifecycle{margin-top:10px}
-.day{margin-bottom:34px}
-.day-bar{display:flex;align-items:center;gap:14px;margin-bottom:16px}
-.day-badge{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.1em;padding:4px 11px;border-radius:4px;background:var(--ink);color:#fff}
-.day-badge.b{background:var(--accent)}
-.day-badge.p{background:#6B3FA0}
-.day-label{font-family:var(--mono);font-size:12px;color:var(--ink-3);letter-spacing:.04em}
-.day-line{flex:1;height:1px;background:var(--rule)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
-.card{background:var(--card);border:1px solid var(--rule);border-radius:var(--r);padding:20px 22px;display:flex;flex-direction:column;transition:all var(--t)}
-.card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 6px 22px -12px rgba(17,29,40,.25)}
-.card.wide{grid-column:1/-1}
-.card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.card-badge{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.08em;padding:3px 9px;border-radius:4px;background:var(--card-2);border:1px solid var(--rule);color:var(--ink-2)}
-.card-badge.feat{background:var(--accent);border-color:var(--accent);color:#fff}
-.card-badge.go{background:rgba(0,173,216,.1);border-color:rgba(0,173,216,.3);color:#0284a8}
-.card-badge.js{background:rgba(180,150,0,.1);border-color:rgba(180,150,0,.28);color:#8a7400}
-.card-badge.cs{background:rgba(107,63,160,.1);border-color:rgba(107,63,160,.28);color:#6B3FA0}
-.card-link{color:var(--ink-3)}.card-link:hover{color:var(--accent)}
-.card-link svg{width:17px;height:17px}
-.card-name{font-size:16.5px;font-weight:600;letter-spacing:-.01em;margin-bottom:3px}
-.card-meta{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.03em;margin-bottom:9px}
-.card-desc{font-size:14px;color:var(--ink-2);line-height:1.65;flex:1;margin-bottom:14px}
-.card-desc strong{color:var(--ink);font-weight:600}
-.card-desc code{font-family:var(--mono);font-size:12.5px;color:var(--accent);background:var(--accent-soft);padding:1px 5px;border-radius:3px}
-.card-tags{display:flex;flex-wrap:wrap;gap:6px}
+  /* ---- capabilities strip (quiet, bottom) ------------------------------- */
+  .caps{border-top:1px solid var(--line);background:var(--surface);padding:44px 0}
+  .caps .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+  .caps .col .k{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--route);margin-bottom:8px}
+  .caps .col .v{font-size:13.5px;color:var(--ink-2);line-height:1.7;font-family:var(--mono)}
+  @media(max-width:760px){.caps .grid{grid-template-columns:repeat(2,1fr);gap:22px}}
+  @media(max-width:420px){.caps .grid{grid-template-columns:1fr}}
 
-/* ---- timeline ---- */
-.tl{background:var(--card);border:1px solid var(--rule);border-radius:var(--r);overflow:hidden}
-.tl-row{display:grid;grid-template-columns:210px 1fr;gap:28px;padding:22px 26px;border-bottom:1px solid var(--rule-2)}
-.tl-row:last-child{border-bottom:none}
-.tl-meta{text-align:right;border-right:1px solid var(--rule);padding-right:24px}
-.tl-org{font-weight:600;font-size:14.5px}
-.tl-org.cur{color:var(--ink-3);font-style:italic;font-weight:500}
-.tl-dates{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-top:3px;letter-spacing:.02em}
-.tl-role{font-weight:600;font-size:15px;color:var(--accent);margin-bottom:7px}
-.tl-detail{font-size:14.5px;color:var(--ink-2);line-height:1.7}
-.tl-detail p+p{margin-top:5px}
-@media(max-width:640px){.tl-row{grid-template-columns:1fr;gap:12px}.tl-meta{text-align:left;border-right:none;border-bottom:1px solid var(--rule-2);padding:0 0 10px}}
+  /* ---- footer ----------------------------------------------------------- */
+  footer{background:var(--ink);color:var(--paper);padding:70px 0 40px}
+  footer .cta-line{font-family:var(--display);font-weight:600;font-size:clamp(1.5rem,4vw,2.3rem);letter-spacing:-.01em;max-width:20ch;line-height:1.1;margin-bottom:28px}
+  footer .cta-line .hl{color:var(--route-bright)}
+  footer .flinks{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:44px}
+  footer .flinks a{font-family:var(--mono);font-size:13px;padding:11px 18px;border:1px solid rgba(243,246,242,.25);border-radius:7px;transition:all .18s ease}
+  footer .flinks a:hover{border-color:var(--route-bright);color:var(--route-bright)}
+  footer .foot-meta{font-family:var(--mono);font-size:11.5px;color:rgba(243,246,242,.5);letter-spacing:.03em;border-top:1px solid rgba(243,246,242,.15);padding-top:20px;display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between}
 
-/* ---- capabilities ---- */
-.caps{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:var(--r);overflow:hidden}
-.cap{background:var(--card);padding:20px 22px}
-.cap-t{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
-.cap-i{font-size:13.5px;color:var(--ink-2);line-height:1.8}
+  /* ---- modal (figure viewer) -------------------------------------------- */
+  .modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:24px}
+  .modal.open{display:flex}
+  .modal .ov{position:absolute;inset:0;background:rgba(12,20,18,.72);backdrop-filter:blur(3px);opacity:0;transition:opacity .2s ease}
+  .modal.open .ov{opacity:1}
+  .modal .dialog{
+    position:relative;z-index:1;max-width:920px;width:100%;background:var(--surface);
+    border:1px solid var(--line-2);border-radius:12px;overflow:hidden;box-shadow:0 30px 80px -30px rgba(0,0,0,.55);
+    transform:translateY(10px) scale(.99);opacity:0;transition:transform .22s ease, opacity .22s ease;
+  }
+  .modal.open .dialog{transform:none;opacity:1}
+  .modal .dhead{display:flex;align-items:center;gap:12px;padding:13px 15px;border-bottom:1px solid var(--line)}
+  .modal .dhead .dtag{font-family:var(--mono);font-size:11px;color:var(--route);letter-spacing:.1em;text-transform:uppercase}
+  .modal .dhead .dt{font-family:var(--display);font-weight:600;font-size:1rem}
+  .modal .close{margin-left:auto;width:34px;height:34px;flex:none;border:1px solid var(--line-2);border-radius:7px;background:var(--surface);cursor:pointer;display:grid;place-items:center;color:var(--ink-2);transition:all .18s ease}
+  .modal .close:hover{border-color:var(--route);color:var(--route)}
+  .modal .dbody{background:var(--sunken);display:grid;place-items:center;min-height:220px}
+  .modal .dbody img{max-width:100%;max-height:72vh;display:block}
+  .modal .dbody .ph{font-family:var(--mono);font-size:12.5px;color:var(--faint);padding:60px 20px;text-align:center}
 
-/* ---- footer ---- */
-.footer{border-top:1px solid var(--rule);padding:34px 0;margin-top:40px}
-.footer-inner{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px}
-.footer-links{display:flex;gap:22px}
-.footer-links a{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:12.5px;color:var(--ink-2)}
-.footer-links a:hover{color:var(--accent)}
-.footer-links svg{width:15px;height:15px}
-.footer-copy{font-family:var(--mono);font-size:11.5px;color:var(--ink-3)}
-
-/* ---- modal ---- */
-.modal{display:none;position:fixed;inset:0;z-index:1000;background:rgba(17,29,40,.78);backdrop-filter:blur(6px);padding:36px;cursor:zoom-out}
-.modal.on{display:flex;align-items:center;justify-content:center}
-.modal-box{max-width:1300px;width:100%;max-height:92vh;cursor:default;background:var(--card);border-radius:var(--r);border:1px solid var(--rule);overflow:hidden;display:flex;flex-direction:column}
-.modal-hd{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;border-bottom:1px solid var(--rule)}
-.modal-title{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--ink-2)}
-.modal-x{font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--ink-3);cursor:pointer;border:1px solid var(--rule);border-radius:4px;padding:5px 12px}
-.modal-x:hover{color:var(--accent);border-color:var(--accent)}
-.modal-body{overflow:auto;padding:16px;background:var(--card-2)}
-.modal-body img{width:100%}
-
-/* ---- reveal ---- */
-.reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
-.reveal.in{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}.reveal{opacity:1;transform:none;transition:none}.card:hover{transform:none}}
-@media(max-width:860px){.hero-grid{grid-template-columns:1fr;gap:28px}}
+  /* ---- motion ----------------------------------------------------------- */
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+  .hero h1,.hero .hook,.hero .cta,.hero .dossier{opacity:0;animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
+  .hero .hook{animation-delay:.1s}.hero .cta{animation-delay:.2s}.hero .dossier{animation-delay:.3s}
+  @keyframes rise{to{opacity:1;transform:none}}
+  .hero h1,.hero .hook,.hero .cta,.hero .dossier{transform:translateY(18px)}
+  :focus-visible{outline:2px solid var(--route);outline-offset:3px;border-radius:3px}
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .reveal{opacity:1;transform:none}
+    html{scroll-behavior:auto}
+  }
 </style>
 </head>
 <body>
 
-<header class="nav">
-  <div class="nav-inner">
-    <div class="brand">
-      <div class="brand-mark">SP</div>
-      <div>
-        <div class="brand-name">Scott Peterman</div>
-        <div class="brand-sub">Principal Network Engineer</div>
-      </div>
-    </div>
-    <nav class="nav-links">
-      <a href="#deepdives" class="hide-sm">Deep Dives</a>
-      <a href="#experience" class="hide-sm">Experience</a>
-      <a href="#capabilities" class="hide-sm">Skills</a>
-      <a href="https://github.com/scottpeterman" target="_blank" rel="noopener">GitHub</a>
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="#top"><b>SP</b> Scott Peterman</a>
+    <nav>
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
     </nav>
   </div>
 </header>
 
-<main>
-  <!-- HERO -->
-  <section class="hero wrap">
-    <div class="hero-grid">
-      <div>
-        <span class="eyebrow">Principal Network Engineer — Network Automation</span>
-        <h1>I operate the network and build the <span class="em">software that runs it</span>.</h1>
-        <p class="hero-lede">Thirty years designing and running enterprise and service-provider networks — MPLS, BGP, and EVPN/VXLAN across Arista, Juniper, and Cisco. Five years turning that operational experience into production-grade automation: open-source repositories, pip packages other engineers install, and every networking tool validated against real multi-vendor hardware before it ships.</p>
-        <div class="hero-cta">
-          <a href="#deepdives" class="btn primary">Read the deep dives</a>
-          <a href="https://github.com/scottpeterman" target="_blank" rel="noopener" class="btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.09.68-.22.68-.49v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.49-1.11-1.49-.91-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.35 9.35 0 015 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9v2.82c0 .27.18.59.69.49A10.26 10.26 0 0022 12.25C22 6.58 17.52 2 12 2z"/></svg>GitHub</a>
-          <a href="https://linkedin.com/in/scott-peterman-networkeng" target="_blank" rel="noopener" class="btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14zM8.34 17.34V10.5H6.06v6.84h2.28zM7.2 9.36a1.32 1.32 0 100-2.64 1.32 1.32 0 000 2.64zm10.14 7.98v-3.75c0-2-1.07-2.94-2.5-2.94a2.16 2.16 0 00-1.96 1.08v-.93h-2.28c.03.64 0 6.84 0 6.84h2.28v-3.82c0-.2.01-.41.07-.56.17-.41.54-.83 1.18-.83.83 0 1.16.63 1.16 1.56v3.65h2.28z"/></svg>LinkedIn</a>
-        </div>
+<main id="top">
+
+  <!-- ===== HERO : outcome first ===== -->
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow">Network systems engineering</span>
+      <h1>I turn opaque networks into something you can <span class="hl">query</span>, plan around, and build against.</h1>
+      <p class="hook">When a network's real state isn't queryable, your designs become shapes automation can't consume, and the tools you bought are the ones you can't extend. <b>That's the gap I work in.</b> Thirty years operating networks; the last five building the software that makes their state something you can trust.</p>
+      <div class="cta">
+        <a class="btn solid" href="#work">See the work <span aria-hidden="true">↓</span></a>
+        <a class="btn ghost" href="https://github.com/scottpeterman" target="_blank" rel="noopener">GitHub</a>
       </div>
-      <div>
-        <div class="spec">
-          <div class="spec-hd"><span>Operator Profile</span><span>REV 2026</span></div>
-          <div class="spec-row"><span class="spec-k">Experience</span><span class="spec-v"><span class="hl">30</span> yrs network eng</span></div>
-          <div class="spec-row"><span class="spec-k">Primary lang</span><span class="spec-v">Python</span></div>
-          <div class="spec-row"><span class="spec-k">Also ships</span><span class="spec-v">Go · C#/.NET · JS/TS</span></div>
-          <div class="spec-row"><span class="spec-k">Domain</span><span class="spec-v">Datacenter · Peering · SP</span></div>
-          <div class="spec-row"><span class="spec-k">Vendors</span><span class="spec-v">Arista · Juniper · Cisco</span></div>
-          <div class="spec-row"><span class="spec-k">Certs</span><span class="spec-v">CCNP · CCIP · JNCIS</span></div>
-          <div class="spec-row"><span class="spec-k">Base</span><span class="spec-v">Littleton, Colorado</span></div>
-        </div>
-       
+      <div class="dossier">
+        <span><b>OPERATE</b> 30 yrs · MPLS · BGP · EVPN</span>
+        <span><b>BUILD</b> validated on real Arista · Juniper · Cisco</span>
+        <span><b>DOMAIN</b> datacenter · peering · service provider</span>
+        <span><b>BASE</b> Littleton, CO</span>
       </div>
     </div>
   </section>
 
-  <!-- METHODOLOGY -->
-  <section class="sec wrap" id="methodology">
-    <div class="panel reveal">
-      <span class="eyebrow">How these tools are built</span>
-      <p>Every networking tool here was validated against real multi-vendor hardware — Arista, Juniper, and Cisco gear running real routing tables and real failure scenarios in a dedicated lab — <strong style="color:var(--ink)">before</strong> it was trusted in production. Nothing was tested first against mocked data.</p>
-      <p>That discipline comes from four years of formal QA network automation: Robot Framework and pyATS suites triggered from GitLab CI against datacenter hardware, where a bad parse or a missed edge case had operational consequences. Design intent is defined upfront, implementation is systematic, and validation is continuous. These tools work because they were tested where failure matters.</p>
-      <div class="chips">
-        <span class="chip b">Hardware-validated</span>
-        <span class="chip g">Multi-vendor</span>
-        <span class="chip o">QA-driven development</span>
-        <span class="chip">Inheritable code · no exotic dependencies</span>
+  <!-- ===== METHOD : credibility, not a claim of commercial polish ===== -->
+  <section class="method">
+    <div class="wrap">
+      <span class="eyebrow">How it's built</span>
+      <p class="claim">Every tool below was validated against real multi-vendor network OSes in a functional lab — real routing tables, real failure scenarios, run through automated suites and re-run on every change, not a one-time pass. Never mock data. The constructs have since made their way into production, but the lab is where they were proven.</p>
+      <div class="tenets">
+        <div class="tenet"><div class="k">Lab-validated</div><div class="v">Built against real network OSes with real routing state and real failures. Never mock data.</div></div>
+        <div class="tenet"><div class="k">Multi-vendor</div><div class="v">Arista, Juniper, Cisco — on a shared, vendor-agnostic core.</div></div>
+        <div class="tenet"><div class="k">QA-driven</div><div class="v">Robot Framework + pyATS out of GitLab CI. Four years of it.</div></div>
+        <div class="tenet"><div class="k">Inheritable</div><div class="v">Reusable primitives on carefully chosen libraries — FastAPI, SQLite. Nothing obscure; the next engineer can pick it up.</div></div>
       </div>
     </div>
   </section>
 
-  <!-- DEEP DIVES -->
-  <section class="sec wrap" id="deepdives">
-    <div class="sec-head reveal">
-      <span class="sec-num">§ 01</span>
-      <h2 class="sec-title">Technical deep dives</h2>
-      <span class="sec-rule"></span>
-    </div>
-    <p class="sec-lede reveal">Three tools, taken apart. Each is a small system with one non-obvious engineering decision at its center — and the three share a foundation, which is the point.</p>
+  <!-- ===== WORK : three tools, one architecture, by verb ===== -->
+  <section class="work" id="work">
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="eyebrow">Selected work</span>
+        <h2 class="sec">Three tools, one architecture.</h2>
+        <p class="lede">Not a catalog. Three tools that came out of the same set of ideas — see the network, know its real state, build its foundations — and each one turns on a single decision that wasn't the obvious one.</p>
+      </div>
 
-    <!-- FIG 01 -->
-    <article class="fig reveal" style="margin-top:26px">
-      <div class="fig-hd">
-        <div class="fig-eyebrow">
-          <span class="fig-no">FIG.01</span>
-          <span class="fig-tagpair">Python · PyQt6 · GPLv3</span>
-          <span class="fig-vendors">Cisco · Arista · Juniper</span>
+      <!-- OBSERVE -->
+      <article class="proof reveal">
+        <div class="rail">
+          <div class="fig">FIG.01</div>
+          <div class="verb">Observe</div>
+          <div class="stacktag">Python<br>FastAPI<br>ECMP · FIB<br>directed graph</div>
         </div>
-        <div class="fig-title">Secure Cartography
-          <a href="https://github.com/scottpeterman/secure_cartography" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.09.68-.22.68-.49v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.49-1.11-1.49-.91-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.35 9.35 0 015 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9v2.82c0 .27.18.59.69.49A10.26 10.26 0 0022 12.25C22 6.58 17.52 2 12 2z"/></svg></a>
-        </div>
-        <div class="fig-premise">SSH-based multi-vendor discovery that turns a live network into documented topology.</div>
-      </div>
-      <div class="fig-body">
-        <div class="fig-diagram" onclick="zoomEl(this,'FIG.01 — Secure Cartography architecture')">
-          <img src="assets/fig01_secure_cartography.svg" alt="Secure Cartography architecture diagram" loading="lazy">
-          <span class="zoomtag">⤢ Enlarge</span>
-        </div>
-        <div class="fig-cap">Fig. 01 — Layered architecture. Left rail: reusable libraries. Center: discovery pipeline. Right: the seed artifact fanning out to consumers.</div>
-        <div class="fig-narr">
-          <p>Point it at a seed device and it crawls the network over SSH and SNMP, reading CDP/LLDP neighbors, fingerprinting each device, and emitting a normalized topology map. Downstream, that map becomes Draw.io and GraphML diagrams and a security-posture audit — but the map is written once and consumed at import time, with no runtime coupling between discovery and its consumers.</p>
-          <p>The architecture is deliberately layered so the hard parts are reusable on their own: a Paramiko SSH client hardened for legacy gear (invoke-shell only, old ciphers and KEX, ANSI filtering, prompt detection), an encrypted credential vault (PBKDF2-HMAC-SHA256 key derivation, Fernet at rest), a resolver that finds working credentials per device, and a parsing engine that selects its own templates — <strong>FIG.02</strong>.</p>
-        </div>
-        <div class="callout g">
-          <span class="lbl">What makes it different</span>
-          <p>It's built from libraries you could hand to another engineer tomorrow. The SSH client, the vault, and the parser each stand alone — and the same SSH client is the one powering fibtrace (FIG.03). The topology map is a seed artifact: the file is the contract, so anything can consume it without importing the tool that made it.</p>
-        </div>
-        <div class="fig-tags">
-          <span class="tag">Paramiko</span><span class="tag">SNMP + SSH</span><span class="tag">TextFSM</span><span class="tag">PBKDF2 · Fernet</span><span class="tag">Draw.io / GraphML</span>
-          <span class="tag pill"><a href="https://pypi.org/project/secure-cartography/" target="_blank" rel="noopener">pip install secure-cartography</a></span>
-        </div>
-      </div>
-    </article>
-
-    <!-- FIG 02 -->
-    <article class="fig reveal">
-      <div class="fig-hd">
-        <div class="fig-eyebrow">
-          <span class="fig-no">FIG.02</span>
-          <span class="fig-tagpair">Python · SQLite · TextFSM</span>
-          <span class="fig-vendors">15+ vendor families</span>
-        </div>
-        <div class="fig-title">tfsm-fire</div>
-        <div class="fig-premise">Multi-vendor CLI parsing where the output selects the template — not the engineer.</div>
-      </div>
-      <div class="fig-body">
-        <div class="fig-diagram" onclick="zoomEl(this,'FIG.02 — tfsm-fire engine architecture')">
-          <img src="assets/fig02_tfsm_fire.svg" alt="tfsm-fire architecture diagram" loading="lazy">
-          <span class="zoomtag">⤢ Enlarge</span>
-        </div>
-        <div class="fig-cap">Fig. 02a — The inversion and the scoring pipeline. Raw output plus a loose hint in; the highest-scoring parse out.</div>
-        <div class="fig-narr">
-          <p>Conventional TextFSM makes you pick the right template up front. Guess wrong and you get silent garbage, and every new command or vendor means another hand-wired selection branch. tfsm-fire inverts that: hand it raw CLI output and a loose hint, and it runs every candidate template, scoring each parse on a 100-point rubric — record count, field richness, population rate, and consistency — then returns the best match. <strong>There is no selection logic to maintain.</strong></p>
-        </div>
-        <div class="split">
-          <div>
-            <div class="fig-diagram" onclick="zoomEl(this,'FIG.02b — tfsm-fire scoring a live capture')">
-              <img src="assets/fig02_tfsm_fire_live.jpg" alt="tfsm-fire scoring a live Cisco IOS capture" loading="lazy">
-              <span class="zoomtag">⤢ Enlarge</span>
+        <div class="body">
+          <h3>fibtrace — the forwarding table, read from the device itself</h3>
+          <p class="prob">A traceroute probes from outside with ICMP and sees hop IPs. It's blind to RIB-versus-FIB divergence, an unresolved next-hop, and any ECMP path it didn't happen to hash into.</p>
+          <div class="decision">
+            <span class="dk">The decision</span>
+            <p>The device itself is the most accurate source of truth — so work it inside-out. SSH into each device, read <em>its own</em> forwarding tables, and ask four questions at every hop — is there a route, is it in the FIB, is the next-hop resolved, is the link healthy — then build a directed graph of every path a packet can actually take. Load a before and after and it tells you exactly what changed.</p>
+          </div>
+          <button class="figure" type="button" data-gif="fibtrace-slides.gif" data-title="fibtrace" data-tag="Observe" aria-haspopup="dialog">
+            <div class="figinner">
+              <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+              <span class="figmeta"><span class="fl">Watch it run</span><span class="fs">fibtrace-slides.gif · click to play</span></span>
             </div>
-            <div class="fig-cap">Fig. 02b — The rubric, live: a Cisco IOS <span class="mono">show interfaces</span> capture scored and parsed into structured records.</div>
+          </button>
+          <div class="links">
+            <a class="chip" href="https://github.com/scottpeterman/fibtrace" target="_blank" rel="noopener">GitHub ↗</a>
+            <a class="chip" href="https://pypi.org/project/fibtrace/" target="_blank" rel="noopener">pip install fibtrace</a>
           </div>
-          <div class="callout" style="margin-top:0;height:100%">
-            <span class="lbl">What makes it different</span>
-            <p>The four bars in the screenshot — records, fields, population, consistency — are the exact scoring factors from the diagram, running against a real capture. The engine scales to 1,200+ templates across 15+ vendor families with zero per-command mapping, and it's the parsing core inside Secure Cartography. Thread-safe by construction, so it parses a whole fleet in parallel.</p>
+        </div>
+      </article>
+
+      <!-- KNOW -->
+      <article class="proof reveal">
+        <div class="rail">
+          <div class="fig">FIG.02</div>
+          <div class="verb">Know</div>
+          <div class="stacktag">Python<br>SQLite<br>TextFSM<br>REST API</div>
+        </div>
+        <div class="body">
+          <h3>Netlapse — a searchable state-tracking machine</h3>
+          <p class="prob">Config backup answers "what changed?" with a text diff, and only for config. Everything else the network knows — ARP, BGP, routes, LLDP, interfaces — is state you can't query, can't version, and can't trust.</p>
+          <div class="decision">
+            <span class="dk">The decision</span>
+            <p>Make any CLI output a first-class record. Define a template and it's collected, parsed, versioned, and <em>semantically</em> diffed — a peer dropping to Idle, not a timer ticking. And every parse is scored, so the platform tells you whether its own data is even true. All of it API-addressable, so it becomes the source of truth other automation reads.</p>
+          </div>
+          <button class="figure" type="button" data-gif="netlaps-slides.gif" data-title="Netlapse" data-tag="Know" aria-haspopup="dialog">
+            <div class="figinner">
+              <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+              <span class="figmeta"><span class="fl">Watch it run</span><span class="fs">netlaps-slides.gif · click to play</span></span>
+            </div>
+          </button>
+          <div class="links">
+            <a class="chip" href="https://github.com/scottpeterman/netlapse" target="_blank" rel="noopener">GitHub ↗</a>
+            <a class="chip" href="https://pypi.org/project/netlapse/" target="_blank" rel="noopener">pip install netlapse</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- BUILD -->
+      <article class="proof reveal">
+        <div class="rail">
+          <div class="fig">FIG.03</div>
+          <div class="verb">Build</div>
+          <div class="stacktag">Python<br>SQLite<br>dnslib<br>two-process</div>
+        </div>
+        <div class="body">
+          <h3>waypost DNS + DHCP — control-plane services you can actually build against</h3>
+          <p class="prob">DHCP hands out an address; DNS has to carry the name; and in most shops a human stitches the two together while the automation can touch neither. The network's own foundational services are the part nobody designs to be built against.</p>
+          <div class="decision">
+            <span class="dk">The decision</span>
+            <p>Build both to be automated from the first packet. Authored intent lives in git, but the decisions get made on state — machine state in SQLite, and DNS derived directly from live lease state. Two processes joined by one narrow, well-defined interface that degrades gracefully instead of ever failing a lease. Validated end to end on real Cisco gear, across a relay.</p>
+          </div>
+          <button class="figure" type="button" data-gif="waypost-slides.gif" data-title="waypost DNS + DHCP" data-tag="Build" aria-haspopup="dialog">
+            <div class="figinner">
+              <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+              <span class="figmeta"><span class="fl">Watch it run</span><span class="fs">waypost-slides.gif · click to play</span></span>
+            </div>
+          </button>
+          <div class="links">
+            <span class="chip mut">private · walkthrough on request</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- one architecture -->
+      <div class="foundation reveal">
+        <div class="fk">One foundation</div>
+        <p>These aren't three tools — they're <b>one set of reusable primitives</b> applied three times. I'd rather everything spoke RESTCONF; operational reality is SSH-first, so <b>parsing is the first-class citizen</b> — the output selects the template, not the engineer. Underneath sits a hardened, vendor-agnostic SSH client I wrote and a structured artifact that carries the contract between stages. Each one is built to be a <b>platform, not a script</b>: something automation can consume reliably, and the next engineer can pick up and extend. Build the second one and the third comes fast.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== EXPERIENCE ===== -->
+  <section class="exp" id="experience">
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="eyebrow">Track record</span>
+        <h2 class="sec">Where it came from.</h2>
+      </div>
+      <div class="timeline">
+        <div class="row reveal">
+          <div class="when">2024 — now</div>
+          <div>
+            <div class="role">Principal Infrastructure Engineer</div>
+            <div class="what">Datacenter and peering infrastructure on Arista and Juniper — circuit turn-ups, PNI implementations, and BGP peer migrations with pre-flight validation, state auditing, and cutover execution.</div>
+          </div>
+        </div>
+        <div class="row reveal">
+          <div class="when">2022 — 2024</div>
+          <div>
+            <div class="role">Principal Infrastructure Engineer · Columbia Sportswear</div>
+            <div class="what">Enterprise network across 600+ retail locations, datacenters, and corporate sites (Cisco, Aruba, Palo Alto). Built a device-state collection platform for auditing and compliance.</div>
+          </div>
+        </div>
+        <div class="row reveal">
+          <div class="when">2019 — 2022</div>
+          <div>
+            <div class="role">Principal Engineer · Charter <span class="tag">the QA instinct</span></div>
+            <div class="what">Built datacenter QA network automation from the ground up — Robot Framework and pyATS suites against real hardware, out of GitLab CI on every config and image change. EVPN/VXLAN fabric and control/data-plane convergence validation. This is where "is the data even true?" became a habit.</div>
+          </div>
+        </div>
+        <div class="row reveal">
+          <div class="when">2012 — 2019</div>
+          <div>
+            <div class="role">Architect, IP Edge · Level3 / TW Telecom <span class="tag">the gap seat</span></div>
+            <div class="what">IP services architecture across a tier-1 backbone — MPLS L3VPN, VPLS, anycast DNS, NetFlow at carrier scale. Sat between engineering and automation, making sure the design constructs were built to be consumed by automation, a decade before that was the norm.</div>
+          </div>
+        </div>
+        <div class="row reveal">
+          <div class="when">2006 — 2012</div>
+          <div>
+            <div class="role">Architect III · Cricket / AT&amp;T</div>
+            <div class="what">Mobile carrier core — MPLS with OSPF-TE, VPLS, MVNO peering, datacenter fabrics up to ~300 switches.</div>
           </div>
         </div>
       </div>
-    </article>
+    </div>
+  </section>
 
-    <!-- FIG 03 -->
-    <article class="fig reveal">
-      <div class="fig-hd">
-        <div class="fig-eyebrow">
-          <span class="fig-no">FIG.03</span>
-          <span class="fig-tagpair">Python · FastAPI · MIT</span>
-          <span class="fig-vendors">Cisco · Arista · Juniper</span>
-        </div>
-        <div class="fig-title">fibtrace
-          <a href="https://github.com/scottpeterman/fibtrace" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.09.68-.22.68-.49v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.49-1.11-1.49-.91-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.35 9.35 0 015 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9v2.82c0 .27.18.59.69.49A10.26 10.26 0 0022 12.25C22 6.58 17.52 2 12 2z"/></svg></a>
-        </div>
-        <div class="fig-premise">Hop-by-hop forwarding-plane validation from the device's own perspective. Not a traceroute.</div>
-      </div>
-      <div class="fig-body">
-        <div class="fig-diagram" onclick="zoomEl(this,'FIG.03 — fibtrace architecture')">
-          <img src="assets/fig03_fibtrace.svg" alt="fibtrace architecture diagram" loading="lazy">
-          <span class="zoomtag">⤢ Enlarge</span>
-        </div>
-        <div class="fig-cap">Fig. 03 — The BFS walk and the four forwarding questions, feeding a directed graph of every path a packet can take.</div>
-        <div class="fig-narr">
-          <p>A traceroute probes from the outside with ICMP and sees hop IPs. It's blind to RIB-versus-FIB divergence, incomplete ARP, and any ECMP path it didn't happen to hash into. fibtrace goes inside-out: it SSHes into each device and reads that device's <strong>own</strong> forwarding tables, asking four questions at every hop — is there a route, is it in the FIB, is the next-hop resolved, is the link healthy — and identifies devices by CLI-prompt hostname rather than IP, because in real networks the management address rarely matches the forwarding plane.</p>
-          <p>The result is a directed graph of every path a packet can take from source to destination — ECMP fan-out, convergence points, and terminal nodes included. No agents, no controllers; just SSH and a browser.</p>
-        </div>
-        <div class="callout o">
-          <span class="lbl">What makes it different — fibtrace.diff</span>
-          <p>Load a pre-change graph and a post-change graph and get quantified impairment — paths, edges, ECMP width — with a CRITICAL / WARN / OK triage band across the top. Hover any path and it renders on both graphs at once, so you're not mentally diffing two pictures. Export JSON for automation, SVG/PNG for a MOP or an incident write-up. Change validation you can hand to a reviewer.</p>
-        </div>
-        <div class="fig-tags">
-          <span class="tag">FastAPI</span><span class="tag">ECMP / FIB</span><span class="tag">3-tier parse: JSON → TextFSM → regex</span><span class="tag">DAG</span>
-          <span class="tag pill"><a href="https://pypi.org/project/fibtrace/" target="_blank" rel="noopener">pip install fibtrace</a></span>
-        </div>
-      </div>
-    </article>
-
-    <!-- BRIDGE -->
-    <div class="bridge reveal">
-      <div class="bridge-key">One foundation</div>
-      <div>
-        <h3>Two systems, one foundation</h3>
-        <p>Secure Cartography discovers <em>what exists</em>; fibtrace validates <em>how it forwards</em>. They aren't the same tool, but they rest on the same three ideas — which is why building the second one was fast. The same hardened SSH client drives both (fibtrace's copy still carries the original module path in its docstring). Both let structure win where they can get it, rather than hand-wiring parser selection. And both treat a structured JSON file as the interface between stages, so downstream tools consume the artifact without importing the producer.</p>
-        <div class="bridge-legend">
-          <span><i class="dot" style="background:var(--v-green)"></i>Shared SSH client</span>
-          <span><i class="dot" style="background:var(--v-blue)"></i>Structure-first parsing</span>
-          <span><i class="dot" style="background:var(--v-orange)"></i>JSON artifact as contract</span>
-        </div>
+  <!-- ===== CAPABILITIES : quiet reference, at the bottom by design ===== -->
+  <section class="caps">
+    <div class="wrap">
+      <span class="eyebrow">Reference</span>
+      <div class="grid" style="margin-top:22px">
+        <div class="col"><div class="k">Protocols</div><div class="v">BGP · MPLS L3VPN<br>VPLS · EVPN/VXLAN<br>OSPF / IS-IS · SD-WAN</div></div>
+        <div class="col"><div class="k">Platforms</div><div class="v">Cisco IOS/XE/NX-OS<br>Arista EOS · Junos<br>Palo Alto · Aruba · F5</div></div>
+        <div class="col"><div class="k">Languages</div><div class="v">Python · Go<br>C#/.NET · JS/TS<br>PyQt6 · FastAPI · Fyne</div></div>
+        <div class="col"><div class="k">Automation</div><div class="v">pyATS · Robot Framework<br>Nornir · NAPALM · TextFSM<br>Paramiko · GitLab CI</div></div>
       </div>
     </div>
   </section>
 
-  <!-- EXPERIENCE -->
-  <section class="sec wrap" id="experience">
-    <div class="sec-head reveal">
-      <span class="sec-num">§ 02</span>
-      <h2 class="sec-title">Experience</h2>
-      <span class="sec-rule"></span>
-    </div>
-    <p class="sec-lede reveal">Principal and architect roles across datacenter, peering, and tier-1 service-provider networks — plus four years building network test automation for a datacenter QA org.</p>
-    <div class="tl reveal" style="margin-top:22px">
-      <div class="tl-row"><div class="tl-meta"><div class="tl-org cur">Current</div><div class="tl-dates">Oct 2024 — Present</div></div><div><div class="tl-role">Principal Infrastructure Engineer</div><div class="tl-detail"><p>Datacenter and peering infrastructure on Arista and Juniper. Circuit turn-ups and PNI implementations.</p><p>BGP peer migrations — pre-flight validation, state auditing, cutover execution.</p></div></div></div>
-      <div class="tl-row"><div class="tl-meta"><div class="tl-org">Columbia Sportswear</div><div class="tl-dates">Mar 2022 — Oct 2024</div></div><div><div class="tl-role">Principal Infrastructure Engineer</div><div class="tl-detail"><p>Enterprise network across 600+ retail locations, datacenters, and corporate sites — Cisco, Aruba, Palo Alto.</p><p>Built a device-state collection platform (Flask/FastAPI, MySQL) for auditing and compliance.</p></div></div></div>
-      <div class="tl-row"><div class="tl-meta"><div class="tl-org">Charter</div><div class="tl-dates">2019 — 2022</div></div><div><div class="tl-role">Principal Engineer — Datacenter QA Network Automation</div><div class="tl-detail"><p>Built network test automation from the ground up in Robot Framework and pyATS — Python suites running against real Arista and Cisco datacenter hardware, triggered from GitLab CI on every config and image change.</p><p>VXLAN/EVPN fabric validation, leaf-spine verification, control-plane and data-plane convergence testing.</p></div></div></div>
-      <div class="tl-row"><div class="tl-meta"><div class="tl-org">Level 3 / TW Telecom</div><div class="tl-dates">2012 — 2019</div></div><div><div class="tl-role">Architect — IP Edge Engineering</div><div class="tl-detail"><p>IP services architecture across a tier-1 backbone — MPLS L3VPN, VPLS, IPVPN, converged voice/data, managed internet.</p><p>Anycast DNS, syslog infrastructure, and NetFlow collection and analysis at carrier scale.</p></div></div></div>
-      <div class="tl-row"><div class="tl-meta"><div class="tl-org">Cricket (AT&amp;T)</div><div class="tl-dates">2006 — 2012</div></div><div><div class="tl-role">Architect III</div><div class="tl-detail"><p>Mobile carrier network architecture — MPLS core with OSPF-TE, VPLS, MVNO peering. Datacenter fabrics up to ~300 switches.</p></div></div></div>
-    </div>
-  </section>
-
-  <!-- CAPABILITIES -->
-  <section class="sec wrap" id="capabilities">
-    <div class="sec-head reveal">
-      <span class="sec-num">§ 03</span>
-      <h2 class="sec-title">Capabilities</h2>
-      <span class="sec-rule"></span>
-    </div>
-    <div class="caps reveal" style="margin-top:22px">
-      <div class="cap"><div class="cap-t">Platforms &amp; protocols</div><div class="cap-i">Cisco IOS / IOS-XE / NX-OS, Arista EOS, Juniper Junos, Palo Alto, Aruba/HPE, F5 · BGP, MPLS L3VPN, VPLS, EVPN/VXLAN, OSPF/IS-IS, SD-WAN</div></div>
-      <div class="cap"><div class="cap-t">Languages</div><div class="cap-i">Python, Go, C#/.NET, JavaScript/TypeScript, Shell · PyQt6, Fyne, FastAPI, Flask, Textual</div></div>
-      <div class="cap"><div class="cap-t">Automation &amp; test</div><div class="cap-i">Netmiko, NAPALM, TextFSM, Nornir, pyATS, Robot Framework, Ansible, PySNMP, Paramiko · GitLab CI</div></div>
-      <div class="cap"><div class="cap-t">Infrastructure</div><div class="cap-i">Git/GitLab CI, Docker, Linux, MySQL, SQLite, Redis, WebSocket services</div></div>
-    </div>
-  </section>
 </main>
 
-<footer class="footer">
-  <div class="wrap footer-inner">
-    <div class="footer-links">
-      <a href="https://github.com/scottpeterman" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.09.68-.22.68-.49v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.49-1.11-1.49-.91-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.35 9.35 0 015 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9v2.82c0 .27.18.59.69.49A10.26 10.26 0 0022 12.25C22 6.58 17.52 2 12 2z"/></svg>github.com/scottpeterman</a>
-      <a href="https://linkedin.com/in/scott-peterman-networkeng" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14zM8.34 17.34V10.5H6.06v6.84h2.28zM7.2 9.36a1.32 1.32 0 100-2.64 1.32 1.32 0 000 2.64zm10.14 7.98v-3.75c0-2-1.07-2.94-2.5-2.94a2.16 2.16 0 00-1.96 1.08v-.93h-2.28c.03.64 0 6.84 0 6.84h2.28v-3.82c0-.2.01-.41.07-.56.17-.41.54-.83 1.18-.83.83 0 1.16.63 1.16 1.56v3.65h2.28z"/></svg>LinkedIn</a>
+<footer id="contact">
+  <div class="wrap">
+    <div class="cta-line">If your network is opaque, <span class="hl">that's the problem I solve.</span></div>
+    <div class="flinks">
+      <a href="https://github.com/scottpeterman" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="https://linkedin.com/in/scott-peterman-networkeng" target="_blank" rel="noopener">LinkedIn ↗</a>
     </div>
-    <div class="footer-copy">© 2026 Scott Peterman · Littleton, Colorado</div>
+    <div class="foot-meta">
+      <span>Scott Peterman · Network systems engineering</span>
+      <span>Littleton, Colorado · REV 2026</span>
+    </div>
   </div>
 </footer>
 
-<!-- MODAL -->
-<div class="modal" id="modal" onclick="closeZoom(event)">
-  <div class="modal-box" onclick="event.stopPropagation()">
-    <div class="modal-hd"><span class="modal-title" id="modalTitle"></span><span class="modal-x" onclick="closeZoom()">ESC · close</span></div>
-    <div class="modal-body"><img id="modalImg" src="" alt=""></div>
+<!-- ===== figure viewer modal (one, reused) ===== -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+  <div class="ov" data-close></div>
+  <div class="dialog" role="document">
+    <div class="dhead">
+      <span class="dtag" id="modalTag"></span>
+      <span class="dt" id="modalTitle"></span>
+      <button class="close" id="modalClose" type="button" aria-label="Close figure">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="dbody" id="modalBody">
+      <img id="modalImg" alt="" />
+    </div>
   </div>
 </div>
 
 <script>
-function zoomEl(el,title){var img=el.querySelector('img');var m=document.getElementById('modal');document.getElementById('modalImg').src=img.currentSrc||img.src;document.getElementById('modalTitle').textContent=title;m.classList.add('on');document.body.style.overflow='hidden';}
-function closeZoom(e){if(e&&e.target.id&&e.target.id!=='modal'&&e.target.className!=='modal-x')return;document.getElementById('modal').classList.remove('on');document.body.style.overflow='';}
-document.addEventListener('keydown',function(e){if(e.key==='Escape')closeZoom();});
-// scroll reveal
-var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+  // scroll-reveal (respects reduced-motion via CSS; observer just adds the class)
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);} });
+    },{rootMargin:'0px 0px -8% 0px',threshold:.12});
+    els.forEach(function(e){io.observe(e)});
+  })();
+
+  // figure viewer: thumbnail -> modal. GIF is loaded only on open and cleared
+  // on close, so nothing animates in the grid and the page stays light.
+  (function(){
+    var modal=document.getElementById('modal'),
+        img=document.getElementById('modalImg'),
+        titleEl=document.getElementById('modalTitle'),
+        tagEl=document.getElementById('modalTag'),
+        closeBtn=document.getElementById('modalClose'),
+        last=null;
+    function open(btn){
+      last=btn;
+      var gif=btn.getAttribute('data-gif'),
+          title=btn.getAttribute('data-title'),
+          tag=btn.getAttribute('data-tag')||'';
+      titleEl.textContent=title;
+      tagEl.textContent=tag;
+      img.alt=title+' — animated walkthrough';
+      img.src=gif;                       // lazy: only fetched on open
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden','false');
+      document.body.style.overflow='hidden';
+      closeBtn.focus();
+    }
+    function close(){
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden','true');
+      document.body.style.overflow='';
+      img.removeAttribute('src');        // stop + unload the gif
+      if(last){last.focus();last=null;}
+    }
+    document.querySelectorAll('.figure').forEach(function(b){
+      b.addEventListener('click',function(){open(b);});
+    });
+    closeBtn.addEventListener('click',close);
+    modal.querySelectorAll('[data-close]').forEach(function(el){el.addEventListener('click',close);});
+    document.addEventListener('keydown',function(e){
+      if(!modal.classList.contains('open'))return;
+      if(e.key==='Escape'){close();return;}
+      if(e.key==='Tab'){e.preventDefault();closeBtn.focus();}  // one control -> trap on it
+    });
+  })();
 </script>
 </body>
 </html>
