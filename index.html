@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Scott Peterman — Network Systems Engineering</title>
-<meta name="description" content="Thirty years operating multi-vendor networks. The last five building the tooling that makes their real state something you can query, trust, and automate against — validated against real network OSes in functional labs, not mock data.">
+<meta name="description" content="Thirty years operating multi-vendor networks. The last five building the tooling that makes their real state something you can query, trust, and automate against — including gated, human-approved AI investigation. Validated against real network OSes in functional labs, not mock data.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -287,13 +287,13 @@
     </div>
   </section>
 
-  <!-- ===== WORK : three tools, one architecture, by verb ===== -->
+  <!-- ===== WORK : four tools, one architecture, by verb ===== -->
   <section class="work" id="work">
     <div class="wrap">
       <div class="head reveal">
         <span class="eyebrow">Selected work</span>
-        <h2 class="sec">Three tools, one architecture.</h2>
-        <p class="lede">Not a catalog. Three tools that came out of the same set of ideas — see the network, know its real state, build its foundations — and each one turns on a single decision that wasn't the obvious one.</p>
+        <h2 class="sec">Four tools, one architecture.</h2>
+        <p class="lede">Not a catalog. Four tools that came out of the same set of ideas — see the network, know its real state, build its foundations, and investigate it safely — and each one turns on a single decision that wasn't the obvious one.</p>
       </div>
 
       <!-- OBSERVE -->
@@ -345,7 +345,7 @@
           </button>
           <div class="links">
             <a class="chip" href="https://github.com/scottpeterman/netlapse" target="_blank" rel="noopener">GitHub ↗</a>
-            <a class="chip" href="https://pypi.org/project/netlapse/" target="_blank" rel="noopener">pip install netlapse</a>
+            <a class="chip" href="https://pypi.org/project/netlapse2/" target="_blank" rel="noopener">pip install netlapse2</a>
           </div>
         </div>
       </article>
@@ -376,10 +376,40 @@
         </div>
       </article>
 
+      <!-- INVESTIGATE -->
+      <article class="proof reveal">
+        <div class="rail">
+          <div class="fig">FIG.04</div>
+          <div class="verb">Investigate</div>
+          <div class="stacktag">Python<br>PyQt6<br>MCP · tool calling<br>local LLM</div>
+        </div>
+        <div class="body">
+          <h3>uglyfruit — AI-assisted investigation with the trust boundary enforced</h3>
+          <p class="prob">The obvious way to put a model on a network is to let it SSH in and run commands. That is the most expensive path to an answer, the least safe, and the one where nothing stops the model from wandering into a live box on its own initiative.</p>
+          <div class="decision">
+            <span class="dk">The decision</span>
+            <p>Don't give the model the CLI — give it a gradient, and make the last step someone else's to grant. Most questions answer from stored state or from a fixed, read-only live surface, so the model never chooses a command. Reaching an arbitrary live command requires an escalation the model can only <em>ask</em> for: a human approves it at a modal, each tier runs in its own process with its own credentials and audit, and no approver means fail-closed. The engineer keeps an ungated terminal in the same pane — it augments the operator instead of standing in for one.</p>
+          </div>
+          <button class="figure" type="button"
+                  data-gif="https://raw.githubusercontent.com/scottpeterman/uglyfruit/refs/heads/main/screenshots/safe/full_app_mcp_tier2.png"
+                  data-title="uglyfruit — the gated loop, end to end"
+                  data-tag="Investigate" aria-haspopup="dialog">
+            <div class="figinner">
+              <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:0"><path d="M9 3H3v6M15 21h6v-6M21 9V3h-6M3 15v6h6"/></svg></span>
+              <span class="figmeta"><span class="fl">See the gated run</span><span class="fs">approved escalation · live command on real gear</span></span>
+            </div>
+          </button>
+          <div class="links">
+            <a class="chip" href="https://github.com/scottpeterman/uglyfruit" target="_blank" rel="noopener">GitHub ↗</a>
+            <span class="chip mut">GPLv3 · reference implementation</span>
+          </div>
+        </div>
+      </article>
+
       <!-- one architecture -->
       <div class="foundation reveal">
         <div class="fk">One foundation</div>
-        <p>These aren't three tools — they're <b>one set of reusable primitives</b> applied three times. I'd rather everything spoke RESTCONF; operational reality is SSH-first, so <b>parsing is the first-class citizen</b> — the output selects the template, not the engineer. Underneath sits a hardened, vendor-agnostic SSH client I wrote and a structured artifact that carries the contract between stages. Each one is built to be a <b>platform, not a script</b>: something automation can consume reliably, and the next engineer can pick up and extend. Build the second one and the third comes fast.</p>
+        <p>These aren't four tools — they're <b>one set of reusable primitives</b> applied four times. I'd rather everything spoke RESTCONF; operational reality is SSH-first, so <b>parsing is the first-class citizen</b> — the output selects the template, not the engineer. Underneath sits a hardened, vendor-agnostic SSH client I wrote and a structured artifact that carries the contract between stages. Each one is built to be a <b>platform, not a script</b>: something automation can consume reliably, and the next engineer can pick up and extend. Build the second one and the third comes fast.</p>
       </div>
     </div>
   </section>
@@ -439,7 +469,7 @@
         <div class="col"><div class="k">Protocols</div><div class="v">BGP · MPLS L3VPN<br>VPLS · EVPN/VXLAN<br>OSPF / IS-IS · SD-WAN</div></div>
         <div class="col"><div class="k">Platforms</div><div class="v">Cisco IOS/XE/NX-OS<br>Arista EOS · Junos<br>Palo Alto · Aruba · F5</div></div>
         <div class="col"><div class="k">Languages</div><div class="v">Python · Go<br>C#/.NET · JS/TS<br>PyQt6 · FastAPI · Fyne</div></div>
-        <div class="col"><div class="k">Automation</div><div class="v">pyATS · Robot Framework<br>Nornir · NAPALM · TextFSM<br>Paramiko · GitLab CI</div></div>
+        <div class="col"><div class="k">Automation</div><div class="v">pyATS · Robot Framework<br>Nornir · NAPALM · TextFSM<br>MCP · LLM tool calling<br>Paramiko · GitLab CI</div></div>
       </div>
     </div>
   </section>
@@ -488,8 +518,8 @@
     els.forEach(function(e){io.observe(e)});
   })();
 
-  // figure viewer: thumbnail -> modal. GIF is loaded only on open and cleared
-  // on close, so nothing animates in the grid and the page stays light.
+  // figure viewer: thumbnail -> modal. The asset is loaded only on open and
+  // cleared on close, so nothing animates in the grid and the page stays light.
   (function(){
     var modal=document.getElementById('modal'),
         img=document.getElementById('modalImg'),
@@ -504,7 +534,7 @@
           tag=btn.getAttribute('data-tag')||'';
       titleEl.textContent=title;
       tagEl.textContent=tag;
-      img.alt=title+' — animated walkthrough';
+      img.alt=title+' — figure';
       img.src=gif;                       // lazy: only fetched on open
       modal.classList.add('open');
       modal.setAttribute('aria-hidden','false');
@@ -515,7 +545,7 @@
       modal.classList.remove('open');
       modal.setAttribute('aria-hidden','true');
       document.body.style.overflow='';
-      img.removeAttribute('src');        // stop + unload the gif
+      img.removeAttribute('src');        // stop + unload the asset
       if(last){last.focus();last=null;}
     }
     document.querySelectorAll('.figure').forEach(function(b){
