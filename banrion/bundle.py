@@ -4,7 +4,7 @@ file: URLs are unique security origins, so a page opened off disk cannot load
 its own sibling scripts. Keep editing js/*.js; re-run this to produce the
 single-file build.
 """
-import re, pathlib
+import re, pathlib, datetime
 
 src = pathlib.Path('chess.html').read_text(encoding='utf-8')
 order = ['js/mqtt.min.js', 'js/chess.js', 'js/transport.js', 'js/game.js', 'js/net.js',
@@ -43,6 +43,10 @@ out = out.replace(
     '<!--SPLASH-IMG--><img id="splash-img" src="banrion.webp" alt="BANRION">',
     f'<img id="splash-img" src="data:image/webp;base64,{splash}" alt="BANRION">')
 assert 'data:image/webp;base64' in out, 'splash placeholder missing from chess.html'
+
+stamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
+assert '__BUILD__' in out, 'build stamp placeholder missing from chess.html'
+out = out.replace('__BUILD__', stamp)
 missing = [p for p in order if p not in src]
 assert not missing, missing
 pathlib.Path('chess_single.html').write_text(out, encoding='utf-8')

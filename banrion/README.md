@@ -198,6 +198,17 @@ you set the table before a game.
   highlight rings keep their own colours. The hint line warns when two picks
   are close in *both* hue and brightness, since the armies overlap heavily at
   board scale.
+- **SAVE THIS VIEW** — first row of the VISUALS panel, and also next to RESET
+  VIEW once a game is running. Keeps the camera you have orbited to as your
+  default **for this browser**. It also prints the four numbers to the log:
+  paste those into `TUNE.cam` in `js/render3d.js` and rebuild to change the
+  view for everyone who opens the published copy, which a per-browser
+  preference cannot do. Note that a `file://` or `content://` copy is an opaque
+  origin where storage may be refused outright, and that a view saved on
+  `127.0.0.1` is invisible to the hosted site — different origins, separate
+  storage. What is stored is how far round you sit from *your own army*,
+  not an absolute angle, so the same saved view puts you behind your pieces
+  whether you are White or Black. RESET VIEW returns to it; CLEAR forgets it.
 - **GLOW, FALLOFF, REFL**, and the **REFLECTIONS / MOTES** toggles are repaints
   and track the slider as you drag.
 - **MERIDIANS / RING SEGS / KNIGHT** rebuild the meshes (and re-upload them on

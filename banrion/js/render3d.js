@@ -29,6 +29,10 @@
   const TUNE = {
     cam:   { yaw:0.0, pitch:0.92, dist:15.0, targetY:0.28, focal:1.25, near:0.12,
              minPitch:0.18, maxPitch:1.45, minDist:5.0, maxDist:30,
+             // Standing rotation away from your own army, in radians. Edit
+             // THIS, never yaw -- anything written to yaw is overwritten by
+             // the next faceSide() or resetView().
+             turn: 0.0,
              // Zoom per PIXEL of scroll, not per event. A mouse notch is one
              // event of ~100px; a trackpad flick is a burst of twenty events
              // of ~5px. Reacting per event makes the two differ by 20x, which
@@ -75,6 +79,11 @@
       indigo:   { label:'INDIGO',    hex:'#7c3aed' }
     }
   };
+
+  // applyView() writes the saved framing INTO TUNE.cam, so the shipped values
+  // have to be kept somewhere or "go back to the default" has nothing to go
+  // back to. Snapshotted once, never written.
+  const SHIPPED_CAM = Object.assign({}, TUNE.cam);
 
   const FILES = 'abcdefgh';
   const SQ = TUNE.board.sq;
@@ -221,9 +230,47 @@
     },
 
     // Each player sits behind their own army.
+    // YAW IS DERIVED, NOT STORED. What a player actually wants to keep is how
+    // far round from their own army they like to sit -- TUNE.cam.turn -- not an
+    // absolute yaw, which would put Black behind White's back. Every framing
+    // goes through here, so the saved view works for either colour.
     faceSide(colour) {
-      this.cam.yaw = colour === 'b' ? Math.PI : 0;
+      this.cam.yaw = (colour === 'b' ? Math.PI : 0) + (TUNE.cam.turn || 0);
       this._dirty = true;
+    },
+
+    // The camera as something worth saving: an offset from your own side,
+    // plus the parts that have no handedness.
+    captureView() {
+      const base = this._nearestSide();
+      let turn = this.cam.yaw - base;
+      turn = Math.atan2(Math.sin(turn), Math.cos(turn));    // wrap to (-pi, pi]
+      return { turn, pitch: this.cam.pitch, dist: this.cam.dist,
+               targetY: this.cam.targetY };
+    },
+    applyView(v) {
+      if (!v) return;
+      const num = (x, lo, hi, d) => (typeof x === 'number' && isFinite(x))
+        ? Math.min(hi, Math.max(lo, x)) : d;
+      TUNE.cam.turn    = num(v.turn, -Math.PI, Math.PI, TUNE.cam.turn || 0);
+      TUNE.cam.pitch   = num(v.pitch, TUNE.cam.minPitch, TUNE.cam.maxPitch, TUNE.cam.pitch);
+      TUNE.cam.dist    = num(v.dist, TUNE.cam.minDist, TUNE.cam.maxDist, TUNE.cam.dist);
+      TUNE.cam.targetY = num(v.targetY, -2, 4, TUNE.cam.targetY);
+      this.resetView();
+    },
+
+    // Forget a saved view and return to the shipped framing.
+    clearView() {
+      for (const k of ['turn', 'pitch', 'dist', 'targetY']) TUNE.cam[k] = SHIPPED_CAM[k];
+      this.resetView();
+    },
+
+    // Which army are we currently sitting behind? Used so a saved turn is
+    // measured from the near side rather than from White in all cases.
+    _nearestSide() {
+      const d = Math.atan2(Math.sin(this.cam.yaw - Math.PI),
+                           Math.cos(this.cam.yaw - Math.PI));
+      return Math.abs(d) < Math.PI / 2 ? Math.PI : 0;
     },
 
     // ---------------------------------------------------------------- camera
@@ -578,10 +625,14 @@
       this.cam.dist = clamp(this.cam.dist * k, TUNE.cam.minDist, TUNE.cam.maxDist);
       this._dirty = true;
     },
+    // Snap to the NEAREST side plus the standing turn, rather than freezing
+    // whatever mid-orbit yaw happened to be current. Otherwise RESET VIEW
+    // half-resets: it fixes the pitch and distance and leaves you facing
+    // sideways.
     resetView() {
-      const keepYaw = this.cam.yaw;
+      const base = this._nearestSide();
       this.cam = Object.assign({}, TUNE.cam);
-      this.cam.yaw = keepYaw;
+      this.cam.yaw = base + (TUNE.cam.turn || 0);
       this._dirty = true;
     }
   };

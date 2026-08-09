@@ -165,6 +165,26 @@ camera starts behind their own army (`faceSide()`), which is just yaw 0 or π.
 > looked at square-on down the rank axis, where it is glaring: the near army
 > draws at the top of the screen and the two sides appear swapped.
 
+### Yaw is derived, not stored
+
+Each player sits behind their own army, so an absolute yaw is the wrong thing
+to remember: replayed for the other colour it puts you behind your opponent's
+back. `TUNE.cam.turn` is a standing rotation *away from your own side*, and
+every framing goes through `faceSide()`, which sets
+`yaw = (colour === 'b' ? PI : 0) + turn`.
+
+`resetView()` snaps to the **nearest** side plus the turn rather than freezing
+whatever mid-orbit yaw was current — otherwise it half-resets, fixing pitch and
+distance while leaving you facing sideways.
+
+So: edit `turn`, never `yaw`. Anything written to yaw is overwritten by the
+next `faceSide()` or `resetView()`.
+
+`captureView()` / `applyView()` / `clearView()` are the saved-view API behind
+the panel's SAVE THIS VIEW. `applyView` writes into `TUNE.cam`, which is why
+`SHIPPED_CAM` snapshots the originals at load — without it, "go back to the
+default" has nothing to go back to.
+
 ### Picking is a ray
 
 A tap is un-projected into a world-space ray and intersected with the `y = 0`

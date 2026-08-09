@@ -155,6 +155,7 @@ safe-buffer/index.js:
         <button class="btn" id="btn-view" onclick="toggleView()">VIEW: 3D</button>
         <button class="btn" onclick="flipBoard()">FLIP BOARD</button>
         <button class="btn" onclick="Render3D.resetView()">RESET VIEW</button>
+        <button class="btn" onclick="saveView()">SAVE VIEW</button>
         <button class="btn amber" onclick="doResign()">RESIGN</button>
       </div>
       <div class="hint">Drag to orbit &middot; wheel or pinch to zoom &middot; tap a piece,
@@ -173,6 +174,11 @@ safe-buffer/index.js:
          in progress. Same mistake the RENDERER row made. -->
     <h2>VISUALS <button class="btn tiny" id="btn-vis" onclick="toggleVisuals()">SHOW</button></h2>
     <div id="visuals" hidden>
+      <div class="row">
+        <button class="btn" id="btn-saveview" onclick="saveView()">SAVE THIS VIEW</button>
+        <button class="btn" onclick="clearView()">CLEAR</button>
+      </div>
+      <div class="hint" id="view-hint">&mdash;</div>
       <div class="vrow"><label>WHITE</label><span class="sws" id="sw-w"></span></div>
       <div class="vrow"><label>BLACK</label><span class="sws" id="sw-b"></span></div>
       <div class="hint" id="sidehint"></div>
@@ -11283,6 +11289,10 @@ void main(){
   const TUNE = {
     cam:   { yaw:0.0, pitch:0.92, dist:15.0, targetY:0.28, focal:1.25, near:0.12,
              minPitch:0.18, maxPitch:1.45, minDist:5.0, maxDist:30,
+             // Standing rotation away from your own army, in radians. Edit
+             // THIS, never yaw -- anything written to yaw is overwritten by
+             // the next faceSide() or resetView().
+             turn: 0.0,
              // Zoom per PIXEL of scroll, not per event. A mouse notch is one
              // event of ~100px; a trackpad flick is a burst of twenty events
              // of ~5px. Reacting per event makes the two differ by 20x, which
@@ -11329,6 +11339,11 @@ void main(){
       indigo:   { label:'INDIGO',    hex:'#7c3aed' }
     }
   };
+
+  // applyView() writes the saved framing INTO TUNE.cam, so the shipped values
+  // have to be kept somewhere or "go back to the default" has nothing to go
+  // back to. Snapshotted once, never written.
+  const SHIPPED_CAM = Object.assign({}, TUNE.cam);
 
   const FILES = 'abcdefgh';
   const SQ = TUNE.board.sq;
@@ -11475,9 +11490,47 @@ void main(){
     },
 
     // Each player sits behind their own army.
+    // YAW IS DERIVED, NOT STORED. What a player actually wants to keep is how
+    // far round from their own army they like to sit -- TUNE.cam.turn -- not an
+    // absolute yaw, which would put Black behind White's back. Every framing
+    // goes through here, so the saved view works for either colour.
     faceSide(colour) {
-      this.cam.yaw = colour === 'b' ? Math.PI : 0;
+      this.cam.yaw = (colour === 'b' ? Math.PI : 0) + (TUNE.cam.turn || 0);
       this._dirty = true;
+    },
+
+    // The camera as something worth saving: an offset from your own side,
+    // plus the parts that have no handedness.
+    captureView() {
+      const base = this._nearestSide();
+      let turn = this.cam.yaw - base;
+      turn = Math.atan2(Math.sin(turn), Math.cos(turn));    // wrap to (-pi, pi]
+      return { turn, pitch: this.cam.pitch, dist: this.cam.dist,
+               targetY: this.cam.targetY };
+    },
+    applyView(v) {
+      if (!v) return;
+      const num = (x, lo, hi, d) => (typeof x === 'number' && isFinite(x))
+        ? Math.min(hi, Math.max(lo, x)) : d;
+      TUNE.cam.turn    = num(v.turn, -Math.PI, Math.PI, TUNE.cam.turn || 0);
+      TUNE.cam.pitch   = num(v.pitch, TUNE.cam.minPitch, TUNE.cam.maxPitch, TUNE.cam.pitch);
+      TUNE.cam.dist    = num(v.dist, TUNE.cam.minDist, TUNE.cam.maxDist, TUNE.cam.dist);
+      TUNE.cam.targetY = num(v.targetY, -2, 4, TUNE.cam.targetY);
+      this.resetView();
+    },
+
+    // Forget a saved view and return to the shipped framing.
+    clearView() {
+      for (const k of ['turn', 'pitch', 'dist', 'targetY']) TUNE.cam[k] = SHIPPED_CAM[k];
+      this.resetView();
+    },
+
+    // Which army are we currently sitting behind? Used so a saved turn is
+    // measured from the near side rather than from White in all cases.
+    _nearestSide() {
+      const d = Math.atan2(Math.sin(this.cam.yaw - Math.PI),
+                           Math.cos(this.cam.yaw - Math.PI));
+      return Math.abs(d) < Math.PI / 2 ? Math.PI : 0;
     },
 
     // ---------------------------------------------------------------- camera
@@ -11832,10 +11885,14 @@ void main(){
       this.cam.dist = clamp(this.cam.dist * k, TUNE.cam.minDist, TUNE.cam.maxDist);
       this._dirty = true;
     },
+    // Snap to the NEAREST side plus the standing turn, rather than freezing
+    // whatever mid-orbit yaw happened to be current. Otherwise RESET VIEW
+    // half-resets: it fixes the pitch and distance and leaves you facing
+    // sideways.
     resetView() {
-      const keepYaw = this.cam.yaw;
+      const base = this._nearestSide();
       this.cam = Object.assign({}, TUNE.cam);
-      this.cam.yaw = keepYaw;
+      this.cam.yaw = base + (TUNE.cam.turn || 0);
       this._dirty = true;
     }
   };
@@ -11989,6 +12046,36 @@ function runBench(){
 // table. Everything here is local -- colours and density are how YOU see the
 // board, not part of the game state, so nothing is published to the opponent.
 const VIS_KEY = 'wfchess.visuals';
+let SAVED_VIEW = null;      // {turn, pitch, dist, targetY} or null for shipped
+
+// Orbit to an angle you like, then keep it. What gets stored is the offset
+// from YOUR OWN army rather than an absolute yaw, so the same saved view puts
+// you behind your pieces whether you are White or Black.
+function saveView(){
+  SAVED_VIEW = Render3D.captureView();
+  Render3D.applyView(SAVED_VIEW);
+  syncViewHint(); visSave();
+  showToast('View saved as your default');
+  // Printed so it can be pasted into TUNE.cam in js/render3d.js. Saving is a
+  // preference for THIS browser; baking these four numbers in is how the view
+  // changes for everyone who opens the published copy.
+  const v = SAVED_VIEW;
+  addLog('View saved. To ship it for everyone, set TUNE.cam: turn:' +
+         v.turn.toFixed(3) + ', pitch:' + v.pitch.toFixed(3) +
+         ', dist:' + v.dist.toFixed(1) + ', targetY:' + v.targetY.toFixed(2));
+}
+function clearView(){
+  SAVED_VIEW = null;
+  Render3D.clearView();
+  syncViewHint(); visSave();
+}
+function syncViewHint(){
+  const h=document.getElementById('view-hint');
+  if(!SAVED_VIEW){ h.textContent='Using the shipped view.'; return; }
+  const deg=Math.round(SAVED_VIEW.turn*180/Math.PI);
+  h.textContent='Your view: turned '+deg+'\u00b0, pitch '+
+    SAVED_VIEW.pitch.toFixed(2)+', distance '+SAVED_VIEW.dist.toFixed(1)+'.';
+}
 
 // file: URLs are opaque origins, so touching localStorage can throw outright
 // rather than returning null. Persistence is a nicety; never let it break boot.
@@ -12004,7 +12091,7 @@ function visSave(){
       glow:T.glow.strength, falloff:T.depth.falloff,
       reflOn:T.refl.on, reflAlpha:T.refl.alpha, motes:T.motes.on,
       meridians:Pieces.DENSITY.meridians, ringSegs:Pieces.DENSITY.ringSegs,
-      knightYaw:Pieces.knightYaw
+      knightYaw:Pieces.knightYaw, view:SAVED_VIEW
     }));
   } catch(_){ /* opaque origin or storage disabled -- session-only, fine */ }
 }
@@ -12079,6 +12166,7 @@ function syncVisuals(){
   document.getElementById('t-refl').style.opacity = T.refl.on ? '1' : '.45';
   document.getElementById('t-motes').setAttribute('aria-pressed', String(T.motes.on));
   document.getElementById('t-motes').style.opacity = T.motes.on ? '1' : '.45';
+  syncViewHint();
   document.getElementById('denshint').textContent =
     Pieces.segCount().toLocaleString()+' segs per set \u00b7 '+
     Render3D.segCount.toLocaleString()+' on the board';
@@ -12123,6 +12211,8 @@ function resetVisuals(){
   T.glow.strength=0.85; T.depth.falloff=0.55;
   T.refl.on=true; T.refl.alpha=0.24; T.motes.on=true;
   Render3D.setSide('w','ice'); Render3D.setSide('b','amber');
+  SAVED_VIEW = null;
+  Render3D.clearView();
   Pieces.setKnightYaw(Pieces.BASE_YAW);
   Render3D.setDensity({ meridians:Pieces.BASE.meridians, ringSegs:Pieces.BASE.ringSegs });
   Board2D.draw(); syncVisuals(); syncBackendUI(); visSave();
@@ -12141,6 +12231,10 @@ function applyStoredVisuals(){
   T.refl.alpha     = num(s.reflAlpha, 0, 0.7, T.refl.alpha);
   if(typeof s.reflOn==='boolean') T.refl.on=s.reflOn;
   if(typeof s.motes==='boolean')  T.motes.on=s.motes;
+  if(s.view && typeof s.view === 'object'){
+    SAVED_VIEW = s.view;
+    Render3D.applyView(SAVED_VIEW);
+  }
   const ky=num(s.knightYaw,0,90,null);
   if(ky!==null) Pieces.setKnightYaw(Math.round(ky));
   const mer=num(s.meridians,6,36,null), rs=num(s.ringSegs,8,40,null);
@@ -12356,6 +12450,11 @@ document.addEventListener('visibilitychange', () => {
 // Shown once per page load, over everything. Dismissed by any input or by a
 // timer, whichever comes first -- a splash that can only be waited out is an
 // obstacle, and one that can only be clicked strands anyone who taps early.
+// Replaced by bundle.py. 'dev' means you are looking at the modular tree, not
+// a built artifact -- which is the answer to "am I actually running the new
+// file?", a question that should never cost more than one glance.
+const BUILD_STAMP = '2026-08-08 21:35';
+
 const SPLASH_MS = 4000;      // how long the splash holds on its own
 const SPLASH_MIN_MS = 600;   // input is ignored for this long after it appears
 
@@ -12414,6 +12513,8 @@ if(!Engine.available()){
 }
 syncBackendUI();
 addLog('Banrion - 3D wireframe chess. Author: Scott Peterman.');
+addLog('Build ' + BUILD_STAMP + ' \u00b7 saveView ' +
+       (typeof saveView === 'function' ? 'available' : 'MISSING'));
 if(!window.mqtt){
   // Online needs the MQTT client from the CDN. Hot-seat does not, so degrade
   // to it rather than presenting buttons that cannot work.

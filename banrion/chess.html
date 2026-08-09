@@ -133,6 +133,7 @@
         <button class="btn" id="btn-view" onclick="toggleView()">VIEW: 3D</button>
         <button class="btn" onclick="flipBoard()">FLIP BOARD</button>
         <button class="btn" onclick="Render3D.resetView()">RESET VIEW</button>
+        <button class="btn" onclick="saveView()">SAVE VIEW</button>
         <button class="btn amber" onclick="doResign()">RESIGN</button>
       </div>
       <div class="hint">Drag to orbit &middot; wheel or pinch to zoom &middot; tap a piece,
@@ -151,6 +152,11 @@
          in progress. Same mistake the RENDERER row made. -->
     <h2>VISUALS <button class="btn tiny" id="btn-vis" onclick="toggleVisuals()">SHOW</button></h2>
     <div id="visuals" hidden>
+      <div class="row">
+        <button class="btn" id="btn-saveview" onclick="saveView()">SAVE THIS VIEW</button>
+        <button class="btn" onclick="clearView()">CLEAR</button>
+      </div>
+      <div class="hint" id="view-hint">&mdash;</div>
       <div class="vrow"><label>WHITE</label><span class="sws" id="sw-w"></span></div>
       <div class="vrow"><label>BLACK</label><span class="sws" id="sw-b"></span></div>
       <div class="hint" id="sidehint"></div>
@@ -278,6 +284,36 @@ function runBench(){
 // table. Everything here is local -- colours and density are how YOU see the
 // board, not part of the game state, so nothing is published to the opponent.
 const VIS_KEY = 'wfchess.visuals';
+let SAVED_VIEW = null;      // {turn, pitch, dist, targetY} or null for shipped
+
+// Orbit to an angle you like, then keep it. What gets stored is the offset
+// from YOUR OWN army rather than an absolute yaw, so the same saved view puts
+// you behind your pieces whether you are White or Black.
+function saveView(){
+  SAVED_VIEW = Render3D.captureView();
+  Render3D.applyView(SAVED_VIEW);
+  syncViewHint(); visSave();
+  showToast('View saved as your default');
+  // Printed so it can be pasted into TUNE.cam in js/render3d.js. Saving is a
+  // preference for THIS browser; baking these four numbers in is how the view
+  // changes for everyone who opens the published copy.
+  const v = SAVED_VIEW;
+  addLog('View saved. To ship it for everyone, set TUNE.cam: turn:' +
+         v.turn.toFixed(3) + ', pitch:' + v.pitch.toFixed(3) +
+         ', dist:' + v.dist.toFixed(1) + ', targetY:' + v.targetY.toFixed(2));
+}
+function clearView(){
+  SAVED_VIEW = null;
+  Render3D.clearView();
+  syncViewHint(); visSave();
+}
+function syncViewHint(){
+  const h=document.getElementById('view-hint');
+  if(!SAVED_VIEW){ h.textContent='Using the shipped view.'; return; }
+  const deg=Math.round(SAVED_VIEW.turn*180/Math.PI);
+  h.textContent='Your view: turned '+deg+'\u00b0, pitch '+
+    SAVED_VIEW.pitch.toFixed(2)+', distance '+SAVED_VIEW.dist.toFixed(1)+'.';
+}
 
 // file: URLs are opaque origins, so touching localStorage can throw outright
 // rather than returning null. Persistence is a nicety; never let it break boot.
@@ -293,7 +329,7 @@ function visSave(){
       glow:T.glow.strength, falloff:T.depth.falloff,
       reflOn:T.refl.on, reflAlpha:T.refl.alpha, motes:T.motes.on,
       meridians:Pieces.DENSITY.meridians, ringSegs:Pieces.DENSITY.ringSegs,
-      knightYaw:Pieces.knightYaw
+      knightYaw:Pieces.knightYaw, view:SAVED_VIEW
     }));
   } catch(_){ /* opaque origin or storage disabled -- session-only, fine */ }
 }
@@ -368,6 +404,7 @@ function syncVisuals(){
   document.getElementById('t-refl').style.opacity = T.refl.on ? '1' : '.45';
   document.getElementById('t-motes').setAttribute('aria-pressed', String(T.motes.on));
   document.getElementById('t-motes').style.opacity = T.motes.on ? '1' : '.45';
+  syncViewHint();
   document.getElementById('denshint').textContent =
     Pieces.segCount().toLocaleString()+' segs per set \u00b7 '+
     Render3D.segCount.toLocaleString()+' on the board';
@@ -412,6 +449,8 @@ function resetVisuals(){
   T.glow.strength=0.85; T.depth.falloff=0.55;
   T.refl.on=true; T.refl.alpha=0.24; T.motes.on=true;
   Render3D.setSide('w','ice'); Render3D.setSide('b','amber');
+  SAVED_VIEW = null;
+  Render3D.clearView();
   Pieces.setKnightYaw(Pieces.BASE_YAW);
   Render3D.setDensity({ meridians:Pieces.BASE.meridians, ringSegs:Pieces.BASE.ringSegs });
   Board2D.draw(); syncVisuals(); syncBackendUI(); visSave();
@@ -430,6 +469,10 @@ function applyStoredVisuals(){
   T.refl.alpha     = num(s.reflAlpha, 0, 0.7, T.refl.alpha);
   if(typeof s.reflOn==='boolean') T.refl.on=s.reflOn;
   if(typeof s.motes==='boolean')  T.motes.on=s.motes;
+  if(s.view && typeof s.view === 'object'){
+    SAVED_VIEW = s.view;
+    Render3D.applyView(SAVED_VIEW);
+  }
   const ky=num(s.knightYaw,0,90,null);
   if(ky!==null) Pieces.setKnightYaw(Math.round(ky));
   const mer=num(s.meridians,6,36,null), rs=num(s.ringSegs,8,40,null);
@@ -645,6 +688,11 @@ document.addEventListener('visibilitychange', () => {
 // Shown once per page load, over everything. Dismissed by any input or by a
 // timer, whichever comes first -- a splash that can only be waited out is an
 // obstacle, and one that can only be clicked strands anyone who taps early.
+// Replaced by bundle.py. 'dev' means you are looking at the modular tree, not
+// a built artifact -- which is the answer to "am I actually running the new
+// file?", a question that should never cost more than one glance.
+const BUILD_STAMP = '__BUILD__';
+
 const SPLASH_MS = 4000;      // how long the splash holds on its own
 const SPLASH_MIN_MS = 600;   // input is ignored for this long after it appears
 
@@ -703,6 +751,8 @@ if(!Engine.available()){
 }
 syncBackendUI();
 addLog('Banrion - 3D wireframe chess. Author: Scott Peterman.');
+addLog('Build ' + BUILD_STAMP + ' \u00b7 saveView ' +
+       (typeof saveView === 'function' ? 'available' : 'MISSING'));
 if(!window.mqtt){
   // Online needs the MQTT client from the CDN. Hot-seat does not, so degrade
   // to it rather than presenting buttons that cannot work.
