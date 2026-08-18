@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- index.html — scottpeterman.github.io -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -287,19 +288,47 @@
     </div>
   </section>
 
-  <!-- ===== WORK : four tools, one architecture, by verb ===== -->
+  <!-- ===== WORK : five tools, one architecture, by verb ===== -->
   <section class="work" id="work">
     <div class="wrap">
       <div class="head reveal">
         <span class="eyebrow">Selected work</span>
-        <h2 class="sec">Four tools, one architecture.</h2>
-        <p class="lede">Not a catalog. Four tools that came out of the same set of ideas — see the network, know its real state, build its foundations, and investigate it safely — and each one turns on a single decision that wasn't the obvious one.</p>
+        <h2 class="sec">Five tools, one architecture.</h2>
+        <p class="lede">Not a catalog. Five tools that came out of the same set of ideas — reach the network, see how it forwards, know its real state, build its foundations, and investigate it safely — and each one turns on a single decision that wasn't the obvious one.</p>
       </div>
+
+      <!-- REACH -->
+      <article class="proof reveal">
+        <div class="rail">
+          <div class="fig">FIG.01</div>
+          <div class="verb">Reach</div>
+          <div class="stacktag">Go<br>Fyne 2<br>CDP · LLDP<br>OS keychain</div>
+        </div>
+        <div class="body">
+          <h3>PathfinderSSH — the terminal that already knows the topology</h3>
+          <p class="prob">Every SSH client treats a network as a flat list of hostnames someone typed in by hand. Discovery lives in a second tool, config capture in a third, and the map in a diagram nobody has opened since the last cutover — so the thing you connect with is the one thing that knows nothing about the network.</p>
+          <div class="decision">
+            <span class="dk">The decision</span>
+            <p>Make the client itself the discovery tool. Seed it with one address, crawl outward on CDP and LLDP, and let the resulting topology <em>be</em> the session tree — click a node and you're on it. The same crawl feeds inventory and config capture with deduplicated history, and exports to draw.io so the diagram is a build artifact instead of a chore. Credentials sit in an OS-backed vault; jump hosts, serial, and legacy KEX are first-class because real networks still have all three.</p>
+          </div>
+          <button class="figure" type="button" data-gif="pathfinderssh-slides.gif" data-title="PathfinderSSH" data-tag="Reach" aria-haspopup="dialog">
+            <div class="figinner">
+              <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+              <span class="figmeta"><span class="fl">Watch it run</span><span class="fs">crawl → map → capture → paste · click to play</span></span>
+            </div>
+          </button>
+          <div class="links">
+            <a class="chip" href="https://github.com/scottpeterman/pathfinderssh" target="_blank" rel="noopener">GitHub ↗</a>
+            <a class="chip" href="https://github.com/scottpeterman/pathfinderssh/releases" target="_blank" rel="noopener">Download ↗</a>
+            <span class="chip mut">GPLv3 · portable, zero-install</span>
+          </div>
+        </div>
+      </article>
 
       <!-- OBSERVE -->
       <article class="proof reveal">
         <div class="rail">
-          <div class="fig">FIG.01</div>
+          <div class="fig">FIG.02</div>
           <div class="verb">Observe</div>
           <div class="stacktag">Python<br>FastAPI<br>ECMP · FIB<br>directed graph</div>
         </div>
@@ -326,7 +355,7 @@
       <!-- KNOW -->
       <article class="proof reveal">
         <div class="rail">
-          <div class="fig">FIG.02</div>
+          <div class="fig">FIG.03</div>
           <div class="verb">Know</div>
           <div class="stacktag">Python<br>SQLite<br>TextFSM<br>REST API</div>
         </div>
@@ -353,7 +382,7 @@
       <!-- BUILD -->
       <article class="proof reveal">
         <div class="rail">
-          <div class="fig">FIG.03</div>
+          <div class="fig">FIG.04</div>
           <div class="verb">Build</div>
           <div class="stacktag">Python<br>SQLite<br>dnslib<br>two-process</div>
         </div>
@@ -379,7 +408,7 @@
       <!-- INVESTIGATE -->
       <article class="proof reveal">
         <div class="rail">
-          <div class="fig">FIG.04</div>
+          <div class="fig">FIG.05</div>
           <div class="verb">Investigate</div>
           <div class="stacktag">Python<br>PyQt6<br>MCP · tool calling<br>local LLM</div>
         </div>
@@ -409,7 +438,7 @@
       <!-- one architecture -->
       <div class="foundation reveal">
         <div class="fk">One foundation</div>
-        <p>These aren't four tools — they're <b>one set of reusable primitives</b> applied four times. I'd rather everything spoke RESTCONF; operational reality is SSH-first, so <b>parsing is the first-class citizen</b> — the output selects the template, not the engineer. Underneath sits a hardened, vendor-agnostic SSH client I wrote and a structured artifact that carries the contract between stages. Each one is built to be a <b>platform, not a script</b>: something automation can consume reliably, and the next engineer can pick up and extend. Build the second one and the third comes fast.</p>
+        <p>These aren't five tools — they're <b>one set of reusable primitives</b> applied five times. I'd rather everything spoke RESTCONF; operational reality is SSH-first, so <b>parsing is the first-class citizen</b> — the output selects the template, not the engineer. Underneath sits a hardened, vendor-agnostic SSH client I wrote and a structured artifact that carries the contract between stages. PathfinderSSH is that same core rewritten in Go so it ships as one binary to an engineer's laptop; the rest stay Python where the platform is the point. Each one is built to be a <b>platform, not a script</b>: something automation can consume reliably, and the next engineer can pick up and extend. Build the second one and the third comes fast.</p>
       </div>
     </div>
   </section>
