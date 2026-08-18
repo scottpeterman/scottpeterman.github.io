@@ -139,6 +139,18 @@
     .proof .stacktag{display:none}
   }
 
+  /* ---- split proof: two tools, one idea --------------------------------- */
+  .proof.split .body{display:grid;grid-template-columns:1fr 1fr;gap:0 30px}
+  .proof.split .half{min-width:0}
+  .proof.split .half + .half{border-left:1px solid var(--line);padding-left:30px}
+  .proof.split .half .hk{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:9px}
+  .proof.split .prob{max-width:none}
+  .proof.split .decision{max-width:none}
+  @media(max-width:820px){
+    .proof.split .body{grid-template-columns:1fr;gap:26px}
+    .proof.split .half + .half{border-left:0;padding-left:0;border-top:1px solid var(--line);padding-top:24px}
+  }
+
   /* ---- figure thumbnail (opens the modal) ------------------------------- */
   .figure{
     display:block;width:100%;margin-top:18px;padding:0;text-align:left;font:inherit;color:inherit;cursor:pointer;
@@ -288,74 +300,72 @@
     </div>
   </section>
 
-  <!-- ===== WORK : five tools, one architecture, by verb ===== -->
+  <!-- ===== WORK : five tools across four ideas, by verb ===== -->
   <section class="work" id="work">
     <div class="wrap">
       <div class="head reveal">
         <span class="eyebrow">Selected work</span>
-        <h2 class="sec">Five tools, one architecture.</h2>
-        <p class="lede">Not a catalog. Five tools that came out of the same set of ideas — reach the network, see how it forwards, know its real state, build its foundations, and investigate it safely — and each one turns on a single decision that wasn't the obvious one.</p>
+        <h2 class="sec">Five tools, four ideas, one architecture.</h2>
+        <p class="lede">Not a catalog. Five tools out of four ideas — see the network, know its real state, build its foundations, and investigate it safely — and each one turns on a single decision that wasn't the obvious one.</p>
       </div>
 
-      <!-- REACH -->
-      <article class="proof reveal">
+      <!-- SEE : two tools, one idea -->
+      <article class="proof split reveal">
         <div class="rail">
           <div class="fig">FIG.01</div>
-          <div class="verb">Reach</div>
-          <div class="stacktag">Go<br>Fyne 2<br>CDP · LLDP<br>OS keychain</div>
+          <div class="verb">See</div>
+          <div class="stacktag">Go · Fyne 2<br>Python · FastAPI<br>CDP · LLDP<br>ECMP · FIB</div>
         </div>
         <div class="body">
-          <h3>PathfinderSSH — the terminal that already knows the topology</h3>
-          <p class="prob">Every SSH client treats a network as a flat list of hostnames someone typed in by hand. Discovery lives in a second tool, config capture in a third, and the map in a diagram nobody has opened since the last cutover — so the thing you connect with is the one thing that knows nothing about the network.</p>
-          <div class="decision">
-            <span class="dk">The decision</span>
-            <p>Make the client itself the discovery tool. Seed it with one address, crawl outward on CDP and LLDP, and let the resulting topology <em>be</em> the session tree — click a node and you're on it. The same crawl feeds inventory and config capture with deduplicated history, and exports to draw.io so the diagram is a build artifact instead of a chore. Credentials sit in an OS-backed vault; jump hosts, serial, and legacy KEX are first-class because real networks still have all three.</p>
-          </div>
-          <button class="figure" type="button" data-gif="pathfinderssh-slides.gif" data-title="PathfinderSSH" data-tag="Reach" aria-haspopup="dialog">
-            <div class="figinner">
-              <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
-              <span class="figmeta"><span class="fl">Watch it run</span><span class="fs">crawl → map → capture → paste · click to play</span></span>
-            </div>
-          </button>
-          <div class="links">
-            <a class="chip" href="https://github.com/scottpeterman/pathfinderssh" target="_blank" rel="noopener">GitHub ↗</a>
-            <a class="chip" href="https://github.com/scottpeterman/pathfinderssh/releases" target="_blank" rel="noopener">Download ↗</a>
-            <span class="chip mut">GPLv3 · portable, zero-install</span>
-          </div>
-        </div>
-      </article>
 
-      <!-- OBSERVE -->
-      <article class="proof reveal">
-        <div class="rail">
-          <div class="fig">FIG.02</div>
-          <div class="verb">Observe</div>
-          <div class="stacktag">Python<br>FastAPI<br>ECMP · FIB<br>directed graph</div>
-        </div>
-        <div class="body">
-          <h3>fibtrace — the forwarding table, read from the device itself</h3>
-          <p class="prob">A traceroute probes from outside with ICMP and sees hop IPs. It's blind to RIB-versus-FIB divergence, an unresolved next-hop, and any ECMP path it didn't happen to hash into.</p>
-          <div class="decision">
-            <span class="dk">The decision</span>
-            <p>The device itself is the most accurate source of truth — so work it inside-out. SSH into each device, read <em>its own</em> forwarding tables, and ask four questions at every hop — is there a route, is it in the FIB, is the next-hop resolved, is the link healthy — then build a directed graph of every path a packet can actually take. Load a before and after and it tells you exactly what changed.</p>
-          </div>
-          <button class="figure" type="button" data-gif="fibtrace-slides.gif" data-title="fibtrace" data-tag="Observe" aria-haspopup="dialog">
-            <div class="figinner">
-              <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
-              <span class="figmeta"><span class="fl">Watch it run</span><span class="fs">fibtrace-slides.gif · click to play</span></span>
+          <div class="half">
+            <div class="hk">Topology · Go, Fyne 2</div>
+            <h3>PathfinderSSH — the terminal that already knows the topology</h3>
+            <p class="prob">Every SSH client treats a network as a flat list of hostnames someone typed in by hand. Discovery lives in a second tool, capture in a third, and the map in a diagram nobody has opened since the last cutover — so the thing you connect with is the one thing that knows nothing about the network.</p>
+            <div class="decision">
+              <span class="dk">The decision</span>
+              <p>Make the client itself the discovery tool. Seed one address, crawl outward on CDP and LLDP, and let the resulting topology <em>be</em> the session tree — click a node and you're on it. The same crawl feeds inventory and config capture with deduplicated history, and exports to draw.io so the diagram is a build artifact instead of a chore. Credentials sit in an OS-backed vault; jump hosts, serial, and legacy KEX are first-class because real networks still have all three.</p>
             </div>
-          </button>
-          <div class="links">
-            <a class="chip" href="https://github.com/scottpeterman/fibtrace" target="_blank" rel="noopener">GitHub ↗</a>
-            <a class="chip" href="https://pypi.org/project/fibtrace/" target="_blank" rel="noopener">pip install fibtrace</a>
+            <button class="figure" type="button" data-gif="pathfinderssh-slides.gif" data-title="PathfinderSSH" data-tag="See" aria-haspopup="dialog">
+              <div class="figinner">
+                <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+                <span class="figmeta"><span class="fl">Watch it run</span><span class="fs">crawl → map → capture · click to play</span></span>
+              </div>
+            </button>
+            <div class="links">
+              <a class="chip" href="https://github.com/scottpeterman/pathfinderssh" target="_blank" rel="noopener">GitHub ↗</a>
+              <a class="chip" href="https://github.com/scottpeterman/pathfinderssh/releases" target="_blank" rel="noopener">Download ↗</a>
+              <span class="chip mut">GPLv3 · portable, zero-install</span>
+            </div>
           </div>
+
+          <div class="half">
+            <div class="hk">Forwarding paths · Python, FastAPI</div>
+            <h3>fibtrace — the forwarding table, read from the device itself</h3>
+            <p class="prob">A traceroute probes from outside with ICMP and sees hop IPs. It's blind to RIB-versus-FIB divergence, an unresolved next-hop, and any ECMP path it didn't happen to hash into.</p>
+            <div class="decision">
+              <span class="dk">The decision</span>
+              <p>The device itself is the most accurate source of truth — so work it inside-out. SSH into each device, read <em>its own</em> forwarding tables, and ask four questions at every hop — is there a route, is it in the FIB, is the next-hop resolved, is the link healthy — then build a directed graph of every path a packet can actually take. Load a before and after and it tells you exactly what changed.</p>
+            </div>
+            <button class="figure" type="button" data-gif="fibtrace-slides.gif" data-title="fibtrace" data-tag="See" aria-haspopup="dialog">
+              <div class="figinner">
+                <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+                <span class="figmeta"><span class="fl">Watch it run</span><span class="fs">fibtrace-slides.gif · click to play</span></span>
+              </div>
+            </button>
+            <div class="links">
+              <a class="chip" href="https://github.com/scottpeterman/fibtrace" target="_blank" rel="noopener">GitHub ↗</a>
+              <a class="chip" href="https://pypi.org/project/fibtrace/" target="_blank" rel="noopener">pip install fibtrace</a>
+            </div>
+          </div>
+
         </div>
       </article>
 
       <!-- KNOW -->
       <article class="proof reveal">
         <div class="rail">
-          <div class="fig">FIG.03</div>
+          <div class="fig">FIG.02</div>
           <div class="verb">Know</div>
           <div class="stacktag">Python<br>SQLite<br>TextFSM<br>REST API</div>
         </div>
@@ -382,7 +392,7 @@
       <!-- BUILD -->
       <article class="proof reveal">
         <div class="rail">
-          <div class="fig">FIG.04</div>
+          <div class="fig">FIG.03</div>
           <div class="verb">Build</div>
           <div class="stacktag">Python<br>SQLite<br>dnslib<br>two-process</div>
         </div>
@@ -408,7 +418,7 @@
       <!-- INVESTIGATE -->
       <article class="proof reveal">
         <div class="rail">
-          <div class="fig">FIG.05</div>
+          <div class="fig">FIG.04</div>
           <div class="verb">Investigate</div>
           <div class="stacktag">Python<br>PyQt6<br>MCP · tool calling<br>local LLM</div>
         </div>
