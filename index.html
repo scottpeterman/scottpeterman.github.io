@@ -174,15 +174,40 @@
   .figure:hover .play{transform:scale(1.08)}
   @media(max-width:720px){.figure{aspect-ratio:16/7}.figure .figmeta .fs{display:none}}
 
+  /* ---- figure: thumbnail variant (real poster image, not a GIF) --------- */
+  .figure.thumb{
+    display:inline-flex;align-items:center;gap:14px;
+    width:auto;max-width:100%;aspect-ratio:auto;padding:8px 16px 8px 8px;
+    background:var(--surface);
+  }
+  .figure.thumb::before{display:none}           /* no grid substrate behind a real image */
+  .figure.thumb .shot{
+    width:150px;height:94px;flex:none;display:block;
+    object-fit:cover;object-position:left top;
+    border:1px solid var(--line);border-radius:6px;background:var(--sunken);
+  }
+  .figure.thumb .figinner{position:static;inset:auto;padding:0;gap:14px}
+  .figure.thumb .play{width:30px;height:30px;box-shadow:none;order:2}
+  .figure.thumb .play svg{width:13px;height:13px}
+  .figure.thumb:hover .shot{border-color:var(--route)}
+  @media(max-width:720px){
+    .figure.thumb{aspect-ratio:auto;gap:12px;padding:8px 12px 8px 8px}
+    .figure.thumb .shot{width:104px;height:66px}
+    .figure.thumb .figmeta .fs{display:none}
+  }
+
   /* ---- one architecture note -------------------------------------------- */
   .foundation{
     border:1px dashed var(--line-2);border-radius:12px;background:var(--sunken);
-    padding:26px 30px;margin:14px 0 8px;display:grid;grid-template-columns:150px 1fr;gap:34px;align-items:center;
+    padding:26px 30px;margin:14px 0 8px;display:grid;grid-template-columns:150px 1fr;gap:34px;align-items:start;
   }
-  .foundation .fk{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--route)}
+  .foundation .fk{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--route);padding-top:4px}
   .foundation p{font-size:15.5px;color:var(--ink-2);max-width:70ch}
   .foundation p b{color:var(--ink);font-weight:600}
-  @media(max-width:720px){.foundation{grid-template-columns:1fr;gap:12px;padding:22px}}
+  .foundation .fbody p + p{margin-top:14px}
+  .foundation .mono{font-family:var(--mono);font-size:.92em}
+  .foundation .links{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+  @media(max-width:720px){.foundation{grid-template-columns:1fr;gap:12px;padding:22px}.foundation .fk{padding-top:0}}
 
   /* ---- experience ------------------------------------------------------- */
   .exp{padding:76px 0 40px}
@@ -448,7 +473,34 @@
       <!-- one architecture -->
       <div class="foundation reveal">
         <div class="fk">One foundation</div>
-        <p>These aren't five tools — they're <b>one set of reusable primitives</b> applied five times. I'd rather everything spoke RESTCONF; operational reality is SSH-first, so <b>parsing is the first-class citizen</b> — the output selects the template, not the engineer. Underneath sits a hardened, vendor-agnostic SSH client I wrote and a structured artifact that carries the contract between stages. PathfinderSSH is that same core rewritten in Go so it ships as one binary to an engineer's laptop; the rest stay Python where the platform is the point. Each one is built to be a <b>platform, not a script</b>: something automation can consume reliably, and the next engineer can pick up and extend. Build the second one and the third comes fast.</p>
+        <div class="fbody">
+          <p>These aren't five tools — they're <b>one set of reusable primitives</b> applied five times. I'd rather everything spoke RESTCONF; operational reality is SSH-first, so <b>parsing is the first-class citizen</b> — the output selects the template, not the engineer. Underneath sits a hardened, vendor-agnostic SSH client and a structured artifact that carries the contract between stages. Each one is built to be a <b>platform, not a script</b>: something automation can consume reliably, and the next engineer can pick up and extend.</p>
+
+          <p>The real test of a primitive is whether it survives being pulled out and handed to someone else. The terminal core inside PathfinderSSH is now <b>anytermqt</b> — a standalone Qt widget that owns no pty, bound for PySide6 and published as wheels for Linux, macOS and Windows, so a Python developer with no compiler and no Qt installed gets a native terminal in one <span class="mono">pip install</span>. I built it because I started out on Windows with no terminal options at all while writing automation tooling. <b>OmegaSSHQt</b> is the proof the pieces compose — that widget and Pathfinder's Go SSH core linked into one native application, shipping on all three platforms.</p>
+
+          <!-- src: swap to a downscaled screenshots/omega-thumb.png once committed;
+               data-gif stays on the full-size image the modal opens. -->
+          <button class="figure thumb" type="button"
+                  data-gif="https://raw.githubusercontent.com/scottpeterman/omegasshqt/refs/heads/main/screenshots/omega.png"
+                  data-title="OmegaSSHQt — the widget and the Go core in one native app"
+                  data-tag="Foundation" aria-haspopup="dialog">
+            <img class="shot" loading="lazy" alt=""
+                 src="https://raw.githubusercontent.com/scottpeterman/omegasshqt/refs/heads/main/screenshots/omega.png" />
+            <span class="figinner">
+              <span class="figmeta">
+                <span class="fl">See it assembled</span>
+                <span class="fs">anytermqt widget over the Go SSH core · Linux, macOS, Windows</span>
+              </span>
+              <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:0"><path d="M9 3H3v6M15 21h6v-6M21 9V3h-6M3 15v6h6"/></svg></span>
+            </span>
+          </button>
+
+          <div class="links">
+            <a class="chip" href="https://github.com/scottpeterman/anytermqt" target="_blank" rel="noopener">anytermqt ↗</a>
+            <a class="chip" href="https://pypi.org/project/anytermqt/" target="_blank" rel="noopener">pip install anytermqt</a>
+            <a class="chip" href="https://github.com/scottpeterman/omegasshqt" target="_blank" rel="noopener">OmegaSSHQt ↗</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
