@@ -295,8 +295,8 @@
             <p>Make the client itself the discovery tool. Seed one address, crawl outward on CDP and LLDP, and let the resulting topology <em>be</em> the session tree — click a node and you're on it. The same crawl feeds inventory and config capture with deduplicated history, and exports to draw.io so the diagram is a build artifact instead of a chore. Credentials sit in an OS-backed vault; jump hosts, serial, and legacy KEX are first-class because real networks still have all three.</p>
           </div>
           <figure class="shot">
-            <img loading="lazy" src="pathfinderssh-slides.gif" data-full="pathfinderssh-slides-full.gif" alt="Crawl, map and capture running end to end in the topology-aware SSH client.">
-            <figcaption><b>crawl → map → capture</b> <span>Go · Fyne 2 · Linux, macOS, Windows</span> <button class="zoom" type="button">expand ⤢</button> <a href="pathfinderssh-slides-full.gif" target="_blank" rel="noopener">open ↗</a></figcaption>
+            <img loading="lazy" src="pathfinderssh-slides.gif" data-full="pathfinderssh-slides.gif" alt="Crawl, map and capture running end to end in the topology-aware SSH client.">
+            <figcaption><b>crawl → map → capture</b> <span>Go · Fyne 2 · Linux, macOS, Windows</span> <button class="zoom" type="button">expand ⤢</button> <a href="pathfinderssh-slides.gif" target="_blank" rel="noopener">open ↗</a></figcaption>
           </figure>
           <div class="links">
             <span class="chip mut">private build · walkthrough on request</span>
@@ -319,8 +319,8 @@
             <p>Build the crawl engine once in Go, expose it across a narrow C ABI, and let a C++/Qt application and a headless CLI be two front ends over the same core — so discovery is a library, not a feature of one binary. SSH and SNMP collect side by side, with OIDs already validated against Junos, IOS and EOS. The map JSON schema is treated as a contract, because other tools consume it; the viewer is a separate, loosely coupled executable, and export and merge are first-class.</p>
           </div>
           <figure class="shot">
-            <img loading="lazy" src="omegamaps.gif" data-full="omegamaps-full.gif" alt="Native Qt discovery and topology mapping application.">
-            <figcaption><b>live crawl → topology → export</b> <span>Go · C · C++ · Qt 6 · Linux, macOS, Windows</span> <button class="zoom" type="button">expand ⤢</button> <a href="omegamaps-full.gif" target="_blank" rel="noopener">open ↗</a></figcaption>
+            <img loading="lazy" src="omegamaps.gif" data-full="omegamaps.gif" alt="Native Qt discovery and topology mapping application.">
+            <figcaption><b>live crawl → topology → export</b> <span>Go · C · C++ · Qt 6 · Linux, macOS, Windows</span> <button class="zoom" type="button">expand ⤢</button> <a href="omegamaps.gif" target="_blank" rel="noopener">open ↗</a></figcaption>
           </figure>
           <div class="links">
             <span class="chip mut">public · GPLv3</span>
@@ -343,8 +343,8 @@
             <p>The device itself is the most accurate source of truth — so work it inside-out. SSH into each device, read <em>its own</em> forwarding tables, and ask four questions at every hop: is there a route, is it in the FIB, is the next-hop resolved, is the link healthy. Build a directed graph of every path a packet can actually take, then diff a before against an after and get path count, ECMP width, and edge churn as numbers you can gate a change on.</p>
           </div>
           <figure class="shot">
-            <img loading="lazy" src="fibtrace-slides.gif" data-full="fibtrace-slides-full.gif" alt="Forwarding path graph and a baseline-versus-comparison diff of paths, ECMP width and churn.">
-            <figcaption><b>walk the FIB → graph → pre/post diff</b> <span>Python · FastAPI · Junos, EOS, IOS/NX-OS</span> <button class="zoom" type="button">expand ⤢</button> <a href="fibtrace-slides-full.gif" target="_blank" rel="noopener">open ↗</a></figcaption>
+            <img loading="lazy" src="fibtrace-slides.gif" data-full="fibtrace-slides.gif" alt="Forwarding path graph and a baseline-versus-comparison diff of paths, ECMP width and churn.">
+            <figcaption><b>walk the FIB → graph → pre/post diff</b> <span>Python · FastAPI · Junos, EOS, IOS/NX-OS</span> <button class="zoom" type="button">expand ⤢</button> <a href="fibtrace-slides.gif" target="_blank" rel="noopener">open ↗</a></figcaption>
           </figure>
           <div class="links">
             <span class="chip mut">private build · walkthrough on request</span>
@@ -367,8 +367,8 @@
             <p>Make any CLI output a first-class record. Define a template and it's collected, parsed, versioned, and <em>semantically</em> diffed — a peer dropping to Idle, not a timer ticking. Every parse is scored on records, fields, population and consistency, so the platform tells you whether its own data is even true, with a template lab for fixing the ones that aren't. All of it API-addressable, so it becomes the source of truth other automation reads.</p>
           </div>
           <figure class="shot">
-            <img loading="lazy" src="netlaps-slides.gif" data-full="netlaps-slides-full.gif" alt="Template lab scoring a parse against raw CLI output, with the parsed records beside it.">
-            <figcaption><b>collect → parse → score → semantic diff</b> <span>Python · SQLite · TextFSM · self-hosted</span> <button class="zoom" type="button">expand ⤢</button> <a href="netlaps-slides-full.gif" target="_blank" rel="noopener">open ↗</a></figcaption>
+            <img loading="lazy" src="netlaps-slides.gif" data-full="netlaps-slides.gif" alt="Template lab scoring a parse against raw CLI output, with the parsed records beside it.">
+            <figcaption><b>collect → parse → score → semantic diff</b> <span>Python · SQLite · TextFSM · self-hosted</span> <button class="zoom" type="button">expand ⤢</button> <a href="netlaps-slides.gif" target="_blank" rel="noopener">open ↗</a></figcaption>
           </figure>
           <div class="links">
             <span class="chip mut">private build · walkthrough on request</span>
@@ -391,8 +391,8 @@
             <p>Build both to be automated from the first packet. Authored intent lives in git, but the decisions get made on state — machine state in SQLite, and DNS derived directly from live lease state. Split-horizon views, forwarders and cache are all config surfaces, not file edits. Two processes joined by one narrow, well-defined interface that degrades gracefully instead of ever failing a lease. Validated end to end on real Cisco gear, across a relay.</p>
           </div>
           <figure class="shot">
-            <img loading="lazy" src="waypost-slides.gif" data-full="waypost-slides-full.gif" alt="DNS console showing split-horizon views, upstream forwarders and cache controls.">
-            <figcaption><b>lease state → zones → split horizon</b> <span>Python · SQLite · dnslib · lab-validated on Cisco relay</span> <button class="zoom" type="button">expand ⤢</button> <a href="waypost-slides-full.gif" target="_blank" rel="noopener">open ↗</a></figcaption>
+            <img loading="lazy" src="waypost-slides.gif" data-full="waypost-slides.gif" alt="DNS console showing split-horizon views, upstream forwarders and cache controls.">
+            <figcaption><b>lease state → zones → split horizon</b> <span>Python · SQLite · dnslib · lab-validated on Cisco relay</span> <button class="zoom" type="button">expand ⤢</button> <a href="waypost-slides.gif" target="_blank" rel="noopener">open ↗</a></figcaption>
           </figure>
           <div class="links">
             <span class="chip mut">private build · walkthrough on request</span>
