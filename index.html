@@ -142,8 +142,9 @@
   /* ---- inline figure (asset sits in the page, no modal) ----------------- */
   .shot{
     margin:20px 0 0; border:1px solid var(--line-2); border-radius:10px; overflow:hidden;
-    background:var(--sunken);
+    background:var(--sunken); max-width:50%;
   }
+  @media(max-width:900px){.shot{max-width:100%}}
   .shot img{display:block;width:100%;height:auto}
   .shot figcaption{
     font-family:var(--mono);font-size:11.5px;letter-spacing:.02em;color:var(--faint);
@@ -288,7 +289,7 @@
           </div>
           <figure class="shot">
             <img loading="lazy" src="pathfinderssh-slides.gif" alt="Crawl, map and capture running end to end in the topology-aware SSH client.">
-            <figcaption><b>crawl → map → capture</b> <span>Go · Fyne 2 · Linux, macOS, Windows</span> <a href="pathfinderssh-slides.gif" target="_blank" rel="noopener">full size ↗</a></figcaption>
+            <figcaption><b>crawl → map → capture</b> <span>Go · Fyne 2 · Linux, macOS, Windows</span> <a href="pathfinderssh-slides.gif" target="_blank" rel="noopener">open ↗</a></figcaption>
           </figure>
           <div class="links">
             <span class="chip mut">private build · walkthrough on request</span>
@@ -312,7 +313,7 @@
           </div>
           <figure class="shot">
             <img loading="lazy" src="omegamaps.gif" alt="Native Qt discovery and topology mapping application.">
-            <figcaption><b>live crawl → topology → export</b> <span>Go · C · C++ · Qt 6 · Linux, macOS, Windows</span> <a href="omegamaps.gif" target="_blank" rel="noopener">full size ↗</a></figcaption>
+            <figcaption><b>live crawl → topology → export</b> <span>Go · C · C++ · Qt 6 · Linux, macOS, Windows</span> <a href="omegamaps.gif" target="_blank" rel="noopener">open ↗</a></figcaption>
           </figure>
           <div class="links">
             <span class="chip mut">public · GPLv3</span>
@@ -336,7 +337,7 @@
           </div>
           <figure class="shot">
             <img loading="lazy" src="fibtrace-slides.gif" alt="Forwarding path graph and a baseline-versus-comparison diff of paths, ECMP width and churn.">
-            <figcaption><b>walk the FIB → graph → pre/post diff</b> <span>Python · FastAPI · Junos, EOS, IOS/NX-OS</span> <a href="fibtrace-slides.gif" target="_blank" rel="noopener">full size ↗</a></figcaption>
+            <figcaption><b>walk the FIB → graph → pre/post diff</b> <span>Python · FastAPI · Junos, EOS, IOS/NX-OS</span> <a href="fibtrace-slides.gif" target="_blank" rel="noopener">open ↗</a></figcaption>
           </figure>
           <div class="links">
             <span class="chip mut">private build · walkthrough on request</span>
@@ -360,7 +361,7 @@
           </div>
           <figure class="shot">
             <img loading="lazy" src="netlaps-slides.gif" alt="Template lab scoring a parse against raw CLI output, with the parsed records beside it.">
-            <figcaption><b>collect → parse → score → semantic diff</b> <span>Python · SQLite · TextFSM · self-hosted</span> <a href="netlaps-slides.gif" target="_blank" rel="noopener">full size ↗</a></figcaption>
+            <figcaption><b>collect → parse → score → semantic diff</b> <span>Python · SQLite · TextFSM · self-hosted</span> <a href="netlaps-slides.gif" target="_blank" rel="noopener">open ↗</a></figcaption>
           </figure>
           <div class="links">
             <span class="chip mut">private build · walkthrough on request</span>
@@ -384,7 +385,7 @@
           </div>
           <figure class="shot">
             <img loading="lazy" src="waypost-slides.gif" alt="DNS console showing split-horizon views, upstream forwarders and cache controls.">
-            <figcaption><b>lease state → zones → split horizon</b> <span>Python · SQLite · dnslib · lab-validated on Cisco relay</span> <a href="waypost-slides.gif" target="_blank" rel="noopener">full size ↗</a></figcaption>
+            <figcaption><b>lease state → zones → split horizon</b> <span>Python · SQLite · dnslib · lab-validated on Cisco relay</span> <a href="waypost-slides.gif" target="_blank" rel="noopener">open ↗</a></figcaption>
           </figure>
           <div class="links">
             <span class="chip mut">private build · walkthrough on request</span>
