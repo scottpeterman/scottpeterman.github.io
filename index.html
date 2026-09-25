@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Scott Peterman — Network Systems Engineering</title>
-<meta name="description" content="Thirty years operating multi-vendor networks. The last five building the tooling that makes their real state something you can query, trust, and automate against — discovery, topology mapping, forwarding-path analysis, state tracking, and DNS/DHCP built to be automated. Validated against real network OSes in functional labs, never just mock data.">
+<meta name="description" content="Thirty years operating multi-vendor networks. The last five building the tooling that makes their real state something you can query, trust, and automate against — discovery, topology mapping, config and state archiving, and state tracking. Validated against real network OSes in functional labs, never just mock data.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -179,6 +179,7 @@
   .exp{padding:76px 0 40px}
   .exp .head{margin-bottom:38px}
   .exp .head h2{margin-top:14px}
+  .exp .foundation{margin-top:38px}
   .timeline{border-top:1px solid var(--line)}
   .row{
     display:grid;grid-template-columns:132px 1fr;gap:28px;padding:22px 0;border-bottom:1px solid var(--line);
@@ -271,43 +272,19 @@
     </div>
   </section>
 
-  <!-- ===== WORK : five builds, shown in the page ===== -->
+  <!-- ===== WORK : four builds, shown in the page ===== -->
   <section class="work" id="work">
     <div class="wrap">
       <div class="head reveal">
         <span class="eyebrow">Selected work</span>
-        <h2 class="sec">Five systems, built end to end.</h2>
-        <p class="lede">This is not a product catalog. What they show is the approach to my solutions: the problem, the decision it turned on, and the thing running. Each one is a capability I can rebuild for a network that needs it.</p>
+        <h2 class="sec">Four systems, built end to end.</h2>
+        <p class="lede">This is not a product catalog. What they show is the approach to my solutions: the problem, the decision it turned on, and the thing running. Each one is a capability I can rebuild for a network that needs it. The first three are the Omega Network Suite: public, GPLv3, a no-server field kit for Linux, macOS and Windows. The fourth is a private build, shown here and walked through on request.</p>
       </div>
-
-      <!-- DISCOVER -->
-      <article class="proof reveal">
-        <div class="rail">
-          <div class="fig">FIG.01</div>
-          <div class="verb">Discover</div>
-          <div class="stacktag">Go · Fyne 2<br>CDP · LLDP<br>SSH · serial<br>OS keyring</div>
-        </div>
-        <div class="body">
-          <h3>A terminal that already knows the topology</h3>
-          <p class="prob">Every SSH client treats a network as a flat list of hostnames someone typed in by hand. Discovery lives in a second tool, capture in a third, and the map in a diagram nobody has opened since the last cutover — so the thing you connect with is the one thing that knows nothing about the network.</p>
-          <div class="decision">
-            <span class="dk">The decision</span>
-            <p>Make the client itself the discovery tool. Seed one address, crawl outward on CDP and LLDP, and let the resulting topology <em>be</em> the session tree — click a node and you're on it. The same crawl feeds inventory and config capture with deduplicated history, and exports to draw.io so the diagram is a build artifact instead of a chore. Credentials sit in an OS-backed vault; jump hosts, serial, and legacy KEX are first-class because real networks still have all three.</p>
-          </div>
-          <figure class="shot">
-            <img loading="lazy" src="pathfinderssh-slides.gif" data-full="pathfinderssh-slides.gif" alt="Crawl, map and capture running end to end in the topology-aware SSH client.">
-            <figcaption><b>crawl → map → capture</b> <span>Go · Fyne 2 · Linux, macOS, Windows</span> <button class="zoom" type="button">expand ⤢</button> <a href="pathfinderssh-slides.gif" target="_blank" rel="noopener">open ↗</a></figcaption>
-          </figure>
-          <div class="links">
-            <span class="chip mut">private build · walkthrough on request</span>
-          </div>
-        </div>
-      </article>
 
       <!-- MAP -->
       <article class="proof reveal">
         <div class="rail">
-          <div class="fig">FIG.02</div>
+          <div class="fig">FIG.01</div>
           <div class="verb">Map</div>
           <div class="stacktag">Go core · C ABI<br>C++ · Qt 6<br>SSH + SNMP<br>Qt WebEngine</div>
         </div>
@@ -319,35 +296,62 @@
             <p>Build the crawl engine once in Go, expose it across a narrow C ABI, and let a C++/Qt application and a headless CLI be two front ends over the same core — so discovery is a library, not a feature of one binary. SSH and SNMP collect side by side, with OIDs already validated against Junos, IOS and EOS. The map JSON schema is treated as a contract, because other tools consume it; the viewer is a separate, loosely coupled executable, and export and merge are first-class.</p>
           </div>
           <figure class="shot">
-            <img loading="lazy" src="omegamaps.gif" data-full="omegamaps.gif" alt="Native Qt discovery and topology mapping application.">
-            <figcaption><b>live crawl → topology → export</b> <span>Go · C · C++ · Qt 6 · Linux, macOS, Windows</span> <button class="zoom" type="button">expand ⤢</button> <a href="omegamaps.gif" target="_blank" rel="noopener">open ↗</a></figcaption>
+            <img loading="lazy" src="https://raw.githubusercontent.com/scottpeterman/omegamaps/refs/heads/main/screenshots/omegamaps.gif" data-full="https://raw.githubusercontent.com/scottpeterman/omegamaps/refs/heads/main/screenshots/omegamaps.gif" alt="Native Qt discovery and topology mapping application.">
+            <figcaption><b>live crawl → topology → export</b> <span>Go · C · C++ · Qt 6 · Linux, macOS, Windows</span> <button class="zoom" type="button">expand ⤢</button> <a href="https://raw.githubusercontent.com/scottpeterman/omegamaps/refs/heads/main/screenshots/omegamaps.gif" target="_blank" rel="noopener">open ↗</a></figcaption>
           </figure>
           <div class="links">
+            <a class="chip" href="https://github.com/scottpeterman/omegamapsqt" target="_blank" rel="noopener">omegamapsqt ↗</a>
             <span class="chip mut">public · GPLv3</span>
           </div>
         </div>
       </article>
 
-      <!-- TRACE -->
+      <!-- CONNECT -->
+      <article class="proof reveal">
+        <div class="rail">
+          <div class="fig">FIG.02</div>
+          <div class="verb">Connect</div>
+          <div class="stacktag">Go core · C ABI<br>C++ · Qt 6<br>SSH · telnet · serial<br>encrypted vault</div>
+        </div>
+        <div class="body">
+          <h3>A native terminal for engineers who live in PuTTY</h3>
+          <p class="prob">Most network engineers are on Windows, and most of them are still in PuTTY — because nothing native replaced it. My own first attempt bundled the terminal, the mapper and the collector into one Go application, and it taught me the lesson the hard way: a terminal that also tries to be everything else does none of it well.</p>
+          <div class="decision">
+            <span class="dk">The decision</span>
+            <p>Split it. The terminal became a widget first and an application second, so the emulator is a reusable component rather than a feature of one binary. The application on top does one job: tabbed SSH, telnet and serial sessions that know their connection state, a session tree, an encrypted credential vault, and per-session logging — the same build on Linux, macOS and Windows. Mapping and capture moved into their own applications that share the map schema instead of the process.</p>
+          </div>
+          <figure class="shot">
+            <img loading="lazy" src="https://raw.githubusercontent.com/scottpeterman/omegasshqt/refs/heads/main/screenshots/slides.gif" data-full="https://raw.githubusercontent.com/scottpeterman/omegasshqt/refs/heads/main/screenshots/slides.gif" alt="Tabbed SSH sessions, session tree and credential vault in the native Qt terminal.">
+            <figcaption><b>session tree → tabs → vault → logging</b> <span>Go · C · C++ · Qt 6 · Linux, macOS, Windows</span> <button class="zoom" type="button">expand ⤢</button> <a href="https://raw.githubusercontent.com/scottpeterman/omegasshqt/refs/heads/main/screenshots/slides.gif" target="_blank" rel="noopener">open ↗</a></figcaption>
+          </figure>
+          <div class="links">
+            <a class="chip" href="https://github.com/scottpeterman/omegasshqt" target="_blank" rel="noopener">omegasshqt ↗</a>
+            <span class="chip mut">public · GPLv3</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ARCHIVE -->
       <article class="proof reveal">
         <div class="rail">
           <div class="fig">FIG.03</div>
-          <div class="verb">Trace</div>
-          <div class="stacktag">Python · FastAPI<br>RIB · FIB<br>ECMP<br>directed graph</div>
+          <div class="verb">Archive</div>
+          <div class="stacktag">Go core · C ABI<br>C++ · Qt 6<br>TextFSM · scoring<br>SQLite</div>
         </div>
         <div class="body">
-          <h3>The forwarding path, read from the devices themselves</h3>
-          <p class="prob">A traceroute probes from outside with ICMP and sees hop IPs. It's blind to RIB-versus-FIB divergence, an unresolved next-hop, and any ECMP path it didn't happen to hash into — which is exactly the state you need before and after a cut.</p>
+          <h3>Config and state archiving you can carry into a new network</h3>
+          <p class="prob">On a new engagement, the first week goes to finding out what's actually running. Configs aren't collected, there's no history, and the ARP and MAC tables live on the screen of whoever last ran the command. A server-side archive is the right answer eventually — but you need the answer before anyone hands you a server.</p>
           <div class="decision">
             <span class="dk">The decision</span>
-            <p>The device itself is the most accurate source of truth — so work it inside-out. SSH into each device, read <em>its own</em> forwarding tables, and ask four questions at every hop: is there a route, is it in the FIB, is the next-hop resolved, is the link healthy. Build a directed graph of every path a packet can actually take, then diff a before against an after and get path count, ECMP width, and edge churn as numbers you can gate a change on.</p>
+            <p>A desktop archive in the CatTools tradition, read-only by design so it can be pointed at a network nobody has vouched for yet. It pulls configs and show output, keeps every version, and diffs what changed. ARP and MAC tables are parsed into searchable records by a template-scoring engine ported to Go — the output selects the template, not the engineer. Inventory comes straight from a mapping crawl, so the map feeds the archive with no retyping.</p>
           </div>
           <figure class="shot">
-            <img loading="lazy" src="fibtrace-slides.gif" data-full="fibtrace-slides.gif" alt="Forwarding path graph and a baseline-versus-comparison diff of paths, ECMP width and churn.">
-            <figcaption><b>walk the FIB → graph → pre/post diff</b> <span>Python · FastAPI · Junos, EOS, IOS/NX-OS</span> <button class="zoom" type="button">expand ⤢</button> <a href="fibtrace-slides.gif" target="_blank" rel="noopener">open ↗</a></figcaption>
+            <img loading="lazy" src="https://raw.githubusercontent.com/scottpeterman/omegacatqt/refs/heads/main/screenshots/capture1.png" data-full="https://raw.githubusercontent.com/scottpeterman/omegacatqt/refs/heads/main/screenshots/capture1.png" alt="Config and show-output archive with version history and parsed ARP/MAC records.">
+            <figcaption><b>capture → version → diff → parse</b> <span>Go · C · C++ · Qt 6 · Linux, macOS, Windows</span> <button class="zoom" type="button">expand ⤢</button> <a href="https://raw.githubusercontent.com/scottpeterman/omegacatqt/refs/heads/main/screenshots/capture1.png" target="_blank" rel="noopener">open ↗</a></figcaption>
           </figure>
           <div class="links">
-            <span class="chip mut">private build · walkthrough on request</span>
+            <a class="chip" href="https://github.com/scottpeterman/omegacatqt" target="_blank" rel="noopener">omegacatqt ↗</a>
+            <span class="chip mut">public · GPLv3</span>
           </div>
         </div>
       </article>
@@ -376,37 +380,30 @@
         </div>
       </article>
 
-      <!-- SERVE -->
-      <article class="proof reveal">
-        <div class="rail">
-          <div class="fig">FIG.05</div>
-          <div class="verb">Serve</div>
-          <div class="stacktag">Python<br>SQLite · dnslib<br>split horizon<br>two-process</div>
-        </div>
-        <div class="body">
-          <h3>DNS and DHCP you can actually build against</h3>
-          <p class="prob">DHCP hands out an address; DNS has to carry the name; and in most shops a human stitches the two together while the automation can touch neither. The network's own foundational services are the part nobody designs to be built against.</p>
-          <div class="decision">
-            <span class="dk">The decision</span>
-            <p>Build both to be automated from the first packet. Authored intent lives in git, but the decisions get made on state — machine state in SQLite, and DNS derived directly from live lease state. Split-horizon views, forwarders and cache are all config surfaces, not file edits. Two processes joined by one narrow, well-defined interface that degrades gracefully instead of ever failing a lease. Validated end to end on real Cisco gear, across a relay.</p>
-          </div>
-          <figure class="shot">
-            <img loading="lazy" src="waypost-slides.gif" data-full="waypost-slides.gif" alt="DNS console showing split-horizon views, upstream forwarders and cache controls.">
-            <figcaption><b>lease state → zones → split horizon</b> <span>Python · SQLite · dnslib · lab-validated on Cisco relay</span> <button class="zoom" type="button">expand ⤢</button> <a href="waypost-slides.gif" target="_blank" rel="noopener">open ↗</a></figcaption>
-          </figure>
-          <div class="links">
-            <span class="chip mut">private build · walkthrough on request</span>
-          </div>
-        </div>
-      </article>
-
       <!-- one architecture -->
       <div class="foundation reveal">
         <div class="fk">One foundation</div>
         <div class="fbody">
-          <p>These aren't five tools — they're <b>one set of reusable primitives</b> applied five times. I'd rather everything spoke RESTCONF; operational reality is SSH-first, so <b>parsing is the first-class citizen</b> — the output selects the template, not the engineer. Underneath sits a hardened, vendor-agnostic SSH client and a structured artifact that carries the contract between stages. Each one is built to be a <b>platform, not a script</b>: something automation can consume reliably, and the next engineer can pick up and extend.</p>
+          <p>These aren't four tools — they're <b>one set of reusable primitives</b> applied four times. I'd rather everything spoke RESTCONF; operational reality is SSH-first, so <b>parsing is the first-class citizen</b> — the output selects the template, not the engineer. Underneath sits a hardened, vendor-agnostic SSH client and a structured artifact that carries the contract between stages. Each one is built to be a <b>platform, not a script</b>: something automation can consume reliably, and the next engineer can pick up and extend.</p>
 
-          <p>The real test of a primitive is whether it survives being pulled out and handed to someone else. The terminal core from the SSH client is now a standalone Qt widget that owns no pty, with PySide6 wrappers, so a Python developer with no compiler and no Qt installed gets a native terminal in one <span class="mono">pip install</span> — I built it because I started out on Windows with no terminal options at all while writing automation tooling. The same <span class="mono">Go core → C ABI → C++/Qt</span> model then carried straight over to the mapping application above: engine once, front ends many, shipping on Linux, macOS and Windows.</p>
+          <p>The real test of a primitive is whether it survives being pulled out and handed to someone else. The terminal core is a standalone Qt widget that owns no pty, with PySide6 wrappers, so a Python developer with no compiler and no Qt installed gets a native terminal in one <span class="mono">pip install</span> — I built it because I started out on Windows with no terminal options at all while writing automation tooling. The same <span class="mono">Go core → C ABI → C++/Qt</span> model carries all three public applications above: engine once, front ends many, shipping on Linux, macOS and Windows.</p>
+          <div class="links">
+            <a class="chip" href="https://github.com/scottpeterman/anytermqt" target="_blank" rel="noopener">anytermqt ↗</a>
+            <a class="chip" href="https://github.com/scottpeterman/anyeditqt" target="_blank" rel="noopener">anyeditqt ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- where it started -->
+      <div class="foundation reveal">
+        <div class="fk">Where it started</div>
+        <div class="fbody">
+          <p>The first two tools were Python, written at night in a hotel room during AutoCon 2. <b>Secure Cartography</b> maps a network over SNMP and SSH, jump hosts included, and is the ancestor of the mapping application above. <b>Terminal Telemetry</b> puts a live telemetry feed beside the SSH session, with user-built widgets and platform packs so any vendor can be added without code. Both were rebuilt from the ground up in 2026 and ship on PyPI. The Go predecessor to the Omega applications is still published as portable binaries for machines where you can't install anything.</p>
+          <div class="links">
+            <a class="chip" href="https://github.com/scottpeterman/securecartography2" target="_blank" rel="noopener">securecartography2 ↗</a>
+            <a class="chip" href="https://github.com/scottpeterman/terminaltelemetry2" target="_blank" rel="noopener">terminaltelemetry2 ↗</a>
+            <a class="chip" href="https://github.com/scottpeterman/pathfinderssh" target="_blank" rel="noopener">pathfinderssh ↗</a>
+          </div>
         </div>
       </div>
     </div>
@@ -456,6 +453,15 @@
           </div>
         </div>
       </div>
+      <div class="foundation reveal">
+        <div class="fk">Personal interest &amp; contributions</div>
+        <div class="fbody">
+          <p><b>AutiobooksQTa</b> is a PyQt6 port of the Autiobooks project, built so a family member could turn his own writing into audiobooks. EPUB in, m4b out, voiced locally with Kokoro TTS and no cloud service involved. Published on PyPI.</p>
+          <div class="links">
+            <a class="chip" href="https://github.com/scottpeterman/autiobooksqta" target="_blank" rel="noopener">autiobooksqta ↗</a>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -478,6 +484,7 @@
   <div class="wrap">
     <div class="cta-line">If your network is opaque, <span class="hl">that's the problem I solve.</span></div>
     <div class="flinks">
+      <a href="https://github.com/scottpeterman" target="_blank" rel="noopener">GitHub ↗</a>
       <a href="https://linkedin.com/in/scott-peterman-networkeng" target="_blank" rel="noopener">LinkedIn ↗</a>
     </div>
     <div class="foot-meta">
