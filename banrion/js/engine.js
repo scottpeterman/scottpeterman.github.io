@@ -1,5 +1,17 @@
 // banrion/js/engine.js
 //
+// Banrion — 3D wireframe chess.  Copyright (C) 2026 Scott Peterman
+//
+// This program is free software: you can redistribute it and/or modify it
+// under the terms of the GNU General Public License as published by the Free
+// Software Foundation, either version 3 of the License, or (at your option)
+// any later version.  It is distributed WITHOUT ANY WARRANTY; without even
+// the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+// PURPOSE.  See the GNU General Public License for more details.
+// You should have received a copy of the GPL along with this program; if not,
+// see <https://www.gnu.org/licenses/>.  Vendored components keep their own
+// licences — see THIRD-PARTY-NOTICES.md.
+//
 // The computer opponent. Wraps Lozza (js/lozza.js, MIT) in a worker and turns
 // UCI chatter into one call: Engine.think(fen, cb) -> cb('e7e5').
 //

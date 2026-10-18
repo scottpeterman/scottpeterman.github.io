@@ -154,6 +154,8 @@ js/
   engine.js           computer opponent               → engine.md
   lozza.js            vendored Lozza (chess engine, MIT)
 piece_lab.html        piece geometry workbench (see below); not part of the game
+LICENSE               GPL-3.0
+THIRD-PARTY-NOTICES.md  what is vendored, and under what
 transport.md          networking and state model
 render3d.md           the wireframe renderer
 engine.md             the computer opponent
@@ -257,6 +259,12 @@ call beside it, worth making at a moment when nothing is mid-game.
 ---
 
 ## Credits and licences
+
+Banrion is **GPL-3.0-or-later** — see `LICENSE`. Copyright Scott Peterman.
+
+The vendored components are all permissive and GPL-compatible, and keep their
+own terms; the combined work is GPL. Full table in
+[THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
 
 - [chess.js](https://github.com/jhlywa/chess.js) — Jeff Hlywa, BSD-2-Clause.
   Vendored and wrapped; see the header of `js/chess.js`.

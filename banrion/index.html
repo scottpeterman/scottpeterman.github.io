@@ -1,4 +1,8 @@
-<!-- banrion/chess.html -->
+<!-- banrion/chess.html
+     Banrion — 3D wireframe chess.  Copyright (C) 2026 Scott Peterman
+     Licensed under the GNU General Public License v3 or later; see LICENSE.
+     Distributed WITHOUT ANY WARRANTY.  Vendored components keep their own
+     licences — see THIRD-PARTY-NOTICES.md. -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -8928,6 +8932,18 @@ global.xoroshiro128 = xoroshiro128;
 /* ==== inlined from js/transport.js ==== */
 // banrion/js/transport.js
 //
+// Banrion — 3D wireframe chess.  Copyright (C) 2026 Scott Peterman
+//
+// This program is free software: you can redistribute it and/or modify it
+// under the terms of the GNU General Public License as published by the Free
+// Software Foundation, either version 3 of the License, or (at your option)
+// any later version.  It is distributed WITHOUT ANY WARRANTY; without even
+// the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+// PURPOSE.  See the GNU General Public License for more details.
+// You should have received a copy of the GPL along with this program; if not,
+// see <https://www.gnu.org/licenses/>.  Vendored components keep their own
+// licences — see THIRD-PARTY-NOTICES.md.
+//
 // Pluggable message transport for two-player games. Lifted from the SFB build
 // with one change: the namespace, KDF salt and client-id prefix are no longer
 // hard-coded, so the same file serves both games. Different namespace + salt
@@ -9297,6 +9313,18 @@ global.xoroshiro128 = xoroshiro128;
 /* ==== inlined from js/game.js ==== */
 // banrion/js/game.js
 //
+// Banrion — 3D wireframe chess.  Copyright (C) 2026 Scott Peterman
+//
+// This program is free software: you can redistribute it and/or modify it
+// under the terms of the GNU General Public License as published by the Free
+// Software Foundation, either version 3 of the License, or (at your option)
+// any later version.  It is distributed WITHOUT ANY WARRANTY; without even
+// the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+// PURPOSE.  See the GNU General Public License for more details.
+// You should have received a copy of the GPL along with this program; if not,
+// see <https://www.gnu.org/licenses/>.  Vendored components keep their own
+// licences — see THIRD-PARTY-NOTICES.md.
+//
 // Game state and rules. Wraps chess.js and owns the one piece of protocol
 // logic worth stating plainly:
 //
@@ -9518,6 +9546,18 @@ global.xoroshiro128 = xoroshiro128;
 <script>
 /* ==== inlined from js/net.js ==== */
 // banrion/js/net.js
+//
+// Banrion — 3D wireframe chess.  Copyright (C) 2026 Scott Peterman
+//
+// This program is free software: you can redistribute it and/or modify it
+// under the terms of the GNU General Public License as published by the Free
+// Software Foundation, either version 3 of the License, or (at your option)
+// any later version.  It is distributed WITHOUT ANY WARRANTY; without even
+// the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+// PURPOSE.  See the GNU General Public License for more details.
+// You should have received a copy of the GPL along with this program; if not,
+// see <https://www.gnu.org/licenses/>.  Vendored components keep their own
+// licences — see THIRD-PARTY-NOTICES.md.
 //
 // Networking layer. Wraps Transport (js/transport.js) and drives the lobby.
 // Structure follows the SFB net.js -- same two-stage lobby, same
@@ -9861,6 +9901,18 @@ function pushGame() {
 /* ==== inlined from js/board2d.js ==== */
 // banrion/js/board2d.js
 //
+// Banrion — 3D wireframe chess.  Copyright (C) 2026 Scott Peterman
+//
+// This program is free software: you can redistribute it and/or modify it
+// under the terms of the GNU General Public License as published by the Free
+// Software Foundation, either version 3 of the License, or (at your option)
+// any later version.  It is distributed WITHOUT ANY WARRANTY; without even
+// the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+// PURPOSE.  See the GNU General Public License for more details.
+// You should have received a copy of the GPL along with this program; if not,
+// see <https://www.gnu.org/licenses/>.  Vendored components keep their own
+// licences — see THIRD-PARTY-NOTICES.md.
+//
 // Placeholder board. Deliberately plain 2D: this exists to prove the state
 // model and the network sync, and gets replaced by the piece-lab renderer once
 // that is trustworthy. Everything it touches is behind Game, so the swap is a
@@ -10025,6 +10077,18 @@ function pushGame() {
 <script>
 /* ==== inlined from js/engine.js ==== */
 // banrion/js/engine.js
+//
+// Banrion — 3D wireframe chess.  Copyright (C) 2026 Scott Peterman
+//
+// This program is free software: you can redistribute it and/or modify it
+// under the terms of the GNU General Public License as published by the Free
+// Software Foundation, either version 3 of the License, or (at your option)
+// any later version.  It is distributed WITHOUT ANY WARRANTY; without even
+// the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+// PURPOSE.  See the GNU General Public License for more details.
+// You should have received a copy of the GPL along with this program; if not,
+// see <https://www.gnu.org/licenses/>.  Vendored components keep their own
+// licences — see THIRD-PARTY-NOTICES.md.
 //
 // The computer opponent. Wraps Lozza (js/lozza.js, MIT) in a worker and turns
 // UCI chatter into one call: Engine.think(fen, cb) -> cb('e7e5').
@@ -10333,6 +10397,18 @@ function pushGame() {
 <script>
 /* ==== inlined from js/pieces.js ==== */
 // banrion/js/pieces.js
+//
+// Banrion — 3D wireframe chess.  Copyright (C) 2026 Scott Peterman
+//
+// This program is free software: you can redistribute it and/or modify it
+// under the terms of the GNU General Public License as published by the Free
+// Software Foundation, either version 3 of the License, or (at your option)
+// any later version.  It is distributed WITHOUT ANY WARRANTY; without even
+// the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+// PURPOSE.  See the GNU General Public License for more details.
+// You should have received a copy of the GPL along with this program; if not,
+// see <https://www.gnu.org/licenses/>.  Vendored components keep their own
+// licences — see THIRD-PARTY-NOTICES.md.
 //
 // Piece geometry, lifted from piece_lab.html. This is the SHIPPING copy: the
 // lab stays the tuning tool, and its EXPORT output is baked in here as data.
@@ -10845,6 +10921,18 @@ global.Pieces = Pieces;
 /* ==== inlined from js/glrender.js ==== */
 // banrion/js/glrender.js
 //
+// Banrion — 3D wireframe chess.  Copyright (C) 2026 Scott Peterman
+//
+// This program is free software: you can redistribute it and/or modify it
+// under the terms of the GNU General Public License as published by the Free
+// Software Foundation, either version 3 of the License, or (at your option)
+// any later version.  It is distributed WITHOUT ANY WARRANTY; without even
+// the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+// PURPOSE.  See the GNU General Public License for more details.
+// You should have received a copy of the GPL along with this program; if not,
+// see <https://www.gnu.org/licenses/>.  Vendored components keep their own
+// licences — see THIRD-PARTY-NOTICES.md.
+//
 // WebGL rasterisation backend for Render3D. This is a BACKEND, not a second
 // renderer: the camera, the ray picking, the input handling and the scene model
 // all still live in render3d.js. Only the "turn world-space segments into lit
@@ -11259,6 +11347,18 @@ void main(){
 <script>
 /* ==== inlined from js/render3d.js ==== */
 // banrion/js/render3d.js
+//
+// Banrion — 3D wireframe chess.  Copyright (C) 2026 Scott Peterman
+//
+// This program is free software: you can redistribute it and/or modify it
+// under the terms of the GNU General Public License as published by the Free
+// Software Foundation, either version 3 of the License, or (at your option)
+// any later version.  It is distributed WITHOUT ANY WARRANTY; without even
+// the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+// PURPOSE.  See the GNU General Public License for more details.
+// You should have received a copy of the GPL along with this program; if not,
+// see <https://www.gnu.org/licenses/>.  Vendored components keep their own
+// licences — see THIRD-PARTY-NOTICES.md.
 //
 // The wireframe board. Camera, scene assembly, draw loop, and picking.
 //
@@ -12453,7 +12553,7 @@ document.addEventListener('visibilitychange', () => {
 // Replaced by bundle.py. 'dev' means you are looking at the modular tree, not
 // a built artifact -- which is the answer to "am I actually running the new
 // file?", a question that should never cost more than one glance.
-const BUILD_STAMP = '2026-08-08 21:35';
+const BUILD_STAMP = '2026-08-09 03:43';
 
 const SPLASH_MS = 4000;      // how long the splash holds on its own
 const SPLASH_MIN_MS = 600;   // input is ignored for this long after it appears
