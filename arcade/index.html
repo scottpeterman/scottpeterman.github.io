@@ -133,7 +133,7 @@ function renderFilters() {
   tags.forEach(t => nav.append(mk(t, t)));
 }
 
-fetch("games.json", { cache: "no-cache" })
+fetch("games.json?v=" + Date.now(), { cache: "no-store" })
   .then(r => r.json())
   .then(m => {
     manifest = m;
