@@ -127,6 +127,16 @@
       "input": ["keyboard", "mouse", "touch"],
       "shelf": "lab",
       "readme": "lab/tauri-reach/README.md"
+    },
+    {
+      "slug": "six-fleets",
+      "title": "Six Fleets",
+      "tagline": "Skirmish at Tauri-B. Pick any two starships and duel at a young star; damage resolves against each ship's tactical sheet.",
+      "path": "lab/six-fleets/",
+      "thumb": "lab/thumbs/six-fleets.webp",
+      "tags": ["webgl", "shooter", "3d"],
+      "input": ["keyboard", "mouse"],
+      "shelf": "lab"
     }
   ]
 }
