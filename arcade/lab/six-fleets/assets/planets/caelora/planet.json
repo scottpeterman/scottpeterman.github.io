@@ -1,0 +1,19 @@
+{
+  "type": "ocean",
+  "seed": "TAURI-B II:Caelora",
+  "width": 4096,
+  "height": 2048,
+  "atmo": "#55aaff",
+  "atmoDensity": 1.213,
+  "cloudCoverage": 0.55,
+  "emissive": false,
+  "clouds": true,
+  "bakeMs": 31926,
+  "name": "caelora",
+  "maps": {
+    "color": "color.webp",
+    "normal": "normal.webp",
+    "rough": "rough.webp",
+    "clouds": "clouds.webp"
+  }
+}
