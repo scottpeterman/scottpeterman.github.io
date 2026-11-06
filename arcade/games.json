@@ -142,7 +142,7 @@
         {
       "slug": "corsair",
       "title": "Corsair",
-      "tagline": "Skirmish at Tauri-B. Pick any two starships and duel at a young star; damage resolves against each ship's tactical sheet.",
+      "tagline": "Prototype for a Pacific flying game: an F4U-1D Corsair over a volcanic jungle island ",
       "path": "lab/corsair/",
       "thumb": "lab/corsair/docs/chase-island.png",
       "tags": ["png", "flightsim", "3d"],
