@@ -138,5 +138,16 @@
       "input": ["keyboard", "mouse"],
       "shelf": "lab"
     }
+    ,
+        {
+      "slug": "corsair",
+      "title": "Corsair",
+      "tagline": "Skirmish at Tauri-B. Pick any two starships and duel at a young star; damage resolves against each ship's tactical sheet.",
+      "path": "lab/corsair/",
+      "thumb": "lab/corsair/docs/chase-island.png",
+      "tags": ["png", "flightsim", "3d"],
+      "input": ["keyboard", "mouse"],
+      "shelf": "lab"
+    }
   ]
 }
