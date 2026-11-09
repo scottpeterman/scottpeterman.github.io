@@ -109,5 +109,5 @@ The games themselves still open straight from disk.
 - Several games request Google Fonts and fall back to system fonts without it.
 
 ## License
-
+ 
 Each game folder carries its own license and third-party notices.
