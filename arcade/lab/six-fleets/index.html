@@ -91,6 +91,7 @@ body.skirmish.sk-picking #sk-pick{display:flex!important}
 body.skirmish.sk-picking .sk:not(#sk-pick){display:none!important}
 #sk-pick .box{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:18px 20px;max-width:760px;width:100%}
 #sk-pick h2{margin:0 0 4px;text-align:center;font-weight:600;font-size:clamp(18px,2.6vw,28px);letter-spacing:.3em;color:#f1ead8}
+#sk-pick .loc{text-align:center;font-family:var(--mono);color:var(--plasma);font-size:12px;letter-spacing:.25em;margin-bottom:6px}
 #sk-pick .sub{text-align:center;font-family:var(--mono);color:var(--dim);font-size:11px;letter-spacing:.1em;margin-bottom:14px}
 #sk-pick .lab{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--plasma);margin:12px 0 6px}
 #sk-pick .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:6px}
@@ -145,7 +146,7 @@ body.skirmish.touch #sk-radar{bottom:calc(130px + env(safe-area-inset-bottom,0px
 #sk-ptr i{position:absolute;left:-11px;top:-9px;width:0;height:0;border-left:22px solid #ff6a4a;border-top:9px solid transparent;border-bottom:9px solid transparent;filter:drop-shadow(0 0 4px rgba(255,106,74,.8));transform-origin:11px 9px}
 #sk-ptr span{position:absolute;left:-30px;top:12px;width:60px;text-align:center;font-family:var(--mono);font-size:10px;color:#ffb38a;text-shadow:0 1px 3px #000}
 </style></head><body class="briefing">
-<title>Six Fleets · Skirmish at Tauri-B</title>
+<title>Six Fleets: Qin Wars</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600&family=Share+Tech+Mono&display=swap">
@@ -326,7 +327,7 @@ body.briefing #bracket,body.briefing #ctl,body.briefing #pausev,body.briefing #h
   <div><button data-k="f1">QIP</button><button data-k="f2">HVY</button><button data-k="fa">ALL</button></div>
 </div>
 <div class="sk" id="sk-pick"><div class="box">
-  <h2 id="sk-pick-title">SKIRMISH AT TAURI-B</h2><div class="sub">Pick two ships and a place to fight. Every hit is resolved by the tactical engine.</div>
+  <h2>SIX FLEETS: QIN WARS</h2><div class="loc" id="sk-pick-title">SKIRMISH AT TAURI-B</div><div class="sub">Pick two ships and a place to fight. Every hit is resolved by the tactical engine.</div>
   <div class="lab">YOUR SHIP</div><div class="row ships" id="sk-pick-p"></div>
   <div class="lab">OPPONENT</div><div class="row ships" id="sk-pick-e"></div>
   <div class="lab">LOCATION</div><div class="row" id="sk-pick-l"></div>
