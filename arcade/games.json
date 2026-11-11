@@ -142,10 +142,10 @@
         {
       "slug": "corsair",
       "title": "Corsair",
-      "tagline": "Prototype for a Pacific flying game: an F4U-1D Corsair over a volcanic jungle island ",
+      "tagline": "Pacific flying game prototype: fly an F4U-1D Corsair from a jungle island strip through a storm front, and dogfight an A6M2 Zero with your wingman.",
       "path": "lab/corsair/",
-      "thumb": "lab/corsair/docs/chase-island.png",
-      "tags": ["png", "flightsim", "3d"],
+      "thumb": "lab/thumbs/corsair.gif",
+      "tags": ["webgl", "flightsim", "3d"],
       "input": ["keyboard", "mouse"],
       "shelf": "lab"
     }
