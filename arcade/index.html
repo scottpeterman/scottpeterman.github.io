@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Vector Arcade</title>
-<meta name="description" content="Wireframe and vector browser games by Scott Peterman.">
-<meta property="og:title" content="Vector Arcade">
-<meta property="og:description" content="Wireframe and vector browser games. No installs, no accounts.">
-<meta property="og:image" content="games/deckrunner/thumb.webp">
+<title>Arcade</title>
+<meta name="description" content="Browser games by Scott Peterman: flight, space combat, shooters, chess and vector classics.">
+<meta property="og:title" content="Arcade">
+<meta property="og:description" content="Browser games. No installs, no accounts.">
+<meta property="og:image" content="assets/backdrop.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
@@ -17,25 +17,31 @@
     --glow:#36d6ff; --amber:#ffb020;
   }
   *{box-sizing:border-box}
-  html,body{margin:0;background:var(--bg);color:var(--ink)}
-  body{font:15px/1.5 "Share Tech Mono",ui-monospace,Menlo,Consolas,monospace;min-height:100vh;
-    background-image:linear-gradient(rgba(54,214,255,.035) 1px,transparent 1px),
-                     linear-gradient(90deg,rgba(54,214,255,.035) 1px,transparent 1px);
-    background-size:32px 32px}
+  html{background:var(--bg)}
+  body{margin:0;color:var(--ink)}
+  body{font:15px/1.5 "Share Tech Mono",ui-monospace,Menlo,Consolas,monospace;min-height:100vh;position:relative}
+  body::before{content:"";position:fixed;inset:0;z-index:-1;
+    background:linear-gradient(180deg,rgba(5,7,11,.15) 0%,rgba(5,7,11,.55) 45%,rgba(5,7,11,.92) 100%),
+               url(assets/backdrop.webp) center top/cover no-repeat,var(--bg)}
   a{color:inherit}
-  header{max-width:1200px;margin:0 auto;padding:48px 16px 12px}
+  header{max-width:1200px;margin:0 auto;padding:clamp(48px,14vh,140px) 16px 12px}
   h1{font-family:Orbitron,sans-serif;font-weight:800;letter-spacing:.12em;margin:0;
      font-size:clamp(28px,6vw,52px);color:var(--glow);text-shadow:0 0 18px rgba(54,214,255,.45)}
-  header p{color:var(--dim);margin:8px 0 0}
+  header p{color:#b9c9da;margin:8px 0 0;text-shadow:0 1px 6px #000}
   nav{max-width:1200px;margin:0 auto;padding:16px 16px 0;display:flex;flex-wrap:wrap;gap:8px}
-  nav button{font:inherit;color:var(--dim);background:transparent;border:1px solid var(--line);
+  nav button{font:inherit;color:#b9c9da;background:rgba(5,7,11,.6);border:1px solid var(--line);
      padding:4px 12px;cursor:pointer}
   nav button[aria-pressed="true"]{color:var(--bg);background:var(--glow);border-color:var(--glow)}
   main{max-width:1200px;margin:0 auto;padding:8px 16px 64px}
   h2{font-family:Orbitron,sans-serif;font-weight:600;font-size:14px;letter-spacing:.2em;
      color:var(--amber);margin:32px 0 12px;text-transform:uppercase}
   .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
-  .card{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);
+  .grid{grid-auto-flow:dense}
+  .card.hero{grid-column:span 2}
+  .card.hero .title{font-size:22px}
+  .card.hero .tag{font-size:14px}
+  @media (max-width:600px){.card.hero{grid-column:auto}}
+  .card{display:flex;flex-direction:column;background:rgba(11,16,24,.92);border:1px solid var(--line);
      text-decoration:none;transition:border-color .15s,transform .15s}
   .card:hover,.card:focus-visible{border-color:var(--glow);transform:translateY(-2px);outline:none}
   .thumb{aspect-ratio:16/9;background:#000;overflow:hidden;position:relative}
@@ -49,7 +55,6 @@
   .tag{color:var(--dim);font-size:13px;flex:1}
   .meta{display:flex;flex-wrap:wrap;gap:6px;font-size:11px;color:var(--dim)}
   .meta span{border:1px solid var(--line);padding:1px 6px}
-  .lab .card{opacity:.85}
   footer{max-width:1200px;margin:0 auto;padding:0 16px 32px;color:var(--dim);font-size:13px}
 </style>
 </head>
@@ -83,11 +88,11 @@ function esc(s) {
 }
 
 function card(g) {
-  const a = el("a", { class: "card", href: g.path });
+  const a = el("a", { class: g.size === "hero" ? "card hero" : "card", href: g.path });
   const thumb = el("div", { class: "thumb" });
   const fb = el("div", { class: "fallback" }, esc(g.title));
   if (g.thumb) {
-    const img = el("img", { src: g.thumb, alt: "", loading: "lazy" });
+    const img = el("img", { src: (g.size === "hero" && g.hero_thumb) || g.thumb, alt: "", loading: "lazy" });
     img.onerror = () => { img.remove(); thumb.appendChild(fb); };
     thumb.appendChild(img);
   } else {
@@ -137,7 +142,7 @@ fetch("games.json?v=" + Date.now(), { cache: "no-store" })
   .then(r => r.json())
   .then(m => {
     manifest = m;
-    document.getElementById("title").textContent = (m.title || "Vector Arcade").toUpperCase();
+    document.getElementById("title").textContent = (m.title || "Arcade").toUpperCase();
     document.getElementById("subtitle").textContent = m.subtitle || "";
     document.getElementById("footer").innerHTML =
       `${esc(m.author || "")} &middot; <a href="${esc(m.repo || "#")}">source</a>`;

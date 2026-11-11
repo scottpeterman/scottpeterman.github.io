@@ -1,20 +1,31 @@
 {
-  "title": "Vector Arcade",
-  "subtitle": "Wireframe and vector games for the browser. No installs, no accounts.",
+  "title": "Arcade",
+  "subtitle": "Flight, space combat, shooters, chess and vector classics for the browser. No installs, no accounts.",
   "author": "Scott Peterman",
   "repo": "https://github.com/scottpeterman/arcade",
   "games": [
     {
-      "slug": "banrion",
-      "title": "Banrion",
-      "tagline": "3D wireframe chess. Play a friend over the internet or the built-in engine.",
-      "path": "games/banrion/",
-      "thumb": "games/banrion/thumb.webp",
-      "tags": ["chess", "multiplayer", "3d"],
-      "input": ["mouse", "touch"],
-      "players": "1-2",
+      "slug": "corsair",
+      "title": "Corsair",
+      "tagline": "Pacific flying game prototype: fly an F4U-1D Corsair from a jungle island strip through a storm front, and dogfight an A6M2 Zero with your wingman.",
+      "path": "lab/corsair/",
+      "thumb": "lab/thumbs/corsair.gif",
+      "tags": ["webgl", "flightsim", "3d"],
+      "input": ["keyboard", "mouse"],
       "shelf": "featured",
-      "readme": "games/banrion/README.md"
+      "size": "hero",
+      "hero_thumb": "lab/corsair/docs/corsair-dogfight.gif"
+    },
+    {
+      "slug": "six-fleets",
+      "title": "Six Fleets: Qin Wars",
+      "tagline": "Pick any two starships from six warring races and duel at Tauri-B, the Gate or the Rayzine star base. Every hit resolves against the ship's tactical sheet.",
+      "path": "lab/six-fleets/",
+      "thumb": "lab/thumbs/six-fleets.webp",
+      "tags": ["webgl", "shooter", "3d"],
+      "input": ["keyboard", "mouse"],
+      "shelf": "featured",
+      "size": "hero"
     },
     {
       "slug": "deckrunner",
@@ -26,18 +37,9 @@
       "input": ["keyboard", "mouse", "touch"],
       "players": "1",
       "shelf": "featured",
-      "readme": "games/deckrunner/README.md"
-    },
-    {
-      "slug": "bounty-hunter",
-      "title": "Bounty Hunter",
-      "tagline": "Fight your way up the tower, floor by floor. Mutants first, then robots.",
-      "path": "games/bounty-hunter/",
-      "thumb": "games/bounty-hunter/thumb.webp",
-      "tags": ["crawler", "3d"],
-      "input": ["keyboard"],
-      "players": "1",
-      "shelf": "featured"
+      "readme": "games/deckrunner/README.md",
+      "size": "hero",
+      "hero_thumb": "games/deckrunner/hero.webp"
     },
     {
       "slug": "normandy",
@@ -51,16 +53,41 @@
       "shelf": "featured",
       "readme": "games/normandy/README.md",
       "thumb_query": "?stage=2&start=1",
-      "thumb_wait": 5000
+      "thumb_wait": 5000,
+      "size": "hero",
+      "hero_thumb": "games/normandy/hero.webp"
     },
     {
-      "slug": "vector-command",
-      "title": "Vector Command",
-      "tagline": "Defense console. Hold the line against incoming waves.",
-      "path": "games/vector-command/",
-      "thumb": "games/vector-command/thumb.webp",
-      "tags": ["arcade", "defense"],
+      "slug": "banrion",
+      "title": "Banrion",
+      "tagline": "3D wireframe chess. Play a friend over the internet or the built-in engine.",
+      "path": "games/banrion/",
+      "thumb": "games/banrion/thumb.webp",
+      "tags": ["chess", "multiplayer", "3d"],
       "input": ["mouse", "touch"],
+      "players": "1-2",
+      "shelf": "featured",
+      "readme": "games/banrion/README.md"
+    },
+    {
+      "slug": "bounty-hunter",
+      "title": "Bounty Hunter",
+      "tagline": "Fight your way up the tower, floor by floor. Mutants first, then robots.",
+      "path": "games/bounty-hunter/",
+      "thumb": "games/bounty-hunter/thumb.webp",
+      "tags": ["crawler", "3d"],
+      "input": ["keyboard"],
+      "players": "1",
+      "shelf": "featured"
+    },
+    {
+      "slug": "puppis-echo",
+      "title": "Puppis Echo",
+      "tagline": "WebGL flight and combat in deep space.",
+      "path": "games/puppis-echo/",
+      "thumb": "games/puppis-echo/thumb.webp",
+      "tags": ["shooter", "3d", "webgl"],
+      "input": ["keyboard", "touch"],
       "players": "1",
       "shelf": "featured"
     },
@@ -77,13 +104,13 @@
       "readme": "games/phosphor-field/README.md"
     },
     {
-      "slug": "puppis-echo",
-      "title": "Puppis Echo",
-      "tagline": "WebGL flight and combat in deep space.",
-      "path": "games/puppis-echo/",
-      "thumb": "games/puppis-echo/thumb.webp",
-      "tags": ["shooter", "3d", "webgl"],
-      "input": ["keyboard", "touch"],
+      "slug": "vector-command",
+      "title": "Vector Command",
+      "tagline": "Defense console. Hold the line against incoming waves.",
+      "path": "games/vector-command/",
+      "thumb": "games/vector-command/thumb.webp",
+      "tags": ["arcade", "defense"],
+      "input": ["mouse", "touch"],
       "players": "1",
       "shelf": "featured"
     },
@@ -127,27 +154,6 @@
       "input": ["keyboard", "mouse", "touch"],
       "shelf": "lab",
       "readme": "lab/tauri-reach/README.md"
-    },
-    {
-      "slug": "six-fleets",
-      "title": "Six Fleets",
-      "tagline": "Skirmish at Tauri-B. Pick any two starships and duel at a young star; damage resolves against each ship's tactical sheet.",
-      "path": "lab/six-fleets/",
-      "thumb": "lab/thumbs/six-fleets.webp",
-      "tags": ["webgl", "shooter", "3d"],
-      "input": ["keyboard", "mouse"],
-      "shelf": "lab"
-    }
-    ,
-        {
-      "slug": "corsair",
-      "title": "Corsair",
-      "tagline": "Pacific flying game prototype: fly an F4U-1D Corsair from a jungle island strip through a storm front, and dogfight an A6M2 Zero with your wingman.",
-      "path": "lab/corsair/",
-      "thumb": "lab/thumbs/corsair.gif",
-      "tags": ["webgl", "flightsim", "3d"],
-      "input": ["keyboard", "mouse"],
-      "shelf": "lab"
     }
   ]
 }
