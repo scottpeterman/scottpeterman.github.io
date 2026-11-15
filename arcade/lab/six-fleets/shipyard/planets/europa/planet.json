@@ -1,0 +1,18 @@
+{
+  "type": "europa",
+  "seed": "SF:Europa",
+  "width": 2048,
+  "height": 1024,
+  "atmo": "#d8e6ff",
+  "atmoDensity": 0.04,
+  "cloudCoverage": 0,
+  "emissive": false,
+  "clouds": false,
+  "bakeMs": 53477,
+  "name": "europa",
+  "maps": {
+    "color": "color.webp",
+    "normal": "normal.webp",
+    "rough": "rough.webp"
+  }
+}
